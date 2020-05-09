@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://euansu123.github.io">
   <title>ESP分区装在机械硬盘的解决方案 | Euansu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重装固态硬盘后，由于机械硬盘已经分区，因此机械硬盘变成首选项，所以系统的引导建立在了机械盘。 作为一个强迫症患者，还是受不了系统在固态而引导在机械盘的问题，因此搜索了许多办法，最终发现这个问题早在16年就已经有解决的方案。 方案一：拆掉机械硬盘重新安装操作系统（如果你动手能力够强，并且有工具是个不错的方法）。 方案二：利用分区工具DiskGenius在固态硬盘分出&gt;300M的ESP分区，虽然">
+  <meta name="description" content="重装固态硬盘后，由于机械硬盘已经分区，因此机械硬盘变成首选项，所以系统的引导建立在了机械盘。 作为一个强迫症患者，还是受不了系统在固态而引导在机械盘的问题，因此搜索了许多办法，最终发现这个问题早在16年就已经有解决的方案。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ESP分区装在机械硬盘的解决方案">
 <meta property="og:url" content="http://euansu123.github.io/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="Euansu&#39;s blog">
-<meta property="og:description" content="重装固态硬盘后，由于机械硬盘已经分区，因此机械硬盘变成首选项，所以系统的引导建立在了机械盘。 作为一个强迫症患者，还是受不了系统在固态而引导在机械盘的问题，因此搜索了许多办法，最终发现这个问题早在16年就已经有解决的方案。 方案一：拆掉机械硬盘重新安装操作系统（如果你动手能力够强，并且有工具是个不错的方法）。 方案二：利用分区工具DiskGenius在固态硬盘分出&gt;300M的ESP分区，虽然">
+<meta property="og:description" content="重装固态硬盘后，由于机械硬盘已经分区，因此机械硬盘变成首选项，所以系统的引导建立在了机械盘。 作为一个强迫症患者，还是受不了系统在固态而引导在机械盘的问题，因此搜索了许多办法，最终发现这个问题早在16年就已经有解决的方案。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/1.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/2.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/3.png">
 <meta property="article:published_time" content="2020-05-09T12:37:00.000Z">
-<meta property="article:modified_time" content="2020-05-09T12:41:45.091Z">
+<meta property="article:modified_time" content="2020-05-09T16:27:28.642Z">
 <meta property="article:author" content="euansu">
 <meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
@@ -168,6 +168,8 @@
       
         <p>重装固态硬盘后，由于机械硬盘已经分区，因此机械硬盘变成首选项，所以系统的引导建立在了机械盘。</p>
 <p>作为一个强迫症患者，还是受不了系统在固态而引导在机械盘的问题，因此搜索了许多办法，最终发现这个问题早在16年就已经有解决的方案。</p>
+<a id="more"></a>
+
 <p>方案一：拆掉机械硬盘重新安装操作系统（如果你动手能力够强，并且有工具是个不错的方法）。</p>
 <p>方案二：利用分区工具DiskGenius在固态硬盘分出&gt;300M的ESP分区，虽然是300MB但是在克隆ESP分区时我的电脑始终显大小不足，最后还是分配了800MB的分区（这里还是建议用300MB，如果不可以可以适当扩大分区大小）。（下图是已经将ESP分区移动至固态硬盘的截图）</p>
 <p><img src="/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/1.png" alt></p>
@@ -390,15 +392,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">note</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">信息安全</a>
               </li>
             
             <div class="clearfix"></div>

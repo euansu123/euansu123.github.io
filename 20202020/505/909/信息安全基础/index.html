@@ -5,20 +5,25 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
+  <link rel="dns-prefetch" href="http://euansu123.github.io">
   <title>信息安全基础 | euansu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="安全体系结构和模型（2课时）1、网络安全的核心目标：机密性、完整性、可用性。  机密性：对信息的访问和公开进行授权限制，包括保护个人隐私和私密信息，包括数据机密性（保证私有的或机密的信息不会被泄露给未经授权的个体）和隐私性（保证个人可控制和影响与之相关的那些信息是可以被收集、被保存的、这些信息可以有谁来公开以及向谁公开）。 完整性：包含了数据完整性（保证只能由特定的，已授权的方式来更改信息和代码）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息安全基础">
-<meta property="og:url" content="http://yoursite.com/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:url" content="http://euansu123.github.io/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="euansu&#39;s blog">
 <meta property="og:description" content="安全体系结构和模型（2课时）1、网络安全的核心目标：机密性、完整性、可用性。  机密性：对信息的访问和公开进行授权限制，包括保护个人隐私和私密信息，包括数据机密性（保证私有的或机密的信息不会被泄露给未经授权的个体）和隐私性（保证个人可控制和影响与之相关的那些信息是可以被收集、被保存的、这些信息可以有谁来公开以及向谁公开）。 完整性：包含了数据完整性（保证只能由特定的，已授权的方式来更改信息和代码）">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-09T04:46:54.546Z">
-<meta property="article:modified_time" content="2020-05-09T04:51:44.287Z">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/1.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/2.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/3.png">
+<meta property="article:published_time" content="2020-05-09T10:50:22.000Z">
+<meta property="article:modified_time" content="2020-05-09T11:06:51.085Z">
 <meta property="article:author" content="euansu">
+<meta property="article:tag" content="note">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/1.png">
   
     <link rel="alternative" href="/atom.xml" title="euansu&#39;s blog" type="application/atom+xml">
   
@@ -159,7 +164,7 @@
 
         
         <a href="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2020-05-09T04:46:54.546Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
+  	<time datetime="2020-05-09T10:50:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
 </a>
         
       </header>
@@ -180,8 +185,10 @@
 <li>安全机制：包括特定的安全机制（可以并入到适当的协议层提供安全服务，主要方式：加密、数字签名、访问控制、数据完整性、认证交换、流量填充、路由控制、公证）和普通的安全机制（不局限于任何特定的OSI安全服务或协议层的机制，主要方式：可信功能、安全标签、事件检测、安全审计、跟踪安全恢复）。</li>
 </ul>
 <p><strong>3、网络安全模型</strong></p>
+<p><img src="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/1.png" alt="网络安全模型"></p>
 <p>网络安全技术的目的：加密（对待发送消息进行安全相关的变换）、数字签名（双方共享某些秘密信息）。</p>
-<h2 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h2><h3 id="传统密码学"><a href="#传统密码学" class="headerlink" title="传统密码学"></a>传统密码学</h3><p>传统加密技术的组成：明文、密钥、加密算法、密文、解密算法。</p>
+<h2 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h2><h3 id="传统密码学"><a href="#传统密码学" class="headerlink" title="传统密码学"></a>传统密码学</h3><p><img src="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/2.png" alt="传统密码的简化模型"></p>
+<p>传统加密技术的组成：明文、密钥、加密算法、密文、解密算法。</p>
 <p>传统密码学的技术有：</p>
 <ul>
 <li><p>代替技术：将明文字符替换成其他字母、数字或者符号的方法。</p>
@@ -190,7 +197,7 @@
 </li>
 <li><p>转轮机：由三个转速的转轮构成，每次按键会改变快速转子上ABC..Z的顺序，多次按键之后会改变中速转子和慢速转子上的数字位置，因此整个转轮机有26 * 26 * 26=17576个不同的替换字母表。</p>
 <ul>
-<li></li>
+<li><img src="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/3.png" alt="三轮转轮机"></li>
 </ul>
 </li>
 <li><p>隐写术：也就是隐藏明文信息。</p>
@@ -222,6 +229,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">note</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -272,7 +290,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://euansu123.github.io/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -284,25 +302,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/20202020/505/909/test/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          test
-        
-      </div>
-    </a>
-  
-  
-    <a href="/20202020/505/909/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -413,6 +412,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">note</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

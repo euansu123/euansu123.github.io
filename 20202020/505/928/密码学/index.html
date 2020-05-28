@@ -6,15 +6,43 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://euansu123.github.io">
-  <title>Euansu&#39;s blog</title>
+  <title>信息安全——密码学 | Euansu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Euansu&#39;s blog">
-<meta property="og:url" content="http://euansu123.github.io/index.html">
+  <meta name="description" content="密码学传统密码学  传统加密技术的组成：明文、密钥、加密算法、密文、解密算法。 传统密码学的技术有：  代替技术：将明文字符替换成其他字母、数字或者符号的方法。 置换技术：对明文进行置换。 转轮机：由三个转速的转轮构成，每次按键会改变快速转子上ABC..Z的顺序，多次按键之后会改变中速转子和慢速转子上的数字位置，因此整个转轮机有26 * 26 * 26&#x3D;17576个不同的替换字母表。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全——密码学">
+<meta property="og:url" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/index.html">
 <meta property="og:site_name" content="Euansu&#39;s blog">
+<meta property="og:description" content="密码学传统密码学  传统加密技术的组成：明文、密钥、加密算法、密文、解密算法。 传统密码学的技术有：  代替技术：将明文字符替换成其他字母、数字或者符号的方法。 置换技术：对明文进行置换。 转轮机：由三个转速的转轮构成，每次按键会改变快速转子上ABC..Z的顺序，多次按键之后会改变中速转子和慢速转子上的数字位置，因此整个转轮机有26 * 26 * 26&#x3D;17576个不同的替换字母表。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/2.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/3.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A82.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A83.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A821.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A84.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A85.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A86.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A87.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A88.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A89.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A810.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A811.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A812.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A813.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A814.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A815.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A816.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A817.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A818.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A819.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A820.png">
+<meta property="article:published_time" content="2020-05-28T00:01:06.000Z">
+<meta property="article:modified_time" content="2020-05-28T01:58:17.925Z">
 <meta property="article:author" content="euansu">
+<meta property="article:tag" content="信息安全">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/2.png">
   
     <link rel="alternative" href="/atom.xml" title="Euansu&#39;s blog" type="application/atom+xml">
   
@@ -137,16 +165,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-密码学" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-密码学" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/">信息安全——密码学</a>
+    <h1 class="article-title" itemprop="name">
+      信息安全——密码学
     </h1>
   
 
@@ -168,329 +194,212 @@
 <li>置换技术：对明文进行置换。</li>
 <li>转轮机：由三个转速的转轮构成，每次按键会改变快速转子上ABC..Z的顺序，多次按键之后会改变中速转子和慢速转子上的数字位置，因此整个转轮机有26 * 26 * 26=17576个不同的替换字母表。</li>
 </ul>
-        
-      
+<a id="more"></a>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/3.png" style="zoom:67%;">
 
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-C++函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/927/C++%E5%87%BD%E6%95%B0/">C++函数</a>
-    </h1>
-  
-
-        
-        <a href="/20202020/505/927/C++%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-05-27T11:06:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>函数是一组一起执行一个任务的语句。每个C++程序至少有一个函数，即main()函数。</p>
-<ol>
-<li><p>函数的定义：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">返回类型 函数名(参数列表)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    函数体;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>返回类型</strong>：一个函数可以返回一个值，返回类型是函数返回的值的数据类型。有些函数执行所需的操作但并不返回值，这种情况下函数的返回类型为void。</p>
-<p><strong>函数名称</strong>：这是函数的实际名称。</p>
-<p><strong>参数</strong>：当函数被调用的时候，向参数传递一个值，这个值被称为实际参数。参数列表包括函数参数的类型、顺序、数量。函数可以没有参数。</p>
-<p><strong>函数主体：</strong>函数主体即一组定义函数执行任务的语句。</p></li></ol>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/927/C++%E5%87%BD%E6%95%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-live2d看板娘部署至hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/">live2d看板娘部署至hexo</a>
-    </h1>
-  
-
-        
-        <a href="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/" class="archive-article-date">
-  	<time datetime="2020-05-09T15:10:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装live2d模块"><a href="#安装live2d模块" class="headerlink" title="安装live2d模块"></a>安装live2d模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
-<h3 id="选择自己喜欢的看板娘"><a href="#选择自己喜欢的看板娘" class="headerlink" title="选择自己喜欢的看板娘"></a>选择自己喜欢的看板娘</h3><p>我自己使用的是<strong>mizuku</strong>。</p>
-<p><strong>Epsilon2.1</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/Epsilon2.1.gif" alt="Epsilon2.1" style="zoom:50%;">
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-ESP分区装在机械硬盘的解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">ESP分区装在机械硬盘的解决方案</a>
-    </h1>
-  
-
-        
-        <a href="/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="archive-article-date">
-  	<time datetime="2020-05-09T12:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>重装固态硬盘后，由于机械硬盘已经分区，因此机械硬盘变成首选项，所以系统的引导建立在了机械盘。</p>
-<p>作为一个强迫症患者，还是受不了系统在固态而引导在机械盘的问题，因此搜索了许多办法，最终发现这个问题早在16年就已经有解决的方案。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-信息安全基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/">信息安全基础知识</a>
-    </h1>
-  
-
-        
-        <a href="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2020-05-09T10:50:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="网络安全形势与法律基础"><a href="#网络安全形势与法律基础" class="headerlink" title="网络安全形势与法律基础"></a>网络安全形势与法律基础</h1><h2 id="网络安全形势"><a href="#网络安全形势" class="headerlink" title="网络安全形势"></a>网络安全形势</h2><ul>
-<li><p>什么是网络安全</p>
 <ul>
-<li><p>计算机安全、信息安全、网络安全…</p>
-<ul>
-<li>计算机安全是指计算机资产安全，即计算机信息系统资源和信息资源不受自然和人为有害因素啊的威胁和危害。<strong>（偏向于硬件）</strong></li>
-<li>信息安全尚无统一定义，主要包含信息完整性、保密性以及可用性等。根本目的是使内部信息不受内部、外部、自然等因素的威胁，为保障信息安全，要求有信息源认证、访问控制，不能有非法软件驻留，不能有未授权的操作等行为。</li>
-<li>网络安全是指网络系统的硬件、软件机器系统中的数据受到保护，不因偶然的或者恶意的原因而遭受到破坏、更改、泄露，系统连续可靠正常地运转，网络服务不中断。</li>
+<li>隐写术：也就是隐藏</li>
 </ul>
-<img src="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/信息安全图1.jpg" style="zoom: 33%;"></li></ul></li></ul>
-        
+<h3 id="现代密码学"><a href="#现代密码学" class="headerlink" title="现代密码学"></a>现代密码学</h3><h4 id="对称加密算法"><a href="#对称加密算法" class="headerlink" title="对称加密算法"></a>对称加密算法</h4><p>（1）对称加密算法的安全使用要求：需要有一个强加密算法：攻击者知道加密算法也不能破译或解出密钥；密钥安全：密钥传输安全、密钥存储安全。<br>（2）对称加密算法的数学表示：</p>
+<ul>
+<li>明文：P、密文：C、密钥：K。</li>
+<li>加密：C=E[P,K]=E[D[C,K],K]</li>
+<li>解密：P=D[C,K]</li>
+</ul>
+<p>（3）加密算法的选择（至少满足一条就认为是安全的）：</p>
+<ol>
+<li>破解密文的代价超过加密信息的价值。</li>
+<li>破解密文需要的时间超出信息的有效生命周期。</li>
+</ol>
+<h4 id="对称分组加密算法"><a href="#对称分组加密算法" class="headerlink" title="对称分组加密算法"></a>对称分组加密算法</h4><p>（1）流密码与分组密码，分组密码每次处理的单元是确定大小的分组，而流密码是以一个元素作为处理单元。</p>
+<ul>
+<li>流密码每用由时间变化的加密变化，其转换速度快、传播错误低，硬件完成简单，缺点是低扩散和插入以及修改不敏感。</li>
+<li>分组密码用的是固定变换，其扩散性好及插入敏感。缺点是加、解密处理慢，及存在错误传播。</li>
+</ul>
+<p>（2）重要的对称分组加密算法</p>
+<ul>
+<li>数据加密标准DES（Data Encryption Standard），分组长度：64位；密钥长度：56位；加密过程：通过Feistel网络进行16轮迭代；解密过程：与加密相反，通过Feistel网络进行16轮反向迭代；DES的强度依赖于密钥强度。</li>
+<li>三重数据加密标准3DES，分组长度64位；密钥长度168位；加密过程：加密过程使用3个密钥执行3次DES加密；解密过程：使用相反的密钥顺序执行3次DES解密；3DES的强度同样依赖于密钥长度。</li>
+<li>高级加密标准AES（Advance Encryption Standard），分组长度128位；密钥长度：128位、192位、256位；加密过程：轮密钥加、字节替换、行移位、列混合…解密过程：轮密钥加、反向列移位、逆字节替换、反向列混合…AES的强度高。</li>
+</ul>
+<p>（3） Feistel密码结构</p>
+<p><strong>很多的分组密码结构本质上基于Feistel密码结构。</strong></p>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全2.png" style="zoom:67%;">
+
+<p>上图左侧为Feistel的加密过程，右侧为Feistel的解密过程。<strong>加密算法的输入是长为2w位的明文分组和密钥K。</strong>明文分组被分为等长的两部分：L0和R0。这两半数据经过n轮迭代后组合成密文分组。<strong>输入的子密钥Ki是由整个密钥K推导出来的。（即子密钥产生算法）</strong></p>
+<p>可以把Feistel的解密过程看作是加密的逆过程，这里就不再对解密过程展开叙述，Feistel会经过16轮加密，每次加密主要是密钥有差别，这里以Feistel的1、2轮加密简单讲解一下Feistel加密。</p>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全3.png" style="zoom:50%;">
+
+<p>如上图所示，Feistel加密可用下面的数学表达式描述。</p>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全21.png" style="zoom:50%;">
+
+<p><font color="red">Feistel最后的迭代后有一个变换，以抵消在最后一轮迭代中的那个变换，保证解密的顺利进行。</font></p>
+<p>Feistel结构的具体实现依赖于以下参数和特征：</p>
+<ul>
+<li>分组长度：分组越长代表安全性越高，但会降低加解密速度。</li>
+<li>密钥长度：密钥越长代表安全性越高，但会降低加解密速度。</li>
+<li>迭代轮数：单论迭代不能提供充分的安全性。</li>
+<li>子密钥产生算法：算法复杂性越高，破译难度越大。</li>
+<li>轮函数：越高的复杂性代表破译难度越大。</li>
+</ul>
+<p>Feistel密码强度来自于三个方面：迭代轮数、F函数、密钥扩展算法。</p>
+<ul>
+<li>迭代轮数越多，密码分析越困难。</li>
+<li>Feistel密码的核心是F函数。F函数给Feistel密码注入了混淆成分，F函数的明显标准是非线性。</li>
+<li>密钥扩展算法应保证密钥和密文严格符合雪崩标准和位独立标准。<ul>
+<li><font color="red">雪崩效应：明文或者密文的某一位发生变化会导致密文的很多位发生变化，这被称作雪崩效应。</font></li>
+</ul>
+</li>
+</ul>
+<p>（4）DES加密算法</p>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全4.png" style="zoom: 67%;">
+
+<p>上图所示为DES加密总流程</p>
+<ul>
+<li><p>加密流程</p>
+<ul>
+<li>初始置换，根据置换表进行位置变换操作。置换表中每个元素表明某个输入位在64位输入中的位置。置换的目的在于打乱比特流。初始置换与逆置换可逆。</li>
+</ul>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A85.png" alt></p>
+<ul>
+<li>16轮迭代，也即Feistel加密结构。</li>
+<li>逆初始置换</li>
+</ul>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A86.png" alt></p>
+<ul>
+<li><p>密钥生成（子密钥产生），密钥的输入为64位，其中8位是校验码，每一轮产生的子密钥为48位。子密钥的产生经过置换选择1、循环左移、置换选择2三个步骤生成。</p>
+<ul>
+<li>置换选择1，输入为64位，输出56位，输入每行的第八位被忽略（奇偶校验位），根据置换选择表1得到56位输出作为循环左移的输入。</li>
+</ul>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A87.png" alt></p>
+<ul>
+<li>循环左移，输入56位，输出56位。将置换选择1的56位输出分为两个28位的C0、D0,在每轮迭代中，Ci-1和Di-1按左移位数表分别循环1位或2位，结果作为置换选择2的输入。</li>
+</ul>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A88.png" alt></p>
+<ul>
+<li>置换选择2，输入56位输出48位。将对应的经过循环左移的56位输入按照置换选择表2作用，得到48位输出每一轮迭代的子密钥。子密钥即Feistel中F函数的输入。</li>
+</ul>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A89.png" alt></p>
+<ul>
+<li><p>F函数，F函数的设计需要满足非线性要求。其中E代表扩展置换。S也就是S盒，每个S盒输入6位，输出4位。</p>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A810.png" alt></p>
+<ul>
+<li>扩展置换，根据扩展置换表。</li>
+</ul>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A811.png" alt></p>
+<ul>
+<li>S盒也是一个置换表，DES中有8个S盒。每个S盒输入6为输出4位。盒Si输入的首尾2位代表表中的某一行，中间四位代表某一列，所选的值即为S盒的输出值。例如：Si中，若输入为011001，则行是01（1），列是1100（12），输出值为1001（9）。</li>
+</ul>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A812.png" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>（5）对称加密考虑因素</p>
+<ul>
+<li>软件加/解密速度，密码尽可能避免使用硬件实现。</li>
+<li>分析复杂度，可简明清楚解释的算法更容易分析其弱点以提供更高级别保障。DES分析复杂度较高。</li>
+</ul>
+<p>（6）3DES加密</p>
+<ul>
+<li>加密过程：加密组合按照“加密—解密—加密（EDE）”顺序。<ul>
+<li>数学描述：<strong>C= E(D(E(P, K1),K2) ,K3)</strong></li>
+<li>如果K1=K2=K3，则相当于进行了DES加密，达到了3DES与DES兼容的目的。</li>
+</ul>
+</li>
+</ul>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全13.png" style="zoom: 50%;">
+
+<ul>
+<li>解密过程：解密组合按照“解密-加密-解密（DED）”顺序。<ul>
+<li>数学描述：<strong>P= D(E(D(P,K3),K2) ,K1)</strong></li>
+</ul>
+</li>
+</ul>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全14.png" style="zoom:50%;">
+
+<ul>
+<li>3DES总结：<ul>
+<li>3DES克服了DES面对穷举攻击的不足。</li>
+<li>3DES与DES兼容。</li>
+<li>3DES缺陷是算法软件运行相对较慢，统DES一样采用64位分组，效率较低。</li>
+</ul>
+</li>
+</ul>
+<p>（7）AES加密</p>
+<p>美国国家标准技术研究所（NIST）在2001年宣布Rijndael作为AES标准算法，因此AES在有些地方也叫做Rijindeal。</p>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A815.png" alt></p>
+<ul>
+<li><p>AES加密经过字节替换、行移位、列混淆、轮密钥加四部分。</p>
+<ul>
+<li>字节替换：用一个S盒完成分组的字节到字节的替换，S盒是一个16*16的表，用来查询字节替换值，在AES的解密过程会用到逆S盒。</li>
+</ul>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全16.png" style="zoom: 80%;">
+
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全17.png" style="zoom: 50%;">
+
+<p>具体操作：将字节的高4位作为行值、低4位作为列值作为索引从S盒对应位置去除元素并作为输出，例如EA即为第14行，第10列，在S盒中对应的值位87。</p>
+<ul>
+<li>行移位：第n行左移n字节（1字节=8位）。</li>
+</ul>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全18.png" style="zoom: 50%;">
+
+<p>具体操作：第0行移位0字节，不变，第1行左移一个字节…</p>
+<ul>
+<li>列混淆：有限域GF（2^8）中的乘法和加法运算。</li>
+</ul>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全19.png" style="zoom: 50%;">
+
+<ul>
+<li>轮密钥加：将当前分组与对应密钥按位XOR（异或）。</li>
+</ul>
+</li>
+<li><p>AES密钥生成，AES的密钥有16字节，24字节或32字节（128位，192位或256位），16位密钥进行10轮密码生成，24字节进行12轮密码生成，32字节进行14轮密码生成。</p>
+</li>
+</ul>
+<img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/信息安全20.png" style="zoom: 50%;">
+
+<ul>
+<li>过程密钥扩展算法是输入4个字，输出为44个字。其中w[0]—w[3]：输入密钥直接复制到扩展密钥数组的前4个字，扩展密钥数组中每个新增的字w[i]依赖于w[i-1]和w[i-4]通过g函数生成。<ul>
+<li>g函数u函数依次进行3项操作自循环：使一个字中的4个字节循环左移一个字节，即输入字[B0,B1,B2,B3]变换成[B1,B2,B3,B0]，字代替：利用S盒对输入字中的每个字节进行代替(与字节替换使用相同S盒)，异或：将上步骤结果与轮常量Rcon[j]相异或。</li>
+</ul>
+</li>
+<li>AES解密和解密为逆过程，主要有四步：轮密钥加、反向行移位、逆字节替换、反向列混合，解密与加密使用相同的轮密钥。</li>
+<li>AES总结<ul>
+<li>AES未使用Feistel结构，而是在每轮替换盒移位时都并行处理整个数组。</li>
+<li>输入的密钥被扩展成44个32比特自的数组w[i]，4个不同的字用作每轮的轮密钥。</li>
+<li>使用4个不同的步骤，1个是移位，3个是替换。</li>
+<li>结构简单。</li>
+<li>只有轮密钥加步骤使用了密钥。</li>
+<li>单个步骤均简单可逆，安全性低，但通过多步骤组合增强安全性。</li>
+<li>通过密钥扩展算法防止密码分析攻击。</li>
+<li>解密算法与加密算法不同。</li>
+</ul>
+</li>
+<li>AES强度<ul>
+<li>u结构简单，可在各种处理器上有效运行。</li>
+<li>整个过程可逆。</li>
+<li>密钥长度可选。</li>
+<li>通过多个简单步骤打乱数据比特，提供混淆、扩散及非线性功能。</li>
+<li>通过密钥扩展算法防止密码分析攻击。<ul>
+<li>知道密钥或轮密钥的部分位不能计算出轮密钥的其它位。</li>
+<li>使用轮常量消除对称性。</li>
+<li>良好的雪崩效应。</li>
+</ul>
+</li>
+<li>易于描述</li>
+</ul>
+</li>
+</ul>
+<p>（4）对称加密考虑因素</p>
+<ul>
+<li>软件加/解密速度，密码尽可能避免使用硬件实现。</li>
+<li>分析复杂度，可简明清楚解释的算法更容易分析其弱点以提供更高级别保障。DES分析复杂度较高。</li>
+</ul>
+
       
 
       
@@ -512,16 +421,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://euansu123.github.io/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/20202020/505/927/C++%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++函数</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -541,10 +509,16 @@
 
 
 
-
-
   
   
+  
+
+  
+
+  
+
+  
+
 
 
           </div>
@@ -566,8 +540,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

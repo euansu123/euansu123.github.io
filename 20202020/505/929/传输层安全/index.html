@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://euansu123.github.io">
   <title>信息安全—传输层安全 | Euansu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;传输层安全大纲。   web安全威胁按照攻击方式分为主动攻击和被动攻击。  被动攻击：对浏览器和服务器间通信进行窃听，获取未授权的权限。 主动攻击：用户假冒、篡改客户端和服务器间的消息、篡改Web站点上的信息。  下图为web安全威胁比较。   web流">
+  <meta name="description" content="传输层安全大纲。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息安全—传输层安全">
 <meta property="og:url" content="http://euansu123.github.io/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/index.html">
 <meta property="og:site_name" content="Euansu&#39;s blog">
-<meta property="og:description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;传输层安全大纲。   web安全威胁按照攻击方式分为主动攻击和被动攻击。  被动攻击：对浏览器和服务器间通信进行窃听，获取未授权的权限。 主动攻击：用户假冒、篡改客户端和服务器间的消息、篡改Web站点上的信息。  下图为web安全威胁比较。   web流">
+<meta property="og:description" content="传输层安全大纲。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web%E5%AE%89%E5%85%A8.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81.png">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL%E6%8F%A1%E6%89%8B.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL%E6%8F%A1%E6%89%8B%E5%8D%8F%E8%AE%AE%E8%BF%87%E7%A8%8B.png">
 <meta property="article:published_time" content="2020-05-29T08:33:24.000Z">
-<meta property="article:modified_time" content="2020-06-01T01:50:44.931Z">
+<meta property="article:modified_time" content="2020-06-11T11:03:13.526Z">
 <meta property="article:author" content="南歌EuanSu">
 <meta property="article:tag" content="信息安全">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>传输层安全大纲。</p>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web安全.png" style="zoom:100%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web安全.png" style="zoom:100%;">
+
+<a id="more"></a>
 
 <p>web安全威胁按照攻击方式分为主动攻击和被动攻击。</p>
 <ul>
@@ -183,18 +185,18 @@
 <li>主动攻击：用户假冒、篡改客户端和服务器间的消息、篡改Web站点上的信息。</li>
 </ul>
 <p>下图为web安全威胁比较。</p>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web安全威胁.png" style="zoom: 80%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web安全威胁.png" style="zoom: 80%;">
 
 <p>web流量安全主要根据对网络的特性，从多个途径提供web安全。</p>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web流量安全.png" style="zoom:50%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web流量安全.png" style="zoom:50%;">
 
 <h3 id="安全套接字层（Secure-Sockets-Layer）"><a href="#安全套接字层（Secure-Sockets-Layer）" class="headerlink" title="安全套接字层（Secure Sockets Layer）"></a>安全套接字层（Secure Sockets Layer）</h3><h4 id="SSL体系结构"><a href="#SSL体系结构" class="headerlink" title="SSL体系结构"></a>SSL体系结构</h4><ul>
 <li><p>SSL使用TCP提供一种可靠的端到端的服务。</p>
 </li>
 <li><p>SSL由两层协议组成。</p>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/ssl.png" style="zoom:67%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/ssl.png" style="zoom:67%;">
 
-</div></li>
+</li>
 </ul>
 <h4 id="SSL连接、SSL会话"><a href="#SSL连接、SSL会话" class="headerlink" title="SSL连接、SSL会话"></a>SSL连接、SSL会话</h4><ul>
 <li>SSL连接和SSL会话的概念<ul>
@@ -213,7 +215,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="SSL的各种协议"><a href="#SSL的各种协议" class="headerlink" title="SSL的各种协议"></a>SSL的各种协议</h4><div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL的各种协议.png" style="zoom:50%;">
+<h4 id="SSL的各种协议"><a href="#SSL的各种协议" class="headerlink" title="SSL的各种协议"></a>SSL的各种协议</h4><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL的各种协议.png" style="zoom:50%;">
 
 <ul>
 <li><p>SSL记录协议：SSL记录协议为SSL连接提供机密性与消息完整性两种服务。</p>
@@ -224,20 +226,22 @@
 <p>SSL记录协议的运行流程</p>
 </li>
 </ul>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL记录协议.png" style="zoom:67%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL记录协议.png" style="zoom:67%;">
 
 <p>​    SSL记录协议格式</p>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL记录协议格式.png" style="zoom:80%;">
-</div></div></li>
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL记录协议格式.png" style="zoom:80%;">
+</li>
 <li><p>SSL修改密码规格协议，SSL变更密码规格协议由值为1的一个字节的消息组成；该消息功能是使挂起状态变更为当前状态，用于更新此连接使用的密码组。</p>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL修改密码协议.png" style="zoom:50%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL修改密码协议.png" style="zoom:50%;">
 
 <p><font color="red">SSL修改密码规格协议的设计目的是为了保障SSL传输过程的安全性，因为SSL协议要求客户端或服务器端每隔一段时间必须改变其加密参数。当某一方要改变其加解密参数时，就发送一个简单的消息通知对方下一个要传送的数据将采用新的加解密参数，也就是要求对方改变原来的安全参数。</font></p>
-</div></li>
+</li>
 <li><p>SSL警报协议</p>
 </li>
 </ul>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/警报协议格式.png" style="zoom:50%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/警报协议格式.png" style="zoom:50%;">
+
+
 
 <p>​    每个消息由两个字节组成：</p>
 <ul>
@@ -256,7 +260,7 @@
 </ul>
 <ul>
 <li><p>SSL握手协议：在任何应用数据被传输之前使用。</p>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL握手.png" style="zoom:50%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL握手.png" style="zoom:50%;">
 
 <p>每一条握手协议消息包括类型、长度、内容三个域。</p>
 <ul>
@@ -273,13 +277,13 @@
 <li><p>第三阶段：客户端发送正数、密钥交换数据、证书验证消息。</p>
 </li>
 <li><p>第四阶段：改变密码套件与结束握手。</p>
-<div align="center"><img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL握手协议过程.png" style="zoom:80%;">
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/SSL握手协议过程.png" style="zoom:80%;">
 
-</div></li>
+</li>
 </ul>
-</div></li>
+</li>
 </ul>
-</div></div></div></div></div>
+
       
 
       

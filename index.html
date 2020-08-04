@@ -166,14 +166,7 @@
         <h3 id="mysql学习教程"><a href="#mysql学习教程" class="headerlink" title="mysql学习教程"></a>mysql学习教程</h3><p>大型数据库：db2、sybase、oracle</p>
 <p>中小型数据库：mysql、sql server</p>
 <p>mysql：市场占有率第一，免费、开源</p>
-<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p &#x2F;&#x2F;登录mysql</span><br><span class="line">show databases; &#x2F;&#x2F;显示mysql中的所有数据库</span><br><span class="line">use 数据库名称 &#x2F;&#x2F;确定选择数据库</span><br><span class="line">show tables; &#x2F;&#x2F;显示数据库中已存在的表格</span><br><span class="line">exit; &#x2F;&#x2F;退出mysql</span><br></pre></td></tr></table></figure>
-
-<h4 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this st</span><br></pre></td></tr></table></figure>
-
-<p>mysql5.6之后加上了安全设置，如果没有重置密码，mysql不允许进行操作。解决方案：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set password&#x3D;password(‘swh123456’);</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-
-
+        
       
 
       

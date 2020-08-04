@@ -143,6 +143,379 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mysql学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">mysql学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-08-04T03:05:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="mysql学习教程"><a href="#mysql学习教程" class="headerlink" title="mysql学习教程"></a>mysql学习教程</h3><p>大型数据库：db2、sybase、oracle</p>
+<p>中小型数据库：mysql、sql server</p>
+<p>mysql：市场占有率第一，免费、开源</p>
+<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p &#x2F;&#x2F;登录mysql</span><br><span class="line">show databases; &#x2F;&#x2F;显示mysql中的所有数据库</span><br><span class="line">use 数据库名称 &#x2F;&#x2F;确定选择数据库</span><br><span class="line">show tables; &#x2F;&#x2F;显示数据库中已存在的表格</span><br><span class="line">exit; &#x2F;&#x2F;退出mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this st</span><br></pre></td></tr></table></figure>
+
+<p>mysql5.6之后加上了安全设置，如果没有重置密码，mysql不允许进行操作。解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set password&#x3D;password(‘swh123456’);</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-vue学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">vue学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-08-03T00:19:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="vue使用教程"><a href="#vue使用教程" class="headerlink" title="vue使用教程"></a>vue使用教程</h3><ol>
+<li><p>引入vue文件</p>
+<ul>
+<li><p>在vue官网<a href="https://vuejs.org/v2/guide/installation.html下载vue开发版本，与jquery引用方式相同。" target="_blank" rel="noopener">https://vuejs.org/v2/guide/installation.html下载vue开发版本，与jquery引用方式相同。</a></p>
+</li>
+<li><p>直接引用在线的vue</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul></li></ol>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-css学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">css学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-07-29T01:45:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-html学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">html学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-07-29T01:44:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
+    <article id="post-jquery学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">jquery学习笔记</a>
+    </h1>
+  
+
+        
+        <a href="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2020-07-29T01:41:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="JQuery学习笔记"><a href="#JQuery学习笔记" class="headerlink" title="JQuery学习笔记"></a>JQuery学习笔记</h3><h4 id="Jquery简介"><a href="#Jquery简介" class="headerlink" title="Jquery简介"></a>Jquery简介</h4><h5 id="RIA技术"><a href="#RIA技术" class="headerlink" title="RIA技术"></a>RIA技术</h5><p>JQuery是RIA技术(Rich Internet Applications)富互联网应具有高度互动性、丰富用户体验以及功能强的客户端。</p>
+<ul>
+<li>常见的RIA技术有：Ajax、Flex、Sliverlight、Jquery、Ext。</li>
+<li>Jquery的优势：轻量级、功能强大的选择q器、出色的DOM封装、可靠的事件处理机制、出色的浏览器兼容性。</li>
+</ul>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+  
     <article id="post-ssh连接kali" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -536,328 +909,10 @@
 
 
   
-    <article id="post-C++函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/927/C++%E5%87%BD%E6%95%B0/">C++函数</a>
-    </h1>
-  
-
-        
-        <a href="/20202020/505/927/C++%E5%87%BD%E6%95%B0/" class="archive-article-date">
-  	<time datetime="2020-05-27T11:06:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>函数是一组一起执行一个任务的语句。每个C++程序至少有一个函数，即main()函数。</p>
-<ol>
-<li><p>函数的定义：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">返回类型 函数名(参数列表)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    函数体;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>返回类型</strong>：一个函数可以返回一个值，返回类型是函数返回的值的数据类型。有些函数执行所需的操作但并不返回值，这种情况下函数的返回类型为void。</p>
-<p><strong>函数名称</strong>：这是函数的实际名称。</p>
-<p><strong>参数</strong>：当函数被调用的时候，向参数传递一个值，这个值被称为实际参数。参数列表包括函数参数的类型、顺序、数量。函数可以没有参数。</p>
-<p><strong>函数主体：</strong>函数主体即一组定义函数执行任务的语句。</p></li></ol>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/927/C++%E5%87%BD%E6%95%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-live2d看板娘部署至hexo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/">live2d看板娘部署至hexo</a>
-    </h1>
-  
-
-        
-        <a href="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/" class="archive-article-date">
-  	<time datetime="2020-05-09T15:10:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装live2d模块"><a href="#安装live2d模块" class="headerlink" title="安装live2d模块"></a>安装live2d模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
-<h3 id="选择自己喜欢的看板娘"><a href="#选择自己喜欢的看板娘" class="headerlink" title="选择自己喜欢的看板娘"></a>选择自己喜欢的看板娘</h3><p>我自己使用的是<strong>mizuku</strong>。</p>
-<p><strong>Epsilon2.1</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/Epsilon2.1.gif" alt="Epsilon2.1" style="zoom:50%;">
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-ESP分区装在机械硬盘的解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">ESP分区装在机械硬盘的解决方案</a>
-    </h1>
-  
-
-        
-        <a href="/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="archive-article-date">
-  	<time datetime="2020-05-09T12:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>重装固态硬盘后，由于机械硬盘已经分区，因此机械硬盘变成首选项，所以系统的引导建立在了机械盘。</p>
-<p>作为一个强迫症患者，还是受不了系统在固态而引导在机械盘的问题，因此搜索了许多办法，最终发现这个问题早在16年就已经有解决的方案。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/909/ESP%E5%88%86%E5%8C%BA%E8%A3%85%E5%9C%A8%E6%9C%BA%E6%A2%B0%E7%A1%AC%E7%9B%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
-    <article id="post-信息安全基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/">信息安全基础知识</a>
-    </h1>
-  
-
-        
-        <a href="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2020-05-09T10:50:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="网络安全形势与法律基础"><a href="#网络安全形势与法律基础" class="headerlink" title="网络安全形势与法律基础"></a>网络安全形势与法律基础</h1><h2 id="网络安全形势"><a href="#网络安全形势" class="headerlink" title="网络安全形势"></a>网络安全形势</h2><ul>
-<li><p>什么是网络安全</p>
-<ul>
-<li><p>计算机安全、信息安全、网络安全…</p>
-<ul>
-<li>计算机安全是指计算机资产安全，即计算机信息系统资源和信息资源不受自然和人为有害因素的威胁和危害。<strong>（偏向于硬件）</strong></li>
-<li>信息安全尚无统一定义，主要包含信息完整性、保密性以及可用性等。根本目的是使内部信息不受内部、外部、自然等因素的威胁，为保障信息安全，要求有信息源认证、访问控制，不能有非法软件驻留，不能有未授权的操作等行为。</li>
-<li>网络安全是指网络系统的硬件、软件机器系统中的数据受到保护，不因偶然的或者恶意的原因而遭受到破坏、更改、泄露，系统连续可靠正常地运转，网络服务不中断。</li>
-</ul>
-<img src="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/信息安全图1.jpg" style="zoom: 33%;"></li></ul></li></ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">信息安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -960,6 +1015,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">kali</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端学习</a>
               </li>
             
             <div class="clearfix"></div>

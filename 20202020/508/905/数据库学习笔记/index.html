@@ -21,18 +21,20 @@
     
     
     <meta name="keywords" content="数据库">
-    <meta name="description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;数据库学习笔记关系数据库 第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。 第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。 第三范式(3NF)">
+    <meta name="description" content="数据库学习笔记关系数据库 第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。 第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。 第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。  第三范式实例：将员工表中的部门信息与公司表的信息相">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库学习笔记">
 <meta property="og:url" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Euansu&#39;s blog">
-<meta property="og:description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;数据库学习笔记关系数据库 第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。 第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。 第三范式(3NF)">
+<meta property="og:description" content="数据库学习笔记关系数据库 第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。 第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。 第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。  第三范式实例：将员工表中的部门信息与公司表的信息相">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog/hexo/source/_posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01.png">
 <meta property="article:published_time" content="2020-08-05T03:55:37.000Z">
-<meta property="article:modified_time" content="2020-08-05T06:04:33.752Z">
+<meta property="article:modified_time" content="2020-08-05T13:18:56.454Z">
 <meta property="article:author" content="南歌EuanSu">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog/hexo/source/_posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01.png">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -149,7 +151,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据库学习笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据库学习笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关系数据库"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">关系数据库</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据库学习笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">数据库学习笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关系数据库"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">关系数据库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数据库的关系"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">数据库的关系</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -178,6 +180,35 @@
 <li>第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。</li>
 <li>第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。</li>
 </ul>
+<p>第三范式实例：将员工表中的部门信息与公司表的信息相互依赖。</p>
+<a id="more"></a>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog\hexo\source\_posts\数据库学习笔记\01.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h4 id="数据库的关系"><a href="#数据库的关系" class="headerlink" title="数据库的关系"></a>数据库的关系</h4><p>数据库的关系分为三种不同类型：</p>
+<ul>
+<li>一对一：在这种关系中，每个数据表中的关键字在对应的关系表中只能存在一个记录。</li>
+<li>一对多：主键数据表中只能含有一个记录，而在其关系表中这条记录可以与一个或者多个记录相关。</li>
+<li>多对多：两个数据表里的每条记录都可以和另一个数据表里任意数量</li>
+</ul>
+<p>一些简单的例子：</p>
+<p>你和你的女朋友：一对一、超市和供货商：一对多、商品和店铺：多对多。</p>
+<p>外键必须建在主键上。</p>
+<p>一对一关系实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>一对多关系实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>多对多关系实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">###多对多实现</span><br><span class="line">#商品表</span><br><span class="line">create table product(</span><br><span class="line">	pid int primary key auto_increment,</span><br><span class="line">	pname varchar(20) not null,</span><br><span class="line">	price float,</span><br><span class="line">	num int comment &#39;商品库存&#39;</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">#订单表</span><br><span class="line">create table orders(</span><br><span class="line">	oid int primary key auto_increment,</span><br><span class="line">	dt datetime comment &#39;下单时间&#39;,</span><br><span class="line">	tel varchar(20) not null</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">#下单关系表</span><br><span class="line">create table orderlist(</span><br><span class="line">	pid int,</span><br><span class="line">	oid int,</span><br><span class="line">	foreign key (pid) references product(pid),</span><br><span class="line">	foreign key (oid) references orders(oid)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#录入测试数据</span><br><span class="line">insert into product (pname,price,num) values (&#39;牛仔裤&#39;,200,100)</span><br><span class="line">insert into product (pname,price,num) values (&#39;裙子&#39;,100,100)</span><br><span class="line">insert into product (pname,price,num) values (&#39;短裤&#39;,300,100)</span><br><span class="line"></span><br><span class="line">insert into orders values (1001,now(),&#39;123456&#39;)</span><br><span class="line">insert into orders values (1002,now(),&#39;123654&#39;)</span><br><span class="line">insert into orders values (1003,now(),&#39;456789&#39;)</span><br><span class="line"></span><br><span class="line">#录入多对多关系</span><br><span class="line"></span><br><span class="line">insert into orderlist values(1,1001);</span><br><span class="line">insert into orderlist values(2,1001);</span><br><span class="line">insert into orderlist values(1,1002);</span><br><span class="line">insert into orderlist values(3,1003);</span><br></pre></td></tr></table></figure>
+
 
         </div>
 
@@ -186,7 +217,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-08-05T06:04:33.752Z" itemprop="dateUpdated">2020-08-05 14:04:33</time>
+    最后更新时间：<time datetime="2020-08-05T13:18:56.454Z" itemprop="dateUpdated">2020-08-05 21:18:56</time>
 </span><br>
 
 
@@ -226,7 +257,9 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=《数据库学习笔记》 — Euansu's blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=《数据库学习笔记》 — Euansu's blog&source=数据库学习笔记关系数据库
+第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。
+第二范式(2NF):在第一..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -261,7 +294,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">sql查询练习</h4>
+      </a>
+    </div>
   
 
   
@@ -374,7 +414,9 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=《数据库学习笔记》 — Euansu's blog&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=《数据库学习笔记》 — Euansu's blog&source=数据库学习笔记关系数据库
+第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。
+第二范式(2NF):在第一..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

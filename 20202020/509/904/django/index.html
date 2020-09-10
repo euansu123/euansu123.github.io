@@ -1,14 +1,232 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.5"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.5"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitalk/dist/gitalk.css?v=2.0.5"><title>django | 南歌Euansu的博客</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">django</h1><a id="logo" href="/.">南歌Euansu的博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">django</h1><div class="post-meta"><a href="/20202020/509/904/django/#comments" class="comment-count"></a><p><span class="date">Sep 04, 2020</span></p></div><div class="post-content"><h3 id="django框架"><a href="#django框架" class="headerlink" title="django框架"></a>django框架</h3><h4 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h4><p>HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于万维网（WWW:World Wide Web ）服务器与本地浏览器之间传输超文本的传送协议。http协议是基于TCP/IP协议之上的应用层协议</p>
-<p><img src="F:%5Cblog%5Chexo%5Csource_posts%5Cdjango%5Chttp.gif" alt></p>
-<p>请求方式：get与post请求</p>
-<p>1.get请求的url：url地址？请求参数1=值&amp;请求参数‘</p>
-<p>post方法是把提交的数据放在http包的请求体中。</p>
-<p>2.get提交的数据大小有限制（因为浏览器对于url的长度有限制），而post方法提交的数据没有限制。</p>
-<p>3.get与post请求在服务端获取请求数据方式不同。</p>
-<p><strong>面试题：主流浏览器内核：IE、Firefox、Google Chrome、Safari、Opera。</strong></p>
-<h4 id="web框架"><a href="#web框架" class="headerlink" title="web框架"></a>web框架</h4><p>框架，即framework，特指为解决一个开放性问题而射击的具有一定约束性的支撑结构，使用框架可以快速帮你开发特定系统。</p>
-<p>框架的优势：风格统一、内核代码有规律。</p>
-</div><div class="post-copyright"><blockquote><p>原文作者: 南歌EuanSu</p><p>原文链接: <a href="http://euansu123.github.io/20202020/509/904/django/">http://euansu123.github.io/20202020/509/904/django/</a></p><p>版权声明: 转载请注明出处(必须保留作者署名及链接)</p></blockquote></div><div class="tags"><a href="/tags/Python/">Python</a></div><div class="post-share"><div class="social-share"><span>分享到:</span></div></div><div class="post-nav"><a href="/20202020/508/927/Python%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/" class="next">Python可迭代对象、迭代器、生成器</a></div><div id="comments"><div id="container"><script type="text/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=2.0.5"></script><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=2.0.5"></script><script>var gitalk = new Gitalk({
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.5"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.5"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitalk/dist/gitalk.css?v=2.0.5"><title>Django框架 | 南歌Euansu的博客</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Django框架</h1><a id="logo" href="/.">南歌Euansu的博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">Django框架</h1><div class="post-meta"><a href="/20202020/509/904/django/#comments" class="comment-count"></a><p><span class="date">Sep 04, 2020</span></p></div><div class="post-content"><h3 id="Django框架"><a href="#Django框架" class="headerlink" title="Django框架"></a>Django框架</h3><h4 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h4><p>HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于万维网（WWW:World Wide Web ）服务器与本地浏览器之间传输超文本的传送协议。http协议是基于TCP/IP协议之上的应用层协议</p>
+<p><img src="/20202020/509/904/django/F:%5Cblog%5Chexo%5Csource_posts%5Cdjango%5C%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.jpg" alt></p>
+<p><strong>Http的请求方式：get与post请求</strong></p>
+<ol>
+<li>get提交的数据会放在url之后，以？分割url和传输数据，参数之间用&amp;相互连接，如EditBook？name=test1&amp;id=123456。post方法是把提交的数据放在Http包的请求体中。</li>
+<li>get提交的数据大小有限制（因为浏览器对url的长度有限制），而post方法提交的数据没有限制。</li>
+<li>get与post请求在服务端获取请求数据方式不同。</li>
+</ol>
+<p><img src="/20202020/509/904/django/F:%5Cblog%5Chexo%5Csource_posts%5Cdjango%5C%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87.jpg" alt></p>
+<p><strong>http协议的响应状态码：</strong></p>
+<p>状态码的值是当客户端向服务端发送请求时，返回请求结果。借助状态码，用户可以直到服务端是正常接收了请求，还是出现了其他状况。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>类别</th>
+<th>原因短语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1XX</td>
+<td>informational(信息状态码)</td>
+<td>接受的请求正在处理</td>
+</tr>
+<tr>
+<td>2XX</td>
+<td>Sucess(成功状态码)</td>
+<td>请求正常处理完毕</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>Redirection(重定向状态码)</td>
+<td>需要进行附加操作以完成请求</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>Client Error(客户端错误状态码)</td>
+<td>服务器无法处理请求</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>Server Error(服务器错误状态码)</td>
+<td>服务器处理请求出错</td>
+</tr>
+</tbody></table>
+<p><strong>HTTP Cookie</strong></p>
+<p>HTTP Cookie也叫Web Cookie或浏览器Cookie，是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时携带被携带并发送到服务器上。<font color="red">（第一次与服务器的连接不会有Cookie）</font>通常，它用于告知服务器端两个请求是否来自同一浏览器，如保持用户的登录状态。Cookie使基于无状态的HTTP协议记录稳定的状态信息。</p>
+<p>Cookie主要用于以下三方面：</p>
+<ul>
+<li>会话状态管理（如用户登录状态、购物车、游戏分数或其他需要记录的信息）</li>
+<li>个性化设置（如用户自定义设置、主题等）</li>
+<li>浏览器行为跟踪（如跟踪分析用户行为等）  </li>
+</ul>
+<p><strong>面试题：主流浏览器内核：</strong></p>
+<p>浏览器内核又可以分成两部分：渲染引擎(layout engineer或者Rendering Engine)和JS引擎<font color="red">(其中渲染引擎负责形成页面，JS引擎支持动态编程)。</font></p>
+<p>浏览器内核的作用：负责取得网页的内容（HTML、XML、图像等等），整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或者打印机。</p>
+<p>常见的浏览器内核分为四种：Trident、Gecko、Blink、Webkit。</p>
+<p><strong>各浏览器常用内核</strong></p>
+<table>
+<thead>
+<tr>
+<th>浏览器名称</th>
+<th>内核名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IE</td>
+<td>Trident，俗称为IE内核</td>
+</tr>
+<tr>
+<td>Chrome</td>
+<td>统称为Chromium内核或Chrome内核，以前是Webkit内核，现在是Blink内核</td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td>Gecko内核</td>
+</tr>
+<tr>
+<td>Safari</td>
+<td>Webkit</td>
+</tr>
+<tr>
+<td>Opera</td>
+<td>最初是Presto内核，后来是Webkit，现在是Blink内核</td>
+</tr>
+<tr>
+<td>360、猎豹</td>
+<td>IE+Chrome双内核</td>
+</tr>
+<tr>
+<td>搜狗、遨游、QQ浏览器</td>
+<td>Trident（兼容模式）+Webkit（高速模式）</td>
+</tr>
+</tbody></table>
+<h4 id="web框架"><a href="#web框架" class="headerlink" title="web框架"></a>web框架</h4><p><img src="/20202020/509/904/django/F:%5Cblog%5Chexo%5Csource_posts%5Cdjango%5Cweb%E6%A1%86%E6%9E%B6.jpg" alt></p>
+<p>框架，即framework，特指为解决一个开放性问题而设计的具有一定约束性的支撑结构，使用框架可以快速帮你开发特定系统。</p>
+<p>框架是利用别人已经设定好的一个网站模板，进行“修改”或者“填空”实现想要的功能。框架的优势：风格统一、内核代码有规律。</p>
+<h4 id="框架架构：MVC-MTV"><a href="#框架架构：MVC-MTV" class="headerlink" title="框架架构：MVC/MTV"></a>框架架构：MVC/MTV</h4><p><img src="/20202020/509/904/django/F:%5Cblog%5Chexo%5Csource_posts%5Cdjango%5CMVC.png" alt></p>
+<p>MVC全名Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。</p>
+<ul>
+<li>模型（model）：定义数据库相关的内容，一般放在Models.py文件中。</li>
+<li>视图（view）：定义HTML等静态网页文件相关，也就是那些HTML、CSS、JS等前端的东西。</li>
+<li>控制器（Controller）：定义业务逻辑相关，就是我们主要的代码。</li>
+</ul>
+<p><strong>MVC接收与响应：</strong></p>
+<ul>
+<li>视图向控制层发送请求；</li>
+<li>控制器接收请求；</li>
+<li>控制器将请求进行包装；</li>
+<li>控制器调用模型；</li>
+<li>模型也可能i调用控制器。</li>
+</ul>
+<p>在Java和.net中将MVC模型改成了多层模型，而Python将MVC摒弃，开发出来了相近的MTV。</p>
+<p><img src="/20202020/509/904/django/F:%5Cblog%5Chexo%5Csource_posts%5Cdjango%5CMTV.png" alt></p>
+<p>Django的MTV模式本质上和MVC是一样的，也是为了各组件保持松耦合关系，只是定义上有些许不同，Django的MTV分别是指：</p>
+<ul>
+<li>M代表模型（Model）：负责业务对象和数据库的关系映射（ORM）；</li>
+<li>T代表模板（Template）：负责如何把页面展示给用户（html）；</li>
+<li>V代表视图（View）：负责业务逻辑，并在适当的时候调用Model和Template。</li>
+</ul>
+<p><strong>MTV的接收与响应：</strong></p>
+<ul>
+<li>WSGI请求处理；</li>
+<li>控制器控制用户输入，通过映射列表将一个请求发送到一个合适的视图；</li>
+<li>程序向模型和模板发送数据—视图；</li>
+<li>数据库存取数据—模型；</li>
+<li>内容与展现分离，描述了数据如何展现—模板；</li>
+<li>将模板和数据整合，形成最终的展示页面—视图；</li>
+<li>控制器返回用户展示—django框架。</li>
+</ul>
+<p><strong>MTV和MVC的区别：</strong></p>
+<p>​    MVC为那些需要给同样数据提供多个视图的应用程序而设计。它很好地实现了数据层与表示层的分离，特别适用于开发与用户图形界面有关的应用程序。控制器用来处理用户命令以及程序事件；模型维护数据并提供数据访问方法；视图用于数据的显示。</p>
+<p>​    MTV中，视图是描述要展现的数据，而视图一般转交给模板。模板描述了数据如何展现。控制器则是指django框架本身，通过url配置，系统将一个请求发送到一个合适的视图。</p>
+<p><strong>其中MTV和MVC中的字母排序代表开发顺序，例如MTV即先开发数据库模型、网页模板、将数据库与网页模板关联的视图。</strong></p>
+<h4 id="Django项目"><a href="#Django项目" class="headerlink" title="Django项目"></a>Django项目</h4><img src="/20202020/509/904/django/blog\hexo\source\_posts\django\django框架.jpg" style="zoom: 80%;">
+
+<p>Django创建项目中各部分的作用;</p>
+<ul>
+<li><strong>djangoWProject</strong>：项目的容器；</li>
+<li><strong>manage.py</strong>：一个实用的命令行工具，可以让你以各种方式与该Django项目进行交互；</li>
+<li><strong>djangoWProject/__ init__.py</strong>：一个空文件，告诉Python该目录是一个Python包；</li>
+<li><strong>djangoWProject/asgi.py</strong>：一个ASGI兼容的Web服务器的入口，便于运行项目。</li>
+<li><strong>djangoWProject/yrls.py</strong>：该Django项目的url声明，一份由Django1驱动的网站目录。</li>
+<li><strong>djangoWProject/wsgi.py</strong>：一个WSGI兼容的Web服务器的入口，便于运行项目。</li>
+</ul>
+<p><strong>问题：WSGI和ASGI的区别</strong></p>
+<p>​    WSGI：Web服务器网关接口(Python Web Server Gateway Interface，WSGI)，是为Python语言定义的Web服务器和Web应用程序或框架之间的一种简单而通用的接口。<br>​    ASGI：异步网关协议接口，一个介于网络协议服务和Python应用之间的标准接口，能够处理多种通用的协议类型，包括HTTP，HTTP2和WebSocket。<br>​    区别：WSGI是基于HTTP协议模式的，不支持WebSocket，而ASGI的诞生则是为了解决Python常用的WSGI不支持当前Web开发中的一些新的协议标准。同时，ASGI对于WSGI原有的模式的支持和WebSocket的扩展，即ASGI是WSGI的扩展。</p>
+<p><strong>创建Django项目</strong></p>
+<ol>
+<li><p>创建Django项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject djangoWProject</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用Pycharm直接创建。</p>
+</li>
+<li><p>创建APP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp firstDjangoApp</span><br></pre></td></tr></table></figure>
+
+<p>项目和APP有什么区别？APP是一个专门做某件事的网络应用程序——比如博客系统，或者公共记录的数据库，或者小型的投票程序。项目则是一个网站使用的配置和应用的集合。项目可以包含很多个应用。应用可以被很多个项目使用。</p>
+</li>
+<li><p>编写一个视图</p>
+<p>视图也即定义前端显示，打开firstDjangoAPP，输入要显示的内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"Hello, world. You're at the polls index."</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果想要看见视图的效果，需要将一个url映射到它，这也即是URLconf，需要在firstDjangoAPP中新建一个urls.py文件。</p>
+<p>在urls.py文件中输入如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">''</span>, views.index, name=<span class="string">'index'</span>),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>接下来要在根URLconf文件中指定我们创建的urls模块。在urlpatterns列表中插入一个include()。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path,include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">'firstDjangoAPP'</span>,include(<span class="string">'firstDjangoAPP.urls'</span>))</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>函数include()允许引用其他URLconfs。每当Django遇到include()时，它会截断与此项匹配的URL部分，并将剩下的字符串发送到URLcinf中进一步处理。</p>
+</li>
+<li><p>数据库配置。</p>
+</li>
+</ol>
+<p>在外层的__ init__.py文件中写入以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   import pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
+
+<p>   a.使用默认的数据库</p>
+<p>   默认开启的某些应用需要至少一个数据表，使用默认的sqlite3则不再需要更改任何配置。</p>
+<p>   这个migrate命令检查INSTALLED_APPS设置，为其中的每个应用创建需要的数据表，会生成默认的sqlsite3数据库。</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">       &#39;default&#39;: &#123;</span><br><span class="line">        # 这里可以指定使用的数据库类型，例如mysql</span><br><span class="line">           &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,</span><br><span class="line">        &#39;NAME&#39;: os.path.join(BASE_DIR, &#39;db.sqlite3&#39;),</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>   ‘ENGINE（引擎）’：可以是<code>django.db.backends.sqlite3</code>、<code>django.db.backends.postgresql</code>、<code>django.db.backends.mysql</code>、<code>django.db.backends.oracle</code>，当然其它的也行。</p>
+<p>   ‘NAME（名称）’：类似于mysql数据库管理系统中用于保存项目内容的数据库的名字。</p>
+<p>   b.使用自己创建的数据库</p>
+<p>   使用自己创建的数据库需要提前有一个数据库，也即在配置数据库的时候就需要存在该数据库，配置时需要自己指定诸如USER、PASSWORD和HOST的参数必须手动指定。如下是一个基于pymysql操作MySQL数据库的配置，修改settintgs.py文件。</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">    &#39;default&#39;: &#123;</span><br><span class="line">        &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,</span><br><span class="line">        &#39;NAME&#39;: &#39;website&#39;,</span><br><span class="line">     &#39;HOST&#39;: &#39;127.0.0.1&#39;,</span><br><span class="line">        &#39;USER&#39;: &#39;root&#39;,</span><br><span class="line">        &#39;PASSWORD&#39;: &#39;swh123456&#39;,</span><br><span class="line">        &#39;PORT&#39;: &#39;3306&#39;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>   Django使用的时间是“UTC”时间，可以修改settings.py中TIME_ZONE的值为“Asia/Shanghai”。</p>
+<ol start="5">
+<li><p>创建数据库中的表</p>
+<p>打开djangoWProject/settings.py，这是个包含了Django项目设置的模块。在这个文件中有一个INSTALLED_APPS设置项。这里包括了Django项目中启动的所有APP。APP能够在多个项目中使用，也可以打包发布APP，以供其他人使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">通常， INSTALLED_APPS 默认包括了以下 Django 的自带应用：</span><br><span class="line"></span><br><span class="line">django.contrib.admin -- 管理员站点， 你很快就会使用它。</span><br><span class="line">django.contrib.auth -- 认证授权系统。</span><br><span class="line">django.contrib.contenttypes -- 内容类型框架。</span><br><span class="line">django.contrib.sessions -- 会话框架。</span><br><span class="line">django.contrib.messages -- 消息框架。</span><br><span class="line">django.contrib.staticfiles -- 管理静态文件的框架。</span><br></pre></td></tr></table></figure>
+
+<p>它列出了所有的项目中被激活的Django应用（APP）。你必须将你自定义的app注册在这里。每个应用可以被多个项目使用，并且可以打包和分发给其他人在他们的项目中使用。</p>
+<p>注册完成APP后，就可以创建数据表了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Python manage.py migrate</span><br></pre></td></tr></table></figure>
+
+<p>migrate命令检查INSTALLED_APPS设置，为其中每个应用创建需要的数据表，</p>
+</li>
+<li><p>创建模型</p>
+<p>模型的本质就是数据库表的布局，再附加一些元数据。Django通过自定义Python类的形式来定义具体的模型，每个模型的物理存在方式就是一个Python的Class类。</p>
+</li>
+<li><p>123</p>
+</li>
+</ol>
+<ol start="8">
+<li><p>编写路由</p>
+</li>
+<li><p>编写路由</p>
+</li>
+</ol>
+<p><strong>以指定端口启动Django项目</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver 8080</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建APP</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp appname</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><strong>停止Django项目</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CTRL+C</span><br></pre></td></tr></table></figure>
+
+</div><div class="post-copyright"><blockquote><p>原文作者: 南歌EuanSu</p><p>原文链接: <a href="http://euansu123.github.io/20202020/509/904/django/">http://euansu123.github.io/20202020/509/904/django/</a></p><p>版权声明: 转载请注明出处(必须保留作者署名及链接)</p></blockquote></div><div class="tags"><a href="/tags/Python/">Python</a></div><div class="post-share"><div class="social-share"><span>分享到:</span></div></div><div class="post-nav"><a href="/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="pre">面向对象的学生管理系统</a><a href="/20202020/508/927/Python%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/" class="next">Python可迭代对象、迭代器、生成器</a></div><div id="comments"><div id="container"><script type="text/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=2.0.5"></script><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=2.0.5"></script><script>var gitalk = new Gitalk({
   clientID: '29fa69e0207d35db8788',
   clientSecret: 'fa58aa09217f9dcf24f8cf5b2146a6f7798ac8e4',
   repo: 'euansu123.github.io',
@@ -19,4 +237,4 @@
   language: 'zh-CN',
   pagerDirection: 'last'
 })
-gitalk.render('container')</script></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#django框架"><span class="toc-text">django框架</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP协议"><span class="toc-text">HTTP协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#web框架"><span class="toc-text">web框架</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20202020/509/904/django/">django</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/927/Python%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/">Python可迭代对象、迭代器、生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/926/Python%E9%97%AD%E5%8C%85/">Python闭包和装饰器</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/920/Pygame%E9%A3%9E%E6%9C%BA%E5%A4%A7%E6%88%98/">Pygame飞机大战</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/918/Python%E5%AD%97%E7%AC%A6%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">Python字符和文件操作</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/918/Python%E5%8F%98%E9%87%8F/">Python变量</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/917/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%82%A3%E4%BA%9B%E4%BA%8B/">Python面向对象那些事</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/913/Python%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Python基础数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/913/Python%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">Python浅拷贝和深拷贝</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">Python基础</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">前端学习</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/kali/" style="font-size: 15px;">kali</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 15px;">信息安全</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">26</span></li></ul></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/atom.xml">订阅本站</a> |  <a href="/about/">联系博主</a></p><p><span> Copyright &copy;<a href="/." rel="nofollow">南歌EuanSu.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script type="text/javascript" src="/js/search.json.js?v=2.0.5"></script><div id="fullscreen-img" class="hide"><span class="close"></span></div><script type="text/javascript" src="/js/imgview.js?v=2.0.5" async></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.5" async></script><link rel="stylesheet" type="text/css" href="/share/css/share.css"><script type="text/javascript" src="/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/share/js/qrcode.js" charset="utf-8"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body></html>
+gitalk.render('container')</script></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Django框架"><span class="toc-text">Django框架</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTTP协议"><span class="toc-text">HTTP协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#web框架"><span class="toc-text">web框架</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#框架架构：MVC-MTV"><span class="toc-text">框架架构：MVC&#x2F;MTV</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Django项目"><span class="toc-text">Django项目</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">面向对象的学生管理系统</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/509/904/django/">Django框架</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/927/Python%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/">Python可迭代对象、迭代器、生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/926/Python%E9%97%AD%E5%8C%85/">Python闭包和装饰器</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/920/Pygame%E9%A3%9E%E6%9C%BA%E5%A4%A7%E6%88%98/">Pygame飞机大战</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/918/Python%E5%AD%97%E7%AC%A6%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">Python字符和文件操作</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/918/Python%E5%8F%98%E9%87%8F/">Python变量</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/917/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%82%A3%E4%BA%9B%E4%BA%8B/">Python面向对象那些事</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/913/Python%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Python基础数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/913/Python%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">Python浅拷贝和深拷贝</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">前端学习</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/kali/" style="font-size: 15px;">kali</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 15px;">信息安全</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">27</span></li></ul></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/atom.xml">订阅本站</a> |  <a href="/about/">联系博主</a></p><p><span> Copyright &copy;<a href="/." rel="nofollow">南歌EuanSu.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script type="text/javascript" src="/js/search.json.js?v=2.0.5"></script><div id="fullscreen-img" class="hide"><span class="close"></span></div><script type="text/javascript" src="/js/imgview.js?v=2.0.5" async></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.5" async></script><link rel="stylesheet" type="text/css" href="/share/css/share.css"><script type="text/javascript" src="/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/share/js/qrcode.js" charset="utf-8"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body></html>

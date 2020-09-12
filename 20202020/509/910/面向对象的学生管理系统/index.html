@@ -1,4 +1,300 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.5"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.5"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitalk/dist/gitalk.css?v=2.0.5"><title>面向对象的学生管理系统 | 南歌Euansu的博客</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">面向对象的学生管理系统</h1><a id="logo" href="/.">南歌Euansu的博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">面向对象的学生管理系统</h1><div class="post-meta"><a href="/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#comments" class="comment-count"></a><p><span class="date">Sep 10, 2020</span></p></div><div class="post-content"><p>首先展示一下面向函数的学生管理系统，使用了Python语言编写。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Pisces","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="首先展示一下面向函数的学生管理系统，使用了Python语言编写。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象的学生管理系统">
+<meta property="og:url" content="http://euansu123.github.io/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="首先展示一下面向函数的学生管理系统，使用了Python语言编写。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-10T15:37:49.000Z">
+<meta property="article:modified_time" content="2020-09-12T12:07:23.069Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>面向对象的学生管理系统 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/img/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/euansu" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;euansu" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面向对象的学生管理系统
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-10 23:37:49" itemprop="dateCreated datePublished" datetime="2020-09-10T23:37:49+08:00">2020-09-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-12 20:07:23" itemprop="dateModified" datetime="2020-09-12T20:07:23+08:00">2020-09-12</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>首先展示一下面向函数的学生管理系统，使用了Python语言编写。</p>
+<a id="more"></a>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">stus = &#123;<span class="number">1001</span>:[<span class="string">"张三"</span>,<span class="number">89.56</span>],<span class="number">1002</span>:[<span class="string">"李四"</span>,<span class="number">95.80</span>]&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#查询学生信息，修改学生信息，删除学生信息，增加学生信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"*****欢迎使用学生管理系统*****"</span>)</span><br><span class="line">    print(<span class="string">"1.查询学生信息"</span>)</span><br><span class="line">    print(<span class="string">"2.添加学生信息"</span>)</span><br><span class="line">    print(<span class="string">"3.修改学生信息"</span>)</span><br><span class="line">    print(<span class="string">"4.删除学生信息"</span>)</span><br><span class="line">    print(<span class="string">"0.退出学生管理"</span>)</span><br><span class="line"></span><br><span class="line">    num=int(input(<span class="string">"请选择你要使用的功能"</span>))</span><br><span class="line">    <span class="keyword">if</span> num==<span class="number">1</span>:</span><br><span class="line">        querystus()</span><br><span class="line">    <span class="keyword">elif</span> num==<span class="number">2</span>:</span><br><span class="line">        addstus()</span><br><span class="line">    <span class="keyword">elif</span> num==<span class="number">3</span>:</span><br><span class="line">        modifystus()</span><br><span class="line">    <span class="keyword">elif</span> num==<span class="number">4</span>:</span><br><span class="line">        delstus()</span><br><span class="line">    <span class="keyword">elif</span> num==<span class="number">5</span>:</span><br><span class="line">        showall()</span><br><span class="line">    <span class="keyword">elif</span> num==<span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"程序退出中..."</span>)</span><br><span class="line">        exit()</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        print(<span class="string">"输入错误，请重新输入"</span>)</span><br><span class="line">        main()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">key</span><span class="params">()</span>:</span></span><br><span class="line">    s = input(<span class="string">"输入Y继续，输入N退出"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> s == <span class="string">"Y"</span> <span class="keyword">or</span> s == <span class="string">"y"</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">elif</span> s == <span class="string">"N"</span> <span class="keyword">or</span> s == <span class="string">"n"</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"输入错误请重新输入"</span>)</span><br><span class="line">        key()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">querystus</span><span class="params">()</span>:</span></span><br><span class="line">    sno = int(input(<span class="string">"请输入您要查询学生的学号"</span>))</span><br><span class="line">    <span class="keyword">if</span> sno <span class="keyword">in</span> stus:</span><br><span class="line">        print(<span class="string">"学生信息查询成功"</span>)</span><br><span class="line">        print(<span class="string">"学号:"</span>+str(sno)+<span class="string">"  姓名:"</span>+str(stus[sno][<span class="number">0</span>])+<span class="string">"  成绩:"</span>+str(stus[sno][<span class="number">1</span>]))</span><br><span class="line">        print(<span class="string">"是否要继续查询学生信息"</span>)</span><br><span class="line">        key_c = key()</span><br><span class="line">        <span class="keyword">if</span> key_c:</span><br><span class="line">            querystus()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            main()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"您要查询的学生信息不存在，请重新输入"</span>)</span><br><span class="line">        querystus()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addstus</span><span class="params">()</span>:</span></span><br><span class="line">    sno = int(input(<span class="string">"请输入要添加学生的学号"</span>))</span><br><span class="line">    <span class="keyword">if</span> sno <span class="keyword">in</span> stus:</span><br><span class="line">        print(<span class="string">"学号信息已被使用，请重新输入学号"</span>)</span><br><span class="line">        addstus()</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        name = input(<span class="string">"请输入学生姓名"</span>)</span><br><span class="line">        score = float(input(<span class="string">"请输入学生成绩"</span>))</span><br><span class="line">        stus[sno] = [name,score]</span><br><span class="line">    print(stus,end=<span class="string">""</span>)</span><br><span class="line">    print(<span class="string">"学生信息添加成功，是否需要继续添加学生信息"</span>)</span><br><span class="line">    key_c = key()</span><br><span class="line">    <span class="keyword">if</span>(key_c):</span><br><span class="line">        addstus()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        main()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delstus</span><span class="params">()</span>:</span></span><br><span class="line">    sno = int(input(<span class="string">"请输入你要删除的学生信息的学号"</span>))</span><br><span class="line">    <span class="keyword">if</span> sno <span class="keyword">in</span> stus:</span><br><span class="line">        print(str(stus[sno]) + <span class="string">"信息删除*****"</span>)</span><br><span class="line">        <span class="keyword">del</span> stus[sno]</span><br><span class="line">        print(<span class="string">"学生信息删除成功，是否需要继续删除学生信息"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"学生信息不存在，请重新输入"</span>)</span><br><span class="line">        delstus()</span><br><span class="line">    key_c = key()</span><br><span class="line">    <span class="keyword">if</span> key_c:</span><br><span class="line">        delstus()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        main()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modifystus</span><span class="params">()</span>:</span></span><br><span class="line">    sno = int(input(<span class="string">"请输入您要修改学生信息的学号"</span>))</span><br><span class="line">    <span class="keyword">if</span> sno <span class="keyword">in</span> stus:</span><br><span class="line">        print(<span class="string">"学号:"</span>+str(sno)+<span class="string">"  姓名:"</span>+str(stus[sno][<span class="number">0</span>])+<span class="string">"  成绩:"</span>+str(stus[sno][<span class="number">1</span>]))</span><br><span class="line">        num = int(input(<span class="string">"请输入你要修改的学生信息：1.姓名；2.成绩。"</span>))</span><br><span class="line">        <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">            sname = input(<span class="string">"请输入姓名"</span>)</span><br><span class="line">            stus[sno][<span class="number">0</span>] = sname</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            score = int(input(<span class="string">"请输入成绩"</span>))</span><br><span class="line">            stus[sno][<span class="number">1</span>] = score</span><br><span class="line">        print(<span class="string">"学生信息修改成功，是否需要继续修改学生信息"</span>)</span><br><span class="line">        key_c = key()</span><br><span class="line">        <span class="keyword">if</span> key_c:</span><br><span class="line">            modifystus()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            main()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"学号输入错误，请重新输入"</span>)</span><br><span class="line">        modifystus()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
 
 <p>面向函数的编程是将编程分成N件事情，然后按照步骤执行函数实现目的。</p>
@@ -10,15 +306,130 @@
 <p><strong>学生管理类</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Student <span class="keyword">import</span> Student</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">School</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#创建学生容器</span></span><br><span class="line">    stus = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">menu</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"---进入学生管理系统---"</span>)</span><br><span class="line">        print(<span class="string">"---1.添加学生---"</span>)</span><br><span class="line">        print(<span class="string">"---2.修改学生---"</span>)</span><br><span class="line">        print(<span class="string">"---3.查询学生---"</span>)</span><br><span class="line">        print(<span class="string">"---4.删除学生---"</span>)</span><br><span class="line">        print(<span class="string">"---0.退出系统---"</span>)</span><br><span class="line">        num = int(input(<span class="string">"请输入要选择的功能"</span>))</span><br><span class="line">        <span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">            self.addstu()</span><br><span class="line">        <span class="keyword">elif</span> num == <span class="number">2</span>:</span><br><span class="line">            self.modifyStu()</span><br><span class="line">        <span class="keyword">elif</span> num == <span class="number">3</span>:</span><br><span class="line">            self.showStu()</span><br><span class="line">        <span class="keyword">elif</span> num == <span class="number">4</span>:</span><br><span class="line">            self.delStu()</span><br><span class="line">        <span class="keyword">elif</span> num == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"---退出学生管理系统---"</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"输入错误，请重新调用"</span>)</span><br><span class="line">            self.menu()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">key</span><span class="params">(self)</span>:</span></span><br><span class="line">        s = input(<span class="string">"输入Y继续，输入N返回主界面"</span>)</span><br><span class="line">        <span class="keyword">if</span> s == <span class="string">"Y"</span> <span class="keyword">or</span> s == <span class="string">"y"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> s == <span class="string">"N"</span> <span class="keyword">or</span> s == <span class="string">"n"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"输入错误请重新输入"</span>)</span><br><span class="line">            self.key()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 添加学生</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addstu</span><span class="params">(self)</span>:</span></span><br><span class="line">        sno = int(input(<span class="string">'请输入学生学号：'</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.stus:</span><br><span class="line">            <span class="keyword">if</span> sno == i.getSid():</span><br><span class="line">                print(<span class="string">"您输入的学号信息已存在，请重新输入"</span>)</span><br><span class="line">                self.addstu()</span><br><span class="line">        sname = input(<span class="string">"请输入学生姓名："</span>)</span><br><span class="line">        scope = int(input(<span class="string">"请输入学生成绩："</span>))</span><br><span class="line">        scity = input(<span class="string">"请输入学生住址："</span>)</span><br><span class="line">        s = Student(sno,sname,scope,scity)</span><br><span class="line">        self.stus.append(s)</span><br><span class="line">        print(<span class="string">"学生信息添加成功"</span>)</span><br><span class="line">        print(<span class="string">"学号："</span>+str(s.getSid())+<span class="string">" 姓名："</span>+s.getSname()+<span class="string">" 成绩： "</span>+str(s.getScope())+<span class="string">" 住址："</span>+s.getScity())</span><br><span class="line">        key_c = self.key()</span><br><span class="line">        <span class="keyword">if</span> key_c:</span><br><span class="line">            self.addstu()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> self.stus:</span><br><span class="line">                print(i)</span><br><span class="line">            self.menu()</span><br><span class="line">    <span class="comment"># 修改学生信息</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">modifyStu</span><span class="params">(self)</span>:</span></span><br><span class="line">        sno = int(input(<span class="string">"请输入要修改的学生学号："</span>))</span><br><span class="line">        flag = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.stus:</span><br><span class="line">            <span class="keyword">if</span> sno == i.getSid():</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag :</span><br><span class="line">            print(<span class="string">f"学号：<span class="subst">&#123;i.getSid()&#125;</span>,姓名：<span class="subst">&#123;i.getSname()&#125;</span>,成绩：<span class="subst">&#123;i.getScope()&#125;</span>,住址：<span class="subst">&#123;i.getScity()&#125;</span>"</span>)</span><br><span class="line">            id = int(input(<span class="string">"请输入您要修改的学号："</span>))</span><br><span class="line">            i.setSid(id)</span><br><span class="line">            name = input(<span class="string">"请输入您要修改的姓名："</span>)</span><br><span class="line">            i.setSname(name)</span><br><span class="line">            scope = int(input(<span class="string">"请输入您要修改的成绩："</span>))</span><br><span class="line">            i.setScope(scope)</span><br><span class="line">            city = input(<span class="string">"请输入您要修改的住址："</span>)</span><br><span class="line">            i.setScity(city)</span><br><span class="line">            print(<span class="string">"---学生信息修改完成---"</span>)</span><br><span class="line">            print(<span class="string">f"学号：<span class="subst">&#123;i.getSid()&#125;</span>,姓名：<span class="subst">&#123;i.getSname()&#125;</span>,成绩：<span class="subst">&#123;i.getScope()&#125;</span>,住址：<span class="subst">&#123;i.getScity()&#125;</span>"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"学生信息不存在"</span>)</span><br><span class="line">        key_c = self.key()</span><br><span class="line">        <span class="keyword">if</span> key_c:</span><br><span class="line">            self.modifyStu()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.menu()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 查询学生</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showStu</span><span class="params">(self)</span>:</span></span><br><span class="line">        sno = int(input(<span class="string">"请输入要查询的学生学号："</span>))</span><br><span class="line">        flag = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.stus:</span><br><span class="line">            <span class="keyword">if</span> sno == i.getSid():</span><br><span class="line">                print(<span class="string">"学生信息查询完成"</span>)</span><br><span class="line">                flag = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> flag:</span><br><span class="line">            print(<span class="string">f"学号：<span class="subst">&#123;i.getSid()&#125;</span>,姓名：<span class="subst">&#123;i.getSname()&#125;</span>,成绩：<span class="subst">&#123;i.getScope()&#125;</span>,住址：<span class="subst">&#123;i.getScity()&#125;</span>"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"学生信息不存在，请重新输入学号"</span>)</span><br><span class="line">            key_c = self.key()</span><br><span class="line">            <span class="keyword">if</span> key_c:</span><br><span class="line">                self.showStu()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.menu()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 删除学生</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delStu</span><span class="params">(self)</span>:</span></span><br><span class="line">        sno = int(input(<span class="string">"请输入要删除的学生学号："</span>))</span><br><span class="line">        t = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> self.stus:</span><br><span class="line">            <span class="keyword">if</span> sno == i.getSid():</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                t += <span class="number">1</span></span><br><span class="line">        print(<span class="string">"---学生信息删除中---"</span>)</span><br><span class="line">        self.stus.pop(t)</span><br><span class="line">        print(<span class="string">"---学生信息删除成功---"</span>)</span><br><span class="line"></span><br><span class="line">sc1 = School()</span><br><span class="line">sc1.menu()</span><br></pre></td></tr></table></figure>
 
-</div><div class="post-copyright"><blockquote><p>原文作者: 南歌EuanSu</p><p>原文链接: <a href="http://euansu123.github.io/20202020/509/910/面向对象的学生管理系统/">http://euansu123.github.io/20202020/509/910/面向对象的学生管理系统/</a></p><p>版权声明: 转载请注明出处(必须保留作者署名及链接)</p></blockquote></div><div class="tags"><a href="/tags/Python/">Python</a></div><div class="post-share"><div class="social-share"><span>分享到:</span></div></div><div class="post-nav"><a href="/20202020/509/904/django/" class="next">Django框架</a></div><div id="comments"><div id="container"><script type="text/javascript" src="https://unpkg.com/gitalk/dist/gitalk.min.js?v=2.0.5"></script><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=2.0.5"></script><script>var gitalk = new Gitalk({
-  clientID: '29fa69e0207d35db8788',
-  clientSecret: 'fa58aa09217f9dcf24f8cf5b2146a6f7798ac8e4',
-  repo: 'euansu123.github.io',
-  owner: 'euansu123',
-  admin: ['euansu123'],
-  id: md5(window.location.pathname),
-  distractionFreeMode: false,
-  language: 'zh-CN',
-  pagerDirection: 'last'
-})
-gitalk.render('container')</script></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">面向对象的学生管理系统</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/509/904/django/">Django框架</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/927/Python%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/">Python可迭代对象、迭代器、生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/926/Python%E9%97%AD%E5%8C%85/">Python闭包和装饰器</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/920/Pygame%E9%A3%9E%E6%9C%BA%E5%A4%A7%E6%88%98/">Pygame飞机大战</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/918/Python%E5%AD%97%E7%AC%A6%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">Python字符和文件操作</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/918/Python%E5%8F%98%E9%87%8F/">Python变量</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/917/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%82%A3%E4%BA%9B%E4%BA%8B/">Python面向对象那些事</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/913/Python%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Python基础数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/913/Python%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">Python浅拷贝和深拷贝</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">前端学习</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/kali/" style="font-size: 15px;">kali</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 15px;">信息安全</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">27</span></li></ul></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/atom.xml">订阅本站</a> |  <a href="/about/">联系博主</a></p><p><span> Copyright &copy;<a href="/." rel="nofollow">南歌EuanSu.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script type="text/javascript" src="/js/search.json.js?v=2.0.5"></script><div id="fullscreen-img" class="hide"><span class="close"></span></div><script type="text/javascript" src="/js/imgview.js?v=2.0.5" async></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.5" async></script><link rel="stylesheet" type="text/css" href="/share/css/share.css"><script type="text/javascript" src="/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/share/js/qrcode.js" charset="utf-8"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body></html>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/509/904/django/" rel="prev" title="Django框架">
+                  <i class="fa fa-chevron-left"></i> Django框架
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

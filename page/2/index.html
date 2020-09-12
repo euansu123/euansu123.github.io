@@ -1,11 +1,926 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.5"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.5"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="stylesheet" type="text/css" href="https://unpkg.com/gitalk/dist/gitalk.css?v=2.0.5"><title>南歌Euansu的博客</title><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">南歌Euansu的博客</h1><a id="logo" href="/.">南歌Euansu的博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="搜索"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h2 class="post-title"><a href="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">Python基础</a></h2><div class="post-meta"><p><span class="date">2020-08-10</span></p></div><div class="post-content"><h3 id="Python基础"><a href="#Python基础" class="headerlink" title="Python基础"></a>Python基础</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>在Python中定义变量是不需要指定数据类型的，所以数据类型可以简单分为<strong>数字型</strong>和<strong>非数字型</strong>。</p></div><p class="readmore"><a href="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/">sql查询练习</a></h2><div class="post-meta"><p><span class="date">2020-08-06</span></p></div><div class="post-content"><h4 id="练习题目："><a href="#练习题目：" class="headerlink" title="练习题目："></a>练习题目：</h4><p>设有一数据库，包含四个表：学生表(Student)、课程表(Course)、成绩表(Score)以及教师表(Teacher)，用SQL语句创建四个表并完成相关题目。</p></div><p class="readmore"><a href="/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">数据库学习笔记</a></h2><div class="post-meta"><p><span class="date">2020-08-05</span></p></div><div class="post-content"><h3 id="数据库学习笔记"><a href="#数据库学习笔记" class="headerlink" title="数据库学习笔记"></a>数据库学习笔记</h3><h4 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h4><ul>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Pisces","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="南歌Euansu的博客">
+<meta property="og:url" content="http://euansu123.github.io/page/2/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="南歌EuanSu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://euansu123.github.io/page/2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/img/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/euansu" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;euansu" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+      
+
+      
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">Python基础</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-10 14:04:24" itemprop="dateCreated datePublished" datetime="2020-08-10T14:04:24+08:00">2020-08-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-12 20:52:24" itemprop="dateModified" datetime="2020-08-12T20:52:24+08:00">2020-08-12</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Python基础"><a href="#Python基础" class="headerlink" title="Python基础"></a>Python基础</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>在Python中定义变量是不需要指定数据类型的，所以数据类型可以简单分为<strong>数字型</strong>和<strong>非数字型</strong>。</p>
+<ul>
+<li><p>数字型</p>
+<ul>
+<li><p>整型(int)</p>
+</li>
+<li><p>浮点型(float)</p>
+</li>
+<li><p>布尔型(bool)</p>
+<ul>
+<li>真True，在Python非零即为真，字符串为空也为假</li>
+<li>假False，0</li>
+</ul>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8001.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>非数字型</p>
+<ul>
+<li>字符串</li>
+<li>列表</li>
+<li>元组</li>
+<li>字典</li>
+</ul>
+</li>
+</ul>
+<p>使用type(name)可以查看一个变量的类型。</p>
+<h5 id="类型之间的运算"><a href="#类型之间的运算" class="headerlink" title="类型之间的运算"></a>类型之间的运算</h5><ol>
+<li><p>数字变量之间可以直接运算</p>
+<p>在Python中，两个数字型变量可以是直接进行算数运算的，如果变量是bool型，在计算时：True对应的数字是1，False对应的数字是0。</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8002.jpg" alt></p>
+</li>
+<li><p>字符串变量之间可以使用+拼接字符串</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8003.jpg" alt></p>
+</li>
+<li><p>字符串变量可以和整数使用*重复拼接相同的字符串</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8004.jpg" alt></p>
+</li>
+<li><p>数字型变量和字符串之间不能进行其他计算</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8005.jpg" alt></p>
+</li>
+</ol>
+<h5 id="变量的输入"><a href="#变量的输入" class="headerlink" title="变量的输入"></a>变量的输入</h5><ol>
+<li><p>input函数实现键盘输入</p>
+<p>在Python中可以使用input函数接收键盘的输入，但默认的输入类型均为字符串，如果需要指定类型的变量，则需要进行类型转换。</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8006.jpg" alt></p>
+</li>
+<li><p>类型转换函数</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8007.jpg" alt></p>
+</li>
+</ol>
+<h5 id="变量的格式化输出"><a href="#变量的格式化输出" class="headerlink" title="变量的格式化输出"></a>变量的格式化输出</h5><ul>
+<li><p>使用%</p>
+<table>
+<thead>
+<tr>
+<th>格式化字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%s</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>有符号十进制整数，%6d表示输出的整数显示位数，不足的地方用0补全</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>浮点数</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>输出%</td>
+</tr>
+</tbody></table>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8008.jpg" alt></p>
+</li>
+<li><p>f字符串</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8009.jpg" alt></p>
+</li>
+<li><p>使用format</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E5%9F%BA%E7%A1%8010.jpg" alt></p>
+</li>
+</ul>
+<h4 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h4><h5 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h5><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>加</td>
+<td>10+20=30</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减</td>
+<td>10-20=-10</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘</td>
+<td>10*20=200</td>
+</tr>
+<tr>
+<td>/</td>
+<td>除</td>
+<td>10/20=0.5</td>
+</tr>
+<tr>
+<td>//</td>
+<td>取整除，返回除法的整数部分（商）</td>
+<td>9//2=4</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取余数，返回除法的余数</td>
+<td>9%2=1</td>
+</tr>
+<tr>
+<td>**</td>
+<td>幂</td>
+<td>2**3=8</td>
+</tr>
+</tbody></table>
+<h5 id="比较关系运算符"><a href="#比较关系运算符" class="headerlink" title="比较关系运算符"></a>比较关系运算符</h5><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>==</td>
+<td>检查两个操作数的值是否<strong>相等</strong>，如果是，则条件成立，返回True</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>检查两个操作的值是否<strong>不相等</strong>，如果是，则条件成立，返回True</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>检查左操作数的值是否<strong>大于</strong>右操作数的值，如果是，则条件成立，返回True</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>检查左操作数的值是否<strong>小于</strong>右操作数的值，如果是，则条件成立，返回True</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>检查左操作数的值是否<strong>大于或等于</strong>右操作数的值，如果是，则条件成立，返回True</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>检查左操作数的值是否<strong>小于或等于</strong>右操作数的值，如果是，则条件成立，返回True</td>
+</tr>
+</tbody></table>
+<h5 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h5><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>逻辑表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>and</td>
+<td>x and y</td>
+<td>只有x和y的值都为True，才会返回True，否则只要x或者y有一个值为False，就返回False</td>
+</tr>
+<tr>
+<td>or</td>
+<td>x or y</td>
+<td>只要x或者y有一个值为True，就返回True，只有x和y的值都为False，才会False</td>
+</tr>
+<tr>
+<td>not</td>
+<td>not x</td>
+<td>如果x为True，返回False，如果x为False，返回True</td>
+</tr>
+</tbody></table>
+<h5 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h5><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>=</td>
+<td>简单的赋值运算符</td>
+<td>c=a+b将a+b的运算结果赋值为c</td>
+</tr>
+<tr>
+<td>+=</td>
+<td>加法赋值运算符</td>
+<td>c+=a 等效于 c=c+b</td>
+</tr>
+<tr>
+<td>-=</td>
+<td>减法赋值运算符</td>
+<td>c-=a 等效于 c=c-b</td>
+</tr>
+<tr>
+<td>*=</td>
+<td>乘法赋值运算符</td>
+<td>c=* a 等效于 c=c*a</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>除法赋值运算符</td>
+<td>c/=a 等效于 c=c/a</td>
+</tr>
+<tr>
+<td>//=</td>
+<td>取整除赋值运算符</td>
+<td>c//=a 等效于 c=c//a</td>
+</tr>
+<tr>
+<td>%=</td>
+<td>取模（余数）赋值运算符</td>
+<td>c %=a 等效于 c=c%a</td>
+</tr>
+<tr>
+<td>**=</td>
+<td>幂赋值运算符</td>
+<td>c=* * a等效于 c=c* *a</td>
+</tr>
+</tbody></table>
+<h5 id="运算符的优先级"><a href="#运算符的优先级" class="headerlink" title="运算符的优先级"></a>运算符的优先级</h5><p>幂运算符优先级最高，逻辑运算符优先级最低。</p>
+<h4 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> 判断条件<span class="number">1</span>:</span><br><span class="line">    执行语句...</span><br><span class="line"><span class="keyword">elif</span> 判断条件<span class="number">2</span>:</span><br><span class="line">    执行语句...</span><br><span class="line"><span class="keyword">elif</span> 判断条件<span class="number">3</span>:</span><br><span class="line">    执行语句...</span><br><span class="line"><span class="keyword">else</span> :</span><br><span class="line">    执行语句...</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h4><ul>
+<li><p>while循环语句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">count =<span class="number">1</span></span><br><span class="line">sum=<span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> count&lt;=<span class="number">10</span>:</span><br><span class="line">    sum+=count</span><br><span class="line">    count+=<span class="number">1</span></span><br><span class="line">sum</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：55</p>
+</li>
+<li><p>for循环语句</p>
+</li>
+<li><p>循环控制语句</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="深复制和浅复制"><a href="#深复制和浅复制" class="headerlink" title="深复制和浅复制"></a>深复制和浅复制</h4><ul>
+<li><p>浅复制（拷贝）：只复制(拷贝)了列表的第一层，对列表的子列表不做拷贝；</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E6%B5%85%E5%A4%8D%E5%88%B6.png" alt></p>
+<p>12312</p>
+<p>123</p>
+</li>
+<li><p>深复制（拷贝）：浅拷贝，拷贝最外层数据对象；深拷贝还会递归拷贝内层对象；</p>
+<p><img src="/20202020/508/910/python%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/F:%5Cblog%5Chexo%5Csource_posts%5Cpython%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%5C%E6%B7%B1%E5%A4%8D%E5%88%B6.png" alt></p>
+<p>12312</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" class="post-title-link" itemprop="url">sql查询练习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-06 21:08:49" itemprop="dateCreated datePublished" datetime="2020-08-06T21:08:49+08:00">2020-08-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-10 08:32:23" itemprop="dateModified" datetime="2020-08-10T08:32:23+08:00">2020-08-10</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="练习题目："><a href="#练习题目：" class="headerlink" title="练习题目："></a>练习题目：</h4><p>设有一数据库，包含四个表：学生表(Student)、课程表(Course)、成绩表(Score)以及教师表(Teacher)，用SQL语句创建四个表并完成相关题目。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">数据库学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-05 11:55:37" itemprop="dateCreated datePublished" datetime="2020-08-05T11:55:37+08:00">2020-08-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-10 13:22:13" itemprop="dateModified" datetime="2020-08-10T13:22:13+08:00">2020-08-10</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="数据库学习笔记"><a href="#数据库学习笔记" class="headerlink" title="数据库学习笔记"></a>数据库学习笔记</h3><h4 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h4><ul>
 <li>第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。</li>
 <li>第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。</li>
 <li>第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。</li>
 </ul>
-<p>第三范式实例：将员工表中的部门信息与公司表的信息相互依赖。</p></div><p class="readmore"><a href="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">mysql学习笔记</a></h2><div class="post-meta"><p><span class="date">2020-08-04</span></p></div><div class="post-content"><h3 id="mysql学习教程"><a href="#mysql学习教程" class="headerlink" title="mysql学习教程"></a>mysql学习教程</h3><p>大型数据库：db2、sybase、oracle</p>
+<p>第三范式实例：将员工表中的部门信息与公司表的信息相互依赖。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">mysql学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-04 11:05:02" itemprop="dateCreated datePublished" datetime="2020-08-04T11:05:02+08:00">2020-08-04</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-10 13:52:14" itemprop="dateModified" datetime="2020-08-10T13:52:14+08:00">2020-08-10</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="mysql学习教程"><a href="#mysql学习教程" class="headerlink" title="mysql学习教程"></a>mysql学习教程</h3><p>大型数据库：db2、sybase、oracle</p>
 <p>中小型数据库：mysql、sql server</p>
-<p>mysql：市场占有率第一，免费、开源</p></div><p class="readmore"><a href="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">vue学习笔记</a></h2><div class="post-meta"><p><span class="date">2020-08-03</span></p></div><div class="post-content"><h3 id="vue使用教程"><a href="#vue使用教程" class="headerlink" title="vue使用教程"></a>vue使用教程</h3><ol>
+<p>mysql：市场占有率第一，免费、开源</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20202020/508/904/mysql%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">vue学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-03 08:19:13" itemprop="dateCreated datePublished" datetime="2020-08-03T08:19:13+08:00">2020-08-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-04 11:11:59" itemprop="dateModified" datetime="2020-08-04T11:11:59+08:00">2020-08-04</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="vue使用教程"><a href="#vue使用教程" class="headerlink" title="vue使用教程"></a>vue使用教程</h3><ol>
 <li><p>引入vue文件</p>
 <ul>
 <li><p>在vue官网<a href="https://vuejs.org/v2/guide/installation.html下载vue开发版本，与jquery引用方式相同。" target="_blank" rel="noopener">https://vuejs.org/v2/guide/installation.html下载vue开发版本，与jquery引用方式相同。</a></p>
@@ -14,10 +929,570 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 
 </li>
-</ul></li></ol></div><p class="readmore"><a href="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">css学习笔记</a></h2><div class="post-meta"><p><span class="date">2020-07-29</span></p></div><div class="post-content"></div><p class="readmore"><a href="/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">html学习笔记</a></h2><div class="post-meta"><p><span class="date">2020-07-29</span></p></div><div class="post-content"></div><p class="readmore"><a href="/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">jquery学习笔记</a></h2><div class="post-meta"><p><span class="date">2020-07-29</span></p></div><div class="post-content"><h3 id="JQuery学习笔记"><a href="#JQuery学习笔记" class="headerlink" title="JQuery学习笔记"></a>JQuery学习笔记</h3><h4 id="Jquery简介"><a href="#Jquery简介" class="headerlink" title="Jquery简介"></a>Jquery简介</h4><h5 id="RIA技术"><a href="#RIA技术" class="headerlink" title="RIA技术"></a>RIA技术</h5><p>JQuery是RIA技术(Rich Internet Applications)富互联网应具有高度互动性、丰富用户体验以及功能强的客户端。</p>
+</ul></li></ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20202020/508/903/vue%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">css学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-29 09:45:02" itemprop="dateCreated datePublished" datetime="2020-07-29T09:45:02+08:00">2020-07-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-03 08:24:27" itemprop="dateModified" datetime="2020-08-03T08:24:27+08:00">2020-08-03</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/507/929/css%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">html学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-29 09:44:43" itemprop="dateCreated datePublished" datetime="2020-07-29T09:44:43+08:00">2020-07-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-04 11:11:40" itemprop="dateModified" datetime="2020-08-04T11:11:40+08:00">2020-08-04</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/507/929/html%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">jquery学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-07-29 09:41:46" itemprop="dateCreated datePublished" datetime="2020-07-29T09:41:46+08:00">2020-07-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-08-04 11:11:31" itemprop="dateModified" datetime="2020-08-04T11:11:31+08:00">2020-08-04</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="JQuery学习笔记"><a href="#JQuery学习笔记" class="headerlink" title="JQuery学习笔记"></a>JQuery学习笔记</h3><h4 id="Jquery简介"><a href="#Jquery简介" class="headerlink" title="Jquery简介"></a>Jquery简介</h4><h5 id="RIA技术"><a href="#RIA技术" class="headerlink" title="RIA技术"></a>RIA技术</h5><p>JQuery是RIA技术(Rich Internet Applications)富互联网应具有高度互动性、丰富用户体验以及功能强的客户端。</p>
 <ul>
 <li>常见的RIA技术有：Ajax、Flex、Sliverlight、Jquery、Ext。</li>
 <li>Jquery的优势：轻量级、功能强大的选择q器、出色的DOM封装、可靠的事件处理机制、出色的浏览器兼容性。</li>
-</ul></div><p class="readmore"><a href="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/505/931/ssh%E8%BF%9E%E6%8E%A5kali/">ssh连接kali</a></h2><div class="post-meta"><p><span class="date">2020-05-31</span></p></div><div class="post-content"><p>在使用ssh连接kali时，遇到了Connection failed的问题，这里写一下我自己的遇到的问题，方便排坑。</p>
-<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>我这里用的是虚拟机运行kali，如果是双系统可以跳过这里，直接进入实战阶段。如果遇到虚拟机不能上网的问题，下面关于虚拟机网络模式也可以解决这个问题。</p></div><p class="readmore"><a href="/20202020/505/931/ssh%E8%BF%9E%E6%8E%A5kali/">阅读更多</a></p></div><div class="post"><h2 class="post-title"><a href="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/">信息安全—传输层安全</a></h2><div class="post-meta"><p><span class="date">2020-05-29</span></p></div><div class="post-content"><p>传输层安全大纲。</p>
-<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web安全.png" style="zoom:100%;"></div><p class="readmore"><a href="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/">阅读更多</a></p></div><nav class="page-navigator"><a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a></nav></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/20202020/509/910/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/">面向对象的学生管理系统</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/509/904/django/">Django框架</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/927/Python%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/">Python可迭代对象、迭代器、生成器</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/926/Python%E9%97%AD%E5%8C%85/">Python闭包和装饰器</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/920/Pygame%E9%A3%9E%E6%9C%BA%E5%A4%A7%E6%88%98/">Pygame飞机大战</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/918/Python%E5%AD%97%E7%AC%A6%E5%92%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">Python字符和文件操作</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/918/Python%E5%8F%98%E9%87%8F/">Python变量</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/917/Python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%82%A3%E4%BA%9B%E4%BA%8B/">Python面向对象那些事</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/913/Python%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Python基础数据结构</a></li><li class="post-list-item"><a class="post-list-link" href="/20202020/508/913/Python%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">Python浅拷贝和深拷贝</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">前端学习</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/kali/" style="font-size: 15px;">kali</a> <a href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/" style="font-size: 15px;">信息安全</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 15px;">数据库</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a><span class="archive-list-count">27</span></li></ul></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/atom.xml">订阅本站</a> |  <a href="/about/">联系博主</a></p><p><span> Copyright &copy;<a href="/." rel="nofollow">南歌EuanSu.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script type="text/javascript" src="/js/search.json.js?v=2.0.5"></script><script type="text/javascript" src="/js/totop.js?v=2.0.5" async></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body></html>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20202020/507/929/jquery%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/505/931/ssh%E8%BF%9E%E6%8E%A5kali/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/505/931/ssh%E8%BF%9E%E6%8E%A5kali/" class="post-title-link" itemprop="url">ssh连接kali</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-05-31 11:37:22 / 修改时间：13:25:49" itemprop="dateCreated datePublished" datetime="2020-05-31T11:37:22+08:00">2020-05-31</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/505/931/ssh%E8%BF%9E%E6%8E%A5kali/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/505/931/ssh%E8%BF%9E%E6%8E%A5kali/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在使用ssh连接kali时，遇到了Connection failed的问题，这里写一下我自己的遇到的问题，方便排坑。</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>我这里用的是虚拟机运行kali，如果是双系统可以跳过这里，直接进入实战阶段。如果遇到虚拟机不能上网的问题，下面关于虚拟机网络模式也可以解决这个问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20202020/505/931/ssh%E8%BF%9E%E6%8E%A5kali/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">信息安全—传输层安全</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-05-29 16:33:24" itemprop="dateCreated datePublished" datetime="2020-05-29T16:33:24+08:00">2020-05-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-06-11 19:03:13" itemprop="dateModified" datetime="2020-06-11T19:03:13+08:00">2020-06-11</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>传输层安全大纲。</p>
+<img src="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/web安全.png" style="zoom:100%;">
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20202020/505/929/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/page/2/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

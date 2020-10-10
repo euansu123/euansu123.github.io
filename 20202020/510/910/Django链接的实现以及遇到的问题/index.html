@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="Django链接的实现这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django链接的实现">
+<meta property="og:url" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="Django链接的实现这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index%E9%A1%B5%E9%9D%A2.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/detail%E9%A1%B5%E9%9D%A2.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E9%97%AE%E9%A2%98.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E9%97%AE%E9%A2%98_%E6%95%B0%E6%8D%AE%E5%BA%93.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E8%AF%84%E8%AE%BA.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E8%AF%84%E8%AE%BA_%E6%95%B0%E6%8D%AE%E5%BA%93.png">
+<meta property="article:published_time" content="2020-10-10T02:11:53.000Z">
+<meta property="article:modified_time" content="2020-10-10T03:09:10.322Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index%E9%A1%B5%E9%9D%A2.png">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Django链接的实现 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Django链接的实现"><span class="nav-number">1.</span> <span class="nav-text">Django链接的实现</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">梦想不会逃走，逃走的只有自己。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="梦想不会逃走，逃走的只有自己。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Django链接的实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-10-10 10:11:53 / 修改时间：11:09:10" itemprop="dateCreated datePublished" datetime="2020-10-10T10:11:53+08:00">2020-10-10</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="Django链接的实现"><a href="#Django链接的实现" class="headerlink" title="Django链接的实现"></a>Django链接的实现</h3><p>这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。</p>
+<a id="more"></a>
+
+<p><strong>模型实现</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="comment"># char最大长度200</span></span><br><span class="line">    question_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    question_date = models.DateTimeField()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vote</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="comment"># 投票内容</span></span><br><span class="line">    vote_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    vote_num = models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 多对一关联，级联操作</span></span><br><span class="line">    question_vote = models.ForeignKey(Question,on_delete=models.CASCADE)</span><br><span class="line">    <span class="comment"># 定义外键关系，告诉Django，每一个Vote关联到一个对应的Question，（要将外键写在“多”的一方）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>模板展示</strong></p>
+<ol>
+<li><p>投票问题</p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index%E9%A1%B5%E9%9D%A2.png" alt></p>
+</li>
+<li><p>投票评论</p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/detail%E9%A1%B5%E9%9D%A2.png" alt></p>
+</li>
+</ol>
+<p>这里解释一下question.vote_set.all：question.vote_set.all就是Python的代码question.vote_set.all() ，它将返回一组可迭代的vote对象，并用在for标签中。</p>
+<p><strong>路由规则编写</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(<span class="string">r'^(?P&lt;question_id&gt;\d+)/$'</span>, views.detail, name=<span class="string">'detail'</span>),</span><br></pre></td></tr></table></figure>
+
+<p>这里主要是针对&lt; a href=””&gt;的解决，通过这行链接，能够直接寻找name =’detail’ 的路由地址。</p>
+<p><strong>视图实现</strong></p>
+<ol>
+<li><p>投票问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">    question_list = Question.objects.order_by(<span class="string">'-question_date'</span>)</span><br><span class="line">    lo = locals()</span><br><span class="line">    print(type(lo),lo)</span><br><span class="line">    <span class="comment"># return render(request,'poll/index.html',&#123;'question_list': question_list&#125;)</span></span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">'poll/index.html'</span>, lo)</span><br></pre></td></tr></table></figure>
+
+<p>locals()返回一个包含当前作用域里面的所有变量和它们的值的字典，相当于{‘question_list’: question_list}。</p>
+</li>
+<li><p>投票评论</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">detail</span><span class="params">(request,question_id)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    功能：根据参数传递博客编号，查询对应的信息</span></span><br><span class="line"><span class="string">    :param request:</span></span><br><span class="line"><span class="string">    :param question_id: 博客编号</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    question = get_object_or_404(Question,pk=question_id)</span><br><span class="line">    <span class="keyword">return</span> render(request,<span class="string">'poll/detail.html'</span>,locals())</span><br></pre></td></tr></table></figure>
+
+<p>其中get_object_or_404的作用是：如果数据库中没有 id=1 的数据条目时，Django 会抛出 Error 500 错误。我们并不希望出现Error 500 错误，所以这里我们使用get_object_or_404就能够抛出Error 404 错误。</p>
+</li>
+</ol>
+<p>如下是投票页面和投票评论的展示。</p>
+<p><strong>投票页面及其数据库</strong></p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E9%97%AE%E9%A2%98.png" alt></p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E9%97%AE%E9%A2%98_%E6%95%B0%E6%8D%AE%E5%BA%93.png" alt></p>
+<p><strong>投票评论及其数据库</strong></p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E8%AF%84%E8%AE%BA.png" alt></p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E8%AF%84%E8%AE%BA_%E6%95%B0%E6%8D%AE%E5%BA%93.png" alt></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Django/" rel="tag"># Django</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/510/909/Django%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%A0%A1%E9%AA%8C/" rel="prev" title="Python交互环境下的Django数据库连接">
+                  <i class="fa fa-chevron-left"></i> Python交互环境下的Django数据库连接
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;一个简单的Django项目创建Django项目可以选择使用Pycharm图形化界面创建，或者使用命令行创建。  命令行创建Django项目 1django-admin startproject 项目名  Pycharm图形化界面创建    创建完成之后，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单的Django项目">
+<meta property="og:url" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;一个简单的Django项目创建Django项目可以选择使用Pycharm图形化界面创建，或者使用命令行创建。  命令行创建Django项目 1django-admin startproject 项目名  Pycharm图形化界面创建    创建完成之后，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%88%9B%E5%BB%BADjango%E9%A1%B9%E7%9B%AE.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/django%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.jpg">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/app%E7%BB%93%E6%9E%84.jpg">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E7%BC%96%E5%86%99%E8%B7%AF%E7%94%B1%E9%80%BB%E8%BE%91%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2html.png">
+<meta property="article:published_time" content="2020-10-06T13:30:27.000Z">
+<meta property="article:modified_time" content="2020-10-07T08:53:41.602Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Django框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%88%9B%E5%BB%BADjango%E9%A1%B9%E7%9B%AE.png">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>一个简单的Django项目 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的Django项目"><span class="nav-number">1.</span> <span class="nav-text">一个简单的Django项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建Django项目"><span class="nav-number">1.1.</span> <span class="nav-text">创建Django项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建APP"><span class="nav-number">1.2.</span> <span class="nav-text">创建APP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写路由"><span class="nav-number">1.3.</span> <span class="nav-text">编写路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写业务处理逻辑"><span class="nav-number">1.4.</span> <span class="nav-text">编写业务处理逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行web服务"><span class="nav-number">1.5.</span> <span class="nav-text">运行web服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回HTML文件"><span class="nav-number">1.6.</span> <span class="nav-text">返回HTML文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回动态页面"><span class="nav-number">1.7.</span> <span class="nav-text">返回动态页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置数据库"><span class="nav-number">1.8.</span> <span class="nav-text">配置数据库</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">梦想不会逃走，逃走的只有自己。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="梦想不会逃走，逃走的只有自己。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一个简单的Django项目
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-06 21:30:27" itemprop="dateCreated datePublished" datetime="2020-10-06T21:30:27+08:00">2020-10-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-07 16:53:41" itemprop="dateModified" datetime="2020-10-07T16:53:41+08:00">2020-10-07</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="一个简单的Django项目"><a href="#一个简单的Django项目" class="headerlink" title="一个简单的Django项目"></a>一个简单的Django项目</h3><h4 id="创建Django项目"><a href="#创建Django项目" class="headerlink" title="创建Django项目"></a>创建Django项目</h4><p>可以选择使用Pycharm图形化界面创建，或者使用命令行创建。</p>
+<ol>
+<li><p>命令行创建Django项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject 项目名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Pycharm图形化界面创建</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%88%9B%E5%BB%BADjango%E9%A1%B9%E7%9B%AE.png" alt></p>
+</li>
+</ol>
+<p>创建完成之后，就可以看到Django项目的结构。</p>
+<img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/django项目结构.jpg" style="zoom: 80%;">
+
+<h4 id="创建APP"><a href="#创建APP" class="headerlink" title="创建APP"></a>创建APP</h4><p>在每个Django项目中可以包含多个APP，相互之间比较独立，但也有联系.APP可以看作是实现具体功能的小模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp APP名</span><br></pre></td></tr></table></figure>
+
+<img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/app结构.jpg" style="zoom:80%;">
+
+<h4 id="编写路由"><a href="#编写路由" class="headerlink" title="编写路由"></a>编写路由</h4><p>路由就是根据用户请求的URL链接来判断对应的处理程序，并返回处理结果，也就是URL与Django的视图建立映射关系。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE.png" alt></p>
+<p>每条配置对应一个处理。</p>
+<h4 id="编写业务处理逻辑"><a href="#编写业务处理逻辑" class="headerlink" title="编写业务处理逻辑"></a>编写业务处理逻辑</h4><p>业务逻辑的处理都在APP下的views.py文件中。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E7%BC%96%E5%86%99%E8%B7%AF%E7%94%B1%E9%80%BB%E8%BE%91%E6%96%87%E4%BB%B6.png" alt></p>
+<p>如index函数所示，返回的只是字符串，但必须使用HttpResponse()，不能直接返回字符串。</p>
+<h4 id="运行web服务"><a href="#运行web服务" class="headerlink" title="运行web服务"></a>运行web服务</h4><p>如果无法启动Django项目，可以在runserver后指定端口号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回HTML文件"><a href="#返回HTML文件" class="headerlink" title="返回HTML文件"></a>返回HTML文件</h4><p>将编写好的html文件放在templates文件夹中，需要在settings.py文件中</p>
+<p>如果需要使用静态文件需要，需要创建静态文件夹，这里的静态文件值得是JS、CSS、图片文件以及各种插件，静态文件的使用需要在settings.py文件中加入如下代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">STATICFILES_DIRS=(</span><br><span class="line">    os.path.join(BASE_DIR,<span class="string">'static'</span>),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回动态页面"><a href="#返回动态页面" class="headerlink" title="返回动态页面"></a>返回动态页面</h4><p>这里指的是接收网页输入的内容并且返回给网页。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2.png" alt></p>
+<p>动态页面的逻辑如上。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2html.png" alt></p>
+<h4 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h4><p>Django默认支持SQLite数据库。</p>
+<p>配置数据库分为以下五步：</p>
+<ol>
+<li><p>添加自定义APP的名称到INSTALLED_APPS配置项；</p>
+</li>
+<li><p>设置数据库连接属性DATABASE；</p>
+</li>
+<li><p>修改当前APP下的models.py文件；</p>
+</li>
+<li><p>使用命令对应修改models到迁移文件（在migrations目录创建迁移文件）；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py makemigrations</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对新迁移文件完成物理表的映射，生成一个物理表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Django%E6%A1%86%E6%9E%B6/" rel="tag"># Django框架</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/509/930/Scrapy%E5%88%86%E5%B8%83%E5%BC%8F%E7%88%AC%E8%99%AB/" rel="prev" title="Scrapy分布式爬虫">
+                  <i class="fa fa-chevron-left"></i> Scrapy分布式爬虫
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

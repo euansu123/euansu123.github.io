@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="Ajax的原理及其实现这里通过一些简单的项目来解释一下Ajax的原理，当然主要的工作是依靠后端来完成，但也需要你有前端的一些基础，否则实操起来会比较困难。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax原理及其实现">
+<meta property="og:url" content="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="Ajax的原理及其实现这里通过一些简单的项目来解释一下Ajax的原理，当然主要的工作是依靠后端来完成，但也需要你有前端的一些基础，否则实操起来会比较困难。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F.jpg">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E6%8A%80%E6%9C%AF%E5%9B%BE.jpg">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E5%85%B3%E9%94%AE%E5%85%83%E7%B4%A0.jpg">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E6%B3%A8%E5%86%8C%E5%8F%AF%E7%94%A8.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E6%B3%A8%E5%86%8C.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E6%AD%A3%E5%B8%B8%E8%AF%84%E8%AE%BA.png">
+<meta property="article:published_time" content="2020-10-16T00:09:20.000Z">
+<meta property="article:modified_time" content="2020-10-18T08:00:12.265Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="Ajax">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E5%B7%A5%E4%BD%9C%E6%96%B9%E5%BC%8F.jpg">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Ajax原理及其实现 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ajax的原理及其实现"><span class="nav-number">1.</span> <span class="nav-text">Ajax的原理及其实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ajax的原理"><span class="nav-number">2.</span> <span class="nav-text">Ajax的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax简介"><span class="nav-number">2.1.</span> <span class="nav-text">Ajax简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax原理"><span class="nav-number">2.2.</span> <span class="nav-text">Ajax原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ajax的实现"><span class="nav-number">3.</span> <span class="nav-text">Ajax的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax的实现步骤："><span class="nav-number">3.1.</span> <span class="nav-text">Ajax的实现步骤：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与后端交互的Ajax"><span class="nav-number">3.2.</span> <span class="nav-text">与后端交互的Ajax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注册页面的Ajax"><span class="nav-number">3.3.</span> <span class="nav-text">注册页面的Ajax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#评论界面的Ajax"><span class="nav-number">3.4.</span> <span class="nav-text">评论界面的Ajax</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">人心有取舍，但求知行合一。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ajax原理及其实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-16 08:09:20" itemprop="dateCreated datePublished" datetime="2020-10-16T08:09:20+08:00">2020-10-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-18 16:00:12" itemprop="dateModified" datetime="2020-10-18T16:00:12+08:00">2020-10-18</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="Ajax的原理及其实现"><a href="#Ajax的原理及其实现" class="headerlink" title="Ajax的原理及其实现"></a>Ajax的原理及其实现</h3><p>这里通过一些简单的项目来解释一下Ajax的原理，当然主要的工作是依靠后端来完成，但也需要你有前端的一些基础，否则实操起来会比较困难。</p>
+<a id="more"></a>
+
+<h3 id="Ajax的原理"><a href="#Ajax的原理" class="headerlink" title="Ajax的原理"></a>Ajax的原理</h3><h4 id="Ajax简介"><a href="#Ajax简介" class="headerlink" title="Ajax简介"></a>Ajax简介</h4><p>Ajax = Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）,通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
+<ul>
+<li>Ajax 不是新的编程语言，而是一种使用现有标准的新方法。</li>
+<li>Ajax 是与服务器交换数据并更新部分网页的艺术，在不重新加载整个页面的情况下。</li>
+</ul>
+<img src="/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax工作方式.jpg" style="zoom:67%;">
+
+<p>如上图所示，是Ajax和传统的Web应用模型工作方式的比较。传统的Web工作模式非常简单，就是浏览器发送HTTP请求，服务器接受之后进行处理，最后返回一个HTML+CSS页面显示在客户端，这种工作方式难免会出现用户等待的情况，因此Ajax也就应运而生了。</p>
+<p>与传统的Web应用模型相比，Ajax在浏览器与Web服务器之间新增加了一层引擎，这个引擎是浏览器在第一次与服务器进行通信时就下载到客户端的浏览器中，直到客户端与服务器通信完毕。当用户与服务器产生会话时，Ajax直到如何响应用户的交互请求，同时能够处理一定的逻辑，不仅如此Ajax给服务器传递的并不是整个页面，只是需要处理的数据，这就大大减轻了服务器的压力，使得页面的模板、布局等能够得到保持。</p>
+<h4 id="Ajax原理"><a href="#Ajax原理" class="headerlink" title="Ajax原理"></a>Ajax原理</h4><p>XMLHttpRequest API是Ajax的核心。</p>
+<p>XMLHttpRequest(XHR)对象用于与服务器交互，通过 XMLHttpRequest 可以在不刷新页面的情况下请求特定 URL，获取数据。这使得网页能够在不影响用户操作的情况下，更新页面的局部内容。</p>
+<img src="/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax技术图.jpg" style="zoom:67%;">
+
+<p>下面列举各种技术在Ajax中所起的作用。</p>
+<img src="/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax关键元素.jpg" style="zoom:67%;">
+
+<h3 id="Ajax的实现"><a href="#Ajax的实现" class="headerlink" title="Ajax的实现"></a>Ajax的实现</h3><h4 id="Ajax的实现步骤："><a href="#Ajax的实现步骤：" class="headerlink" title="Ajax的实现步骤："></a>Ajax的实现步骤：</h4><ol>
+<li>创建XMLHttpRequest对象，也即一个异步调用对象；</li>
+<li>创建一个新的HTTP请求，并指定该HTTP请求的方法、URL以及验证信息；</li>
+<li>设置响应HTTP请求状态变化的函数；</li>
+<li>发送HTTP请求；</li>
+<li>获取返回的数据；</li>
+<li>实现局部刷新。</li>
+</ol>
+<h4 id="与后端交互的Ajax"><a href="#与后端交互的Ajax" class="headerlink" title="与后端交互的Ajax"></a>与后端交互的Ajax</h4><p>这里的Ajax是通过JQuery实现的，简单列举一下你会用到的方法，当然是直接应用在了Ajax函数中，对数据的处理需要在后端进行，永远不要也不能将数据试图在前端处理。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">	url:这里填写代载入页面的url地址</span><br><span class="line">	data:待发送的key/value</span><br><span class="line">	menthod:是采用get或者post方法</span><br><span class="line">	success:载入成功时返回的函数</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="注册页面的Ajax"><a href="#注册页面的Ajax" class="headerlink" title="注册页面的Ajax"></a>注册页面的Ajax</h4><ul>
+<li><p>前端实现</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>注册页面<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">// blur:失去焦点</span></span></span><br><span class="line"><span class="javascript">            $(<span class="string">'#uname'</span>).blur(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                uname = $(<span class="string">'#uname'</span>).val()</span></span><br><span class="line">                alert(uname)</span><br><span class="line"><span class="actionscript">                <span class="comment">//这里是进行了一次get访问，可以拿到网址的内容，但我们只是做了一个简单的response，也就是返回一个字符串，最终可以返回给该页面作为一个数据，被实时应用。可以试着直接访问/newajax/tes/?uname=euansu这个网址你会更加清除的理解ajax的工作。</span></span></span><br><span class="line"><span class="actionscript">                $.get(<span class="string">'/newajax/tes/?uname='</span>+uname,<span class="function"><span class="keyword">function</span> <span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">                    $(<span class="string">'#msg'</span>).html(data)</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"width: 30%;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">"text-center"</span>&gt;</span>账号注册<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"name"</span>&gt;</span>账号<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"uname"</span> <span class="attr">name</span>=<span class="string">"uname"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"msg"</span> <span class="attr">style</span>=<span class="string">"color:red;"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"exampleInputPassword1"</span>&gt;</span>Password<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">id</span>=<span class="string">"upwd"</span> <span class="attr">name</span>=<span class="string">"upwd"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-primary btn-lg btn-block"</span>&gt;</span>注册<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>后端实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your views here.</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method==<span class="string">'POST'</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> render(request,<span class="string">'newajax/register.html'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(request)</span>:</span></span><br><span class="line">    uname = request.GET.get(<span class="string">'uname'</span>) <span class="comment"># 这里会用到刚才在模板中的名称</span></span><br><span class="line">    print(uname)</span><br><span class="line">    print(type(uname))</span><br><span class="line">    <span class="keyword">if</span> uname==<span class="string">'euansu'</span>:</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">'该账户已经被注册了！'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(<span class="string">'恭喜你，账号可用！'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>后端我写了两个视图函数，一开始我是希望一个视图函数能够实现ajax，但需要网站的get返回，会与访问登录界面产生冲突，所以另外写了一个视图函数来处理这个问题。</p>
+<p>在这里我没有使用数据库，因为我只想要简单的完成一个ajax的效果，如果需要数据库则需要编写models.py文件。</p>
+</li>
+<li><p>最终效果</p>
+<ul>
+<li><p>账号可用</p>
+<p><img src="/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E6%B3%A8%E5%86%8C%E5%8F%AF%E7%94%A8.png" alt></p>
+</li>
+<li><p>账号不可用</p>
+<p><img src="/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E6%B3%A8%E5%86%8C.png" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="评论界面的Ajax"><a href="#评论界面的Ajax" class="headerlink" title="评论界面的Ajax"></a>评论界面的Ajax</h4><ul>
+<li><p>前端实现</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>评论页面<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            $(<span class="string">'#send'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                xname = $(<span class="string">'#uname'</span>).val()</span></span><br><span class="line"><span class="javascript">                xcomm = $(<span class="string">'#ucomm'</span>).val()</span></span><br><span class="line"><span class="actionscript">                <span class="comment">// alert(xcomm)</span></span></span><br><span class="line"><span class="actionscript">                <span class="comment">// console.log(xcomm)</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">if</span> (xname==<span class="string">''</span>||xcomm==<span class="string">''</span>)&#123;</span></span><br><span class="line"><span class="actionscript">                    alert(<span class="string">'账户名和评论都需要填写完整！'</span>)</span></span><br><span class="line">                &#125;</span><br><span class="line"><span class="actionscript">                <span class="comment">// 开始编写ajax的前端</span></span></span><br><span class="line"><span class="javascript">                $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">                    url:<span class="string">'/newajax/comm/'</span>,</span></span><br><span class="line"><span class="actionscript">                    method: <span class="string">'POST'</span>,</span></span><br><span class="line">                    data:&#123;</span><br><span class="line"><span class="actionscript">                        <span class="string">'uname'</span>:xname,</span></span><br><span class="line"><span class="actionscript">                        <span class="string">'ucomm'</span>:xcomm</span></span><br><span class="line">                    &#125;,</span><br><span class="line"></span><br><span class="line"><span class="actionscript">                    success:<span class="function"><span class="keyword">function</span> <span class="params">(data)</span></span>&#123;</span></span><br><span class="line">                        alert(data)</span><br><span class="line"><span class="javascript">                        <span class="keyword">var</span> obj = <span class="built_in">JSON</span>.parse(data)</span></span><br><span class="line"><span class="actionscript">                        <span class="comment">// alert(obj['ucomm'])</span></span></span><br><span class="line"><span class="javascript">                        <span class="keyword">var</span> st = $(<span class="string">'#comm'</span>).html() <span class="comment">//获取评论区中原来的内容</span></span></span><br><span class="line"><span class="actionscript">                        <span class="comment">// alert(obj['ucomm'])</span></span></span><br><span class="line"><span class="actionscript">                        <span class="keyword">var</span> temp = <span class="string">'用户：'</span>+obj[<span class="string">'uname'</span>] + <span class="string">'&lt;br&gt;'</span></span></span><br><span class="line"><span class="actionscript">                            + <span class="string">'时间：'</span> + obj[<span class="string">'udate'</span>] + <span class="string">'&lt;br&gt;'</span></span></span><br><span class="line"><span class="actionscript">                            + <span class="string">'评论：'</span> + obj[<span class="string">'ucomm'</span>] +<span class="string">'&lt;br&gt;'</span></span></span><br><span class="line">                        st += temp;</span><br><span class="line"><span class="javascript">                        $(<span class="string">'#comm'</span>).html(st)</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line"></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"width: 40%"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">"text-center"</span>&gt;</span>评论页面<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"bg-info"</span>&gt;</span></span><br><span class="line">            西野七瀬（Nishino Nanase），1994年5月25日出生于日本大阪府，日本歌手、演员、模特，日本女子偶像组合乃木坂46原成员。</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        账号：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"uname"</span> <span class="attr">name</span>=<span class="string">"uname"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        评论：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"ucomm"</span> <span class="attr">name</span>=<span class="string">"ucomm"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"send"</span>&gt;</span>提交评论<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"comm"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>后端实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">comment</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method==<span class="string">'POST'</span>:</span><br><span class="line">        uname = request.POST.get(<span class="string">'uname'</span>)</span><br><span class="line">        ucomm = request.POST.get(<span class="string">'ucomm'</span>)</span><br><span class="line">        <span class="comment"># 封装响应数据</span></span><br><span class="line">        data = &#123;<span class="string">'uname'</span>:uname,<span class="string">'ucomm'</span>:ucomm,<span class="string">'udate'</span>:time.strftime(<span class="string">'%Y-%m-%d %H:%M:%S'</span>,time.localtime())&#125;</span><br><span class="line">        s = json.dumps(data,ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">        <span class="keyword">return</span> HttpResponse(s)</span><br><span class="line">    <span class="keyword">return</span> render(request,<span class="string">'newajax/comment.html'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这个程序有一个bug，能够街道评论但打包之后评论的内容就变为空了，目前还不知道如何解决，希望尽快能填上这个坑。</p>
+<p>问题解决，写错了ajax的url地址，但不知为什么能够正确返回一部分值。</p>
+</li>
+<li><p>最终效果</p>
+<p><img src="/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/ajax%E6%AD%A3%E5%B8%B8%E8%AF%84%E8%AE%BA.png" alt></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Django/" rel="tag"># Django</a>
+              <a href="/tags/Ajax/" rel="tag"># Ajax</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/510/913/Django%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%93%8D%E4%BD%9C%E8%AF%A6%E8%A7%A3/" rel="prev" title="Django数据库的操作详解">
+                  <i class="fa fa-chevron-left"></i> Django数据库的操作详解
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20202020/510/916/%E5%9F%BA%E4%BA%8EDjango%E7%9A%84%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" rel="next" title="基于Django的图书管理系统">
+                  基于Django的图书管理系统 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/510/916/Ajax%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

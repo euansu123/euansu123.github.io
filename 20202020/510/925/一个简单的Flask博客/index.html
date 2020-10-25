@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="一个简单的Flask博客 与Django的复杂不同，Flask是Python的一个轻量的Web框架，开发Web应用简单快速。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单的Flask博客">
+<meta property="og:url" content="http://euansu123.github.io/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="一个简单的Flask博客 与Django的复杂不同，Flask是Python的一个轻量的Web框架，开发Web应用简单快速。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/hello.png">
+<meta property="article:published_time" content="2020-10-24T23:33:36.000Z">
+<meta property="article:modified_time" content="2020-10-25T01:36:53.156Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Flask">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/hello.png">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>一个简单的Flask博客 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的Flask博客"><span class="nav-number">1.</span> <span class="nav-text">一个简单的Flask博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备"><span class="nav-number">2.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用Flask说“hello-flask”"><span class="nav-number">3.</span> <span class="nav-text">用Flask说“hello flask”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Flask做一个博客"><span class="nav-number">4.</span> <span class="nav-text">使用Flask做一个博客</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备一个数据库"><span class="nav-number">4.1.</span> <span class="nav-text">准备一个数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建博客编写"><span class="nav-number">4.2.</span> <span class="nav-text">创建博客编写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个首页展示"><span class="nav-number">4.3.</span> <span class="nav-text">创建一个首页展示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建博文列表展示"><span class="nav-number">4.4.</span> <span class="nav-text">创建博文列表展示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建博文的展示页面"><span class="nav-number">4.5.</span> <span class="nav-text">创建博文的展示页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建博文的更新功能"><span class="nav-number">4.6.</span> <span class="nav-text">创建博文的更新功能</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">人心有取舍，但求知行合一。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=424264505&auto=1&height=32"></iframe>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一个简单的Flask博客
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-10-25 07:33:36 / 修改时间：09:36:53" itemprop="dateCreated datePublished" datetime="2020-10-25T07:33:36+08:00">2020-10-25</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="一个简单的Flask博客"><a href="#一个简单的Flask博客" class="headerlink" title="一个简单的Flask博客"></a>一个简单的Flask博客</h3><blockquote>
+<p>与Django的复杂不同，Flask是Python的一个轻量的Web框架，开发Web应用简单快速。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>如同开发Django一样，我们不能直接开发flask，这里需要安装flask的包，只需要如下一个简单的命令即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install flask</span><br></pre></td></tr></table></figure>
+
+<p>当我们想要操作数据库，像Django一样，使用ORM即可，但flask这里需要安装flask-sqlalchemy库，也是一条简单的命令。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install flask-sqlalchemy</span><br></pre></td></tr></table></figure>
+
+<p>在Django中使用了mysql数据库，这里我们不如试着上手sqlite，在使用sqlite之前记得安装一个sqlite可视化工具，我选择了sqlite studio。</p>
+<h3 id="用Flask说“hello-flask”"><a href="#用Flask说“hello-flask”" class="headerlink" title="用Flask说“hello flask”"></a>用Flask说“hello flask”</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当前文件的名字</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 路由函数</span></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"hello flask"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># debug=True，开发过程中可以出现更多的提示</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然这个程序能够实现一个简单的Flask效果，但我们不能只是让它运行，要知道这些代码每一行的作用。</p>
+<ul>
+<li>app = Flask(_ _ name_ _)：app是Flask的实例，接受包或者模块的名字作为参数，但一般只是用来传递模块的name。</li>
+<li>app.route(‘/‘)：这是一个路由装饰器，能将url和执行的视图和函数关联起来，同时指定路径，这里是说首页的意思。</li>
+<li>app.run(debug=True)：执行app.run就可以启动flask服务，debug=True是说在开发过程中显示信息，在命令行中也能够看到发送请求的日志，但还不止于此，每次对源代码的修改，保存一下刷新页面都可以立即生效，而不用重新开启服务。</li>
+</ul>
+<p>接下来运行flask，就可以在看到一个简单的网页效果了。</p>
+<p><img src="/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/hello.png" alt></p>
+<h3 id="使用Flask做一个博客"><a href="#使用Flask做一个博客" class="headerlink" title="使用Flask做一个博客"></a>使用Flask做一个博客</h3><p>这里用Flask做博客，是因为博客虽然小，但需要完成增删改查的数据库操作、Jinja2页面模板渲染、HTML表单操作、Ajax请求发送等，用到的技术有：flask、sqlalchemy、sqlite。</p>
+<h4 id="准备一个数据库"><a href="#准备一个数据库" class="headerlink" title="准备一个数据库"></a>准备一个数据库</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取当前模块名</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前模块的目录，是为了指定sqlite的存放位置</span></span><br><span class="line">os.path.dirname(__file__)</span><br><span class="line">basedir = os.path.abspath(os.path.dirname(__file__)) <span class="comment"># 绝对路径</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定sqlite数据库文件存放位置，app.sqlite：sqlite数据库的名称，也可以设置成db后缀</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>]= <span class="string">'sqlite:///'</span>+os.path.join(basedir,<span class="string">'app.sqlite'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据库对象</span></span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个数据库表的Model类Blog，以期完成ORM操作</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Blog</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    <span class="comment"># 主键id</span></span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># 博文标题</span></span><br><span class="line">    title = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    <span class="comment"># 博文正文</span></span><br><span class="line">    text = db.Column(db.TEXT)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,title,text)</span>:</span></span><br><span class="line">        self.text = text</span><br><span class="line">        self.title = title</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据库的操作只需要运行一遍</span></span><br><span class="line">db.create_all()</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建博客编写"><a href="#创建博客编写" class="headerlink" title="创建博客编写"></a>创建博客编写</h4><ul>
+<li><p>路由绑定函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/blogs/create',methods=['GET','POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createblogs</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'create_blogs.html'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(request.method)</span><br><span class="line">        title = request.form[<span class="string">'title'</span>]</span><br><span class="line">        text = request.form[<span class="string">'text'</span>]</span><br><span class="line"></span><br><span class="line">        blog = Blog(title,text)</span><br><span class="line">        db.session.add(blog)</span><br><span class="line">        db.session.commit()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">'/blogs'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>前端页面渲染</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;写博文&lt;/h1&gt;</span><br><span class="line">&lt;!-- HTML表单 --&gt;</span><br><span class="line">&lt;form action=<span class="string">"/blogs/create"</span> method=<span class="string">"POST"</span>&gt;</span><br><span class="line">&lt;label&gt;标题：&lt;/label&gt;</span><br><span class="line">&lt;input type=<span class="string">"text"</span> name=<span class="string">"title"</span>&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;label&gt;正文：&lt;/label&gt;</span><br><span class="line">&lt;input type=<span class="string">"text"</span> name=<span class="string">"text"</span>&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">"submit"</span> value=<span class="string">"创建"</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="创建一个首页展示"><a href="#创建一个首页展示" class="headerlink" title="创建一个首页展示"></a>创建一个首页展示</h4><ul>
+<li><p>路由绑定函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">home</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'home.html'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>前端页面渲染</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;我的博客&lt;&#x2F;h1&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;&#x2F;blogs&quot;&gt;博文列表&lt;&#x2F;a&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;a href&#x3D;&quot;&#x2F;blogs&#x2F;create&quot;&gt;去写一篇博客&lt;&#x2F;a&gt;</span><br><span class="line">&lt;br&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="创建博文列表展示"><a href="#创建博文列表展示" class="headerlink" title="创建博文列表展示"></a>创建博文列表展示</h4><p>这里需要拿到数据库中的所有数据，需要完成sqlite数据库相关操作。</p>
+<ul>
+<li><p>路由绑定函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/blogs')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_blogs</span><span class="params">()</span>:</span></span><br><span class="line">    blogs = Blog.query.all() <span class="comment"># 拿到数据库中的所有数据</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'blog_list.html'</span>,bloglist=blogs)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>前端页面渲染</p>
+<p>这里的渲染会用到jinjia2，jinjia2是一个现代的，设计者友好的，仿照Django模板的Python模板语言。他速度快，被广泛使用，并且提供了可选的沙箱模板执行环境保证安全。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">&lt;h3&gt;&lt;a href="/"&gt;&lt; 回到首页&lt;/a&gt;&lt;/h3&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>博文列表<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Jinja2模板语法 --&gt;</span></span><br><span class="line">&#123;% if bloglist %&#125;</span><br><span class="line">    &#123;% for blog in bloglist %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/blogs/&#123;&#123;blog.id&#125;&#125;"</span>&gt;</span>&#123;&#123;blog.title&#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">&#123;% else %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>还没有一篇博文，去写一篇吧~<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/blogs/create"</span>&gt;</span>去写一篇<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="创建博文的展示页面"><a href="#创建博文的展示页面" class="headerlink" title="创建博文的展示页面"></a>创建博文的展示页面</h4><p>博文的删除需要调用数据库的删除。</p>
+<ul>
+<li><p>路由函数绑定</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/blogs/&lt;blogid&gt;',methods=['GET','DELETE']) # id会自动匹配遍历</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">blog_operation</span><span class="params">(blogid)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method==<span class="string">'GET'</span>:</span><br><span class="line">        bloginfo = Blog.query.filter_by(id=blogid).first_or_404()</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'blog_detail.html'</span>,blog=bloginfo)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        bloginfo = Blog.query.filter_by(id=blogid).delete()</span><br><span class="line">        db.session.commit()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"删除成功"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>前端页面渲染</p>
+<p>这里同样也用到了jinjia2模板语言。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">&lt;h3&gt;&lt;a href="/blogs"&gt;&lt; 回到博文列表&lt;/a&gt;&lt;/h3&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>博文详情<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/blogs/update/&#123;&#123;blog.id&#125;&#125;"</span>&gt;</span>更新<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;&#123;blog.title&#125;&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;blog.text&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">class</span>=<span class="string">"btn-delete"</span> <span class="attr">id</span>=<span class="string">"&#123;&#123;blog.id&#125;&#125;"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="string">'a.btn-delete'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">event</span>)</span>&#123;</span></span><br><span class="line">        event.preventDefault()</span><br><span class="line"><span class="actionscript">        <span class="comment">// 取消跳转的默认事件</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> blogid = $(<span class="keyword">this</span>).attr(<span class="string">'id'</span>)</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//alert(blogid)</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        $.ajax(&#123;</span></span><br><span class="line"><span class="actionscript">            url:<span class="string">"/blogs/"</span>+blogid,</span></span><br><span class="line"><span class="actionscript">            type:<span class="string">"DELETE"</span>,</span></span><br><span class="line"><span class="actionscript">            contentType:<span class="string">"application/json"</span>,</span></span><br><span class="line"><span class="actionscript">            success:<span class="function"><span class="keyword">function</span> <span class="params">(resp)</span></span>&#123;</span></span><br><span class="line">                alert(resp)</span><br><span class="line"><span class="javascript">                <span class="built_in">window</span>.open(<span class="string">'/blogs'</span>,<span class="string">'_self'</span>) <span class="comment">//打开一个新窗口</span></span></span><br><span class="line">            &#125;,</span><br><span class="line"><span class="actionscript">            error:<span class="function"><span class="keyword">function</span> <span class="params">(resp)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">                alert(<span class="string">'删除失败'</span>+resp.message)</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="创建博文的更新功能"><a href="#创建博文的更新功能" class="headerlink" title="创建博文的更新功能"></a>创建博文的更新功能</h4><ul>
+<li><p>路由绑定函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/blogs/update/&lt;blogid&gt;',methods=['GET','POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_blog</span><span class="params">(blogid)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> request.method==<span class="string">'GET'</span>:</span><br><span class="line">        bloginfo = Blog.query.filter_by(id=blogid).first_or_404()</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'update_blog.html'</span>,blog=bloginfo)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        title = request.form[<span class="string">'title'</span>]</span><br><span class="line">        text = request.form[<span class="string">'text'</span>]</span><br><span class="line">        bloginfo = Blog.query.filter_by(id=blogid).update(&#123;<span class="string">'title'</span>:title,<span class="string">'text'</span>:text&#125;)</span><br><span class="line">        db.session.commit()</span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">f'/blogs/<span class="subst">&#123;blogid&#125;</span>'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>前端页面渲染</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;更新博文&lt;/h1&gt;</span><br><span class="line">&lt;!-- HTML表单 --&gt;</span><br><span class="line">&lt;form action=<span class="string">"/blogs/update/&#123;&#123;blog.id&#125;&#125;"</span> method=<span class="string">"POST"</span>&gt;</span><br><span class="line">&lt;label&gt;标题：&lt;/label&gt;</span><br><span class="line">&lt;input type=<span class="string">"text"</span> name=<span class="string">"title"</span> value=<span class="string">"&#123;&#123;blog.title&#125;&#125;"</span>&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;label&gt;正文：&lt;/label&gt;</span><br><span class="line">&lt;input type=<span class="string">"text"</span> name=<span class="string">"text"</span> value=<span class="string">"&#123;&#123;blog.text&#125;&#125;"</span>&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;input type=<span class="string">"submit"</span> value=<span class="string">"提交"</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>最后启动服务就可以看到一个简单的Flask博客效果了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Flask/" rel="tag"># Flask</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/510/921/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B9%8BMatplotlib/" rel="prev" title="数据分析之Matplotlib">
+                  <i class="fa fa-chevron-left"></i> 数据分析之Matplotlib
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

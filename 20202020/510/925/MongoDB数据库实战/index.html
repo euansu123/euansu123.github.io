@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="MongoDB数据库 MongoDB 是一个基于分布式文件存储的数据库。MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB数据库实战">
+<meta property="og:url" content="http://euansu123.github.io/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="MongoDB数据库 MongoDB 是一个基于分布式文件存储的数据库。MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://euansu123.github.io/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/mongodb%E5%90%AF%E5%8A%A8.jpg">
+<meta property="article:published_time" content="2020-10-25T10:19:45.000Z">
+<meta property="article:modified_time" content="2020-10-28T06:51:49.487Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="MongoDB">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/mongodb%E5%90%AF%E5%8A%A8.jpg">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MongoDB数据库实战 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB数据库"><span class="nav-number">1.</span> <span class="nav-text">MongoDB数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB数据库操作"><span class="nav-number">2.</span> <span class="nav-text">MongoDB数据库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建、删除数据库"><span class="nav-number">2.1.</span> <span class="nav-text">创建、删除数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#向数据库中插入数据"><span class="nav-number">2.2.</span> <span class="nav-text">向数据库中插入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从数据库中查询数据"><span class="nav-number">2.3.</span> <span class="nav-text">从数据库中查询数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改数据库中的数据"><span class="nav-number">2.4.</span> <span class="nav-text">修改数据库中的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除数据库中的数据"><span class="nav-number">2.5.</span> <span class="nav-text">删除数据库中的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为数据库中的数据添加索引"><span class="nav-number">2.6.</span> <span class="nav-text">为数据库中的数据添加索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库的聚合操作"><span class="nav-number">2.7.</span> <span class="nav-text">数据库的聚合操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python操作MongoDB数据库"><span class="nav-number">3.</span> <span class="nav-text">Python操作MongoDB数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据和集合"><span class="nav-number">3.1.</span> <span class="nav-text">创建数据和集合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#向数据库中插入数据-1"><span class="nav-number">3.2.</span> <span class="nav-text">向数据库中插入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从数据库中查询数据-1"><span class="nav-number">3.3.</span> <span class="nav-text">从数据库中查询数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库的聚合操作-1"><span class="nav-number">3.4.</span> <span class="nav-text">数据库的聚合操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改数据库中的数据。"><span class="nav-number">3.5.</span> <span class="nav-text">修改数据库中的数据。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除数据库的元素"><span class="nav-number">3.6.</span> <span class="nav-text">删除数据库的元素</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">人心有取舍，但求知行合一。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=424264505&auto=1&height=32"></iframe>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MongoDB数据库实战
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-25 18:19:45" itemprop="dateCreated datePublished" datetime="2020-10-25T18:19:45+08:00">2020-10-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-10-28 14:51:49" itemprop="dateModified" datetime="2020-10-28T14:51:49+08:00">2020-10-28</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="MongoDB数据库"><a href="#MongoDB数据库" class="headerlink" title="MongoDB数据库"></a>MongoDB数据库</h3><blockquote>
+<p>MongoDB 是一个基于分布式文件存储的数据库。MongoDB 是一个介于关系数据库和非关系数据库之间的产品，是非关系数据库当中功能最丰富，最像关系数据库的。</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="MongoDB数据库操作"><a href="#MongoDB数据库操作" class="headerlink" title="MongoDB数据库操作"></a>MongoDB数据库操作</h3><p>MongoDB可以直接在MongoDB官网：<a href="https://www.mongodb.com/try?jmp=nav#community" target="_blank" rel="noopener">https://www.mongodb.com/try?jmp=nav#community</a> 选择你需要的版本下载。</p>
+<p>我这里下载了4.2版本无需再创建数据文件和者日志文件的目录，如果版本较低，则需要则行再MongoDB的文件夹下创建数据库和日志文件的目录。</p>
+<p>运行MongoDB数据库，在运行MongoDB数据库之前需要将数据库注册在系统变量中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br></pre></td></tr></table></figure>
+
+<p>如果出现如下图所示，则启动成功。</p>
+<p><img src="/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/mongodb%E5%90%AF%E5%8A%A8.jpg" alt></p>
+<h4 id="创建、删除数据库"><a href="#创建、删除数据库" class="headerlink" title="创建、删除数据库"></a>创建、删除数据库</h4><p>创建数据库，这里的test是新建的数据库名，如果存在这个数据库则使用这个数据库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user test</span><br></pre></td></tr></table></figure>
+
+<p>如果想要查看数据库，使用如下命令，注意databases不能修改，这是一个固定的使用方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases</span><br></pre></td></tr></table></figure>
+
+<p>往MongoDB数据库中添加集合（collection），这里的集合相当于mysql中的表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(&#39;euansu&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>查看MongoDB当前数据库中的集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show collections</span><br></pre></td></tr></table></figure>
+
+<p>删除集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.euansu.drop()</span><br></pre></td></tr></table></figure>
+
+<p>插入数据，如果我们想要创建的数据库的元素包含多个内容则需要创建一个集合，实现插入，这里以电影为例。</p>
+<p>创建电影集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(&#39;movie&#39;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="向数据库中插入数据"><a href="#向数据库中插入数据" class="headerlink" title="向数据库中插入数据"></a>向数据库中插入数据</h4><p>插入数据，这里勿需提前声明数据库的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">db.movie.insert(</span><br><span class="line"> &#123;</span><br><span class="line">   title: &#39;Forrest Gump&#39;, </span><br><span class="line">   directed_by: &#39;Robert Zemeckis&#39;,</span><br><span class="line">   stars: [&#39;Tom Hanks&#39;, &#39;Robin Wright&#39;, &#39;Gary Sinise&#39;],</span><br><span class="line">   tags: [&#39;drama&#39;, &#39;romance&#39;],</span><br><span class="line">   debut: new Date(1994,7,6,0,0),</span><br><span class="line">   likes: 864367,</span><br><span class="line">   dislikes: 30127,</span><br><span class="line">   comments: [    </span><br><span class="line">      &#123;</span><br><span class="line">         user:&#39;user1&#39;,</span><br><span class="line">         message: &#39;My first comment&#39;,</span><br><span class="line">         dateCreated: new Date(2013,11,10,2,35),</span><br><span class="line">         like: 0 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&#39;user2&#39;,</span><br><span class="line">         message: &#39;My first comment too!&#39;,</span><br><span class="line">         dateCreated: new Date(2013,11,11,6,20),</span><br><span class="line">         like: 0 </span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>也可以插入多个数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">db.movie.insert([</span><br><span class="line"> &#123;</span><br><span class="line">   title: &#39;Fight Club&#39;, </span><br><span class="line">   directed_by: &#39;David Fincher&#39;,</span><br><span class="line">   stars: [&#39;Brad Pitt&#39;, &#39;Edward Norton&#39;, &#39;Helena Bonham Carter&#39;],</span><br><span class="line">   tags: &#39;drama&#39;,</span><br><span class="line">   debut: new Date(1999,10,15,0,0),</span><br><span class="line">   likes: 224360,</span><br><span class="line">   dislikes: 40127,</span><br><span class="line">   comments: [    </span><br><span class="line">      &#123;</span><br><span class="line">         user:&#39;user3&#39;,</span><br><span class="line">         message: &#39;My first comment&#39;,</span><br><span class="line">         dateCreated: new Date(2008,09,13,2,35),</span><br><span class="line">         like: 0 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&#39;user2&#39;,</span><br><span class="line">         message: &#39;My first comment too!&#39;,</span><br><span class="line">         dateCreated: new Date(2003,10,11,6,20),</span><br><span class="line">         like: 14 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&#39;user7&#39;,</span><br><span class="line">         message: &#39;Good Movie!&#39;,</span><br><span class="line">         dateCreated: new Date(2009,10,11,6,20),</span><br><span class="line">         like: 2</span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">   title: &#39;Seven&#39;, </span><br><span class="line">   directed_by: &#39;David Fincher&#39;,</span><br><span class="line">   stars: [&#39;Morgan Freeman&#39;, &#39;Brad Pitt&#39;,  &#39;Kevin Spacey&#39;],</span><br><span class="line">   tags: [&#39;drama&#39;,&#39;mystery&#39;,&#39;thiller&#39;],</span><br><span class="line">   debut: new Date(1995,9,22,0,0),</span><br><span class="line">   likes: 134370,</span><br><span class="line">   dislikes: 1037,</span><br><span class="line">   comments: [    </span><br><span class="line">      &#123;</span><br><span class="line">         user:&#39;user3&#39;,</span><br><span class="line">         message: &#39;Love Kevin Spacey&#39;,</span><br><span class="line">         dateCreated: new Date(2002,09,13,2,35),</span><br><span class="line">         like: 0 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&#39;user2&#39;,</span><br><span class="line">         message: &#39;Good works!&#39;,</span><br><span class="line">         dateCreated: new Date(2013,10,21,6,20),</span><br><span class="line">         like: 14 </span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">         user:&#39;user7&#39;,</span><br><span class="line">         message: &#39;Good Movie!&#39;,</span><br><span class="line">         dateCreated: new Date(2009,10,11,6,20),</span><br><span class="line">         like: 2</span><br><span class="line">      &#125;</span><br><span class="line">   ]</span><br><span class="line">&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<p>注意批量插入数据的格式：db.movie.insert([{ITEM1},{ITEM2}])。</p>
+<h4 id="从数据库中查询数据"><a href="#从数据库中查询数据" class="headerlink" title="从数据库中查询数据"></a>从数据库中查询数据</h4><p>查询数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find()</span><br></pre></td></tr></table></figure>
+
+<p>这条命令返回的是一个排序混乱的数据库元素，我们可以使用pretty()方法，是数据库元素能够更加美观，不至于太过紧凑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find().pretty()</span><br></pre></td></tr></table></figure>
+
+<p>MongoDB支持各种各样的深度查询功能，例如找出David Fincher导演的所有电影。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&#39;directed_by&#39;:&#39;David Fincher&#39;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<p>也可以设置多个条件，例如找出David Fincher导演，Morgan Freeman主演的电影。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&#39;directed_by&#39;:&#39;David Fincher&#39;, &#39;stars&#39;:&#39;Morgan Freeman&#39;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<p>这条命令是AND的逻辑，也就是说找出的电影必须是David Fincher导演，并且由Morgan Freeman主演的电影，也可以使用OR的逻辑。</p>
+<p>找出David Fincher导演或Morgan Freeman主演的电影。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(</span><br><span class="line">&#123;</span><br><span class="line">  $or: </span><br><span class="line">     [  &#123;&#39;stars&#39;:&#39;Robin Wright&#39;&#125;, </span><br><span class="line">        &#123;&#39;stars&#39;:&#39;Morgan Freeman&#39;&#125;</span><br><span class="line">     ]</span><br><span class="line">&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<p>设置搜索范围，例如找出50万人以上赞的电影，类似的运算符还有：小于(lt)、小于或等于(lte)、大于或等于(gte)、不等于(ne)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&#39;likes&#39;:&#123;$gt:500000&#125;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<p>对于包含多个值的key，同样可以使用find来查询，例如查询tags为romance的电影，但tags的值还有thiller、drama等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&#39;tags&#39;:&#39;romance&#39;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果知道要查询的数据只有一个结果，也可使用：findOne()方法，如果查询的结果有多个值，则会按照存储顺序返回第一个值，findOne()自带pretty()方法，无需再加。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.findOne(&#123;&#39;title&#39;:&#39;Forrest Gump&#39;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果查询的数据想要显示一部分，可以使用limit()、skip()，第一个指明数据的输出格式，第二个可以跳过数据输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find().limit(2).skip(1).pretty()</span><br></pre></td></tr></table></figure>
+
+<p>返回局部数据，我们有时候查询数据并不想返回所有的值，例如查找喜剧标签，我只要知道电影名和上映日期就够了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&#39;tags&#39;:&#39;drama&#39;&#125;,&#123;&#39;debut&#39;:1,&#39;title&#39;:1&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<p>返回的值带有’_id’，但我没有指定，这里需要单独设置’ _id’为0。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find(&#123;&#39;tags&#39;:&#39;drama&#39;&#125;,&#123;&#39;debut&#39;:1,&#39;title&#39;:1,&#39;_id&#39;:0&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改数据库中的数据"><a href="#修改数据库中的数据" class="headerlink" title="修改数据库中的数据"></a>修改数据库中的数据</h4><p>修改七宗罪的喜欢人数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;title:&#39;Seven&#39;&#125;, &#123;$set:&#123;likes:134371&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>也可以进行增量修改，修改有人对七宗罪点了两个赞，其中inc可以进行加法运算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;title:&#39;Seven&#39;&#125;, &#123;$inc:&#123;likes:2&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果有多个符合要求的电影，按照如上的方法则默认只会更新第一个，如果需要更新多个电影，则需要设置{multi:true}，如下命令就对所有电影的赞数增加了10。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;&#125;, &#123;$inc:&#123;likes:10&#125;&#125;,&#123;multi:true&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>也可以对数据库中的数据增加值，例如给七宗罪增加一个流行的标签。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;&#39;title&#39;:&#39;Seven&#39;&#125;, &#123;$push:&#123;&#39;tags&#39;:&#39;popular&#39;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除数据库中的数据"><a href="#删除数据库中的数据" class="headerlink" title="删除数据库中的数据"></a>删除数据库中的数据</h4><p>删除标签为romance的电影，这条命令会删除掉所有标签为romance的电影。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.remove(&#123;&#39;tags&#39;:&#39;romance&#39;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>也可以只删除第一个标签为romance的电影。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.remove(&#123;&#39;tags&#39;:&#39;romance&#39;&#125;,1)</span><br></pre></td></tr></table></figure>
+
+<p>如果remove()中的条件为空，则会删除集合下的所有文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.remove(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="为数据库中的数据添加索引"><a href="#为数据库中的数据添加索引" class="headerlink" title="为数据库中的数据添加索引"></a>为数据库中的数据添加索引</h4><p>索引相当于为字符串和数字建立了映射，这样搜索的时候就会快很多，排序的时候也是一样。</p>
+<p>对导演这个Key添加索引。这里的1是升序，如果要降序索引，用-1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.ensureIndex(&#123;directed_by:1&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>对输出进行排序，比如按名字排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.find().sort(&#123;&#39;title&#39;:1&#125;).pretty()</span><br></pre></td></tr></table></figure>
+
+<p>返回所有的索引，包含索引映射的名字。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.getIndexes()</span><br></pre></td></tr></table></figure>
+
+<p>删除索引，其中index_name指的是数据中索引的名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.dropIndex(&#39;index_name&#39;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据库的聚合操作"><a href="#数据库的聚合操作" class="headerlink" title="数据库的聚合操作"></a>数据库的聚合操作</h4><p>聚合操作相当于SQL中的Group by，比如有一张学生成绩的明细表是，我们可以找出各分数段的学生各有多少，为了实现这个操作，需要改动一下之前设置的数据库，执行修改命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.movie.update(&#123;title:&#39;Seven&#39;&#125;,&#123;$set:&#123;grade:1&#125;&#125;)</span><br><span class="line">db.movie.update(&#123;title:&#39;Forrest Gump&#39;&#125;,&#123;$set:&#123;grade:1&#125;&#125;)</span><br><span class="line">db.movie.update(&#123;title:&#39;Fight Club&#39;&#125;,&#123;$set:&#123;grade:2&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这几条命令是对电影添加一个虚拟的分级。</p>
+<p>找出电影的分级共有几种，会按照”_id”进行统计。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&#39;$grade&#39;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>也可以自定义输出，按照导演名输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&#39;$directed_by&#39;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>找出每个导演的电影数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&#39;$directed_by&#39;,num_movie:&#123;$sum:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>统计两位导演的赞数，这里返回的是按照导演分类，不同导演所有电影赞数的总和。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&#39;$directed_by&#39;,num_likes:&#123;$sum:&#39;$likes&#39;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>统计两位导演电影平均的赞数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&#39;$directed_by&#39;,num_movie:&#123;$avg:&#39;$likes&#39;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<p>返回导演电影中第一部的赞数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.movie.aggregate([&#123;$group:&#123;_id:&#39;$directed_by&#39;,num_movie:&#123;$first:&#39;$likes&#39;&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python操作MongoDB数据库"><a href="#Python操作MongoDB数据库" class="headerlink" title="Python操作MongoDB数据库"></a>Python操作MongoDB数据库</h3><p>Python中操作MongoDB首先要安装PyMongo库，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install PyMongo</span><br></pre></td></tr></table></figure>
+
+<p>连接MongoDB数据库，如果不给MongoClient传递参数，则会默认：27017。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line">client &#x3D; pymongo.MongoClient(&#39;localhost&#39;,27017)</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建数据和集合"><a href="#创建数据和集合" class="headerlink" title="创建数据和集合"></a>创建数据和集合</h4><p>创建或者指定数据库，也可以使用db = client.test。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db &#x3D; client[&#39;test&#39;]</span><br></pre></td></tr></table></figure>
+
+<p>创建或者指定集合，也可以使用collection = db.students。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">collection &#x3D; db[&#39;students&#39;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="向数据库中插入数据-1"><a href="#向数据库中插入数据-1" class="headerlink" title="向数据库中插入数据"></a>向数据库中插入数据</h4><p>向数据库中插入一个元素，result会返回插入元素的id。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">student3 &#x3D; &#123;</span><br><span class="line">    &#39;id&#39;: &#39;20179330&#39;,</span><br><span class="line">    &#39;name&#39;: &#39;Euan&#39;,</span><br><span class="line">    &#39;age&#39;: 21,</span><br><span class="line">    &#39;gender&#39;: &#39;male&#39;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result &#x3D; collection.insert_one(student3)</span><br></pre></td></tr></table></figure>
+
+<p>向数据库中插入多个数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">student1 &#x3D; &#123;</span><br><span class="line">    &#39;id&#39;: &#39;20179331&#39;,</span><br><span class="line">    &#39;name&#39;: &#39;Nange&#39;,</span><br><span class="line">    &#39;age&#39;: 21,</span><br><span class="line">    &#39;gender&#39;: &#39;male&#39;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">student2 &#x3D; &#123;</span><br><span class="line">    &#39;id&#39;: &#39;20179332&#39;,</span><br><span class="line">    &#39;name&#39;: &#39;Nanase&#39;,</span><br><span class="line">    &#39;age&#39;: 21,</span><br><span class="line">    &#39;gender&#39;: &#39;female&#39;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result &#x3D; collection.insert_many([student1,student2])</span><br></pre></td></tr></table></figure>
+
+<h4 id="从数据库中查询数据-1"><a href="#从数据库中查询数据-1" class="headerlink" title="从数据库中查询数据"></a>从数据库中查询数据</h4><p>查询一条数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 数据库的查询: find或者find_one方法</span><br><span class="line">result &#x3D; collection.find_one(&#123;&#39;name&#39;:&#39;euansu&#39;&#125;)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<p>根据objectid查询。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result &#x3D; collection.find_one(&#123;&#39;_id&#39;: ObjectId(&#39;5f95663cafa345cdb39918c6&#39;)&#125;)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<p>查询多条数据，返回的是Cursor类型的数据，需要进行遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">result &#x3D; collection.find(&#123;&#39;age&#39;:20&#125;)</span><br><span class="line">print(result)</span><br><span class="line">print(type(result))</span><br><span class="line">for i in result:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<p>查询一个范围的数据：查询年龄大于20的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result &#x3D; collection.find(&#123;&#39;age&#39;:&#123;&#39;$gt&#39;:20&#125;&#125;)</span><br><span class="line">print(result)</span><br><span class="line">for i in result:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用正则表达式进行匹配查询。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result &#x3D; collection.find(&#123;&#39;name&#39;:&#123;&#39;$regex&#39;:&#39;.*u$&#39;&#125;&#125;)</span><br><span class="line">for i in result:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据库的聚合操作-1"><a href="#数据库的聚合操作-1" class="headerlink" title="数据库的聚合操作"></a>数据库的聚合操作</h4><p>查询文档的数量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count &#x3D; collection.count_documents(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>查询年龄为20的文档数量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count &#x3D; collection.count_documents(&#123;&#39;age&#39;:20&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>按照ASCII的升序进行排列，返回的是一个Cursor，需要遍历输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find().sort(&#39;name&#39;, pymongo.ASCENDING)</span><br><span class="line">print([result[&#39;name&#39;] for result in results])</span><br></pre></td></tr></table></figure>
+
+<p>按照ASCII的降序进行排列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find().sort(&#39;name&#39;,pymongo.DESCENDING)</span><br><span class="line">print([result[&#39;name&#39;] for result in results])</span><br></pre></td></tr></table></figure>
+
+<p>偏移元素，例如skip(1)，就忽略了第一个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find().sort(&#39;name&#39;,pymongo.DESCENDING).skip(1)</span><br><span class="line">print([result[&#39;name&#39;] for result in results])</span><br></pre></td></tr></table></figure>
+
+<p>限制元素个数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">results &#x3D; collection.find().sort(&#39;name&#39;, pymongo.ASCENDING).limit(2)</span><br><span class="line">print([result[&#39;name&#39;] for result in results])</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改数据库中的数据。"><a href="#修改数据库中的数据。" class="headerlink" title="修改数据库中的数据。"></a>修改数据库中的数据。</h4><p>修改数据库中的一条数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">condition &#x3D; &#123;&#39;name&#39;: &#39;euansu&#39;&#125;</span><br><span class="line">student &#x3D; collection.find_one(condition)</span><br><span class="line">student[&#39;age&#39;] &#x3D; 26</span><br><span class="line">result &#x3D; collection.update_one(condition, &#123;&#39;$set&#39;: student&#125;)</span><br><span class="line">print(result)</span><br><span class="line">print(result.matched_count, result.modified_count)</span><br></pre></td></tr></table></figure>
+
+<p>修改数据库中的多条数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">condition &#x3D; &#123;&#39;age&#39;: &#123;&#39;$gt&#39;: 20&#125;&#125;  </span><br><span class="line">result &#x3D; collection.update_many(condition, &#123;&#39;$inc&#39;: &#123;&#39;age&#39;: 1&#125;&#125;)  </span><br><span class="line">print(result) </span><br><span class="line">print(result.matched_count, result.modified_count)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除数据库的元素"><a href="#删除数据库的元素" class="headerlink" title="删除数据库的元素"></a>删除数据库的元素</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result &#x3D; collection.remove(&#123;&#39;name&#39;:&#39;Mike&#39;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>更多详情参考：MongoDB中文网：<a href="https://mongodb.net.cn/manual/" target="_blank" rel="noopener">https://mongodb.net.cn/manual/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/510/925/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Flask%E5%8D%9A%E5%AE%A2/" rel="prev" title="一个简单的Flask博客">
+                  <i class="fa fa-chevron-left"></i> 一个简单的Flask博客
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/510/925/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%9E%E6%88%98/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

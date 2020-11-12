@@ -21,17 +21,22 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;">
+  <meta name="description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;爬虫数据提取方法 本篇文章写了爬虫的四种方法：json、Xpath、pyquery、正则表达式  我们将数据分为两类，针对两类数据有不同的处理方式：  非结构化数据：html、文本等，处理方法：正则表达式、xpath。 结构化数据：json、xml等，处">
 <meta property="og:type" content="article">
-<meta property="og:title" content="爬虫方法">
+<meta property="og:title" content="爬虫数据提取方法">
 <meta property="og:url" content="http://euansu123.github.io/20202020/509/929/%E7%88%AC%E8%99%AB%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;">
+<meta property="og:description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;爬虫数据提取方法 本篇文章写了爬虫的四种方法：json、Xpath、pyquery、正则表达式  我们将数据分为两类，针对两类数据有不同的处理方式：  非结构化数据：html、文本等，处理方法：正则表达式、xpath。 结构化数据：json、xml等，处">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/json%E4%B8%8Epython%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%BD%AC%E5%8C%96.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/json%E7%9A%84%E4%B8%80%E4%B8%AAdemo.png">
 <meta property="article:published_time" content="2020-09-28T23:20:06.000Z">
-<meta property="article:modified_time" content="2020-09-28T23:20:07.033Z">
+<meta property="article:modified_time" content="2020-11-12T02:19:42.623Z">
 <meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="爬虫">
+<meta property="article:tag" content="Pthon">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/json%E4%B8%8Epython%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%BD%AC%E5%8C%96.png">
 
 
 <link rel="canonical" href="http://euansu123.github.io/20202020/509/929/%E7%88%AC%E8%99%AB%E6%96%B9%E6%B3%95/">
@@ -47,7 +52,7 @@
   };
 </script>
 
-  <title>爬虫方法 | 南歌Euansu的博客</title>
+  <title>爬虫数据提取方法 | 南歌Euansu的博客</title>
   
 
 
@@ -161,7 +166,7 @@
   </div>
 
   <aside class="sidebar">
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -172,6 +177,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#爬虫数据提取方法"><span class="nav-number">1.</span> <span class="nav-text">爬虫数据提取方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#爬虫数据提取之json"><span class="nav-number">1.1.</span> <span class="nav-text">爬虫数据提取之json</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#json与Python对象的转换"><span class="nav-number">1.1.1.</span> <span class="nav-text">json与Python对象的转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬虫数据提取之正则表达式"><span class="nav-number">1.2.</span> <span class="nav-text">爬虫数据提取之正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式常用匹配方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">正则表达式常用匹配方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬虫数据提取之xpath"><span class="nav-number">1.3.</span> <span class="nav-text">爬虫数据提取之xpath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬虫数据提取之pyquery"><span class="nav-number">1.4.</span> <span class="nav-text">爬虫数据提取之pyquery</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -186,14 +192,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -254,7 +260,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          爬虫方法
+          爬虫数据提取方法
         </h1>
 
         <div class="post-meta-container">
@@ -264,10 +270,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2020-09-29 07:20:06 / 修改时间：07:20:07" itemprop="dateCreated datePublished" datetime="2020-09-29T07:20:06+08:00">2020-09-29</time>
+      <time title="创建时间：2020-09-29 07:20:06" itemprop="dateCreated datePublished" datetime="2020-09-29T07:20:06+08:00">2020-09-29</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-12 10:19:42" itemprop="dateModified" datetime="2020-11-12T10:19:42+08:00">2020-11-12</time>
+      </span>
 
   
   
@@ -293,7 +305,148 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h1 id="爬虫数据提取方法"><a href="#爬虫数据提取方法" class="headerlink" title="爬虫数据提取方法"></a>爬虫数据提取方法</h1><blockquote>
+<p>本篇文章写了爬虫的四种方法：json、Xpath、pyquery、正则表达式</p>
+</blockquote>
+<p>我们将数据分为两类，针对两类数据有不同的处理方式：</p>
+<ol>
+<li>非结构化数据：html、文本等，处理方法：正则表达式、xpath。</li>
+<li>结构化数据：json、xml等，处理方法：转换为Python数据类型。</li>
+</ol>
+<h2 id="爬虫数据提取之json"><a href="#爬虫数据提取之json" class="headerlink" title="爬虫数据提取之json"></a>爬虫数据提取之json</h2><p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写。同时也方便了机器进行解析和生成。适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。简单来说，json就是javascript中的对象和数组。</p>
+<h3 id="json与Python对象的转换"><a href="#json与Python对象的转换" class="headerlink" title="json与Python对象的转换"></a>json与Python对象的转换</h3><img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/json与python对象的转化.png">
+
+<p>如上图是json与python对象的转化，接下来看一个简单的Python与json的转化例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># JSON数据格式的文件操作</span></span><br><span class="line">dict_data = &#123;<span class="string">"地点"</span>:<span class="string">"秦皇岛"</span>, <span class="string">"时间"</span>: <span class="string">"2020-9-16 22:00:00"</span>&#125;</span><br><span class="line">f = open(<span class="string">'data.json'</span>,<span class="string">'w'</span>,encoding=<span class="string">'utf8'</span>)</span><br><span class="line">json.dump(dict_data,f,ensure_ascii=<span class="literal">False</span>)</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># JSON读取</span></span><br><span class="line">f = open(<span class="string">'data.json'</span>,<span class="string">'r'</span>,encoding=<span class="string">'utf8'</span>)</span><br><span class="line">new_dict_data = json.load(f)</span><br><span class="line">f.close()</span><br><span class="line">print(new_dict_data)</span><br></pre></td></tr></table></figure>
+
+<p>运行这个程序，得到如下结果：</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/json的一个demo.png">
+
+
+
+<h2 id="爬虫数据提取之正则表达式"><a href="#爬虫数据提取之正则表达式" class="headerlink" title="爬虫数据提取之正则表达式"></a>爬虫数据提取之正则表达式</h2><p>正则表达式（处理字符串强大的工具，有特定的语法结构） 功能：实现字符串的检索，替换，匹配验证。</p>
+<p>这里对正则表达式的做了一些简单的划分</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>？</td>
+<td>匹配长度{0,1}，？前匹配的字符最多可以出现1次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配长度{1,n}，+前匹配的字符必须出现至少1次</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配长度{0,1,n}，*前匹配的字符可以不出现，可以出现1次或者多次</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配任意单个字符（包括符号、数字和空格等）</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配任意字符，等价于[0-9]</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配任意非数字的字符</td>
+</tr>
+<tr>
+<td>\A</td>
+<td>匹配字符串开头</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任意空白字符，等价于[\t\n\r\f]</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任意非空字符</td>
+</tr>
+<tr>
+<td>\z</td>
+<td>匹配字符串结尾，如果存在换行，同时还会匹配换行符</td>
+</tr>
+<tr>
+<td>\Z</td>
+<td>匹配字符串结尾，如果存在换行，只匹配到换行前的技术字符串</td>
+</tr>
+<tr>
+<td>\G</td>
+<td>匹配最后完成的位置</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配一行字符串的开头</td>
+</tr>
+<tr>
+<td>[^…]</td>
+<td>中括号中的^表示取非，也即不存在中括号中的字符</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配一行字符串的结尾</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>精确匹配n个前面的表达式</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>匹配n到m次由前面表达式定义的片段，贪婪模式</td>
+</tr>
+<tr>
+<td>a|b</td>
+<td>匹配a或b</td>
+</tr>
+<tr>
+<td>()</td>
+<td>匹配括号内的表达式，可以用来分组</td>
+</tr>
+<tr>
+<td>[…]</td>
+<td>匹配一组字符，单独列出，例如[amk]匹配a，m或k</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母、数字、下划线</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非字母、数字、下划线</td>
+</tr>
+</tbody></table>
+<h3 id="正则表达式常用匹配方法"><a href="#正则表达式常用匹配方法" class="headerlink" title="正则表达式常用匹配方法"></a>正则表达式常用匹配方法</h3><ul>
+<li><p>match(‘参数1’，’参数2’)：从字符串起始位置匹配正则表达式，如果匹配，就返回匹配成功结果。如果不匹配，就返回None。参数1：正则表达式，参数2：要匹配的字符串。</p>
+<p>match还有以下扩展方法：</p>
+<ul>
+<li>re.S匹配修饰符，添加修饰符re.S使.匹配包括换行符在内的所有字符。</li>
+</ul>
+</li>
+<li><p>search(‘参数1’，’参数2’)：匹配整个字符串，返回第一个成功匹配结果，匹配失败返回None。参数1：正则表达式，参数2：要匹配的字符串。</p>
+</li>
+<li><p>findall(‘参数1’，’参数2’)：搜索整个字符串，返回匹配规则的所有内容。参数1：正则表达式，参数2：要匹配的字符串。</p>
+</li>
+<li><p>sub(‘参数1’,’参数2’,’参数3’)：</p>
+</li>
+<li><p>compile()：将正则字符串编译成正则表达式对象 以便复用</p>
+</li>
+</ul>
+<h2 id="爬虫数据提取之xpath"><a href="#爬虫数据提取之xpath" class="headerlink" title="爬虫数据提取之xpath"></a>爬虫数据提取之xpath</h2><h2 id="爬虫数据提取之pyquery"><a href="#爬虫数据提取之pyquery" class="headerlink" title="爬虫数据提取之pyquery"></a>爬虫数据提取之pyquery</h2>
     </div>
 
     
@@ -301,6 +454,10 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+              <a href="/tags/Pthon/" rel="tag"># Pthon</a>
+          </div>
 
         
 

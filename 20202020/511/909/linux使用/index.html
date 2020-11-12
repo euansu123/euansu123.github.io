@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="CentOS使用 本篇文章采用的linux系统是CentOS，选择centos的原因是许多公司在生产环境上部署的服务器都选择了CentOS系统，有着强大的英文文档与开发社区的支持，是一个成熟的Linux发行版。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS使用教程">
+<meta property="og:url" content="http://euansu123.github.io/20202020/511/909/linux%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="CentOS使用 本篇文章采用的linux系统是CentOS，选择centos的原因是许多公司在生产环境上部署的服务器都选择了CentOS系统，有着强大的英文文档与开发社区的支持，是一个成熟的Linux发行版。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/centos%E8%8E%B7%E5%8F%96IP%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AEip.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/man%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/man%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.jpg">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E4%B8%8D%E5%90%8C%E7%94%A8%E6%88%B7%E7%9A%84%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%80%E6%9C%89%E8%80%85%E5%92%8C%E6%89%80%E5%B1%9E%E7%BB%84.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7%E6%9F%A5%E7%9C%8B.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/useradd%E5%91%BD%E4%BB%A4%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/userdel%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/userdel%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/sudo%E5%91%BD%E4%BB%A4.jpg">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/df%E5%91%BD%E4%BB%A4%E6%9F%A5%E7%9C%8B%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/fdisk%E9%80%89%E9%A1%B9.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%88%86%E5%8C%BA%E6%A0%BC%E5%BC%8F%E5%8C%96.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%B7%BB%E5%8A%A0%E7%A1%AC%E7%9B%98%E8%AE%BE%E5%A4%87.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E5%8F%AF%E7%94%A8%E5%88%86%E5%8C%BA.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/fdisk%E9%80%89%E9%A1%B9.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/fdisk%E7%AE%A1%E7%90%86%E5%88%86%E5%8C%BA.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%88%86%E5%8C%BA%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/mkfs%E5%88%86%E5%8C%BA%E6%A0%BC%E5%BC%8F%E5%8C%96.jpg">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%88%86%E5%8C%BA%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%83%85%E5%86%B5.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%8C%82%E8%BD%BD%E5%88%86%E5%8C%BA.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E4%BF%AE%E6%94%B9fdtab%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E4%BF%AE%E6%94%B9%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E6%96%87%E4%BB%B6.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E9%87%8D%E5%90%AF.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%88%86%E5%8C%BA%E5%8D%B8%E8%BD%BD.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/vim%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E5%88%87%E6%8D%A2%E6%96%B9%E6%B3%95.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/vim%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/vim%E7%BC%96%E8%BE%91%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%9C%AB%E8%A1%8C%E6%A8%A1%E5%BC%8F.jpg">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4%E7%9A%84%E9%80%89%E9%A1%B9.jpg">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%8E%8B%E7%BC%A9%E5%89%8D%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.jpg">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%8E%8B%E7%BC%A9%E7%BB%93%E6%9D%9F%E5%90%8E%E7%94%9F%E6%88%90%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6.jpg">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B.jpg">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/shell%E8%84%9A%E6%9C%AC.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%8E%A5%E6%94%B6%E5%8F%82%E6%95%B0shell%E8%84%9A%E6%9C%AC.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%8E%A5%E6%94%B6%E5%8F%82%E6%95%B0shell%E8%84%9A%E6%9C%AC.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95%E6%89%80%E7%94%A8%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%88%A4%E6%96%AD%E6%B5%8B%E8%AF%95%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E4%B8%BA%E7%9B%AE%E5%BD%95%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E9%80%BB%E8%BE%91%E6%B5%8B%E8%AF%95%E8%AF%AD%E5%8F%A5.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E9%80%BB%E8%BE%91%E9%9D%9E%E8%AF%AD%E5%8F%A5.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%95%B4%E6%95%B0%E6%AF%94%E8%BE%83%E9%80%89%E9%A1%B9.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E6%95%B4%E6%95%B0%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E7%A9%BA%E9%97%B2%E5%86%85%E5%AD%98%E6%A3%80%E6%B5%8B.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6.png">
+<meta property="og:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%90%E7%AE%97.png">
+<meta property="article:published_time" content="2020-11-08T23:57:58.000Z">
+<meta property="article:modified_time" content="2020-11-12T15:14:31.195Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Centos">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qj91fhedp.hb-bkt.clouddn.com/static/images/centos%E8%8E%B7%E5%8F%96IP%E5%9C%B0%E5%9D%80.png">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/511/909/linux%E4%BD%BF%E7%94%A8/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CentOS使用教程 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS使用"><span class="nav-number">1.</span> <span class="nav-text">CentOS使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS网络设置"><span class="nav-number">2.</span> <span class="nav-text">CentOS网络设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS快捷键"><span class="nav-number">3.</span> <span class="nav-text">CentOS快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键"><span class="nav-number">3.1.</span> <span class="nav-text">快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重要的命令行"><span class="nav-number">3.2.</span> <span class="nav-text">重要的命令行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CentOS系统目录结构"><span class="nav-number">4.</span> <span class="nav-text">CentOS系统目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux的文件和目录管理"><span class="nav-number">5.</span> <span class="nav-text">Linux的文件和目录管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件访问"><span class="nav-number">5.1.</span> <span class="nav-text">文件访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量PATH"><span class="nav-number">5.2.</span> <span class="nav-text">环境变量PATH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件的所有者和所属组"><span class="nav-number">5.3.</span> <span class="nav-text">文件的所有者和所属组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更改文件权限"><span class="nav-number">5.4.</span> <span class="nav-text">更改文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改文件的特殊属性"><span class="nav-number">5.5.</span> <span class="nav-text">修改文件的特殊属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下的搜索文件"><span class="nav-number">5.6.</span> <span class="nav-text">Linux下的搜索文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux文件系统"><span class="nav-number">6.</span> <span class="nav-text">Linux文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见文件类型"><span class="nav-number">6.1.</span> <span class="nav-text">常见文件类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux文件的后缀名"><span class="nav-number">6.2.</span> <span class="nav-text">Linux文件的后缀名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux的链接文件"><span class="nav-number">6.3.</span> <span class="nav-text">Linux的链接文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux用户身份与权限"><span class="nav-number">7.</span> <span class="nav-text">Linux用户身份与权限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#磁盘管理"><span class="nav-number">8.</span> <span class="nav-text">磁盘管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#挂载硬件设备"><span class="nav-number">8.1.</span> <span class="nav-text">挂载硬件设备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux文本编辑Vim"><span class="nav-number">9.</span> <span class="nav-text">Linux文本编辑Vim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令模式"><span class="nav-number">9.1.</span> <span class="nav-text">命令模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入模式"><span class="nav-number">9.2.</span> <span class="nav-text">输入模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#末行模式"><span class="nav-number">9.3.</span> <span class="nav-text">末行模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux文档的压缩与打包"><span class="nav-number">10.</span> <span class="nav-text">Linux文档的压缩与打包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell"><span class="nav-number">11.</span> <span class="nav-text">Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本实例"><span class="nav-number">11.0.1.</span> <span class="nav-text">shell脚本实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接收参数的shell脚本"><span class="nav-number">11.0.2.</span> <span class="nav-text">接收参数的shell脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本判断用户的参数"><span class="nav-number">11.0.3.</span> <span class="nav-text">shell脚本判断用户的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件测试语句"><span class="nav-number">11.0.4.</span> <span class="nav-text">文件测试语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑测试语句"><span class="nav-number">11.0.5.</span> <span class="nav-text">逻辑测试语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数值比较语句"><span class="nav-number">11.0.6.</span> <span class="nav-text">整数值比较语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串比较语句"><span class="nav-number">11.0.7.</span> <span class="nav-text">字符串比较语句</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">人心有取舍，但求知行合一。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+      <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=424264505&auto=1&height=32"></iframe>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/511/909/linux%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CentOS使用教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-09 07:57:58" itemprop="dateCreated datePublished" datetime="2020-11-09T07:57:58+08:00">2020-11-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-12 23:14:31" itemprop="dateModified" datetime="2020-11-12T23:14:31+08:00">2020-11-12</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/511/909/linux%E4%BD%BF%E7%94%A8/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/511/909/linux%E4%BD%BF%E7%94%A8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="CentOS使用"><a href="#CentOS使用" class="headerlink" title="CentOS使用"></a>CentOS使用</h1><blockquote>
+<p>本篇文章采用的linux系统是CentOS，选择centos的原因是许多公司在生产环境上部署的服务器都选择了CentOS系统，有着强大的英文文档与开发社区的支持，是一个成熟的Linux发行版。</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="CentOS网络设置"><a href="#CentOS网络设置" class="headerlink" title="CentOS网络设置"></a>CentOS网络设置</h1><p>新的CentOS往往没有IP地址，需要使用命令:<strong>dhclien</strong>获取IP地址，使用这个IP地址可以方便我们使用xshell等工具远程连接访问虚拟机。获取ip地址后，就可以使用ip addr命令查看我们所获取的IP地址。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/centos获取IP地址.png">
+
+<p>做完这一步，就可以通过xshell连接CentOS，但工作中，常常需要我们手动给Linux系统设置IP地址，输入如下命令编辑网络文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi  &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ens33</span><br></pre></td></tr></table></figure>
+
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/手动设置ip.png">
+
+<p>将配置文件修改成如下形式即可，注意红框圈出来的地方。其中的IPADDR就是你想要设置的IP，GATEWAY是网关接口，需要修改成你自己的。</p>
+<p>做完这些工作后，输入如下命令重启网络再次输入ip addr命令测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network.service</span><br></pre></td></tr></table></figure>
+
+<h1 id="CentOS快捷键"><a href="#CentOS快捷键" class="headerlink" title="CentOS快捷键"></a>CentOS快捷键</h1><h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><ul>
+<li><strong>Ctrl+C</strong>：结束（终止）当前命令。</li>
+<li><strong>Tab</strong>：实现自动补全功能，输入命令、文件或目录的前几个字符时，会自动帮你补全。</li>
+<li><strong>Ctrl+D</strong>：退出当前终端。同样，你也可以输入命令<code>exit</code>实现该功能。</li>
+<li><strong>Ctrl+Z</strong>：暂停当前进程。这和Ctrl+C是有去区别的，暂停后，使用<code>fg</code>命令恢复该进程。</li>
+<li><strong>Ctrl+L</strong>：清屏，使光标移动到屏幕的第一行。 当命令和显示的结果占满整个屏幕时，我们每运行一个命令，都会在最后一行显示，这样看起来不太方便，此时就可以使用这个快捷键，让光标移动到屏幕第一行，也就是所谓的清屏。</li>
+<li><strong>Ctrl+A</strong>：可以让光标移动到命令的最前面。有时候一条命令很长，快敲完时发现前面某个字母不对，此时可以直接用这个快捷键把光标定位到行首，然后再用左右方向键微调光标的位置。</li>
+<li><strong>Ctrl+E</strong>：可以让光标移动到最后面，作用同上。</li>
+</ul>
+<h2 id="重要的命令行"><a href="#重要的命令行" class="headerlink" title="重要的命令行"></a>重要的命令行</h2><ul>
+<li><p><strong>man</strong>命令用于查看命令的帮助文档，其格式为<code>man 命令</code>。例如输入如下命令：</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/man帮助文档.png">
+
+<p>如果帮助文档过长，可以使用上下键移动文本，按字母键q即可退出文档。</p>
+</li>
+<li><p><strong>ls</strong>命令是list的缩写，该命令用于列出指定目录或者文件。其格式为<code>ls [选项] [文件名/目录名]</code></p>
+<ol>
+<li><p>后面不加任何选项也不跟目录名或文件名：会列出当前目录下的文件和目录，不包含隐藏文件。</p>
+</li>
+<li><p>后面加 <code>-a</code>选项、不加目录名或文件名：会列出当前目录下所有的文件和目录，含有隐藏文件。</p>
+</li>
+<li><p>后面加<code>-l</code>选项、不加目录名或者文件名：会列出当前目录下除隐藏文件外的所有文件和目录的详细信息，包含其权限、所属主、所属组以及文件创建日期和时间。</p>
+</li>
+<li><p>后面不加选项、只跟文件名：会列出该文件，使用时通常都是加上<code>-l</code>选项，用来查看该文件的详细信息。</p>
+</li>
+<li><p>后面不加选项、只跟目录名：会列出指定目录下的文件和目录。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/man帮助文档.png">
+</li>
+</ol>
+</li>
+<li><p>Linux的关机和重启</p>
+<p><strong>Linux主要用在服务器领域，而在服务器上执行一项服务是永无止境的，除非遇到特殊情况，否则不会关机。</strong></p>
+<p>如果要关机，必须要保证当前系统中没有其他用户在登录系统。我们可以使用<code>who</code>命令查看是否还有其他人在登录，或者使用命令<code>ps</code> <code>-aux</code> 查看是否还有后台进程运行。<code>shutdown</code>、<code>halt</code>、<code>poweroff</code>都为关机的命令，我们可以使用命令<code>man shutdown</code>查看其帮助文档。例如，可以运行如下命令关机（<code>//</code>符号后面的内容为解释性文字）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># shutdown -h 10  &#x2F;&#x2F;计算机将在10分钟后关机，且会显示在登录用户的当前屏幕中</span><br><span class="line"># shutdown -h now  &#x2F;&#x2F;立即关机</span><br><span class="line"># shutdown -h 20:25  &#x2F;&#x2F;系统会在20:25关机</span><br><span class="line"># shutdown -h +10  &#x2F;&#x2F;10分钟后关机</span><br><span class="line"># shutdown -r now  &#x2F;&#x2F;立即重启</span><br><span class="line"># shutdown -r +10  &#x2F;&#x2F;10分钟后重启</span><br><span class="line"># reboot  &#x2F;&#x2F;重启，等同于shutdown -r now</span><br><span class="line"># halt  &#x2F;&#x2F;关闭系统，等同于shutdown -h now和poweroff</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="CentOS系统目录结构"><a href="#CentOS系统目录结构" class="headerlink" title="CentOS系统目录结构"></a>CentOS系统目录结构</h1><p>使用<code>ls  /</code>命令查看根文件的目录结构，运行结果如下：</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/linux目录结构.jpg">
+
+<p>这里有一些我自己创建的目录以及磁盘的挂载，先不做解释，先来写一下Linux的目录结构。</p>
+<ul>
+<li><p><strong>/bin</strong>：bin是Binary的缩写，该目录下存放的是最常用的命令。</p>
+</li>
+<li><p><strong>/boot</strong>：该目录下存放的是启动Linux时使用的一些核心文件，包括一些连接文件以及镜像文件。</p>
+</li>
+<li><p><strong>/dev</strong>：dev是Device（设备）的缩写。该目录下存放的是Linux的外部设备。在Linux中，访问设备的方式和访问文件的方式是相同的。</p>
+</li>
+<li><p><strong>/etc</strong>：该目录下存放的是所有系统管理所需要的配置文件和子目录。</p>
+</li>
+<li><p><strong>/home</strong>：这是用户的家目录。在Linux中，每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的。</p>
+</li>
+<li><p><strong>/lib和/lib64</strong>：这两个目录下存放的是系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件，几乎所有的应用程序都需要用到这些共享库。其中/lib64为64位的软件包的库文件所在目录。</p>
+</li>
+<li><p><strong>/media</strong>：系统会自动识别一些设备（如U盘、光驱等），当识别后，Linux会把识别的设备挂载到该目录下。</p>
+</li>
+<li><p><strong>/mnt</strong>：系统提供该目录是为了让用户临时挂载别的文件系统。我们可以将光驱挂载到/mnt/上，然后进入该目录查看光驱里的内容。</p>
+</li>
+<li><p><strong>/opt</strong>：这是给主机额外安装软件所设置的目录，该目录默认为空。比如，你要安装一个Oracle数据库，可以放到该目录下。</p>
+</li>
+<li><p><strong>/proc</strong>：该目录是一个虚拟目录，是系统内存的映射，可以直接访问它来获取系统信息。该目录的内容在内存里，我们可以直接修改里面的某些文件。比如可以通过下面的命令来屏蔽主机的<code>ping</code>命令，使其他人无法<code>ping</code>你的机器。在日常工作中，你会经常用到类似的用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># echo 1 &gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;icmp_echo_ignore_all</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>/root</strong>：该目录是系统管理员的用户家目录。</p>
+</li>
+<li><p><strong>/run</strong>：这个目录其实和/var/run是同一个目录，这里面存放的是一些服务的pid。一个服务启动完后，是有一个pid文件的。至于为什么说是同一个目录，Linux是如何做到的，4.9节会详细介绍。</p>
+</li>
+<li><p><strong>/sbin</strong>：s就是Super User的意思，该目录存放的是系统管理员使用的系统管理程序。</p>
+</li>
+<li><p><strong>/srv</strong>：该目录存放的是一些服务启动之后需要提取的数据。</p>
+</li>
+<li><p><strong>/sys</strong>：该目录存放的是与硬件驱动程序相关的信息。</p>
+</li>
+<li><p><strong>/tmp</strong>：该目录用来存放一些临时文件。</p>
+</li>
+<li><p><strong>/usr</strong>：这是一个非常重要的目录，类似于Windows下的Program Files目录，用户的很多应用程序和文件都存放在该目录下。后面的章节中，我们会多次用到这个目录。</p>
+</li>
+<li><p><strong>/usr/bin</strong>：该目录存放的是系统用户使用的应用程序。</p>
+</li>
+<li><p><strong>/usr/sbin</strong>： 该目录存放的是超级用户使用的比较高级的管理程序和系统守护程序。</p>
+</li>
+<li><p><strong>/usr/src</strong> ：该目录是内核源代码默认的放置目录。</p>
+</li>
+<li><p><strong>/var</strong>：该目录存放的是不断扩充且经常修改的目录，包括各种日志文件或者pid文件，其中刚刚提到的/var/run就是在这个目录下面。</p>
+</li>
+</ul>
+<p>Linux系统下有几个重要的目录要特别注意，不要误删或者随意更改其内部文件。</p>
+<ul>
+<li>/etc目录下是系统的配置文件，如果更改了该目录下的某个文件，可能会导致系统无法正常启动。</li>
+<li>/bin、/sbin、/usr/bin和/usr/sbin目录是系统预设的执行文件的放置目录，其中/bin和/usr/bin目录下是供系统用户使用的指令（除root外的通用账户），而/sbin和/usr/sbin目录下则是供root使用的指令。比如，<code>ls</code>指令就存放在/bin/目录下。</li>
+<li>/var也是一个非常重要的目录，系统上运行各个程序时所产生的日志都被记录在该目录下（即/var/log目录中）。另外<code>mail</code>指令的预设也放置在这里。</li>
+</ul>
+<h1 id="Linux的文件和目录管理"><a href="#Linux的文件和目录管理" class="headerlink" title="Linux的文件和目录管理"></a>Linux的文件和目录管理</h1><h2 id="文件访问"><a href="#文件访问" class="headerlink" title="文件访问"></a>文件访问</h2><p><strong>绝对路径和相对路径</strong></p>
+<p>在Linux中，通过文件路径系统可以找到这个文件，而路径又分成了绝对路径和相对路径。</p>
+<ul>
+<li>绝对路径：路径是从根目录<code>/</code>写起，例如/home。</li>
+<li>相对路径：路径从当前目录出发，例如home目录下有四个子目录：<code>euansu  nange  user1  zhangsan</code>，要访问euansu不必从根目录写起，可以直接写euansu。</li>
+</ul>
+<p>写完了Linux的路径，接下来就要写如何使用这些路径。</p>
+<ul>
+<li><p><code>cd</code>:是用来变更用户所在的目录，命令格式为<code>cd [目录名]</code>。如果cd后没有接目录，则会直接进入当前用户的根目录。</p>
+</li>
+<li><p><code>mkdir</code>：用于创建目录，命令格式为<code>mkdir [-mp] [目录名]</code>，其中-m、-p是mkdir命令的选项。-m选项指定要创建目录的权限，-p可以创建级联目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># mkdir &#x2F;tmp&#x2F;test&#x2F;123</span><br><span class="line">mkdir: 无法创建目录 &#39;&#x2F;tmp&#x2F;test&#x2F;123&#39;: 没有那个文件或目录</span><br><span class="line"># mkdir -p &#x2F;tmp&#x2F;test&#x2F;123</span><br><span class="line"># ls &#x2F;tmp&#x2F;test</span><br><span class="line">123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>rmdir</code>用于删除空目录，后面可以是一个目录，也可以是多个目录（用空格分隔）。<font color="red">注意：这个命令只能删除空目录，不能删除文件和非空目录。</font></p>
+</li>
+<li><p><code>rm</code>删除文件以及目录，命令格式<code>rm [选项] [文件名/目录名]</code>，其中最常用的两个选项是<code>-r</code>、<code>-f</code>，-r是删除目录的选项，类似于rmdir，但可以删除非空目录。-f表示强制删除，不再询问是否删除，而是直接删除，如果-f选项后面跟一个不存在的目录或文件也不会报错。</p>
+</li>
+<li><p><code>cp</code>拷贝命令，命令格式：<code>cp [选项] [来源文件] [目的文件]</code>，常用选项有-r、-i，如果要赋值一个目录，必须加-r选项，否则不能赋值，这类似于rm命令。-i，安全选项，如果遇到一个已经存在的文件会询问是否覆盖，但我们使用的命令其实就是cp -i，可以通过which命令查看。</p>
+</li>
+<li><p><code>mv</code>移动命令，命令格式：<code>mv [ 选项 ] [源文件或目录] [目标文件或目录]</code>。该命令有如下几种情况。</p>
+<ul>
+<li>目标文件是目录，但该目录不存在。<font color="red">源文件重命名为给定的目标文件名。</font></li>
+<li>目标文件是目录，且该目录存在。<font color="red">源目录或文件移动到该目录中。</font></li>
+<li>目标文件是文件，且该文件不存在。<font color="red">源文件重命名为给定的目标文件名。</font></li>
+<li>目标文件是文件，但该文件存在。<font color="red">会询问是否覆盖。</font></li>
+</ul>
+<p><font color="red">可以简单理解为：存在就是剪切，不存在就是重命名。</font></p>
+</li>
+<li><p><code>cat</code>查看文档，命令格式：<code>cat [选项] [文件名]</code>，常用的选项有-n、-A，-n：查看文件时，把行号也显示到屏幕上。-A：显示所有的字符，包括所有特殊符号。</p>
+</li>
+<li><p><code>tac</code>倒序查看文档：这里的倒序是针对行来说的，也即原来的第一行变为倒数第一行…</p>
+</li>
+<li><p><code>more</code>查看一个文件的内容，当文件内容太多，一屏不能全部显示时，这时可以使用命令<code>more</code>。当看完一屏后，按空格键可以继续看下一屏，看完所有内容后就会退出，按Ctrl+B可以向上翻屏，按Ctrl+F向下翻屏（同空格）。如果你想提前退出，按q键即可。</p>
+</li>
+<li><p><code>less</code>的作用和命令<code>more</code>一样，后面直接跟文件名，但命令<code>less</code>比<code>more</code>功能要多一些。按空格键可以翻页，按j键可以向下移动（按一下就向下移动一行），按k键可以向上移动。在使用<code>more</code>和<code>less</code>查看某个文件时，你可以按一下/键，并输入一个字符串（如<code>root</code>），然后回车，这样就可以查找这个字符串了。如果是查找多个该字符串，可以按n键显示下一个。另外，也可以用?键替代/键来搜索字符串，唯一不同的是，/是在当前行向下搜索，而?是在当前行向上搜索。</p>
+</li>
+<li><p><code>head</code>显示文件的前10行，如果加<code>-n</code>选项，则显示文件的前几行。</p>
+</li>
+<li><p><code>tail</code>显示文件的后10行，如果加<code>-n</code>选项，则显示文件的后几行。</p>
+</li>
+</ul>
+<h2 id="环境变量PATH"><a href="#环境变量PATH" class="headerlink" title="环境变量PATH"></a>环境变量PATH</h2><p>变量是计算机系统用于保存可变值的数据类型。在 Linux 系统中，变量名称一般都是大写的，这是一种约定俗成的规范。我们可以直接通过变量名称来提取到对应的变量值。Linux系统中的环境变量是用来定义系统运行环境的一些参数，比如每个用户不同的家目录、邮件存放位置等。</p>
+<p>这里举一个变量的例子，在Linux系统中一切都是文件，命令也不例外，命令的执行过程分为以下4个步骤。</p>
+<ol>
+<li>判断用户是否以绝对路径或者相对路径输入命令(如/bin/ls)，如果是的话，直接执行命令。</li>
+<li>Linux系统检查用户输入的命令是否为“别名命令”，即使用自定义的名称替换原本的命令名称。例如：<code>ll</code>就是命令<code>ls -l</code>的别名。</li>
+<li>Bash解释器判断用户输入的是内部命令还是外部命令，内部命令是解释器内部的指令，会被直接执行；而用户在绝大部分时间内输入的是外部命令，这些外部命令需要第4步去执行。</li>
+<li>系统在多个路径中查找用户输入的命令文件，而定义这些路径的变量叫做PATH，PATH可以告诉Bash解释器待执行命令的可能存放位置，Bash会在这些外置进行查找。</li>
+</ol>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/Linux系统中最重要的环境变量.png">
+
+<p>Linux作为一个多用户多任务的操作系统，能够为每个用户提供独立的、合适的工作运行环境，因此一个相同的变量会因为不同用户而具有不同的值。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/不同用户的变量.png">
+
+<h2 id="文件的所有者和所属组"><a href="#文件的所有者和所属组" class="headerlink" title="文件的所有者和所属组"></a>文件的所有者和所属组</h2><p>一个Linux目录或者文件，都会有一个所有者和所属组。所有者是指文件的拥有者，而所属组指的是这个文件属于哪一个用户组。Linux设置文件属性的目的是为了文件的安全。</p>
+<p>使用ls -l，可以查看文件的所有者和所属组的属性。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/文件的所有者和所属组.png">
+
+<ul>
+<li><p><strong>第1列</strong>：表示该文件的读写权限，第一位表示了文件属性，有<code>b</code>、<code>c</code>、<code>s</code>、<code>l</code>，其中<code>l</code>表示该文件为链接文件；<code>b</code>表示该文件为块设备，磁盘分区就是这种类型，<code>c</code>表示该文件为串行端口，比如键盘、鼠标都是这样的文件；<code>s</code>表示该文件为套接字文件，用于进程之间的通信。后面的9位，每3位为一组，其中<code>r</code>代表可读，<code>w</code>代表可写，<code>x</code>代表可执行。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/文件属性查看.png">
+</li>
+</ul>
+<ul>
+<li><strong>第2列</strong>：表示该文件占用的节点（<code>inode</code>），如果是目录，那这个数值与该目录下是子目录数量有关。</li>
+<li><strong>第3列</strong>：表示该文件的所有者。</li>
+<li><strong>第4列</strong>：表示该文件的所属组。</li>
+<li><strong>第5列</strong>：表示该文件的大小。</li>
+<li><strong>第6列、第7列和第8列</strong>：表示该文件最后一次被修改的时间（<code>mtime</code>），依次为月份、日期以及时间。</li>
+<li><strong>第9列</strong>：表示文件名。</li>
+</ul>
+<h2 id="更改文件权限"><a href="#更改文件权限" class="headerlink" title="更改文件权限"></a>更改文件权限</h2><ul>
+<li><p><code>chgrp</code>（change group的简写）命令可以更改文件的所属组，其格式为：<code>chgrp [选项] [组名] [文件名]</code>，<code>chgrp</code>命令只更改了目录本身，而目录下的文件并没有更改。如果要想级联更改子目录以及子文件，加<code>-R</code>选项可以实现。</p>
+</li>
+<li><p><code>chown</code>（change owner的简写）命令可以更改文件的所有者，其格式为：<code>chown [ -R ] 账户名 文件名</code>或者<code>chown [ -R ] 账户名:组名 文件名</code>。这里的<code>-R</code>选项只适用于目录，作用是级联更改，即不仅更改当前目录，连目录里的目录或者文件也全部更改。</p>
+<p>也可以直接对用户权限做加减法，命令格式<code>chmod [用户] [+/-] [权限] [文件/目录名]</code>，其中的用户：a，全部用户，o，其他用户、g组用户、u当前用户。 权限：r：读权限 、w写权限 、 x执行权限，脚本文件以及进入目录。</p>
+</li>
+<li><p><code>chmod</code>（change mode的简写）用于改变用户对文件/目录的读写执行权限，其格式为：<code>chmod [-R] xyz</code> 文件名（这里的<code>xyz</code>表示数字）。其中，<code>-R</code>选项的作用等同于<code>chown</code>命令的<code>-R</code>选项，也表示级联更改。Linux使用数字代替<code>rwx</code>，具体规则为：<code>r</code>等于4，<code>w</code>等于2，<code>x</code>等于1，<code>-</code>等于0。</p>
+</li>
+<li><p><code>umask</code>用于改变文件的默认权限，在Linux系统中，一个目录的默认权限为755，而一个文件的默认权限为644。可以直接使用umask查看其值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># umask</span><br><span class="line">0022</span><br></pre></td></tr></table></figure>
+
+<p>其中0022的作用：</p>
+<ol>
+<li>若用户建立普通文件，则预设没有可执行权限，只有<code>r</code>、<code>w</code>两个权限，最大值为666（<code>-rw-rw-rw-</code>），而这些权限减去022，得到的结果是<code>rw-rw-rw- – ----w--w- = rw-r--r--</code>，这也就是普通文件权限默认为644的原因。</li>
+<li>若用户建立目录，则预设所有权限均开放，即777（<code>drwxrwxrwx</code>），这些权限减去022，得到的结果是rwxrwxrwx – —-w–w- = rwxr-xr-x，这也就是目录权限默认为755的原因。</li>
+</ol>
+<p>我们也可以修改umask值从而修改文件以及目录的默认值。</p>
+</li>
+</ul>
+<h2 id="修改文件的特殊属性"><a href="#修改文件的特殊属性" class="headerlink" title="修改文件的特殊属性"></a>修改文件的特殊属性</h2><ul>
+<li><code>chattr</code>（change attribute）的格式为：<code>chattr [+-=][Asaci] [文件或者目录名]</code>，其中，+、-和=分别表示增加、减少和设定。各个选项的含义如下。<ul>
+<li><strong><code>A</code></strong>：增加该属性后，表示文件或目录的<code>atime</code>将不可修改。</li>
+<li><strong><code>s</code></strong>：增加该属性后，会将数据同步写入磁盘中。</li>
+<li><strong><code>a</code></strong>：增加该属性后，表示只能追加不能删除，非root用户不能设定该属性。</li>
+<li><strong><code>c</code></strong>：增加该属性后，表示自动压缩该文件，读取时会自动解压。</li>
+<li><strong><code>i</code></strong>：增加该属性后，表示文件不能删除、重命名、设定链接、写入以及新增数据。</li>
+</ul>
+</li>
+<li><code>lsattr</code>（list attribute），该命令用于读取文件或者目录的特殊权限，其格式为：<code>lsattr [-aR] [文件/目录名]</code>。下面先来看看<code>-a</code>和<code>-R</code>这两个选项的含义。<ul>
+<li><strong><code>-a</code></strong>：类似于<code>ls</code>的<code>-a</code>选项，即连同隐藏文件一同列出。</li>
+<li><strong><code>-R</code></strong>：连同子目录的数据一同列出。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Linux下的搜索文件"><a href="#Linux下的搜索文件" class="headerlink" title="Linux下的搜索文件"></a>Linux下的搜索文件</h2><ul>
+<li><code>which</code>命令查找可执行文件的绝对路径。命令格式：<code>which [命令]</code>。</li>
+<li><code>whereis</code>命令通过预先生成的一个文件列表库查找与给出的文件名相关的文件，其格式为 <code>whereis [-bms] [文件名称]</code>，其中各选项的含义如下所示。<ul>
+<li><strong><code>-b</code></strong>：只查找二进制文件。</li>
+<li><strong><code>-m</code></strong>：只查找帮助文件（在man目录下的文件）。</li>
+<li><strong><code>-s</code></strong>：只查找源代码文件。</li>
+</ul>
+</li>
+<li><code>locate</code>命令类似于<code>whereis</code>，也是通过查找预先生成的文件列表库来告诉用户要查找的文件在哪里，后面直接跟文件名。如果你的Linux没有这个命令，需要安装mlocate软件包。</li>
+<li><code>find</code>其格式为：<code>find [路径] [参数]</code> 。下面介绍小编常用的几个参数。<ul>
+<li><strong><code>-atime +n/-n</code></strong>：表示访问或执行时间大于或小于n天的文件。</li>
+<li><strong><code>-ctime +n/-n</code></strong>：表示写入、更改<code>inode</code>属性（如更改所有者、权限或者链接）的时间大于或小于n天的文件。</li>
+<li><strong><code>-mtime +n/-n</code></strong>：表示写入时间大于或小于n天的文件，该参数用得最多。</li>
+</ul>
+</li>
+</ul>
+<h1 id="Linux文件系统"><a href="#Linux文件系统" class="headerlink" title="Linux文件系统"></a>Linux文件系统</h1><p>Linux的文件系统格式为ext3、ext4或者xfs。早期的Linux使用ext2格式，CentOS 5默认使用ext3，CentOS 6默认使用ext4，而目前最新的CentOS 7默认使用xfs格式。</p>
+<h2 id="常见文件类型"><a href="#常见文件类型" class="headerlink" title="常见文件类型"></a>常见文件类型</h2><ul>
+<li><strong>普通文件（regular file）</strong>：即一般类型的文件，当用命令<code>ls -l</code>查看某个目录时，第一个属性为“-”的文件就是普通文件。它又可分成纯文本文件（ASCII）和二进制文件（binary）。纯文本文件可以通过<code>cat</code>、<code>more</code>、<code>less</code>等工具直接查看内容，而二进制文件不能。例如，我们用的命令/usr/bin/ls就是一个二进制文件。</li>
+<li><strong>目录（directory）</strong>：它与Windows下的文件夹类似，只不过在Linux中我们不将其称为“文件夹”，而称为“目录”。用命令<code>ls -l</code>查看的第一个属性值为d的文件就是目录。</li>
+<li><strong>链接文件（link file）</strong>：用命令<code>ls -l</code>查看的第一个属性为l的文件就是链接文件，它类似于Windows下的快捷方式。这种文件在Linux中很常见，小编在日常系统运维工作中经常用到，所以你要特别留意一下这类文件。</li>
+<li><strong>设备（device）</strong>：即与系统周边相关的一些文件，通常都集中在/dev目录下。 这种文件一般分为两种，一种是块（block）设备，就是一些存储数据，以提供系统存取的接口设备，简称硬盘。例如，第一块硬盘是/dev/sda1，用命令<code>ls-l</code>查看的第一个属性值为b的文件就是块设备。另一种是字符（character）设备，是一些串行端口的接口设备，例如键盘、鼠标等，用命令<code>ls-l</code>查看的第一个属性为c的文件就是字符设备。</li>
+</ul>
+<h2 id="Linux文件的后缀名"><a href="#Linux文件的后缀名" class="headerlink" title="Linux文件的后缀名"></a>Linux文件的后缀名</h2><p>在Linux系统中，文件的后缀名没有具体意义，加或者不加都无所谓。但是为了便于区分，我们习惯在定义文件名时加一个后缀名。这样当用户看到这个文件名时，就会很快知道它到底是一个什么文件，例如1.sh、2.tar.gz、my.cnf、test.zip等。</p>
+<h2 id="Linux的链接文件"><a href="#Linux的链接文件" class="headerlink" title="Linux的链接文件"></a>Linux的链接文件</h2><p>链接文件它分为硬链接（hard link）和软链接（symbolic link）两种。两种链接的本质区别在于<code>inode</code>。下面小编就来介绍一下这两种链接文件。</p>
+<ul>
+<li><strong>硬链接</strong>：当系统要读取一个文件时，会先读inode信息，然后再根据inode中的信息到块区域将数据取出来。而硬链接是直接再建立一个<code>inode</code>链接到文件放置的块区域，即进行硬链接时该文件内容没有任何变化，只是增加了一个指向这个文件的<code>inode</code>，并不会额外占用磁盘空间。硬链接有两个限制： (1)不能跨文件系统，因为不同的文件系统有不同的inode table； (2)不能链接目录。</li>
+<li><strong>软链接</strong>：与硬链接不同，软链接是建立一个独立的文件，当读取这个链接文件时，它会把读取的行为转发到该文件所链接的文件上。例如，现在有一个文件a，我们做了一个软链接文件b（只是一个链接文件，非常小），b指向了a。当读取b时，b就会把读取的动作转发到a上，这样就读取了文件a。当我们删除文件a时，链接文件b不会被删除；但如果再次读取b时，会提示无法打开文件。然而，当我们删除b时，a是不会有任何影响的。</li>
+</ul>
+<h1 id="Linux用户身份与权限"><a href="#Linux用户身份与权限" class="headerlink" title="Linux用户身份与权限"></a>Linux用户身份与权限</h1><p>Linux系统是一个多用户多任务系统，因此Linux系统必须具备很好的安全性，因此在安装CentOS的时候，就要求设立root管理员的密码，这个root管理员就是Linux系统中的超级用户，拥有最高的系统管理权，如添加/删除用户、启动/关闭进程服务，开启/禁用硬件设备等。</p>
+<p>root管理员之所以成为系统管理员不是因为它叫root，而是因为用户的UID的数值为0。在Linux系统中，UID可以用来判断用户身份，规则如下：</p>
+<ul>
+<li>管理员UID为0：系统的管理员用户。</li>
+<li>系统用户UID为1~999：Linux系统为了避免因某个服务程序出现漏洞而被黑客提权至整台服务器，默认服务程序会有独立的系统用户负责运行，进而有效控制被破坏范围。</li>
+<li>普通用户UID从1000开始：是由管理员创建的用于日常工作的用户。</li>
+</ul>
+<p>而为了方便同一组的用户，Linux系统还引入了用户组的概念，通过使用用户组号码，我们可以将多个用户加入一个用户组，从而方便为组中的用户统一规划权限或指派任务。</p>
+<ul>
+<li><p><code>useradd</code>：用于创建新的用户，命令格式为<code>useradd [选项] [用户名]</code>。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/useradd命令参数.png">
+</li>
+<li><p><code>groupadd</code>：用于创建新的用户组，命令格式为<code>groupadd [选项] [群族名]</code>。</p>
+</li>
+<li><p><code>userdel</code>：用于删除用户，命令格式为<code>userdel [选项] [用户名]</code>。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/userdel参数.png">
+</li>
+<li><p><code>groupdel</code>：用于删除用户，命令格式为<code>userdel [选项] [用户名]</code>。</p>
+</li>
+<li><p><code>passwd</code>：用于修改用户密码，命令格式为<code>passwd [选项] [用户名]</code>。</p>
+<p>root用户可以修改所有用户的密码，其他用户只能修改自身的密码。</p>
+</li>
+</ul>
+<p>上文提到Linux拥有多个用户，下面写一下Linux的用户切换。</p>
+<ul>
+<li><p><code>su</code>：用于切换用户身份，命令格式为<code>su [-] [用户名]</code>，其中的<code>-</code>可以加也可以不加，如果加上<code>-</code>后完全切换到新用户中，也将环境变量和信息变更为新用户的相应信息，<font color="red">建议在切换用户的时候加上<code>-</code>。</font></p>
+</li>
+<li><p><code>sudo</code>：用于给普通用户提供额外root管理员才能够使用的权限，命令格式为<code>sudo [参数] 命令名称</code>。</p>
+<p>使用sudo命令要注意，需要提前使用root用户给与一些设定：</p>
+<ol>
+<li><p>使用<code>visudo</code>命令编辑相关的配置文件/etc/sudoers</p>
+ <img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/userdel参数.png">
+
+<p><code>euansu ALL=(ALL) ALL</code>添加到/etc/sudoers文件中就可以让euansu拥有sudo的特权。ALL=(ALL)，左边的ALL指的是所有的主机，右边的ALL指的是获取哪个用户的身份，最后一个指的是可以使用的sudo命令，前面的NOPASSWD，指的是使用sudo命令的时候可以不用输入密码。</p>
+</li>
+<li><p>使用sudo命令</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/sudo命令.jpg">
+
+
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h1><p>首先列举一些磁盘管理的常用命令。</p>
+<ul>
+<li><p><code>df</code>：查看已挂载磁盘的总容量，使用容量，剩余容量等，可以不加任何参数，默认以kb单位显示。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/df命令查看磁盘使用情况.png">
+
+<p>[-h]选项表示使用合适的单位进行显示。</p>
+</li>
+<li><p><code>du</code>：查看某个目录或文件所占空间的大小，命令格式：<code>du [选项] [文件或目录名]</code>。</p>
+<p>du -sh是du最常用的方法，列出文件夹总的大小同时以合适的单位表示。</p>
+</li>
+<li><p><code>fdisk</code>：管理硬盘设备分区，提供了添加、删除、转换分区等对硬盘的操作,命令格式：<code>fdisk [选项] [磁盘名]</code>。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/fdisk选项.png">
+</li>
+<li><p><code>mount</code>：挂载文件系统，命令格式：<code>mount [文件系统] [挂载目录]</code>。</p>
+</li>
+<li><p><code>umount</code>：撤销已经挂载的设备文件，命令格式：<code>umount [挂载点/设备文件]</code>。</p>
+</li>
+<li><p><code>mkfs</code>：格式化分区，如果存储设备没有进行格式化，则Linux系统无法得知如何向存储设备写入数据。在shell输入mkfs后连续敲击两下用于补齐命令的Tab键，可以得到如下显示：</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/分区格式化.png">
+
+<p>常用命令：mkfs.ext2、mkfs.ext3、mkfs.ext4、mkfs.xfs，分别对应ext和xfs文件格式。</p>
+</li>
+</ul>
+<h2 id="挂载硬件设备"><a href="#挂载硬件设备" class="headerlink" title="挂载硬件设备"></a>挂载硬件设备</h2><p>我们在Windows环境下使用U盘只需要简单的插入即可使用，但是Linux系统中需要进行分区、格式化、挂载才能够使用磁盘。</p>
+<ol>
+<li><p>这里我们使用VMware运行的CentOS中添加一个新的硬盘设备，来完成如上所说的步骤。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/添加硬盘设备.png">
+
+<p><font color="red">在创建新的硬盘设备的时候，需要确保得到的是一块连续的空间，也即将虚拟磁盘存储为单个文件。</font></p>
+<p>新的硬盘设备添加完成后，进行磁盘分区。</p>
+</li>
+<li><p>使用fdisk命令对磁盘分区</p>
+<p>使用fdisk列出所有所有可用分区</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/列出所有可用分区.png">
+
+<p>使用fdisk管理分区</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/fdisk选项.png">
+
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/fdisk管理分区.png">
+
+<p>磁盘容量=主分区+扩展分区，扩展分区=各个逻辑分区的总和</p>
+<p>分区结果如下图所示</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/分区情况.png">
+</li>
+<li><p>对分区进行格式化</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/mkfs分区格式化.jpg">
+
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/分区格式化情况.png">
+</li>
+<li><p>挂载</p>
+<ul>
+<li><p>mount命令直接挂载，需要挂载到一个已经存在的目录，但同时会删除掉目录原有的文档，所以挂载磁盘最好新建一个目录。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/挂载分区.png">
+</li>
+<li><p>修改/etc/fstab配置文件，这个文件中显示了系统启动时需要挂载的各个分区。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/修改fdtab文件.png">
+
+<p><code>mount -a</code>会把/etc/fstab中出现的所有磁盘分区挂载上，当然你也可以选择重启linux。</p>
+</li>
+<li><p>修改/etc/rc.d/rc.local文件，系统开机后会执行这个文件中的命令，这里我们使用UUID挂载磁盘。</p>
+<p>UUID，通用唯一识别码，UUID的目的是想让分散系统中的所有元素都能有唯一的辨识信息，而不需要通过中央控制端来做辨识信息的指定。Linux中会给每个磁盘分配唯一的UUID。</p>
+<p>使用UUID修改/etc/rc.d/rc.local，最后要检查文件是否可执行，如果文件不可执行，重启也不会挂载。给文件添加执行权限可以使用<code>chmod a+x /etc/rc.d/rc.local</code>。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/修改开机启动文件.png">
+
+<p>确认修改信息没有错误后，重启linux虚拟机，就会发现磁盘分区已经挂载成功。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/重启.png">
+</li>
+</ul>
+</li>
+<li><p>卸载</p>
+<p>使用umount命令即可卸载分区</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/分区卸载.png">
+
+</li>
+</ol>
+<h1 id="Linux文本编辑Vim"><a href="#Linux文本编辑Vim" class="headerlink" title="Linux文本编辑Vim"></a>Linux文本编辑Vim</h1><p>Linux系统中一切都是文件，而配置一个服务就是在修改其配置文件的参数。而Vim文本编辑器，默认安装在当前所有的Linux操作系统上，如果你的系统中没有Vim，使用命令安装即可。</p>
+<p>在使用Vim之前，先要了解以下Vim，它不像Windwos中的记事本一样可以借助光标操作，Vim的所有操作都是通过键盘输入，同时也设置了三种工作模式：命令模式、输入模式、末行模式，想要高效率的使用Vim，就必须要先了解Vim的三种工作模式，如下是Vim三种模式的切换方法以及操作区别。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/vim编辑器的切换方法.png">
+
+<ul>
+<li><p>命令模式：控制光标移动，可对文本进行复制、粘贴、删除和查找等工作。</p>
+</li>
+<li><p>输入模式：正常的文本录入。</p>
+</li>
+<li><p>末行模式：保存或退出文档，以及设置编辑环境。</p>
+</li>
+</ul>
+<p>在每次运行 Vim 编辑器时，默认进入命令模式，此时需要先切换到输入模式后再进行文档编写工作，而每次在编写完文档后需要先返回命令模式，然后再进入末行模式，执行文档的保存或退出操作。</p>
+<p><font color="red">centos如果没有安装vim，则需要执行：<code>yum install -y vim-enhanced</code>。</font></p>
+<h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/vim命令模式.png">
+
+<h2 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h2><img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/vim编辑模式.png">
+
+<h2 id="末行模式"><a href="#末行模式" class="headerlink" title="末行模式"></a>末行模式</h2><img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/末行模式.jpg">
+
+<h1 id="Linux文档的压缩与打包"><a href="#Linux文档的压缩与打包" class="headerlink" title="Linux文档的压缩与打包"></a>Linux文档的压缩与打包</h1><p>Linux下常见的压缩文件通常是tar.gz格式，除此之外还有tar、gz、bz2、zip等格式。</p>
+<ul>
+<li><strong>.gz</strong>：表示由gzip压缩工具压缩的文件。</li>
+<li><strong>.bz2</strong>：表示由bzip2压缩工具压缩的文件。</li>
+<li><strong>.tar</strong>：表示由tar打包程序打包的文件（tar并没有压缩功能，只是把一个目录合并成一个文件）。</li>
+<li><strong>.tar.gz</strong>：可以理解为先由tar打包，然后再由gzip压缩。</li>
+<li><strong>.tar.bz2</strong>：可以理解为先由tar打包，然后再由bzip2压缩。</li>
+<li><strong>.tar.xz</strong>：可以理解成先由tar打包，然后再xz压缩。</li>
+</ul>
+<p>常用的命令是tar命令，格式为<code>tar [选项] [压缩后文件名] [源文件名]</code>。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/压缩命令的选项.jpg">
+
+<p>来看一个简单的压缩文件例子：</p>
+<p>使用tree命令查看要压缩的目录结构。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/压缩前目录结构.jpg">
+
+<p>使用tar命令进行文件压缩，成功后会生成压缩文件。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/压缩结束后生成压缩文件.jpg">
+
+<p>进行文件解压前删除原目录，会自动产生一个去掉压缩后缀的目录。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/压缩文件解压.jpg">
+
+<h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>GNU/Linux shell是一种特殊的交互式工具。它为用户提供了启动程序、管理文件系统中的文件以及运行在Linux系统上的进程的途径。shell的核心是命令行提示符。命令行提示符是shell负责交互的部分。它允许你输入文本命令，然后解释命令，并在内核中执行。</p>
+<p>shell包含了一组内部命令，用这些命令可以完成诸如复制文件、移动文件、重命名文件、显示和终止系统中正运行的程序等操作。shell也允许你在命令行提示符中输入程序的名称，它会将程序名传递给内核以启动它。</p>
+<p>你也可以将多个shell命令放入文件中作为程序执行。这些文件被称作shell脚本。</p>
+<p>可以将 Shell 终端解释器当作人与计算机硬件之间的“翻译官”，它作为用户与 Linux 系统内部的通信媒介，除了能够支持各种变量与参数外，还提供了诸如循环、分支等高级编程语言才有的控制结构特性。要想正确使用 Shell 中的这些功能特性，准确下达命令尤为重要。Shell 脚本命令的工作方式有两种：交互式和批处理。</p>
+<ul>
+<li>交互式：用户每输入一条命令就立即执行。</li>
+<li>批处理：由用户事先编号一个完整的shell脚本，shell会一次性执行脚本中的诸多命令。</li>
+</ul>
+<h3 id="shell脚本实例"><a href="#shell脚本实例" class="headerlink" title="shell脚本实例"></a>shell脚本实例</h3><p>编写一个简单的shell脚本，其中脚本文件的第一行是脚本声明(#!)用来告诉系统使用哪种shell解释器来执行这个脚本，第二、三行则是Linux命令。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/shell脚本.png">
+
+<p>如图上所展示，shell脚本除了可以用bash解释器执行也可以输入完整的路径执行。</p>
+<h3 id="接收参数的shell脚本"><a href="#接收参数的shell脚本" class="headerlink" title="接收参数的shell脚本"></a>接收参数的shell脚本</h3><p>shell脚本也能够接收用户输入的参数。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/接收参数shell脚本.png">
+
+<h3 id="shell脚本判断用户的参数"><a href="#shell脚本判断用户的参数" class="headerlink" title="shell脚本判断用户的参数"></a>shell脚本判断用户的参数</h3><p>上面写道shell接收参数，这里则是对参数做进一步的处理。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/接收参数shell脚本.png">
+
+<p>按照测试对象划分，条件测试语句可以分为4种：</p>
+<ul>
+<li>文件测试语句；</li>
+<li>逻辑测试语句；</li>
+<li>整数值比较语句；</li>
+<li>字符串比较语句。</li>
+</ul>
+<p><strong>shell脚本这里要注意，如果返回值为0，说明判断条件满足。</strong></p>
+<h3 id="文件测试语句"><a href="#文件测试语句" class="headerlink" title="文件测试语句"></a>文件测试语句</h3><p>文件测试语句即使用指定条件来判断文件是否存在或权限是否满足等情况的运算符，具体的参数如下图所示。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/文件测试所用参数.png">
+
+<p>如下语句为判断测试文件是否为目录类型，如果返回值为0，则判断语句成立。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/判断测试文件是否为目录类型.png">
+
+<h3 id="逻辑测试语句"><a href="#逻辑测试语句" class="headerlink" title="逻辑测试语句"></a>逻辑测试语句</h3><p>这里先判断文件是否为目录类型，如果是则执行第二个条件，否则不会执行。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/逻辑测试语句.png">
+
+<p>直接通过<code>!</code>就能够实现逻辑非的判断。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/逻辑非语句.png">
+
+<h3 id="整数值比较语句"><a href="#整数值比较语句" class="headerlink" title="整数值比较语句"></a>整数值比较语句</h3><p>如下是可用的整数比较运算运算符，要注意证书比较运算符仅仅是对数字的操作，不能将数字与字符串、文件等内容一起操作，更不能直接用等号、大小号判断，需要严格按照shell的整数值比较运算符。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/整数比较选项.png">
+
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/整数比较运算.png">
+
+<p>这里有一个小例子用来查看内存剩余空间。</p>
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/空闲内存检测.png">
+
+<h3 id="字符串比较语句"><a href="#字符串比较语句" class="headerlink" title="字符串比较语句"></a>字符串比较语句</h3><img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/字符串比较运算符.png">
+
+<img src="http://qj91fhedp.hb-bkt.clouddn.com/static/images/字符串运算.png">
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Centos/" rel="tag"># Centos</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/511/907/C-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/" rel="prev" title="C++基础知识梳理">
+                  <i class="fa fa-chevron-left"></i> C++基础知识梳理
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/511/909/linux%E4%BD%BF%E7%94%A8/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

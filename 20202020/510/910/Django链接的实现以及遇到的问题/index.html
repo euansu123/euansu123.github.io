@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="Django链接的实现这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。">
+  <meta name="description" content="Django链接的实现 这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django链接的实现">
 <meta property="og:url" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="Django链接的实现这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。">
+<meta property="og:description" content="Django链接的实现 这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index%E9%A1%B5%E9%9D%A2.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/detail%E9%A1%B5%E9%9D%A2.png">
@@ -181,7 +181,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Django链接的实现"><span class="nav-number">1.</span> <span class="nav-text">Django链接的实现</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#django链接的实现"><span class="nav-number">1.</span> <span class="nav-text">Django链接的实现</span></a></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -196,14 +196,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -302,46 +302,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="Django链接的实现"><a href="#Django链接的实现" class="headerlink" title="Django链接的实现"></a>Django链接的实现</h3><p>这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。</p>
+        <h3 id="django链接的实现">Django链接的实现</h3>
+<p>这里的链接指直接在页面上通过超链接实现跳转，也就是HTML&lt; a&gt;标签的href方法。我在这里并不是想要直接实现跳转，而是做了一个投票问题和投票评论两个类，希望能够通过问题链接到评论，这就意味着很难通过一个函数实现，同时如何调用指定的评论也是一个问题，这里记录一下我遇到的问题。</p>
 <a id="more"></a>
-
 <p><strong>模型实现</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="comment"># char最大长度200</span></span><br><span class="line">    question_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    question_date = models.DateTimeField()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vote</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="comment"># 投票内容</span></span><br><span class="line">    vote_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    vote_num = models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 多对一关联，级联操作</span></span><br><span class="line">    question_vote = models.ForeignKey(Question,on_delete=models.CASCADE)</span><br><span class="line">    <span class="comment"># 定义外键关系，告诉Django，每一个Vote关联到一个对应的Question，（要将外键写在“多”的一方）</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>模板展示</strong></p>
-<ol>
+<ol type="1">
 <li><p>投票问题</p>
-<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index%E9%A1%B5%E9%9D%A2.png" alt></p>
-</li>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index页面.png"></p></li>
 <li><p>投票评论</p>
-<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/detail%E9%A1%B5%E9%9D%A2.png" alt></p>
-</li>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/detail页面.png"></p></li>
 </ol>
 <p>这里解释一下question.vote_set.all：question.vote_set.all就是Python的代码question.vote_set.all() ，它将返回一组可迭代的vote对象，并用在for标签中。</p>
 <p><strong>路由规则编写</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url(<span class="string">r'^(?P&lt;question_id&gt;\d+)/$'</span>, views.detail, name=<span class="string">'detail'</span>),</span><br></pre></td></tr></table></figure>
-
-<p>这里主要是针对&lt; a href=””&gt;的解决，通过这行链接，能够直接寻找name =’detail’ 的路由地址。</p>
+<p>这里主要是针对&lt; a href=&quot;&quot;&gt;的解决，通过这行链接，能够直接寻找name ='detail’ 的路由地址。</p>
 <p><strong>视图实现</strong></p>
-<ol>
+<ol type="1">
 <li><p>投票问题</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">    question_list = Question.objects.order_by(<span class="string">'-question_date'</span>)</span><br><span class="line">    lo = locals()</span><br><span class="line">    print(type(lo),lo)</span><br><span class="line">    <span class="comment"># return render(request,'poll/index.html',&#123;'question_list': question_list&#125;)</span></span><br><span class="line">    <span class="keyword">return</span> render(request, <span class="string">'poll/index.html'</span>, lo)</span><br></pre></td></tr></table></figure>
-
-<p>locals()返回一个包含当前作用域里面的所有变量和它们的值的字典，相当于{‘question_list’: question_list}。</p>
-</li>
+<p>locals()返回一个包含当前作用域里面的所有变量和它们的值的字典，相当于{'question_list': question_list}。</p></li>
 <li><p>投票评论</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">detail</span><span class="params">(request,question_id)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    功能：根据参数传递博客编号，查询对应的信息</span></span><br><span class="line"><span class="string">    :param request:</span></span><br><span class="line"><span class="string">    :param question_id: 博客编号</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    question = get_object_or_404(Question,pk=question_id)</span><br><span class="line">    <span class="keyword">return</span> render(request,<span class="string">'poll/detail.html'</span>,locals())</span><br></pre></td></tr></table></figure>
-
-<p>其中get_object_or_404的作用是：如果数据库中没有 id=1 的数据条目时，Django 会抛出 Error 500 错误。我们并不希望出现Error 500 错误，所以这里我们使用get_object_or_404就能够抛出Error 404 错误。</p>
-</li>
+<p>其中get_object_or_404的作用是：如果数据库中没有 id=1 的数据条目时，Django 会抛出 Error 500 错误。我们并不希望出现Error 500 错误，所以这里我们使用get_object_or_404就能够抛出Error 404 错误。</p></li>
 </ol>
 <p>如下是投票页面和投票评论的展示。</p>
 <p><strong>投票页面及其数据库</strong></p>
-<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E9%97%AE%E9%A2%98.png" alt></p>
-<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E9%97%AE%E9%A2%98_%E6%95%B0%E6%8D%AE%E5%BA%93.png" alt></p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/投票问题.png"></p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/投票问题_数据库.png"></p>
 <p><strong>投票评论及其数据库</strong></p>
-<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E8%AF%84%E8%AE%BA.png" alt></p>
-<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/%E6%8A%95%E7%A5%A8%E8%AF%84%E8%AE%BA_%E6%95%B0%E6%8D%AE%E5%BA%93.png" alt></p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/投票评论.png"></p>
+<p><img src="/20202020/510/910/Django%E9%93%BE%E6%8E%A5%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%BB%A5%E5%8F%8A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/投票评论_数据库.png"></p>
 
     </div>
 

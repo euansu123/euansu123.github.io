@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="练习题目：设有一数据库，包含四个表：学生表(Student)、课程表(Course)、成绩表(Score)以及教师表(Teacher)，用SQL语句创建四个表并完成相关题目。">
+  <meta name="description" content="练习题目： 设有一数据库，包含四个表：学生表(Student)、课程表(Course)、成绩表(Score)以及教师表(Teacher)，用SQL语句创建四个表并完成相关题目。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql查询练习">
 <meta property="og:url" content="http://euansu123.github.io/20202020/508/906/sql%E6%9F%A5%E8%AF%A2%E7%BB%83%E4%B9%A0/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="练习题目：设有一数据库，包含四个表：学生表(Student)、课程表(Course)、成绩表(Score)以及教师表(Teacher)，用SQL语句创建四个表并完成相关题目。">
+<meta property="og:description" content="练习题目： 设有一数据库，包含四个表：学生表(Student)、课程表(Course)、成绩表(Score)以及教师表(Teacher)，用SQL语句创建四个表并完成相关题目。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-06T13:08:49.000Z">
 <meta property="article:modified_time" content="2020-08-10T00:32:23.158Z">
@@ -173,7 +173,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#练习题目："><span class="nav-number">1.</span> <span class="nav-text">练习题目：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试数据"><span class="nav-number">2.</span> <span class="nav-text">测试数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql代码实现"><span class="nav-number">3.</span> <span class="nav-text">mysql代码实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#练习题目"><span class="nav-number">1.</span> <span class="nav-text">练习题目：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试数据"><span class="nav-number">2.</span> <span class="nav-text">测试数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql代码实现"><span class="nav-number">3.</span> <span class="nav-text">mysql代码实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -188,14 +188,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -300,155 +300,163 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h4 id="练习题目："><a href="#练习题目：" class="headerlink" title="练习题目："></a>练习题目：</h4><p>设有一数据库，包含四个表：学生表(Student)、课程表(Course)、成绩表(Score)以及教师表(Teacher)，用SQL语句创建四个表并完成相关题目。</p>
+        <h4 id="练习题目">练习题目：</h4>
+<p>设有一数据库，包含四个表：学生表(Student)、课程表(Course)、成绩表(Score)以及教师表(Teacher)，用SQL语句创建四个表并完成相关题目。</p>
 <a id="more"></a>
-
 <p><strong>学生表(Student)</strong></p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>属性名</th>
 <th>数据类型</th>
 <th>可否为空</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>Sno</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>学号（主码）</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Sname</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>学生姓名</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Sex</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>学生性别</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Sbirthday</td>
 <td>datetime</td>
 <td>可</td>
 <td>学生出生年月</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Class</td>
 <td>varchar(20)</td>
 <td>可</td>
 <td>学生所在班级</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><strong>课程表(Course)</strong></p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>属性名</th>
 <th>数据类型</th>
 <th>可否为空</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>Cno</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>课程号（主码）</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Cname</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>课程名称</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Tno</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>教工编号（外码）</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>成绩表(Score)</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>属性名</th>
 <th>数据类型</th>
 <th>可否为空</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>Sno</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>学号（外码，主码）</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Cno</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>课程号（外码，主码）</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Degree</td>
 <td>varchar(20)</td>
 <td>可</td>
 <td>成绩</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>教师表(Teacher)</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>属性名</th>
 <th>数据类型</th>
 <th>可否为空</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>Tno</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>教工编号（主码）</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Tname</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>教工姓名</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Tsex</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>教工性别</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Tbirthday</td>
 <td>datetime</td>
 <td>可</td>
 <td>教工出生年月</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Prof</td>
 <td>varchar(20)</td>
 <td>可</td>
 <td>职称</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Depart</td>
 <td>varchar(20)</td>
 <td>否</td>
 <td>教工所在部门</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>1.查询Student表中的所有记录的Sname、Ssex和Class列。</p>
 <p>2.查询教师所有的单位即不重复的Depart列。</p>
 <p>3.查询Score表中成绩在60到80之间的所有记录。</p>
@@ -457,14 +465,14 @@
 <p>6.查询Score表中的最高分的学生学号和课程号。（子查询或者排序）</p>
 <p>7.查询每门课的平均成绩。</p>
 <p>8.查询所有学生的Sname、Cname和Degree列。</p>
-<h4 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h4><h4 id="mysql代码实现"><a href="#mysql代码实现" class="headerlink" title="mysql代码实现"></a>mysql代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">create database mysqlwork;</span><br><span class="line">use mysqlwork;</span><br><span class="line">#创建学生表</span><br><span class="line">create table Student(</span><br><span class="line">	Sno varchar(20) primary key,</span><br><span class="line">	Sname varchar(20) not null,</span><br><span class="line">	Sex varchar(20) not null,</span><br><span class="line">	Sbirthday datetime,</span><br><span class="line">	Class varchar(20)</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line">#创建教师表</span><br><span class="line">create table Teacher(</span><br><span class="line">	Tno varchar(20) primary key,</span><br><span class="line">	Tname varchar(20) not null,</span><br><span class="line">	Tsex varchar(20) not null,</span><br><span class="line">	Tbirthday datetime,</span><br><span class="line">	Prof varchar(20),</span><br><span class="line">	Depart varchar(20) not null</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line">#创建课程表</span><br><span class="line">create table Course(</span><br><span class="line">	Cno varchar(20) primary key,</span><br><span class="line">	Cname varchar(20) not null,</span><br><span class="line">	Tno varchar(20) not null,</span><br><span class="line">	foreign key(Tno) references Teacher(Tno)</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line">#创建成绩表</span><br><span class="line">create table Score(</span><br><span class="line">	Sno varchar(20),</span><br><span class="line">	Cno varchar(20),</span><br><span class="line">	primary key(Sno,Cno),</span><br><span class="line">	Degree Decimal(4,1),</span><br><span class="line">	foreign key(Cno) references Course(Cno),</span><br><span class="line">	foreign key(Sno) references Student(Sno)</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">#插入学生表的数据</span><br><span class="line">insert into Student values (&#39;108&#39;,&#39;曾华&#39;,&#39;男&#39;,&#39;1977-9-01&#39;,&#39;95033&#39;);</span><br><span class="line">insert into Student values (&#39;105&#39;,&#39;匡明&#39;,&#39;男&#39;,&#39;1975-10-02&#39;,&#39;95031&#39;);</span><br><span class="line">insert into Student values (&#39;107&#39;,&#39;王丽&#39;,&#39;女&#39;,&#39;1976-01-23&#39;,&#39;95033&#39;);</span><br><span class="line">insert into Student values (&#39;101&#39;,&#39;李军&#39;,&#39;男&#39;,&#39;1976-02-20&#39;,&#39;95033&#39;);</span><br><span class="line">insert into Student values (&#39;109&#39;,&#39;王芳&#39;,&#39;女&#39;,&#39;1977-02-10&#39;,&#39;95031&#39;);</span><br><span class="line">insert into Student values (&#39;103&#39;,&#39;陆军&#39;,&#39;男&#39;,&#39;1974-06-03&#39;,&#39;95031&#39;);</span><br><span class="line">#插入教师表的数据</span><br><span class="line">insert into Teacher values (&#39;804&#39;,&#39;李诚&#39;,&#39;男&#39;,&#39;1958-12-02&#39;,&#39;副教授&#39;,&#39;计算机系&#39;);</span><br><span class="line">insert into Teacher values (&#39;856&#39;,&#39;张旭&#39;,&#39;男&#39;,&#39;1969-03-12&#39;,&#39;讲师&#39;,&#39;电子工程系&#39;);</span><br><span class="line">insert into Teacher values (&#39;825&#39;,&#39;王萍&#39;,&#39;女&#39;,&#39;1970-05-05&#39;,&#39;助教&#39;,&#39;计算机系&#39;);</span><br><span class="line">insert into Teacher values (&#39;831&#39;,&#39;刘冰&#39;,&#39;女&#39;,&#39;1977-08-14&#39;,&#39;助教&#39;,&#39;电子工程系&#39;);</span><br><span class="line">#插入课程表信息</span><br><span class="line">insert into Course values (&#39;3-105&#39;,&#39;计算机导论&#39;,&#39;825&#39;);</span><br><span class="line">insert into Course values (&#39;3-245&#39;,&#39;操作系统&#39;,&#39;804&#39;);</span><br><span class="line">insert into Course values (&#39;6-166&#39;,&#39;数字电路&#39;,&#39;856&#39;);</span><br><span class="line">insert into Course values (&#39;9-888&#39;,&#39;高等数学&#39;,&#39;831&#39;);</span><br><span class="line">#插入成绩表信息</span><br><span class="line">insert into Score values (&#39;103&#39;,&#39;3-245&#39;,&#39;86&#39;);</span><br><span class="line">insert into Score values (&#39;105&#39;,&#39;3-245&#39;,&#39;75&#39;);</span><br><span class="line">insert into Score values (&#39;109&#39;,&#39;3-245&#39;,&#39;68&#39;);</span><br><span class="line">insert into Score values (&#39;103&#39;,&#39;3-105&#39;,&#39;92&#39;);</span><br><span class="line">insert into Score values (&#39;105&#39;,&#39;3-105&#39;,&#39;88&#39;);</span><br><span class="line">insert into Score values (&#39;109&#39;,&#39;3-105&#39;,&#39;76&#39;);</span><br><span class="line">insert into Score values (&#39;101&#39;,&#39;3-105&#39;,&#39;64&#39;);</span><br><span class="line">insert into Score values (&#39;107&#39;,&#39;3-105&#39;,&#39;91&#39;);</span><br><span class="line">insert into Score values (&#39;108&#39;,&#39;3-105&#39;,&#39;78&#39;);</span><br><span class="line">insert into Score values (&#39;101&#39;,&#39;6-166&#39;,&#39;85&#39;);</span><br><span class="line">insert into Score values (&#39;107&#39;,&#39;6-166&#39;,&#39;79&#39;);</span><br><span class="line">insert into Score values (&#39;108&#39;,&#39;6-166&#39;,&#39;81&#39;);</span><br><span class="line"></span><br><span class="line">#1.查询Student表中的所有记录的Sname、Ssex和Class列。</span><br><span class="line">select Sname,Sex,Class from Student;</span><br><span class="line">#2.查询教师所有的单位即不重复的Depart列。</span><br><span class="line">select distinct Depart from Teacher;</span><br><span class="line">#3.查询Score表中成绩在60到80之间的所有记录。</span><br><span class="line">select * from Score where Degree between 60 and 80;</span><br><span class="line">#4.查询Score表中成绩为85，86或88的记录</span><br><span class="line">select * from Score where Degree&#x3D;&#39;85&#39; or Degree&#x3D;&#39;86&#39; or Degree&#x3D;&#39;88&#39;;</span><br><span class="line">#5. 以Class降序查询Student表的所有记录</span><br><span class="line">select * from Student order by Class desc;</span><br><span class="line">#6.查询Score表中的最高分的学生学号和课程号。（子查询或者排序）</span><br><span class="line">select Sno 学号,Cno 课程号 from Score where Degree&#x3D;(select max(Degree) from Score);</span><br><span class="line">#7.查询每门课的平均成绩。</span><br><span class="line">select Cname 课程名,avg(Degree) 平均成绩 from Score,Course where Score.Cno&#x3D;Course.Cno group by Cname;</span><br><span class="line">#8.查询所有学生的Sname、Cname和Degree列</span><br><span class="line">select Sname 学生姓名,Cname 课程名,Degree 成绩 from Score </span><br><span class="line">inner join Course on SCore.Cno&#x3D;Course.Cno</span><br><span class="line">inner join Student on Score.Sno&#x3D;Student.Sno;</span><br><span class="line">#方法二</span><br><span class="line">select Sname 学生姓名,Cname 课程名,Degree 成绩 from Score,Course,Student where Score.Cno&#x3D;Course.Cno and Score.Sno&#x3D;Student.Sno;</span><br><span class="line">#9.查询Score表中至少有5名学生选修的并以3开头的课程的平均分数</span><br><span class="line">select avg(Degree) 平均分数 from score where Cno like &#39;3%&#39; and Cno&#x3D;(</span><br><span class="line">select Cno from Score group by Cno having count(*)&gt;&#x3D;5)</span><br><span class="line">#10.查询所有学生的Sname、Cname和Degree列</span><br><span class="line">select Sname 学生姓名,Cname 课程名,Degree 成绩 from Score,Course,Student where Score.Cno&#x3D;Course.Cno and Score.Sno&#x3D;Student.Sno;</span><br><span class="line">#11.查询“95033”班学生的平均分</span><br><span class="line">select avg(Degree) from score where Sno in (</span><br><span class="line">select Sno from student where Class&#x3D;&#39;95033&#39;)</span><br><span class="line">#结果是多行的需要用in　</span><br><span class="line">#12.查询“张旭“教师任课的学生成绩</span><br><span class="line">#直接查询</span><br><span class="line">select Sno,Degree from Score where Cno&#x3D;(</span><br><span class="line">select Cno from Course where Tno&#x3D;(</span><br><span class="line">select Tno from Teacher where Tname&#x3D;&#39;张旭&#39;))</span><br><span class="line">#13.查询选修某课程的同学人数多于5人的教师姓名</span><br><span class="line">select Tname from Teacher,Course where Teacher.Tno&#x3D;Course.Tno and Course.Cno&#x3D;(select Cno from Score group by Cno having count(*)&gt;5)</span><br><span class="line">#14.查询成绩比该课程平均成绩低的同学的成绩表</span><br><span class="line">select * from Score a where Degree &lt; (</span><br><span class="line">select avg(Degree) from Score b where a.Cno&#x3D;b.Cno )</span><br><span class="line">#15.查询Student表中不姓“王”的同学记录</span><br><span class="line">select * from Student where Sname not like &#39;王_&#39;</span><br><span class="line">#16.查询Student表中每个学生的姓名和年龄：提示:使用year()函数</span><br><span class="line">select Sname 姓名,year(now())-year(Sbirthday) 年龄 from Student </span><br><span class="line">#17.查询所有选修“计算机导论”课程的“男”同学的成绩表</span><br><span class="line">select Sno 学号,Cno 课程号,Degree 成绩 from Score where Cno&#x3D;(</span><br><span class="line">select Cno from Course where Cname&#x3D;&#39;计算机导论&#39;) and Sno in</span><br><span class="line">(select Sno from Student where Sex&#x3D;&#39;男&#39;)</span><br><span class="line">#学号选择in是因为有多个学号</span><br></pre></td></tr></table></figure>
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>1.多个主码的设置：</p>
+<h4 id="测试数据">测试数据</h4>
+<h4 id="mysql代码实现">mysql代码实现</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">create database mysqlwork;</span><br><span class="line">use mysqlwork;</span><br><span class="line">#创建学生表</span><br><span class="line">create table Student(</span><br><span class="line">	Sno varchar(20) primary key,</span><br><span class="line">	Sname varchar(20) not null,</span><br><span class="line">	Sex varchar(20) not null,</span><br><span class="line">	Sbirthday datetime,</span><br><span class="line">	Class varchar(20)</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line">#创建教师表</span><br><span class="line">create table Teacher(</span><br><span class="line">	Tno varchar(20) primary key,</span><br><span class="line">	Tname varchar(20) not null,</span><br><span class="line">	Tsex varchar(20) not null,</span><br><span class="line">	Tbirthday datetime,</span><br><span class="line">	Prof varchar(20),</span><br><span class="line">	Depart varchar(20) not null</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line">#创建课程表</span><br><span class="line">create table Course(</span><br><span class="line">	Cno varchar(20) primary key,</span><br><span class="line">	Cname varchar(20) not null,</span><br><span class="line">	Tno varchar(20) not null,</span><br><span class="line">	foreign key(Tno) references Teacher(Tno)</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line">#创建成绩表</span><br><span class="line">create table Score(</span><br><span class="line">	Sno varchar(20),</span><br><span class="line">	Cno varchar(20),</span><br><span class="line">	primary key(Sno,Cno),</span><br><span class="line">	Degree Decimal(4,1),</span><br><span class="line">	foreign key(Cno) references Course(Cno),</span><br><span class="line">	foreign key(Sno) references Student(Sno)</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">#插入学生表的数据</span><br><span class="line">insert into Student values (&#39;108&#39;,&#39;曾华&#39;,&#39;男&#39;,&#39;1977-9-01&#39;,&#39;95033&#39;);</span><br><span class="line">insert into Student values (&#39;105&#39;,&#39;匡明&#39;,&#39;男&#39;,&#39;1975-10-02&#39;,&#39;95031&#39;);</span><br><span class="line">insert into Student values (&#39;107&#39;,&#39;王丽&#39;,&#39;女&#39;,&#39;1976-01-23&#39;,&#39;95033&#39;);</span><br><span class="line">insert into Student values (&#39;101&#39;,&#39;李军&#39;,&#39;男&#39;,&#39;1976-02-20&#39;,&#39;95033&#39;);</span><br><span class="line">insert into Student values (&#39;109&#39;,&#39;王芳&#39;,&#39;女&#39;,&#39;1977-02-10&#39;,&#39;95031&#39;);</span><br><span class="line">insert into Student values (&#39;103&#39;,&#39;陆军&#39;,&#39;男&#39;,&#39;1974-06-03&#39;,&#39;95031&#39;);</span><br><span class="line">#插入教师表的数据</span><br><span class="line">insert into Teacher values (&#39;804&#39;,&#39;李诚&#39;,&#39;男&#39;,&#39;1958-12-02&#39;,&#39;副教授&#39;,&#39;计算机系&#39;);</span><br><span class="line">insert into Teacher values (&#39;856&#39;,&#39;张旭&#39;,&#39;男&#39;,&#39;1969-03-12&#39;,&#39;讲师&#39;,&#39;电子工程系&#39;);</span><br><span class="line">insert into Teacher values (&#39;825&#39;,&#39;王萍&#39;,&#39;女&#39;,&#39;1970-05-05&#39;,&#39;助教&#39;,&#39;计算机系&#39;);</span><br><span class="line">insert into Teacher values (&#39;831&#39;,&#39;刘冰&#39;,&#39;女&#39;,&#39;1977-08-14&#39;,&#39;助教&#39;,&#39;电子工程系&#39;);</span><br><span class="line">#插入课程表信息</span><br><span class="line">insert into Course values (&#39;3-105&#39;,&#39;计算机导论&#39;,&#39;825&#39;);</span><br><span class="line">insert into Course values (&#39;3-245&#39;,&#39;操作系统&#39;,&#39;804&#39;);</span><br><span class="line">insert into Course values (&#39;6-166&#39;,&#39;数字电路&#39;,&#39;856&#39;);</span><br><span class="line">insert into Course values (&#39;9-888&#39;,&#39;高等数学&#39;,&#39;831&#39;);</span><br><span class="line">#插入成绩表信息</span><br><span class="line">insert into Score values (&#39;103&#39;,&#39;3-245&#39;,&#39;86&#39;);</span><br><span class="line">insert into Score values (&#39;105&#39;,&#39;3-245&#39;,&#39;75&#39;);</span><br><span class="line">insert into Score values (&#39;109&#39;,&#39;3-245&#39;,&#39;68&#39;);</span><br><span class="line">insert into Score values (&#39;103&#39;,&#39;3-105&#39;,&#39;92&#39;);</span><br><span class="line">insert into Score values (&#39;105&#39;,&#39;3-105&#39;,&#39;88&#39;);</span><br><span class="line">insert into Score values (&#39;109&#39;,&#39;3-105&#39;,&#39;76&#39;);</span><br><span class="line">insert into Score values (&#39;101&#39;,&#39;3-105&#39;,&#39;64&#39;);</span><br><span class="line">insert into Score values (&#39;107&#39;,&#39;3-105&#39;,&#39;91&#39;);</span><br><span class="line">insert into Score values (&#39;108&#39;,&#39;3-105&#39;,&#39;78&#39;);</span><br><span class="line">insert into Score values (&#39;101&#39;,&#39;6-166&#39;,&#39;85&#39;);</span><br><span class="line">insert into Score values (&#39;107&#39;,&#39;6-166&#39;,&#39;79&#39;);</span><br><span class="line">insert into Score values (&#39;108&#39;,&#39;6-166&#39;,&#39;81&#39;);</span><br><span class="line"></span><br><span class="line">#1.查询Student表中的所有记录的Sname、Ssex和Class列。</span><br><span class="line">select Sname,Sex,Class from Student;</span><br><span class="line">#2.查询教师所有的单位即不重复的Depart列。</span><br><span class="line">select distinct Depart from Teacher;</span><br><span class="line">#3.查询Score表中成绩在60到80之间的所有记录。</span><br><span class="line">select * from Score where Degree between 60 and 80;</span><br><span class="line">#4.查询Score表中成绩为85，86或88的记录</span><br><span class="line">select * from Score where Degree&#x3D;&#39;85&#39; or Degree&#x3D;&#39;86&#39; or Degree&#x3D;&#39;88&#39;;</span><br><span class="line">#5. 以Class降序查询Student表的所有记录</span><br><span class="line">select * from Student order by Class desc;</span><br><span class="line">#6.查询Score表中的最高分的学生学号和课程号。（子查询或者排序）</span><br><span class="line">select Sno 学号,Cno 课程号 from Score where Degree&#x3D;(select max(Degree) from Score);</span><br><span class="line">#7.查询每门课的平均成绩。</span><br><span class="line">select Cname 课程名,avg(Degree) 平均成绩 from Score,Course where Score.Cno&#x3D;Course.Cno group by Cname;</span><br><span class="line">#8.查询所有学生的Sname、Cname和Degree列</span><br><span class="line">select Sname 学生姓名,Cname 课程名,Degree 成绩 from Score </span><br><span class="line">inner join Course on SCore.Cno&#x3D;Course.Cno</span><br><span class="line">inner join Student on Score.Sno&#x3D;Student.Sno;</span><br><span class="line">#方法二</span><br><span class="line">select Sname 学生姓名,Cname 课程名,Degree 成绩 from Score,Course,Student where Score.Cno&#x3D;Course.Cno and Score.Sno&#x3D;Student.Sno;</span><br><span class="line">#9.查询Score表中至少有5名学生选修的并以3开头的课程的平均分数</span><br><span class="line">select avg(Degree) 平均分数 from score where Cno like &#39;3%&#39; and Cno&#x3D;(</span><br><span class="line">select Cno from Score group by Cno having count(*)&gt;&#x3D;5)</span><br><span class="line">#10.查询所有学生的Sname、Cname和Degree列</span><br><span class="line">select Sname 学生姓名,Cname 课程名,Degree 成绩 from Score,Course,Student where Score.Cno&#x3D;Course.Cno and Score.Sno&#x3D;Student.Sno;</span><br><span class="line">#11.查询“95033”班学生的平均分</span><br><span class="line">select avg(Degree) from score where Sno in (</span><br><span class="line">select Sno from student where Class&#x3D;&#39;95033&#39;)</span><br><span class="line">#结果是多行的需要用in　</span><br><span class="line">#12.查询“张旭“教师任课的学生成绩</span><br><span class="line">#直接查询</span><br><span class="line">select Sno,Degree from Score where Cno&#x3D;(</span><br><span class="line">select Cno from Course where Tno&#x3D;(</span><br><span class="line">select Tno from Teacher where Tname&#x3D;&#39;张旭&#39;))</span><br><span class="line">#13.查询选修某课程的同学人数多于5人的教师姓名</span><br><span class="line">select Tname from Teacher,Course where Teacher.Tno&#x3D;Course.Tno and Course.Cno&#x3D;(select Cno from Score group by Cno having count(*)&gt;5)</span><br><span class="line">#14.查询成绩比该课程平均成绩低的同学的成绩表</span><br><span class="line">select * from Score a where Degree &lt; (</span><br><span class="line">select avg(Degree) from Score b where a.Cno&#x3D;b.Cno )</span><br><span class="line">#15.查询Student表中不姓“王”的同学记录</span><br><span class="line">select * from Student where Sname not like &#39;王_&#39;</span><br><span class="line">#16.查询Student表中每个学生的姓名和年龄：提示:使用year()函数</span><br><span class="line">select Sname 姓名,year(now())-year(Sbirthday) 年龄 from Student </span><br><span class="line">#17.查询所有选修“计算机导论”课程的“男”同学的成绩表</span><br><span class="line">select Sno 学号,Cno 课程号,Degree 成绩 from Score where Cno&#x3D;(</span><br><span class="line">select Cno from Course where Cname&#x3D;&#39;计算机导论&#39;) and Sno in</span><br><span class="line">(select Sno from Student where Sex&#x3D;&#39;男&#39;)</span><br><span class="line">#学号选择in是因为有多个学号</span><br></pre></td></tr></table></figure>
+<h4 id="总结">总结</h4>
+<p>1.多个主码的设置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">primary key(属性名,...),</span><br></pre></td></tr></table></figure>
-
 <p>2.多个表的连接</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select 属性名,... from 主要参与比较的表 </span><br><span class="line">inner join 参与比较的表2 on 主要参与比较的表.属性&#x3D;参与比较的表2.属性</span><br><span class="line">inner join 参与比较的表3 on 主要参与比较的表.属性&#x3D;参与比较的表2.属性</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
 
     </div>
 

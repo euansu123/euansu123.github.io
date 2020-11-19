@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="随机数的产生在基于密码学的网络安全和算法协议许多地方用到了二进制随机数，催使了随机数的产生。主要有以下应用:  密钥分发和相互认证。通信的双方通过交换信息共同合作分发密钥和&#x2F;或互相认证对方。 会话密钥产生。对称加密需要产生一个短时间使用的秘密密钥。 RSA公钥加密算法中密钥的产生。 用于对称流密码加密的位流的产生。">
+  <meta name="description" content="随机数的产生 在基于密码学的网络安全和算法协议许多地方用到了二进制随机数，催使了随机数的产生。主要有以下应用:  密钥分发和相互认证。通信的双方通过交换信息共同合作分发密钥和&#x2F;或互相认证对方。 会话密钥产生。对称加密需要产生一个短时间使用的秘密密钥。 RSA公钥加密算法中密钥的产生。 用于对称流密码加密的位流的产生。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="信息安全—随机数的产生和流密码以及RC4">
 <meta property="og:url" content="http://euansu123.github.io/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="随机数的产生在基于密码学的网络安全和算法协议许多地方用到了二进制随机数，催使了随机数的产生。主要有以下应用:  密钥分发和相互认证。通信的双方通过交换信息共同合作分发密钥和&#x2F;或互相认证对方。 会话密钥产生。对称加密需要产生一个短时间使用的秘密密钥。 RSA公钥加密算法中密钥的产生。 用于对称流密码加密的位流的产生。">
+<meta property="og:description" content="随机数的产生 在基于密码学的网络安全和算法协议许多地方用到了二进制随机数，催使了随机数的产生。主要有以下应用:  密钥分发和相互认证。通信的双方通过交换信息共同合作分发密钥和&#x2F;或互相认证对方。 会话密钥产生。对称加密需要产生一个短时间使用的秘密密钥。 RSA公钥加密算法中密钥的产生。 用于对称流密码加密的位流的产生。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%901.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%902.png">
@@ -183,7 +183,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#随机数的产生"><span class="nav-number">1.</span> <span class="nav-text">随机数的产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流密码和RC4"><span class="nav-number">2.</span> <span class="nav-text">流密码和RC4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流密码"><span class="nav-number">2.1.</span> <span class="nav-text">流密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RC4算法"><span class="nav-number">2.2.</span> <span class="nav-text">RC4算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组密码应用场景"><span class="nav-number">2.3.</span> <span class="nav-text">分组密码应用场景</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#随机数的产生"><span class="nav-number">1.</span> <span class="nav-text">随机数的产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流密码和rc4"><span class="nav-number">2.</span> <span class="nav-text">流密码和RC4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#流密码"><span class="nav-number">2.1.</span> <span class="nav-text">流密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rc4算法"><span class="nav-number">2.2.</span> <span class="nav-text">RC4算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组密码应用场景"><span class="nav-number">2.3.</span> <span class="nav-text">分组密码应用场景</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -198,14 +198,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -304,7 +304,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="随机数的产生"><a href="#随机数的产生" class="headerlink" title="随机数的产生"></a>随机数的产生</h2><p>在基于密码学的网络安全和算法协议许多地方用到了二进制随机数，催使了随机数的产生。主要有以下应用:</p>
+        <h2 id="随机数的产生">随机数的产生</h2>
+<p>在基于密码学的网络安全和算法协议许多地方用到了二进制随机数，催使了随机数的产生。主要有以下应用:</p>
 <ul>
 <li>密钥分发和相互认证。通信的双方通过交换信息共同合作分发密钥和/或互相认证对方。</li>
 <li>会话密钥产生。对称加密需要产生一个短时间使用的秘密密钥。</li>
@@ -312,26 +313,24 @@
 <li>用于对称流密码加密的位流的产生。</li>
 </ul>
 <a id="more"></a>
-
 <p>这些应用对随机数序列提出了两个不同且未必兼容的要求：随机性和不可预测性。</p>
-<ol>
-<li>随机性：一般认为随机序列应有良好的统计特性，主要有以下两个评价标准：<ul>
+<ol type="1">
+<li>随机性：一般认为随机序列应有良好的统计特性，主要有以下两个评价标准：
+<ul>
 <li>分布均匀性：序列中的位分布应该是均匀的，即0和1出现的频率大约相等。</li>
 <li>独立性：序列中任何子序列不能由其他子序列推出。</li>
-</ul>
-</li>
+</ul></li>
 <li>不可预测性：对随机数的要求不能仅仅是序列统计随机，更要求随机数序列不可预测。</li>
 </ol>
 <p>随机数的生成主要有三种方法，分别是真随机数发生器TRNG、伪随机数发生器PRNG、伪随机函数PRF。</p>
-<img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成1.png" style="zoom:33%;">
-
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成1.png" style="zoom:33%;"></p>
 <p>随机数生成方式的比较。</p>
-<img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成2.png" style="zoom:50%;">
-
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成2.png" style="zoom:50%;"></p>
 <p>相比于真随机数的生成，伪随机生成具有一定的规律。伪随机数的生成由种子和算法决定，知道种子和算法可以重现整个位流。伪随机生成的种子同样要求具有随机性和不可预测性。</p>
-<h2 id="流密码和RC4"><a href="#流密码和RC4" class="headerlink" title="流密码和RC4"></a>流密码和RC4</h2><h3 id="流密码"><a href="#流密码" class="headerlink" title="流密码"></a>流密码</h3><p>流密码来源于“一次一密”，典型的流密码一次加密一个字节的明文(也可根据需要设计为其它字节大小)。</p>
-<img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成3.png" style="zoom:50%;">
-
+<h2 id="流密码和rc4">流密码和RC4</h2>
+<h3 id="流密码">流密码</h3>
+<p>流密码来源于“一次一密”，典型的流密码一次加密一个字节的明文(也可根据需要设计为其它字节大小)。</p>
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成3.png" style="zoom:50%;"></p>
 <p><strong>流密码的原理：将明文字节流输入到伪随机发生器，伪随机发生器会产生密钥字节流，与明文异或后得到密文。</strong></p>
 <p>流密码设计的主要考虑因素：</p>
 <ul>
@@ -340,9 +339,9 @@
 <li>伪随机数发生器的输出受输入密钥K的调节。—为了防止穷举攻击，密钥应该足够长。</li>
 </ul>
 <p><font color="red">流密码的关键在于密钥流生成器。</font></p>
-<img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成4.png" style="zoom: 67%;">
-
-<h3 id="RC4算法"><a href="#RC4算法" class="headerlink" title="RC4算法"></a>RC4算法</h3><p>RC4算法是Ron Rivest为RSA公司在1987年设计的一种流密码。</p>
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成4.png" style="zoom: 67%;"></p>
+<h3 id="rc4算法">RC4算法</h3>
+<p>RC4算法是Ron Rivest为RSA公司在1987年设计的一种流密码。</p>
 <ul>
 <li>RC4算法以随即置换作为基础。</li>
 <li>分析该密码的周期很可能大于10的100次方。</li>
@@ -354,23 +353,19 @@
 <p>RC4算法的流程：初始化状态向量S、产生密钥流、加密。</p>
 <ul>
 <li><p><strong>初始化状态向量S</strong>：RC4算法用1-256字节的可变长度密钥初始化化一个256字节的状态向量S，S中的元素从S[0]-S[255]，从始至终置换后的S包含从0-255的所有8位数。故状态向量S在一开始是按照升序从0-255排列。</p>
-<img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成5.png" style="zoom:50%;">
-
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成5.png" style="zoom:50%;"></p>
 <p>同时建立一个临时向量T，用户输入一个初始密钥K，将K的值赋给T，有以下三种情况：</p>
-<img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成7.png" style="zoom:50%;">
-
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成7.png" style="zoom:50%;"></p>
 <p>然后用临时向量T产生状态向量S的初始置换，将状态向量S中的数据顺序打乱。</p>
-<img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成6.png" style="zoom: 50%;">
-
-<p>对于状态向量S的操作仅仅是交换，所以唯一改变的就是S中数的排列，状态向量S仍然包含所有0-255的元素。</p>
-</li>
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成6.png" style="zoom: 50%;"></p>
+<p>对于状态向量S的操作仅仅是交换，所以唯一改变的就是S中数的排列，状态向量S仍然包含所有0-255的元素。</p></li>
 <li><p>产生密钥流：状态向量S一旦完成初始化，输入密钥就不再被使用。密钥流生成过程是：从S[0]到S[255]，对每个S[i]，根据S的当前配置，将S[i]与S中另一字节置换，当S[255]完成置换后，操作继续重复从S[0]开始。</p>
-<img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成8.png" style="zoom:50%;">
-</li>
-<li><p>加密：将明文与密钥流进行异或。</p>
-</li>
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成8.png" style="zoom:50%;"></p></li>
+<li><p>加密：将明文与密钥流进行异或。</p></li>
 </ul>
-<h3 id="分组密码应用场景"><a href="#分组密码应用场景" class="headerlink" title="分组密码应用场景"></a>分组密码应用场景</h3><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成9.png" style="zoom:50%;">
+<h3 id="分组密码应用场景">分组密码应用场景</h3>
+<p><img src="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/随机数生成9.png" style="zoom:50%;"></p>
+
     </div>
 
     

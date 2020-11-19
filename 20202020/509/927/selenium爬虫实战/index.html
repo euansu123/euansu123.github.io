@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="Selenium简介selenium是一个自动化测试工具，利用它可以驱动浏览器执行特定的动作，例如：点击、下拉等操作，同时还可以获取浏览器当前呈现的页面的源代码，做到可见既可爬。对于一些js动态渲染的页面来说，此种爬取方式非常有效。">
+  <meta name="description" content="Selenium简介 selenium是一个自动化测试工具，利用它可以驱动浏览器执行特定的动作，例如：点击、下拉等操作，同时还可以获取浏览器当前呈现的页面的源代码，做到可见既可爬。对于一些js动态渲染的页面来说，此种爬取方式非常有效。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="selenium爬虫实战">
 <meta property="og:url" content="http://euansu123.github.io/20202020/509/927/selenium%E7%88%AC%E8%99%AB%E5%AE%9E%E6%88%98/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="Selenium简介selenium是一个自动化测试工具，利用它可以驱动浏览器执行特定的动作，例如：点击、下拉等操作，同时还可以获取浏览器当前呈现的页面的源代码，做到可见既可爬。对于一些js动态渲染的页面来说，此种爬取方式非常有效。">
+<meta property="og:description" content="Selenium简介 selenium是一个自动化测试工具，利用它可以驱动浏览器执行特定的动作，例如：点击、下拉等操作，同时还可以获取浏览器当前呈现的页面的源代码，做到可见既可爬。对于一些js动态渲染的页面来说，此种爬取方式非常有效。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/509/927/selenium%E7%88%AC%E8%99%AB%E5%AE%9E%E6%88%98/chromedriver.png">
 <meta property="article:published_time" content="2020-09-27T11:03:24.000Z">
@@ -175,7 +175,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Selenium简介"><span class="nav-number">1.</span> <span class="nav-text">Selenium简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selenium使用准备"><span class="nav-number">2.</span> <span class="nav-text">Selenium使用准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Selenium库"><span class="nav-number">2.1.</span> <span class="nav-text">安装Selenium库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Google浏览器并且配置驱动"><span class="nav-number">2.2.</span> <span class="nav-text">安装Google浏览器并且配置驱动</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selenium爬取网易云音乐评论"><span class="nav-number">3.</span> <span class="nav-text">Selenium爬取网易云音乐评论</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#selenium简介"><span class="nav-number">1.</span> <span class="nav-text">Selenium简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#selenium使用准备"><span class="nav-number">2.</span> <span class="nav-text">Selenium使用准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装selenium库"><span class="nav-number">2.1.</span> <span class="nav-text">安装Selenium库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装google浏览器并且配置驱动"><span class="nav-number">2.2.</span> <span class="nav-text">安装Google浏览器并且配置驱动</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#selenium爬取网易云音乐评论"><span class="nav-number">3.</span> <span class="nav-text">Selenium爬取网易云音乐评论</span></a></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -190,14 +190,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -296,20 +296,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="Selenium简介"><a href="#Selenium简介" class="headerlink" title="Selenium简介"></a>Selenium简介</h3><p>selenium是一个自动化测试工具，利用它可以驱动浏览器执行特定的动作，例如：点击、下拉等操作，同时还可以获取浏览器当前呈现的页面的源代码，做到可见既可爬。对于一些js动态渲染的页面来说，此种爬取方式非常有效。</p>
+        <h3 id="selenium简介">Selenium简介</h3>
+<p>selenium是一个自动化测试工具，利用它可以驱动浏览器执行特定的动作，例如：点击、下拉等操作，同时还可以获取浏览器当前呈现的页面的源代码，做到可见既可爬。对于一些js动态渲染的页面来说，此种爬取方式非常有效。</p>
 <a id="more"></a>
-
-<h3 id="Selenium使用准备"><a href="#Selenium使用准备" class="headerlink" title="Selenium使用准备"></a>Selenium使用准备</h3><h4 id="安装Selenium库"><a href="#安装Selenium库" class="headerlink" title="安装Selenium库"></a>安装Selenium库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selenium</span><br></pre></td></tr></table></figure>
-
+<h3 id="selenium使用准备">Selenium使用准备</h3>
+<h4 id="安装selenium库">安装Selenium库</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selenium</span><br></pre></td></tr></table></figure>
 <p>安装完成后，使用import selenium验证。</p>
-<h4 id="安装Google浏览器并且配置驱动"><a href="#安装Google浏览器并且配置驱动" class="headerlink" title="安装Google浏览器并且配置驱动"></a>安装Google浏览器并且配置驱动</h4><p>点击Google菜单 帮助 -&gt; 关于Google Chrome -&gt; 查看版本号 （版本 71.0.3578.98（正式版本） （64 位））。</p>
-<p>Chrome Driver下载地址：<a href="https://chromedriver.storage.googleapis.com/index.html" target="_blank" rel="noopener">https://chromedriver.storage.googleapis.com/index.html</a></p>
+<h4 id="安装google浏览器并且配置驱动">安装Google浏览器并且配置驱动</h4>
+<p>点击Google菜单 帮助 -&gt; 关于Google Chrome -&gt; 查看版本号 （版本 71.0.3578.98（正式版本） （64 位））。</p>
+<p>Chrome Driver下载地址：https://chromedriver.storage.googleapis.com/index.html</p>
 <p>Chrome Driver下载成功后放到Python的script目录下，打开CMD输入命令：chromedriver验证是否安装成功。</p>
-<p><img src="/20202020/509/927/selenium%E7%88%AC%E8%99%AB%E5%AE%9E%E6%88%98/chromedriver.png" alt></p>
+<p><img src="/20202020/509/927/selenium%E7%88%AC%E8%99%AB%E5%AE%9E%E6%88%98/chromedriver.png"></p>
 <p>至此，就可以开始使用Selenium开始新的爬虫之旅了！</p>
-<h3 id="Selenium爬取网易云音乐评论"><a href="#Selenium爬取网易云音乐评论" class="headerlink" title="Selenium爬取网易云音乐评论"></a>Selenium爬取网易云音乐评论</h3><p>这里以爬虫网易云音乐评论示例Selenium的使用。</p>
+<h3 id="selenium爬取网易云音乐评论">Selenium爬取网易云音乐评论</h3>
+<p>这里以爬虫网易云音乐评论示例Selenium的使用。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 目标歌曲：https://music.163.com/#/song?id=461525011</span></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support <span class="keyword">import</span> expected_conditions <span class="keyword">as</span> EC <span class="comment"># 验证网页元素是否存在，提供了多种验证方式</span></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By <span class="comment"># selenium的内置Class用于定义元素怒</span></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.support.ui <span class="keyword">import</span> WebDriverWait <span class="comment"># 延时等待-显式等待</span></span><br><span class="line"><span class="keyword">from</span> selenium.common.exceptions <span class="keyword">import</span> NoSuchElementException <span class="comment"># 异常处理-元素不存在</span></span><br><span class="line"></span><br><span class="line">browser = webdriver.Chrome()</span><br><span class="line">browser.maximize_window() <span class="comment"># 窗口最大化</span></span><br><span class="line">browser.get(<span class="string">'https://music.163.com/#/song?id=461525011'</span>)</span><br><span class="line">browser.switch_to.frame(<span class="string">'contentFrame'</span>) <span class="comment"># 切换进入框架</span></span><br><span class="line">time.sleep(<span class="number">5</span>)</span><br><span class="line">browser.execute_script(<span class="string">'window.scrollTo(0,document.body.scrollHeight)'</span>)</span><br><span class="line">coms = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    next_page = browser.find_element_by_css_selector(<span class="string">'.znxt'</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        WebDriverWait(browser, <span class="number">10</span>).until(EC.presence_of_element_located((By.XPATH, <span class="string">"//a[@data-type='reply']"</span>)))</span><br><span class="line">        comments = browser.find_elements_by_css_selector(<span class="string">'.itm'</span>)</span><br><span class="line">        <span class="keyword">for</span> comment <span class="keyword">in</span> comments:</span><br><span class="line">            tmp = comment.text</span><br><span class="line">            new_comment = tmp.split(<span class="string">'\n'</span>)</span><br><span class="line">            print(new_comment[<span class="number">0</span>])</span><br><span class="line">            coms.append(new_comment[<span class="number">0</span>])</span><br><span class="line">    <span class="comment"># 异常处理</span></span><br><span class="line">    <span class="keyword">except</span> NoSuchElementException:</span><br><span class="line">        print(<span class="string">'No Element'</span>)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        next_page.click()</span><br><span class="line">browser.close()</span><br><span class="line"><span class="comment"># 存储文件</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> coms:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'网易云音乐评论.txt'</span>,<span class="string">'a'</span>,encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(i)</span><br><span class="line">        f.write(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
-
 
     </div>
 

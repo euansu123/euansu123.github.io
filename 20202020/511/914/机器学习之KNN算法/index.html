@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="机器学习之KNN算法  KNN算法的工作原理是：存在一个样本数据集合，也称训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的新数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就是k-近邻算法中k的出处，通常k是不大于2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之KNN算法">
+<meta property="og:url" content="http://euansu123.github.io/20202020/511/914/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="机器学习之KNN算法  KNN算法的工作原理是：存在一个样本数据集合，也称训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的新数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就是k-近邻算法中k的出处，通常k是不大于2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%80%E8%88%AC%E5%AE%9E%E7%8E%B0.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/KNN%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE%E4%B9%8B%E5%8F%AF%E8%A7%86%E5%8C%96.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/sklearn%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8F%AF%E8%A7%86%E5%8C%96.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/argsort%E5%AF%B9%E6%95%B0%E6%8D%AE%E7%B4%A2%E5%BC%95%E6%8E%92%E5%BA%8F.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%8A%95%E7%A5%A8%E6%B1%82%E5%BE%97%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/knn%E5%B0%81%E8%A3%85%E5%87%BD%E6%95%B0.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/sklearn%E7%9A%84knn%E8%BF%90%E8%A1%8C%E5%AE%9E%E4%BE%8B.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E5%88%A4%E6%96%AD%E6%A8%A1%E5%9E%8B%E5%A5%BD%E5%9D%8F.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E5%88%A4%E6%96%ADknn%E6%A8%A1%E5%9E%8B%E6%80%A7%E8%83%BD.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/sklern%E5%88%A4%E6%96%ADknn%E6%80%A7%E8%83%BD.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E5%B0%81%E8%A3%85%E7%9A%84%E5%88%86%E7%B1%BB%E5%87%86%E7%A1%AE%E5%BA%A6%E5%88%A4%E6%96%AD.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/sklearn%E5%BA%93%E7%9A%84%E5%88%86%E7%B1%BB%E5%87%86%E7%A1%AE%E5%BA%A6%E5%88%A4%E6%96%AD.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A5%BD%E7%9A%84%E8%B6%85%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/KNN%E8%B7%9D%E7%A6%BB%E7%9A%84%E6%9D%83%E9%87%8D.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/KNN%E5%AF%BB%E6%89%BE%E6%9C%80%E5%A5%BD%E7%9A%84%E8%B7%9D%E7%A6%BB%E6%9D%83%E9%87%8D.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%9B%BC%E5%93%88%E9%A1%BF%E8%B7%9D%E7%A6%BB.jpg">
+<meta property="og:image" content="http://img.euansu.cn/static/images/KNN%E7%AE%97%E6%B3%95%E5%AF%BB%E6%89%BE%E9%97%B5%E5%8F%AF%E5%A4%AB%E6%96%AF%E5%9F%BA%E8%B7%9D%E7%A6%BB.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/KNN%E7%AE%97%E6%B3%95%E7%9A%84%E7%BD%91%E6%A0%BC%E6%90%9C%E7%B4%A2.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/KNN%E7%BD%91%E6%A0%BC%E6%90%9C%E7%B4%A2%E7%9A%84%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%95%B0%E6%8D%AE%E5%BD%92%E4%B8%80%E5%8C%96_%E6%9C%80%E5%80%BC%E5%BD%92%E4%B8%80%E5%8C%96.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%95%B0%E6%8D%AE%E5%BD%92%E4%B8%80%E5%8C%96_%E5%9D%87%E5%80%BC%E6%96%B9%E5%B7%AE%E5%BD%92%E4%B8%80%E5%8C%96.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%95%B0%E6%8D%AE%E5%BD%92%E4%B8%80%E5%8C%96%E7%9A%84%E4%BD%BF%E7%94%A8.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E5%BD%92%E4%B8%80%E5%8C%96.png">
+<meta property="article:published_time" content="2020-11-14T07:32:33.000Z">
+<meta property="article:modified_time" content="2020-11-19T08:32:29.913Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.euansu.cn/static/images/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%80%E8%88%AC%E5%AE%9E%E7%8E%B0.png">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/511/914/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>机器学习之KNN算法 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习之knn算法"><span class="nav-number">1.</span> <span class="nav-text">机器学习之KNN算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习算法的一般流程"><span class="nav-number">2.</span> <span class="nav-text">机器学习算法的一般流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个knn算法实例"><span class="nav-number">3.</span> <span class="nav-text">一个KNN算法实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断knn算法的性能"><span class="nav-number">4.</span> <span class="nav-text">判断KNN算法的性能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判断knn算法的分类准确度"><span class="nav-number">5.</span> <span class="nav-text">判断KNN算法的分类准确度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#超参数和模型参数"><span class="nav-number">6.</span> <span class="nav-text">超参数和模型参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#超参数和模型参数的定义"><span class="nav-number">6.1.</span> <span class="nav-text">超参数和模型参数的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定最好的超参数"><span class="nav-number">6.2.</span> <span class="nav-text">确定最好的超参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#寻找最好的k"><span class="nav-number">6.2.1.</span> <span class="nav-text">寻找最好的k</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寻找最好的距离权重"><span class="nav-number">6.2.2.</span> <span class="nav-text">寻找最好的距离权重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#机器学习中的距离"><span class="nav-number">6.2.3.</span> <span class="nav-text">机器学习中的距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寻找闵可夫斯基距离"><span class="nav-number">6.2.4.</span> <span class="nav-text">寻找闵可夫斯基距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网格搜索"><span class="nav-number">6.2.5.</span> <span class="nav-text">网格搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据归一化"><span class="nav-number">7.</span> <span class="nav-text">数据归一化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最值归一化"><span class="nav-number">7.1.</span> <span class="nav-text">最值归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均值方差归一化"><span class="nav-number">7.2.</span> <span class="nav-text">均值方差归一化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归一化的使用"><span class="nav-number">7.3.</span> <span class="nav-text">归一化的使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整实现"><span class="nav-number">8.</span> <span class="nav-text">完整实现</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">人心有取舍，但求知行合一。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/511/914/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习之KNN算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-14 15:32:33" itemprop="dateCreated datePublished" datetime="2020-11-14T15:32:33+08:00">2020-11-14</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-19 16:32:29" itemprop="dateModified" datetime="2020-11-19T16:32:29+08:00">2020-11-19</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/511/914/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/511/914/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="机器学习之knn算法">机器学习之KNN算法</h1>
+<blockquote>
+<p>KNN算法的工作原理是：存在一个样本数据集合，也称训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的新数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前<em>k</em>个最相似的数据，这就是<em>k</em>-近邻算法中<em>k</em>的出处，通常<em>k</em>是不大于20的整数。</p>
+<p>最后，选择<em>k</em>个最相似数据中出现次数最多的分类，作为新数据的分类。</p>
+<p>KNN算法的本质：如果一个样本在特征空间中的k个最相似(即特征空间中最邻近)的样本中的大多数属于某一个类别，则该样本也属于这个类别。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="机器学习算法的一般流程">机器学习算法的一般流程</h1>
+<ol type="1">
+<li>收集数据：可以使用任何方法。</li>
+<li>准备数据：距离计算所需要的数值，最好是结构化的数据格式。</li>
+<li>分析数据：可以使用任何分析方法。</li>
+<li>训练算法：此步骤不适用于KNN算法。</li>
+<li>测试算法：计算错误率。</li>
+<li>使用算法：首先需要输入样本数据和结构化的输出结果，然后运行KNN算法判定输入数据分别属于哪个分类，最后应用对计算出的分类执行后续的处理。</li>
+</ol>
+<img src="http://img.euansu.cn/static/images/机器学习算法的一般实现.png">
+<h1 id="一个knn算法实例">一个KNN算法实例</h1>
+<p>假设现在设计一个程序判断点的归属，如下，我么给出了一个简单的特征值及与其一一对应的标签，同时我们需要判断predict所属的类别是0还是1，通过KNN算法计算与其最近点的距离，我们能够得到一个结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 特征</span></span><br><span class="line">raw_data_x= [[<span class="number">3.393533211</span>,<span class="number">2.331273381</span>],</span><br><span class="line">             [<span class="number">2.110073483</span>,<span class="number">1.781539638</span>],</span><br><span class="line">             [<span class="number">1.343808831</span>,<span class="number">3.368360954</span>],</span><br><span class="line">             [<span class="number">3.582294042</span>,<span class="number">4.679179110</span>],</span><br><span class="line">             [<span class="number">2.280362439</span>,<span class="number">2.866990263</span>],</span><br><span class="line">             [<span class="number">7.423436942</span>,<span class="number">4.696522875</span>],</span><br><span class="line">             [<span class="number">5.745051997</span>,<span class="number">3.533989803</span>],</span><br><span class="line">             [<span class="number">9.172168622</span>,<span class="number">2.511101045</span>],</span><br><span class="line">             [<span class="number">7.792783481</span>,<span class="number">3.424088941</span>],</span><br><span class="line">             [<span class="number">7.939820817</span>,<span class="number">0.791637231</span>]</span><br><span class="line">            ]</span><br><span class="line"><span class="comment"># 所属类别</span></span><br><span class="line">raw_data_y = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要预测的点</span></span><br><span class="line">predict = [<span class="number">8.093607318</span>,<span class="number">3.365731514</span>]</span><br></pre></td></tr></table></figure>
+<p>拿到数据之后，我们首先分析以下数据，借助matplotlib.pyplot能够将这些点可视化的展示出来，在数据展示之前我们还需要将这些数据转换为numpy array的形式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">X_train = np.array(raw_data_x)</span><br><span class="line">y_train = np.array(raw_data_y)</span><br><span class="line">x = np.array(predict)</span><br></pre></td></tr></table></figure>
+<p>数据可视化展示</p>
+<img src="http://img.euansu.cn/static/images/KNN分析数据之可视化.png">
+<p>上图中蓝色的点也即我们想要预测分类的数据，通过观察我们已经能够得到蓝色点的属性应该是1，这是因为样本值较少，且分布较为分散，我们可以较为直观的进行分类，如果数据较多，就很难做到通过观察进行分类。</p>
+<img src="http://img.euansu.cn/static/images/sklearn鸢尾花数据集可视化.png">
+<p>如上，我们从sklearn库中导入的鸢尾花数据集，三种颜色代表不同的鸢尾花，这个时候我们就很难通过观察对想要预测的数据进行分类，因此可视化只是展示，不能直接通过可视化得到结果。</p>
+<p>接下来所要做的就是计算样本点与所要预测点的距离。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt <span class="comment">#开平方</span></span><br><span class="line">distance = []</span><br><span class="line"><span class="comment"># 求各点与要预测的点的距离</span></span><br><span class="line"><span class="keyword">for</span> x_train <span class="keyword">in</span> X_train:</span><br><span class="line">    d = sqrt(np.sum((x_train - x)**<span class="number">2</span>))</span><br><span class="line">    distance.append(d)</span><br></pre></td></tr></table></figure>
+<p>KNN算法的本质是拿到最邻近的样本点，因为我们需要对样本点排序，但不能够直接使用sort，这样会影响到与标签的对应，这里使用argsort()函数，只是按照索引进行排序。</p>
+<img src="http://img.euansu.cn/static/images/argsort对数据索引排序.png">
+<p>接下来就是设定想要对比的样本点的个数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设定要取的k值</span></span><br><span class="line">k = <span class="number">6</span></span><br><span class="line">topK_y = y_train[nearest[:k]] <span class="comment"># 获取到k个值对应分类属性</span></span><br></pre></td></tr></table></figure>
+<p>通过上面语句，我们能够拿到与预测点距离最近的6个点的分类属性，接下来需要对分类属性进行比较，那种分类属性更多，所预测点就属于该分类属性。</p>
+<img src="http://img.euansu.cn/static/images/投票求得结果.png">
+<p>最后得到的分类属性是1，与我们观察到的结果也是一致的。</p>
+<p>最后将分类的过程封装成函数在Pycharm中运行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt <span class="comment">#开平方</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter <span class="comment"># Counter可以对分类做加和</span></span><br><span class="line"><span class="comment"># 样本点（实例）</span></span><br><span class="line">raw_data_x= [[<span class="number">3.393533211</span>,<span class="number">2.331273381</span>],</span><br><span class="line">             [<span class="number">2.110073483</span>,<span class="number">1.781539638</span>],</span><br><span class="line">             [<span class="number">1.343808831</span>,<span class="number">3.368360954</span>],</span><br><span class="line">             [<span class="number">3.582294042</span>,<span class="number">4.679179110</span>],</span><br><span class="line">             [<span class="number">2.280362439</span>,<span class="number">2.866990263</span>],</span><br><span class="line">             [<span class="number">7.423436942</span>,<span class="number">4.696522875</span>],</span><br><span class="line">             [<span class="number">5.745051997</span>,<span class="number">3.533989803</span>],</span><br><span class="line">             [<span class="number">9.172168622</span>,<span class="number">2.511101045</span>],</span><br><span class="line">             [<span class="number">7.792783481</span>,<span class="number">3.424088941</span>],</span><br><span class="line">             [<span class="number">7.939820817</span>,<span class="number">0.791637231</span>]</span><br><span class="line">            ]</span><br><span class="line"><span class="comment"># 所属类别</span></span><br><span class="line">raw_data_y = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">X_train = np.array(raw_data_x)</span><br><span class="line">y_train = np.array(raw_data_y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 要预测的点</span></span><br><span class="line">x = np.array([<span class="number">8.093607318</span>,<span class="number">3.365731514</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">knn</span><span class="params">(X_train,y_train,k)</span>:</span></span><br><span class="line">    distance = []</span><br><span class="line">    <span class="comment"># 求各点与要预测的点的距离</span></span><br><span class="line">    <span class="keyword">for</span> x_train <span class="keyword">in</span> X_train:</span><br><span class="line">        d = sqrt(np.sum((x_train - x)**<span class="number">2</span>))</span><br><span class="line">        distance.append(d)</span><br><span class="line">    nearest = np.argsort(distance)</span><br><span class="line">    topK_y = y_train[nearest[:k]] <span class="comment"># 获取到k个值对应分类属性</span></span><br><span class="line">    votes = Counter(topK_y) <span class="comment"># 分类加和</span></span><br><span class="line">    <span class="comment"># votes.most_common(1)[0][0] # 进行投票，most_common 返回排序后的前n个列表</span></span><br><span class="line">    <span class="keyword">return</span> votes.most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">result = knn(X_train,y_train,<span class="number">6</span>)</span><br><span class="line">print(<span class="string">f"最终的预测分类结果是<span class="subst">&#123;result&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/knn封装函数.png">
+<p>如上是我们手写的KNN算法，Python的sklearn提供了knn的方法可供我们直接调用，实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier <span class="comment"># 调用scikit-learn深度学习库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 样本点（实例）</span></span><br><span class="line">raw_data_x= [[<span class="number">3.393533211</span>,<span class="number">2.331273381</span>],</span><br><span class="line">             [<span class="number">2.110073483</span>,<span class="number">1.781539638</span>],</span><br><span class="line">             [<span class="number">1.343808831</span>,<span class="number">3.368360954</span>],</span><br><span class="line">             [<span class="number">3.582294042</span>,<span class="number">4.679179110</span>],</span><br><span class="line">             [<span class="number">2.280362439</span>,<span class="number">2.866990263</span>],</span><br><span class="line">             [<span class="number">7.423436942</span>,<span class="number">4.696522875</span>],</span><br><span class="line">             [<span class="number">5.745051997</span>,<span class="number">3.533989803</span>],</span><br><span class="line">             [<span class="number">9.172168622</span>,<span class="number">2.511101045</span>],</span><br><span class="line">             [<span class="number">7.792783481</span>,<span class="number">3.424088941</span>],</span><br><span class="line">             [<span class="number">7.939820817</span>,<span class="number">0.791637231</span>]</span><br><span class="line">            ]</span><br><span class="line"><span class="comment"># 所属类别</span></span><br><span class="line">raw_data_y = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">X_train = np.array(raw_data_x)</span><br><span class="line">y_train = np.array(raw_data_y)</span><br><span class="line">kNN_classifier = KNeighborsClassifier(n_neighbors=<span class="number">6</span>) <span class="comment"># 首先传k</span></span><br><span class="line">kNN_classifier.fit(X_train,y_train) <span class="comment"># 喂数据</span></span><br><span class="line">x = np.array([<span class="number">8.093607318</span>,<span class="number">3.365731514</span>])</span><br><span class="line">x_to_predict = x.reshape((<span class="number">1</span>,<span class="number">-1</span>))</span><br><span class="line">y_predict = kNN_classifier.predict(x_to_predict)</span><br><span class="line">print(<span class="string">f"最终的预测分类为：<span class="subst">&#123;y_predict[<span class="number">0</span>]&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<img src="http://img.euansu.cn/static/images/sklearn的knn运行实例.png">
+<p>最后将我们所写的KNN算法封装成类。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sklearn_KNN</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,k)</span>:</span></span><br><span class="line">        <span class="keyword">assert</span> k&gt;=<span class="number">1</span>,<span class="string">'k must be valid'</span></span><br><span class="line">        self.k = k</span><br><span class="line">        self._X_train = <span class="literal">None</span></span><br><span class="line">        self._y_train = <span class="literal">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self,X_train,y_train)</span>:</span></span><br><span class="line">        <span class="comment"># 这里的assert用来告诉程序出错的位置以及原因</span></span><br><span class="line">        <span class="keyword">assert</span> self.k &lt;= X_train.shape[<span class="number">0</span>], <span class="string">'k必须是有效的'</span></span><br><span class="line">        <span class="keyword">assert</span> y_train.shape[<span class="number">0</span>] == X_train.shape[<span class="number">0</span>], <span class="string">'y_train的数量应该和样本点X_train的数量相同'</span></span><br><span class="line">        self._X_train = X_train</span><br><span class="line">        self._y_train = y_train</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self,X_predict)</span>:</span></span><br><span class="line">        <span class="comment"># 数据必须是二维</span></span><br><span class="line">        <span class="keyword">assert</span> X_predict.ndim == <span class="number">2</span>,<span class="string">'要预测的数据必须是二维数据'</span></span><br><span class="line">        <span class="keyword">assert</span> X_predict.shape[<span class="number">1</span>] == self._X_train.shape[<span class="number">1</span>], <span class="string">'要预测的数值需要和样本点数值的格式一致'</span></span><br><span class="line"></span><br><span class="line">        y_predict = [self._predict(x) <span class="keyword">for</span> x <span class="keyword">in</span> X_predict]</span><br><span class="line">        <span class="keyword">return</span> np.array(y_predict)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_predict</span><span class="params">(self,x)</span>:</span></span><br><span class="line"></span><br><span class="line">        distance = [sqrt(np.sum((x_train - x) ** <span class="number">2</span>)) <span class="keyword">for</span> x_train <span class="keyword">in</span> self._X_train]  <span class="comment"># 获取也挣点与待测点的距离</span></span><br><span class="line">        nearest = np.argsort(distance)  <span class="comment"># 按照距离进行排序，这里只是获取这些排序的索引</span></span><br><span class="line">        topK_y = self._y_train[nearest[:self.k]]  <span class="comment"># 获取前k个值</span></span><br><span class="line">        votes = Counter(topK_y)  <span class="comment"># 分类加和</span></span><br><span class="line">        <span class="keyword">return</span> votes.most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h1 id="判断knn算法的性能">判断KNN算法的性能</h1>
+<p>我们实现了机器学习的模型，需要对性能进行判断，可以是准确率可以是运行速度。在这里我们将训练数据分成两部分，其中的一大用来“喂”给模型，剩下的小部分则是用来判断模型的好坏。</p>
+<img src="http://img.euansu.cn/static/images/训练数据判断模型好坏.png">
+<p>首先需要定义一个函数将训练数据分成训练数据和测试数据，函数如下所示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_test_split</span><span class="params">(X,y,test_radio=<span class="number">0.2</span>,seed=None)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> seed:</span><br><span class="line">        np.random.seed(seed)</span><br><span class="line">    temparray = np.random.permutation(len(X)) <span class="comment"># 分割数据</span></span><br><span class="line">    test_num = int(test_radio * len(X)) <span class="comment">#拿到测试数据的大小</span></span><br><span class="line">    test_index = temparray[:test_num]</span><br><span class="line">    train_index = temparray[test_num:]</span><br><span class="line">    X_train = X[train_index]</span><br><span class="line">    y_train = y[train_index]</span><br><span class="line">    X_test = X[test_index]</span><br><span class="line">    y_test = y[test_index]</span><br><span class="line">    <span class="keyword">return</span> X_train,y_train,X_test,y_test</span><br></pre></td></tr></table></figure>
+<p>在写KNN算法实例的时候，我们已经定义了一个自己的KNN类，可以直接调用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">knn = Sklearn_KNN(<span class="number">5</span>)	<span class="comment"># 实例一个knn对象</span></span><br><span class="line">X_train,y_train,X_test,y_test = train_test_split(iris.data,iris.target)	<span class="comment"># 分割数据</span></span><br><span class="line">knn.fit(X_train,y_train)	<span class="comment"># 给模型“喂”数据</span></span><br><span class="line">y_predict = knn.predict(X_test)	<span class="comment"># 输入测试数据，计算得到的预测结果</span></span><br></pre></td></tr></table></figure>
+<p>我们比较机器学习的性能通过对比得到的预测结果，与原来留下的测试数据进行比对，其中的准确率是模型好坏的判断依据。</p>
+<img src="http://img.euansu.cn/static/images/判断knn模型性能.png">
+<p>同样的sklearn库自带了实现了对于模型性能的检测</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line">X_train,X_test,y_train,y_test = train_test_split(iris.data,iris.target)</span><br><span class="line">knn = Sklearn_KNN(<span class="number">5</span>)</span><br><span class="line">knn.fit(X_train,y_train)</span><br><span class="line">y_predict = knn.predict(X_test)</span><br><span class="line">sum(y_predict==y_test)/len(y_test)</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/sklern判断knn性能.png">
+<h1 id="判断knn算法的分类准确度">判断KNN算法的分类准确度</h1>
+<p>这里调用datasets中的手写数字<code>datasets.load_digits()</code>，手写数字能够很好的判断KNN算法结果的准确度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">accuracy_score</span><span class="params">(y_test,y_predict)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> sum(y_test==y_predict)/len(y_test)</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/封装的分类准确度判断.png">
+<p>如上，是判断KNN算法分类准确度的函数的实现，sklearn也提供了相应的方法，使用方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score <span class="comment">#调用sklearn自带的方法</span></span><br><span class="line">accuracy_score(y_test, y_predict)</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/sklearn库的分类准确度判断.png">
+<h1 id="超参数和模型参数">超参数和模型参数</h1>
+<h2 id="超参数和模型参数的定义">超参数和模型参数的定义</h2>
+<ul>
+<li>超参数：在算法运行前需要决定的参数。</li>
+<li>模型参数：算法过程中学习的参数。</li>
+</ul>
+<p>KNN算法没有模型参数，KNN算法中的K是典型的超参数。</p>
+<h2 id="确定最好的超参数">确定最好的超参数</h2>
+<ul>
+<li>领域知识确定。</li>
+<li>经验数值确定。</li>
+<li>实验搜索确定。</li>
+</ul>
+<p>这里我们通常采用实验搜索的方法寻找最好的超参数，但并非寻找所有的k，也即k的取值并不是全局，这样太过于浪费时间也没有必要，这里通过遍历搜索一个范围内的k即可。</p>
+<h3 id="寻找最好的k">寻找最好的k</h3>
+<img src="http://img.euansu.cn/static/images/寻找最好的超参数.png">
+<h3 id="寻找最好的距离权重">寻找最好的距离权重</h3>
+<p>距离权重是KNN算法的另一个超参数，简单来说就是用距离的倒数作为权重</p>
+<img src="http://img.euansu.cn/static/images/KNN距离的权重.png">
+<p>距离的权重只有两种取值，考虑权重或者不考虑，实现如下。</p>
+<img src="http://img.euansu.cn/static/images/KNN寻找最好的距离权重.png">
+<h3 id="机器学习中的距离">机器学习中的距离</h3>
+<p>这里讲一下机器学习的入门距离：曼哈顿距离、欧氏距离、闵可夫斯基距离、切比雪夫距离。</p>
+<ol type="1">
+<li><p>曼哈顿距离，也被称为街区距离，与我们所认识的距离有所差距，两点之间的距离不再是直线距离，而是投影到坐标轴的长度之和。</p>
+<img src="http://img.euansu.cn/static/images/曼哈顿距离.jpg">
+<p>上图中的红绿蓝三条线都表示曼哈顿距离，如下是曼哈顿距离的计算公式。 <span class="math display">\[
+d(i,j) = |X_i - X_j| + |Y_i - Y_j|
+\]</span></p></li>
+<li><p>欧氏距离，定义在两个向量（点）上，点X和Y的欧式距离为： <span class="math display">\[
+d_{Euclidean} = \sqrt{(X - Y)^T·(X-y)}
+\]</span></p></li>
+<li><p>切比雪夫距离，两个点之间的距离为其各坐标数值数值差的最大值。 <span class="math display">\[
+d_{Chebyshev}(P,Q) = max(|p_i - q_i|)
+\]</span> 其中P，Q代表两个向量（两个点），其坐标分别为p_i，q_i。而切比雪夫距离也等于L_p度量的极值。即： <span class="math display">\[
+\lim_{k\rightarrow+\infty} (\sum_{i=1}^{n}|p_i - q_i|^k)^{\frac{1}{k}}
+\]</span> 因此切比雪夫距离也成为L度量。</p></li>
+<li><p>闵可夫斯基距离：两个向量（点）之间的P阶距离。 <span class="math display">\[
+d_{minkowski} = (|X-Y|^p)^\frac{1}{p}
+\]</span> 当p=1时，就是曼哈顿距离，当p=2是就是欧氏距离。</p>
+<p>闵可夫斯基距离的两个点X，Y可以拓展到多维空间中，如下所示： <span class="math display">\[
+X = (x_1,x_2,x_3,...,x_n)
+\]</span></p>
+<p><span class="math display">\[
+Y = (y_1,y_2,y_3,...,y_n)
+\]</span></p></li>
+</ol>
+<h3 id="寻找闵可夫斯基距离">寻找闵可夫斯基距离</h3>
+<img src="http://img.euansu.cn/static/images/KNN算法寻找闵可夫斯基距离.png">
+<h3 id="网格搜索">网格搜索</h3>
+<p>网格搜索常常用在已经模型的情况下，用来进行微调寻找最好的模型参数，如上我们所寻找k，距离权重都是在做这件事情，我们可以直接交给网格搜索来探索出一组很好的超参数值的组合。</p>
+<p>使用的时候，直接从Sklearn库调用网格搜索即可。</p>
+<img src="http://img.euansu.cn/static/images/KNN算法的网格搜索.png">
+<p>如上便完成了网格搜索，接下来就可以查看网格搜索的结果。</p>
+<img src="http://img.euansu.cn/static/images/KNN网格搜索的结果.png">
+<h1 id="数据归一化">数据归一化</h1>
+<p>数据标准化（归一化）处理是数据挖掘的一项基础工作，<strong>不同评价指标往往具有不同的量纲和量纲单位，这样的情况会影响到数据分析的结果，为了消除指标之间的量纲影响，需要进行数据标准化处理，</strong>以解决数据指标之间的可比性。原始数据经过数据标准化处理后，各指标处于同一数量级，适合进行综合对比评价。如下是两种常用的数据归一化方法：</p>
+<ul>
+<li><p>最值归一化：把所有数据映射到0-1之间，将这个数据映射到0-（X_max-X_min）之间，然后对每个X相比于整个范围所占的比例。 <span class="math display">\[
+X_{scale} = \frac{x - x_{min}}{x_{max}-x_{min}}
+\]</span> <strong>适用于分布有明显边界的情况，受边界情况影响较大。</strong></p></li>
+<li><p>均值方差归一化：把所有数据归一到均值为0方差为1的分布中。 <span class="math display">\[
+X_{scale} = \frac{X - X_{mean}}{S}
+\]</span> 均值方差归一化：把所有数据归一到均值为0方差为1的分布中。**</p></li>
+</ul>
+<h2 id="最值归一化">最值归一化</h2>
+<p>最值归一化：把所有数据映射到0-1之间，将这个数据映射到0-（X_max-X_min）之间，然后对每个X相比于整个范围所占的比例。 <span class="math display">\[
+X_{scale} = \frac{x - x_{min}}{x_{max}-x_{min}}
+\]</span> <strong>适用于分布有明显边界的情况，受边界情况影响较大。</strong></p>
+<p>最值归一化的算法实现：</p>
+<img src="http://img.euansu.cn/static/images/数据归一化_最值归一化.png">
+<h2 id="均值方差归一化">均值方差归一化</h2>
+<p>均值方差归一化：把所有数据归一到均值为0方差为1的分布中。 <span class="math display">\[
+X_{scale} = \frac{X - X_{mean}}{S}
+\]</span> <strong>适用于数据分布没有明显边界，有可能存在极端情况值。</strong></p>
+<p>均值方差归一化的算法实现：</p>
+<img src="http://img.euansu.cn/static/images/数据归一化_均值方差归一化.png">
+<h2 id="归一化的使用">归一化的使用</h2>
+<p>同样的sklearn已经帮我们封装好了归一化方法，直接调用即可，通过如下方法就完成了数据的归一化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler <span class="comment"># 导入归一化处理方法</span></span><br><span class="line">standardScaler = StandardScaler()</span><br><span class="line">standardScaler.fit(X_train)</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/数据归一化的使用.png">
+<p>如果想要对测试数据进行归一化，直接使用transform即可，不需要再次进行fit。</p>
+<img src="http://img.euansu.cn/static/images/测试数据归一化.png">
+<h1 id="完整实现">完整实现</h1>
+<p>码云地址：https://gitee.com/euansu/machine-learning-study/blob/master/KNN%E7%AE%97%E6%B3%95.ipynb</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/511/909/linux%E4%BD%BF%E7%94%A8/" rel="prev" title="CentOS使用教程">
+                  <i class="fa fa-chevron-left"></i> CentOS使用教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/511/914/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="Scrapy简介Scrapy 是用 Python编写而成用以爬取网站数据、提取结构性数据而编写的应用框架。通过使用Scrapy框架，我们能够简单的爬取指定网站的内容或图片。">
+  <meta name="description" content="Scrapy简介 Scrapy 是用 Python编写而成用以爬取网站数据、提取结构性数据而编写的应用框架。通过使用Scrapy框架，我们能够简单的爬取指定网站的内容或图片。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="scrapy爬虫框架">
 <meta property="og:url" content="http://euansu123.github.io/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="Scrapy简介Scrapy 是用 Python编写而成用以爬取网站数据、提取结构性数据而编写的应用框架。通过使用Scrapy框架，我们能够简单的爬取指定网站的内容或图片。">
+<meta property="og:description" content="Scrapy简介 Scrapy 是用 Python编写而成用以爬取网站数据、提取结构性数据而编写的应用框架。通过使用Scrapy框架，我们能够简单的爬取指定网站的内容或图片。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/scrapy%E6%A1%86%E6%9E%B6%E7%BB%93%E6%9E%84.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/%E9%A1%B9%E7%9B%AE%E8%87%AA%E5%BB%BAspider.png">
@@ -178,7 +178,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy简介"><span class="nav-number">1.</span> <span class="nav-text">Scrapy简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy运行机制"><span class="nav-number">2.</span> <span class="nav-text">Scrapy运行机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy框架文件结构"><span class="nav-number">3.</span> <span class="nav-text">Scrapy框架文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy爬取博客园"><span class="nav-number">4.</span> <span class="nav-text">Scrapy爬取博客园</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy实现文件存储"><span class="nav-number">5.</span> <span class="nav-text">Scrapy实现文件存储</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#scrapy简介"><span class="nav-number">1.</span> <span class="nav-text">Scrapy简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrapy运行机制"><span class="nav-number">2.</span> <span class="nav-text">Scrapy运行机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrapy框架文件结构"><span class="nav-number">3.</span> <span class="nav-text">Scrapy框架文件结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrapy爬取博客园"><span class="nav-number">4.</span> <span class="nav-text">Scrapy爬取博客园</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scrapy实现文件存储"><span class="nav-number">5.</span> <span class="nav-text">Scrapy实现文件存储</span></a></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -193,14 +193,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -305,46 +305,42 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="Scrapy简介"><a href="#Scrapy简介" class="headerlink" title="Scrapy简介"></a>Scrapy简介</h3><p>Scrapy 是用 Python编写而成用以爬取网站数据、提取结构性数据而编写的应用框架。通过使用Scrapy框架，我们能够简单的爬取指定网站的内容或图片。</p>
+        <h3 id="scrapy简介">Scrapy简介</h3>
+<p>Scrapy 是用 Python编写而成用以爬取网站数据、提取结构性数据而编写的应用框架。通过使用Scrapy框架，我们能够简单的爬取指定网站的内容或图片。</p>
 <a id="more"></a>
-
-<p><img src="/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/scrapy%E6%A1%86%E6%9E%B6%E7%BB%93%E6%9E%84.png" alt></p>
-<h3 id="Scrapy运行机制"><a href="#Scrapy运行机制" class="headerlink" title="Scrapy运行机制"></a>Scrapy运行机制</h3><ol>
+<p><img src="/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/scrapy框架结构.png"></p>
+<h3 id="scrapy运行机制">Scrapy运行机制</h3>
+<ol type="1">
 <li>引擎从调度器中取出一个URL，用于接下来的抓取。</li>
 <li>引擎把URL封装成请求（Request）传给下载器，下载器把资源下载后封装后封装成应答包（Response）。</li>
 <li>爬虫解析Response。</li>
 <li>若解析出实体（Item），则交给实体管道进行进一步的处理。</li>
 <li>若解析出的是URL，则把URL交给Scheduler等待抓取。</li>
 </ol>
-<h3 id="Scrapy框架文件结构"><a href="#Scrapy框架文件结构" class="headerlink" title="Scrapy框架文件结构"></a>Scrapy框架文件结构</h3><p>首先我们创建一个Scrapy项目，目录结构如下所示。</p>
+<h3 id="scrapy框架文件结构">Scrapy框架文件结构</h3>
+<p>首先我们创建一个Scrapy项目，目录结构如下所示。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cnblog&#x2F;</span><br><span class="line">    scrapy.cfg # 项目的配置文件</span><br><span class="line">    </span><br><span class="line">    cnblog&#x2F;</span><br><span class="line">         __init__.py</span><br><span class="line">         </span><br><span class="line">        items.py # 定义你所要抓取的字段</span><br><span class="line">        </span><br><span class="line">        pipelines.py # 管道文件，当spider抓取到内容（item）以后，会被送到这里，这些信息（item）在这里会被清洗，去重，保存到文件或者数据库。</span><br><span class="line">        </span><br><span class="line">        middlewares.py # 中间件，主要是对功能的拓展，你可以添加一些自定义的功能，比如添加随机user-agent, 添加proxy。</span><br><span class="line">        </span><br><span class="line">        settings.py # 设置文件，用来设置爬虫的默认信息，相关功能开启与否，比如是否遵循robots协议，设置默认的headers，设置文件的路径，中间件的执行顺序等等。</span><br><span class="line">        </span><br><span class="line">        spiders&#x2F; # 在这个文件夹下编写自己的spider</span><br><span class="line">            __init__.py</span><br></pre></td></tr></table></figure>
-
-<h3 id="Scrapy爬取博客园"><a href="#Scrapy爬取博客园" class="headerlink" title="Scrapy爬取博客园"></a>Scrapy爬取博客园</h3><p>1.进入项目文件夹，创建自己的爬虫文件，如下的命令在终端运行。</p>
+<h3 id="scrapy爬取博客园">Scrapy爬取博客园</h3>
+<p>1.进入项目文件夹，创建自己的爬虫文件，如下的命令在终端运行。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd cnblog</span><br><span class="line">scrapy genspider cnblog_spider cnblogs.com</span><br></pre></td></tr></table></figure>
-
 <p>2.进入我们刚才创建的爬虫文件cnblog_spider，发现框架已经自动生成了爬虫主要代码，只要补充自己想要爬取的项目即可，我希望爬取博客园的文章链接以及题目，所以我补充了如下代码,顺便进行输出，可以直观的看到项目是否运行成功。</p>
-<p><img src="/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/%E9%A1%B9%E7%9B%AE%E8%87%AA%E5%BB%BAspider.png" alt></p>
+<p><img src="/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/项目自建spider.png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title = response.xpath(<span class="string">'//a[@class="post-item-title"]/text()'</span>).extract()</span><br><span class="line">url = response.xpath(<span class="string">'//a[@class="post-item-title"]/@href'</span>).extract()</span><br><span class="line">print(title)</span><br><span class="line">print(url)</span><br></pre></td></tr></table></figure>
-
 <p>3.在终端运行爬虫项目。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl cnblog_spider</span><br></pre></td></tr></table></figure>
-
 <p>得到如下运行结果，至此一个简单的爬虫项目就运行成功了。</p>
-<p><img src="/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/cnblog_spider.png" alt></p>
-<h3 id="Scrapy实现文件存储"><a href="#Scrapy实现文件存储" class="headerlink" title="Scrapy实现文件存储"></a>Scrapy实现文件存储</h3><p>如果希望存储我们爬取的信息，则需要在items.py文件中定义它们，item是保存爬取到的数据的容器，其使用方法和dict字典类似，对于items中定义信息，只需要根据提示补充代码即可。</p>
+<p><img src="/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/cnblog_spider.png"></p>
+<h3 id="scrapy实现文件存储">Scrapy实现文件存储</h3>
+<p>如果希望存储我们爬取的信息，则需要在items.py文件中定义它们，item是保存爬取到的数据的容器，其使用方法和dict字典类似，对于items中定义信息，只需要根据提示补充代码即可。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CnblogItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    <span class="comment"># define the fields for your item here like:</span></span><br><span class="line">    <span class="comment"># name = scrapy.Field()</span></span><br><span class="line">    title = scrapy.Field()</span><br><span class="line">    url = scrapy.Field()</span><br></pre></td></tr></table></figure>
-
 <p>接下来需要在爬虫文件中导入我们刚才在items中定义的CnblogItem类，使用字典的方法就可以给items进行赋值。最后yield生成器，将items传递给管道pipeline进行后续操作。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></span><br><span class="line">    items = CnblogItem()</span><br><span class="line">    <span class="comment"># extract()使得使提取内容转换为Unicode字符串，返回数据类型为list</span></span><br><span class="line">    items[<span class="string">'title'</span>] = response.xpath(<span class="string">'//a[@class="post-item-title"]/text()'</span>).extract()</span><br><span class="line">    items[<span class="string">'url'</span>] = response.xpath(<span class="string">'//a[@class="post-item-title"]/@href'</span>).extract()</span><br><span class="line">    <span class="keyword">yield</span> items <span class="comment"># 生成器相当于用后销毁，节省内存。</span></span><br></pre></td></tr></table></figure>
-
 <p>修改管道pipelines.py文件，这里本来有一个自定义的CnblogPipeline类，为了更好的介绍Scrapy框架的使用，我这里又定义了一个PrintPipeline类。管道pipelines.py文件的作用就是实现数据的输出处理，也可以完成存储的工作。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CnblogPipeline</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'cnblogs.txt'</span>,<span class="string">'a'</span>,encoding=<span class="string">'utf8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            title = item[<span class="string">'title'</span>]</span><br><span class="line">            url = item[<span class="string">'url'</span>]</span><br><span class="line">            <span class="comment"># print(title)</span></span><br><span class="line">            <span class="comment"># print(url)</span></span><br><span class="line">            <span class="keyword">for</span> i,j <span class="keyword">in</span> zip(title,url):</span><br><span class="line">                f.write(i+<span class="string">':'</span>+j+<span class="string">'\n'</span>)</span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrintPipeline</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">        print(<span class="string">'Printitem::'</span>+item[<span class="string">'title'</span>])</span><br><span class="line">        <span class="keyword">return</span> item</span><br></pre></td></tr></table></figure>
-
 <p>最后需要在Seeting.py文件中打开ITEM_PIPELINES，同时添加在管道中新定义类PrintPipeline，并且标注优先级。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">   <span class="string">'cnblog.pipelines.CnblogPipeline'</span>: <span class="number">300</span>, <span class="comment"># 数字代表优先级</span></span><br><span class="line">   <span class="string">'cnblog.pipelines.PrintPipeline'</span>: <span class="number">500</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>至此，就可以运行Scrapy框架了！</p>
-<p><img src="/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.png" alt></p>
+<p><img src="/20202020/509/928/scrapy%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6/运行结果.png"></p>
 <p>运行完成！！！恭喜你，程序无Bug！！！</p>
 
     </div>

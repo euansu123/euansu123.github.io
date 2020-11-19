@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="一个简单的Django项目这篇文章简单记录了如何开发一个简单的Django项目。">
+  <meta name="description" content="一个简单的Django项目 这篇文章简单记录了如何开发一个简单的Django项目。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个简单的Django项目">
 <meta property="og:url" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="一个简单的Django项目这篇文章简单记录了如何开发一个简单的Django项目。">
+<meta property="og:description" content="一个简单的Django项目 这篇文章简单记录了如何开发一个简单的Django项目。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%88%9B%E5%BB%BADjango%E9%A1%B9%E7%9B%AE.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/django%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.jpg">
@@ -182,7 +182,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的Django项目"><span class="nav-number">1.</span> <span class="nav-text">一个简单的Django项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建Django项目"><span class="nav-number">1.1.</span> <span class="nav-text">创建Django项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建APP"><span class="nav-number">1.2.</span> <span class="nav-text">创建APP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写路由"><span class="nav-number">1.3.</span> <span class="nav-text">编写路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写业务处理逻辑"><span class="nav-number">1.4.</span> <span class="nav-text">编写业务处理逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行web服务"><span class="nav-number">1.5.</span> <span class="nav-text">运行web服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回HTML文件"><span class="nav-number">1.6.</span> <span class="nav-text">返回HTML文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回动态页面"><span class="nav-number">1.7.</span> <span class="nav-text">返回动态页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置数据库"><span class="nav-number">1.8.</span> <span class="nav-text">配置数据库</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的django项目"><span class="nav-number">1.</span> <span class="nav-text">一个简单的Django项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建django项目"><span class="nav-number">1.1.</span> <span class="nav-text">创建Django项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建app"><span class="nav-number">1.2.</span> <span class="nav-text">创建APP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写路由"><span class="nav-number">1.3.</span> <span class="nav-text">编写路由</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写业务处理逻辑"><span class="nav-number">1.4.</span> <span class="nav-text">编写业务处理逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行web服务"><span class="nav-number">1.5.</span> <span class="nav-text">运行web服务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回html文件"><span class="nav-number">1.6.</span> <span class="nav-text">返回HTML文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回动态页面"><span class="nav-number">1.7.</span> <span class="nav-text">返回动态页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置数据库"><span class="nav-number">1.8.</span> <span class="nav-text">配置数据库</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -197,14 +197,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -309,63 +309,54 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="一个简单的Django项目"><a href="#一个简单的Django项目" class="headerlink" title="一个简单的Django项目"></a>一个简单的Django项目</h3><p>这篇文章简单记录了如何开发一个简单的Django项目。</p>
+        <h3 id="一个简单的django项目">一个简单的Django项目</h3>
+<p>这篇文章简单记录了如何开发一个简单的Django项目。</p>
 <a id="more"></a>
-
-<h4 id="创建Django项目"><a href="#创建Django项目" class="headerlink" title="创建Django项目"></a>创建Django项目</h4><p>可以选择使用Pycharm图形化界面创建，或者使用命令行创建。</p>
-<ol>
+<h4 id="创建django项目">创建Django项目</h4>
+<p>可以选择使用Pycharm图形化界面创建，或者使用命令行创建。</p>
+<ol type="1">
 <li><p>命令行创建Django项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject 项目名</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject 项目名</span><br></pre></td></tr></table></figure></li>
 <li><p>Pycharm图形化界面创建</p>
-<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%88%9B%E5%BB%BADjango%E9%A1%B9%E7%9B%AE.png" alt></p>
-</li>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/创建Django项目.png"></p></li>
 </ol>
 <p>创建完成之后，就可以看到Django项目的结构。</p>
-<img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/django项目结构.jpg" style="zoom: 80%;">
-
-<h4 id="创建APP"><a href="#创建APP" class="headerlink" title="创建APP"></a>创建APP</h4><p>在每个Django项目中可以包含多个APP，相互之间比较独立，但也有联系.APP可以看作是实现具体功能的小模块。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/django项目结构.jpg" style="zoom: 80%;"></p>
+<h4 id="创建app">创建APP</h4>
+<p>在每个Django项目中可以包含多个APP，相互之间比较独立，但也有联系.APP可以看作是实现具体功能的小模块。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp APP名</span><br></pre></td></tr></table></figure>
-
-<img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/app结构.jpg" style="zoom:80%;">
-
-<h4 id="编写路由"><a href="#编写路由" class="headerlink" title="编写路由"></a>编写路由</h4><p>路由就是根据用户请求的URL链接来判断对应的处理程序，并返回处理结果，也就是URL与Django的视图建立映射关系。</p>
-<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE.png" alt></p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/app结构.jpg" style="zoom:80%;"></p>
+<h4 id="编写路由">编写路由</h4>
+<p>路由就是根据用户请求的URL链接来判断对应的处理程序，并返回处理结果，也就是URL与Django的视图建立映射关系。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/路由配置.png"></p>
 <p>每条配置对应一个处理。</p>
-<h4 id="编写业务处理逻辑"><a href="#编写业务处理逻辑" class="headerlink" title="编写业务处理逻辑"></a>编写业务处理逻辑</h4><p>业务逻辑的处理都在APP下的views.py文件中。</p>
-<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E7%BC%96%E5%86%99%E8%B7%AF%E7%94%B1%E9%80%BB%E8%BE%91%E6%96%87%E4%BB%B6.png" alt></p>
+<h4 id="编写业务处理逻辑">编写业务处理逻辑</h4>
+<p>业务逻辑的处理都在APP下的views.py文件中。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/编写路由逻辑文件.png"></p>
 <p>如index函数所示，返回的只是字符串，但必须使用HttpResponse()，不能直接返回字符串。</p>
-<h4 id="运行web服务"><a href="#运行web服务" class="headerlink" title="运行web服务"></a>运行web服务</h4><p>如果无法启动Django项目，可以在runserver后指定端口号。</p>
+<h4 id="运行web服务">运行web服务</h4>
+<p>如果无法启动Django项目，可以在runserver后指定端口号。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
-
-<h4 id="返回HTML文件"><a href="#返回HTML文件" class="headerlink" title="返回HTML文件"></a>返回HTML文件</h4><p>将编写好的html文件放在templates文件夹中，需要在settings.py文件中</p>
+<h4 id="返回html文件">返回HTML文件</h4>
+<p>将编写好的html文件放在templates文件夹中，需要在settings.py文件中</p>
 <p>如果需要使用静态文件需要，需要创建静态文件夹，这里的静态文件值得是JS、CSS、图片文件以及各种插件，静态文件的使用需要在settings.py文件中加入如下代码。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">STATICFILES_DIRS=(</span><br><span class="line">    os.path.join(BASE_DIR,<span class="string">'static'</span>),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h4 id="返回动态页面"><a href="#返回动态页面" class="headerlink" title="返回动态页面"></a>返回动态页面</h4><p>这里指的是接收网页输入的内容并且返回给网页。</p>
-<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2.png" alt></p>
+<h4 id="返回动态页面">返回动态页面</h4>
+<p>这里指的是接收网页输入的内容并且返回给网页。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/动态页面.png"></p>
 <p>动态页面的逻辑如上。</p>
-<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/%E5%8A%A8%E6%80%81%E9%A1%B5%E9%9D%A2html.png" alt></p>
-<h4 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h4><p>Django默认支持SQLite数据库。</p>
+<p><img src="/20202020/510/906/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Django%E9%A1%B9%E7%9B%AE/动态页面html.png"></p>
+<h4 id="配置数据库">配置数据库</h4>
+<p>Django默认支持SQLite数据库。</p>
 <p>配置数据库分为以下五步：</p>
-<ol>
-<li><p>添加自定义APP的名称到INSTALLED_APPS配置项；</p>
-</li>
-<li><p>设置数据库连接属性DATABASE；</p>
-</li>
-<li><p>修改当前APP下的models.py文件；</p>
-</li>
+<ol type="1">
+<li><p>添加自定义APP的名称到INSTALLED_APPS配置项；</p></li>
+<li><p>设置数据库连接属性DATABASE；</p></li>
+<li><p>修改当前APP下的models.py文件；</p></li>
 <li><p>使用命令对应修改models到迁移文件（在migrations目录创建迁移文件）；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py makemigrations</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py makemigrations</span><br></pre></td></tr></table></figure></li>
 <li><p>对新迁移文件完成物理表的映射，生成一个物理表。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure></li>
 </ol>
 
     </div>

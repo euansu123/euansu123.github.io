@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="liva2d看板娘部署至hexolive2d能够让浏览博客的用户不至于太过枯燥，这篇文章简单讲一下live2d的部署。">
+  <meta name="description" content="liva2d看板娘部署至hexo live2d能够让浏览博客的用户不至于太过枯燥，这篇文章简单讲一下live2d的部署。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="live2d看板娘部署至hexo">
 <meta property="og:url" content="http://euansu123.github.io/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="liva2d看板娘部署至hexolive2d能够让浏览博客的用户不至于太过枯燥，这篇文章简单讲一下live2d的部署。">
+<meta property="og:description" content="liva2d看板娘部署至hexo live2d能够让浏览博客的用户不至于太过枯燥，这篇文章简单讲一下live2d的部署。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/Epsilon2.1.gif">
 <meta property="og:image" content="http://euansu123.github.io/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/haru.gif">
@@ -207,14 +207,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -319,85 +319,65 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="liva2d看板娘部署至hexo"><a href="#liva2d看板娘部署至hexo" class="headerlink" title="liva2d看板娘部署至hexo"></a>liva2d看板娘部署至hexo</h3><p>live2d能够让浏览博客的用户不至于太过枯燥，这篇文章简单讲一下live2d的部署。</p>
+        <h3 id="liva2d看板娘部署至hexo">liva2d看板娘部署至hexo</h3>
+<p>live2d能够让浏览博客的用户不至于太过枯燥，这篇文章简单讲一下live2d的部署。</p>
 <a id="more"></a>
-
-<h3 id="安装live2d模块"><a href="#安装live2d模块" class="headerlink" title="安装live2d模块"></a>安装live2d模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
-<h3 id="选择自己喜欢的看板娘"><a href="#选择自己喜欢的看板娘" class="headerlink" title="选择自己喜欢的看板娘"></a>选择自己喜欢的看板娘</h3><p>我自己使用的是<strong>mizuku</strong>。</p>
+<h3 id="安装live2d模块">安装live2d模块</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+<h3 id="选择自己喜欢的看板娘">选择自己喜欢的看板娘</h3>
+<p>我自己使用的是<strong>mizuku</strong>。</p>
 <p><strong>Epsilon2.1</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/Epsilon2.1.gif" alt="Epsilon2.1" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/Epsilon2.1.gif" alt="Epsilon2.1" style="zoom:50%;"></p>
 <p><strong>haru</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/haru.gif" alt="haru" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/haru.gif" alt="haru" style="zoom:50%;"></p>
 <p><strong>haruto</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/haruto.gif" alt="haruto" style="zoom: 67%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/haruto.gif" alt="haruto" style="zoom: 67%;"></p>
 <p><strong>hibiki</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/hibiki.gif" alt="hibiki" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/hibiki.gif" alt="hibiki" style="zoom:50%;"></p>
 <p><strong>hijiki</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/hijiki.gif" alt="hijiki" style="zoom: 67%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/hijiki.gif" alt="hijiki" style="zoom: 67%;"></p>
 <p><strong>koharu</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/koharu.gif" alt="koharu" style="zoom:67%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/koharu.gif" alt="koharu" style="zoom:67%;"></p>
 <p><strong>miku</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/miku.gif" alt="miku" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/miku.gif" alt="miku" style="zoom:50%;"></p>
 <p><strong>nico</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/nico.gif" alt="nico" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/nico.gif" alt="nico" style="zoom:50%;"></p>
 <p><strong>nietzche</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/nietzche.gif" alt="nietzche" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/nietzche.gif" alt="nietzche" style="zoom:50%;"></p>
 <p><strong>ni-j</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/ni-j.gif" alt="ni-j" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/ni-j.gif" alt="ni-j" style="zoom:50%;"></p>
 <p><strong>nipsilon</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/nipsilon.gif" alt="nipsilon" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/nipsilon.gif" alt="nipsilon" style="zoom:50%;"></p>
 <p><strong>nito</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/nito.gif" alt="nito" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/nito.gif" alt="nito" style="zoom:50%;"></p>
 <p><strong>shizuku</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/shizuku.gif" alt="shizuku" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/shizuku.gif" alt="shizuku" style="zoom:50%;"></p>
 <p><strong>tororo</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/tororo.gif" alt="tororo" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/tororo.gif" alt="tororo" style="zoom:50%;"></p>
 <p><strong>tsumiki</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/tsumiki.gif" alt="tsumiki" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/tsumiki.gif" alt="tsumiki" style="zoom:50%;"></p>
 <p><strong>Unitychan</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/Unitychan.gif" alt="Unitychan" style="zoom: 67%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/Unitychan.gif" alt="Unitychan" style="zoom: 67%;"></p>
 <p><strong>wanko</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/wanko.gif" alt="wanko" style="zoom:50%;">
-
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/wanko.gif" alt="wanko" style="zoom:50%;"></p>
 <p><strong>z16</strong></p>
-<img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/z16.gif" alt="z16" style="zoom:50%;">
-
-<h3 id="安装看板娘"><a href="#安装看板娘" class="headerlink" title="安装看板娘"></a>安装看板娘</h3><p>例如安装shizuku</p>
+<p><img src="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/z16.gif" alt="z16" style="zoom:50%;"></p>
+<h3 id="安装看板娘">安装看板娘</h3>
+<p>例如安装shizuku</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save live2d-widget-model-shizuku</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># Live2D</span><br><span class="line">## https:&#x2F;&#x2F;github.com&#x2F;xiazeyu&#x2F;live2d-widget.js</span><br><span class="line">## https:&#x2F;&#x2F;l2dwidget.js.org&#x2F;docs&#x2F;class&#x2F;src&#x2F;index.js~L2Dwidget.html#instance-method-init</span><br><span class="line">live2d:</span><br><span class="line">  model:</span><br><span class="line">    scale: 1</span><br><span class="line">    hHeadPos: 0.5</span><br><span class="line">    vHeadPos: 0.618</span><br><span class="line">    use: live2d-widget-model-shizuku #下载的看板娘名称</span><br><span class="line">  display:</span><br><span class="line">    superSample: 2</span><br><span class="line">    width: 150</span><br><span class="line">    height: 300</span><br><span class="line">    position: right #展示位置</span><br><span class="line">    hOffset: 0</span><br><span class="line">    vOffset: -20</span><br><span class="line">  mobile: #移动设备展示选择</span><br><span class="line">    show: true</span><br><span class="line">    scale: 0.5</span><br><span class="line">  react:</span><br><span class="line">    opacityDefault: 0.7</span><br><span class="line">    opacityOnHover: 0.2</span><br></pre></td></tr></table></figure>
-
-<h3 id="部署到hexo网站"><a href="#部署到hexo网站" class="headerlink" title="部署到hexo网站"></a>部署到hexo网站</h3><p>1、首先清空本地缓存</p>
+<h3 id="修改配置文件">修改配置文件</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># Live2D</span><br><span class="line">## https:&#x2F;&#x2F;github.com&#x2F;xiazeyu&#x2F;live2d-widget.js</span><br><span class="line">## https:&#x2F;&#x2F;l2dwidget.js.org&#x2F;docs&#x2F;class&#x2F;src&#x2F;index.js~L2Dwidget.html#instance-method-init</span><br><span class="line">live2d:</span><br><span class="line">  model:</span><br><span class="line">    scale: 1</span><br><span class="line">    hHeadPos: 0.5</span><br><span class="line">    vHeadPos: 0.618</span><br><span class="line">    use: live2d-widget-model-shizuku #下载的看板娘名称</span><br><span class="line">  display:</span><br><span class="line">    superSample: 2</span><br><span class="line">    width: 150</span><br><span class="line">    height: 300</span><br><span class="line">    position: right #展示位置</span><br><span class="line">    hOffset: 0</span><br><span class="line">    vOffset: -20</span><br><span class="line">  mobile: #移动设备展示选择</span><br><span class="line">    show: true</span><br><span class="line">    scale: 0.5</span><br><span class="line">  react:</span><br><span class="line">    opacityDefault: 0.7</span><br><span class="line">    opacityOnHover: 0.2</span><br></pre></td></tr></table></figure>
+<h3 id="部署到hexo网站">部署到hexo网站</h3>
+<p>1、首先清空本地缓存</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-
 <p>2、生成博客文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
 <p>3、启动服务器，本地测试修改</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
 <p>4、部署至hexo网站</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<h3 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
+<h3 id="卸载">卸载</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-helper-live2d</span><br></pre></td></tr></table></figure>
 
     </div>
 

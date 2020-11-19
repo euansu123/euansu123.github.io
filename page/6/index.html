@@ -184,14 +184,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -230,6 +230,98 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="post-title-link" itemprop="url">信息安全—随机数的产生和流密码以及RC4</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-05-28 11:02:36 / 修改时间：16:34:41" itemprop="dateCreated datePublished" datetime="2020-05-28T11:02:36+08:00">2020-05-28</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="随机数的产生">随机数的产生</h2>
+<p>在基于密码学的网络安全和算法协议许多地方用到了二进制随机数，催使了随机数的产生。主要有以下应用:</p>
+<ul>
+<li>密钥分发和相互认证。通信的双方通过交换信息共同合作分发密钥和/或互相认证对方。</li>
+<li>会话密钥产生。对称加密需要产生一个短时间使用的秘密密钥。</li>
+<li>RSA公钥加密算法中密钥的产生。</li>
+<li>用于对称流密码加密的位流的产生。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/20202020/505/928/%E9%9A%8F%E6%9C%BA%E6%95%B0%E5%92%8C%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -290,8 +382,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="密码学"><a href="#密码学" class="headerlink" title="密码学"></a>密码学</h2><h3 id="传统密码学"><a href="#传统密码学" class="headerlink" title="传统密码学"></a>传统密码学</h3><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/2.png" style="zoom: 67%;">
-
+          <h2 id="密码学">密码学</h2>
+<h3 id="传统密码学">传统密码学</h3>
+<p><img src="/20202020/505/928/%E5%AF%86%E7%A0%81%E5%AD%A6/2.png" style="zoom: 67%;"></p>
 <p>传统加密技术的组成：明文、密钥、加密算法、密文、解密算法。</p>
 <p>传统密码学的技术有：</p>
 <ul>
@@ -384,10 +477,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>函数是一组一起执行一个任务的语句。每个C++程序至少有一个函数，即main()函数。</p>
-<ol>
+<ol type="1">
 <li><p>函数的定义：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">返回类型 函数名(参数列表)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    函数体;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>返回类型</strong>：一个函数可以返回一个值，返回类型是函数返回的值的数据类型。有些函数执行所需的操作但并不返回值，这种情况下函数的返回类型为void。</p>
 <p><strong>函数名称</strong>：这是函数的实际名称。</p>
 <p><strong>参数</strong>：当函数被调用的时候，向参数传递一个值，这个值被称为实际参数。参数列表包括函数参数的类型、顺序、数量。函数可以没有参数。</p>
@@ -482,7 +574,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="liva2d看板娘部署至hexo"><a href="#liva2d看板娘部署至hexo" class="headerlink" title="liva2d看板娘部署至hexo"></a>liva2d看板娘部署至hexo</h3><p>live2d能够让浏览博客的用户不至于太过枯燥，这篇文章简单讲一下live2d的部署。</p>
+          <h3 id="liva2d看板娘部署至hexo">liva2d看板娘部署至hexo</h3>
+<p>live2d能够让浏览博客的用户不至于太过枯燥，这篇文章简单讲一下live2d的部署。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/20202020/505/909/live2d%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%83%A8%E7%BD%B2%E8%87%B3hexo/#more" rel="contents">
@@ -665,16 +758,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="网络安全形势与法律基础"><a href="#网络安全形势与法律基础" class="headerlink" title="网络安全形势与法律基础"></a>网络安全形势与法律基础</h1><h2 id="网络安全形势"><a href="#网络安全形势" class="headerlink" title="网络安全形势"></a>网络安全形势</h2><ul>
+          <h1 id="网络安全形势与法律基础">网络安全形势与法律基础</h1>
+<h2 id="网络安全形势">网络安全形势</h2>
+<ul>
 <li><p>什么是网络安全</p>
 <ul>
-<li><p>计算机安全、信息安全、网络安全…</p>
+<li><p>计算机安全、信息安全、网络安全...</p>
 <ul>
 <li>计算机安全是指计算机资产安全，即计算机信息系统资源和信息资源不受自然和人为有害因素的威胁和危害。<strong>（偏向于硬件）</strong></li>
 <li>信息安全尚无统一定义，主要包含信息完整性、保密性以及可用性等。根本目的是使内部信息不受内部、外部、自然等因素的威胁，为保障信息安全，要求有信息源认证、访问控制，不能有非法软件驻留，不能有未授权的操作等行为。</li>
 <li>网络安全是指网络系统的硬件、软件机器系统中的数据受到保护，不因偶然的或者恶意的原因而遭受到破坏、更改、泄露，系统连续可靠正常地运转，网络服务不中断。</li>
 </ul>
-<img src="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/信息安全图1.jpg" style="zoom: 33%;"></li></ul></li></ul>
+<p><img src="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/信息安全图1.jpg" style="zoom: 33%;"></p></li></ul></li></ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/20202020/505/909/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80/#more" rel="contents">

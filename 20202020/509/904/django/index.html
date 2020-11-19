@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="Django框架网站运行原理 一些常用的术语： 客户端：在计算机上运行并连接到互联网的应用程序，简称浏览器。用户通过操作客户端实现网站和用户之间的数据交互。 服务器：能连接到互联网且具有IP地址的计算机，服务器主要接收和处理用户的请求信息。 IP地址：互联网协议地址，TCP&#x2F;IP网络设备（计算机、服务器、打印机、路由器等）的数字标识符。 域名：用于标识一个或多个IP地址。 ISP：互联网服务提供商">
+  <meta name="description" content="Django框架 网站运行原理  一些常用的术语：  客户端：在计算机上运行并连接到互联网的应用程序，简称浏览器。用户通过操作客户端实现网站和用户之间的数据交互。 服务器：能连接到互联网且具有IP地址的计算机，服务器主要接收和处理用户的请求信息。 IP地址：互联网协议地址，TCP&#x2F;IP网络设备（计算机、服务器、打印机、路由器等）的数字标识符。 域名：用于标识一个或多个IP地址。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Django框架">
 <meta property="og:url" content="http://euansu123.github.io/20202020/509/904/django/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="Django框架网站运行原理 一些常用的术语： 客户端：在计算机上运行并连接到互联网的应用程序，简称浏览器。用户通过操作客户端实现网站和用户之间的数据交互。 服务器：能连接到互联网且具有IP地址的计算机，服务器主要接收和处理用户的请求信息。 IP地址：互联网协议地址，TCP&#x2F;IP网络设备（计算机、服务器、打印机、路由器等）的数字标识符。 域名：用于标识一个或多个IP地址。 ISP：互联网服务提供商">
+<meta property="og:description" content="Django框架 网站运行原理  一些常用的术语：  客户端：在计算机上运行并连接到互联网的应用程序，简称浏览器。用户通过操作客户端实现网站和用户之间的数据交互。 服务器：能连接到互联网且具有IP地址的计算机，服务器主要接收和处理用户的请求信息。 IP地址：互联网协议地址，TCP&#x2F;IP网络设备（计算机、服务器、打印机、路由器等）的数字标识符。 域名：用于标识一个或多个IP地址。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://euansu123.github.io/20202020/509/904/django/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.jpg">
 <meta property="og:image" content="http://euansu123.github.io/20202020/509/904/django/%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87.jpg">
@@ -181,7 +181,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Django框架"><span class="nav-number">1.</span> <span class="nav-text">Django框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#网站运行原理"><span class="nav-number">1.1.</span> <span class="nav-text">网站运行原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP协议"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web框架"><span class="nav-number">1.3.</span> <span class="nav-text">web框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#框架架构：MVC-MTV"><span class="nav-number">1.4.</span> <span class="nav-text">框架架构：MVC&#x2F;MTV</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Django项目"><span class="nav-number">1.5.</span> <span class="nav-text">Django项目</span></a></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#django框架"><span class="nav-number">1.</span> <span class="nav-text">Django框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#网站运行原理"><span class="nav-number">1.1.</span> <span class="nav-text">网站运行原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http协议"><span class="nav-number">1.2.</span> <span class="nav-text">HTTP协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web框架"><span class="nav-number">1.3.</span> <span class="nav-text">web框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#框架架构mvcmtv"><span class="nav-number">1.4.</span> <span class="nav-text">框架架构：MVC&#x2F;MTV</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#django项目"><span class="nav-number">1.5.</span> <span class="nav-text">Django项目</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -196,14 +196,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -308,71 +308,75 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="Django框架"><a href="#Django框架" class="headerlink" title="Django框架"></a>Django框架</h3><h4 id="网站运行原理"><a href="#网站运行原理" class="headerlink" title="网站运行原理"></a>网站运行原理</h4><ul>
-<li>一些常用的术语：<ol>
+        <h3 id="django框架">Django框架</h3>
+<h4 id="网站运行原理">网站运行原理</h4>
+<ul>
+<li>一些常用的术语：
+<ol type="1">
 <li>客户端：在计算机上运行并连接到互联网的应用程序，简称浏览器。用户通过操作客户端实现网站和用户之间的数据交互。</li>
 <li>服务器：能连接到互联网且具有IP地址的计算机，服务器主要接收和处理用户的请求信息。</li>
 <li>IP地址：互联网协议地址，TCP/IP网络设备（计算机、服务器、打印机、路由器等）的数字标识符。</li>
 <li>域名：用于标识一个或多个IP地址。</li>
 <li>ISP：互联网服务提供商</li>
-</ol>
-</li>
+</ol></li>
 <li>网站运行流程：</li>
 </ul>
 <a id="more"></a>
-
-<h4 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h4><p>HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于万维网（WWW:World Wide Web ）服务器与本地浏览器之间传输超文本的传送协议。http协议是基于TCP/IP协议之上的应用层协议</p>
-<p><img src="/20202020/509/904/django/%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87.jpg" alt></p>
+<h4 id="http协议">HTTP协议</h4>
+<p>HTTP协议是Hyper Text Transfer Protocol（超文本传输协议）的缩写,是用于万维网（WWW:World Wide Web ）服务器与本地浏览器之间传输超文本的传送协议。http协议是基于TCP/IP协议之上的应用层协议</p>
+<p><img src="/20202020/509/904/django/请求报文.jpg"></p>
 <p><strong>Http的请求方式：get与post请求</strong></p>
-<ol>
+<ol type="1">
 <li>get提交的数据会放在url之后，以？分割url和传输数据，参数之间用&amp;相互连接，如EditBook？name=test1&amp;id=123456。post方法是把提交的数据放在Http包的请求体中。</li>
 <li>get提交的数据大小有限制（因为浏览器对url的长度有限制），而post方法提交的数据没有限制。</li>
 <li>get与post请求在服务端获取请求数据方式不同。</li>
 </ol>
-<p><img src="/20202020/509/904/django/%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87.jpg" alt></p>
+<p><img src="/20202020/509/904/django/响应报文.jpg"></p>
 <p><strong>http协议的响应状态码：</strong></p>
 <p>状态码的值是当客户端向服务端发送请求时，返回请求结果。借助状态码，用户可以直到服务端是正常接收了请求，还是出现了其他状况。</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th></th>
 <th>类别</th>
 <th>原因短语</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>1XX</td>
 <td>informational(信息状态码)</td>
 <td>接受的请求正在处理</td>
 </tr>
-<tr>
+<tr class="even">
 <td>2XX</td>
 <td>Sucess(成功状态码)</td>
 <td>请求正常处理完毕</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>3XX</td>
 <td>Redirection(重定向状态码)</td>
 <td>需要进行附加操作以完成请求</td>
 </tr>
-<tr>
+<tr class="even">
 <td>4XX</td>
 <td>Client Error(客户端错误状态码)</td>
 <td>服务器无法处理请求</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>5XX</td>
 <td>Server Error(服务器错误状态码)</td>
 <td>服务器处理请求出错</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><strong>HTTP Cookie</strong></p>
 <p>HTTP Cookie也叫Web Cookie或浏览器Cookie，是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时携带被携带并发送到服务器上。<font color="red">（第一次与服务器的连接不会有Cookie）</font>通常，它用于告知服务器端两个请求是否来自同一浏览器，如保持用户的登录状态。Cookie使基于无状态的HTTP协议记录稳定的状态信息。</p>
 <p>Cookie主要用于以下三方面：</p>
 <ul>
 <li>会话状态管理（如用户登录状态、购物车、游戏分数或其他需要记录的信息）</li>
 <li>个性化设置（如用户自定义设置、主题等）</li>
-<li>浏览器行为跟踪（如跟踪分析用户行为等）  </li>
+<li>浏览器行为跟踪（如跟踪分析用户行为等）</li>
 </ul>
 <p><strong>面试题：主流浏览器内核：</strong></p>
 <p>浏览器内核又可以分成两部分：渲染引擎(layout engineer或者Rendering Engine)和JS引擎<font color="red">(其中渲染引擎负责形成页面，JS引擎支持动态编程)。</font></p>
@@ -381,44 +385,48 @@
 <p><strong>各浏览器常用内核</strong></p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>浏览器名称</th>
 <th>内核名称</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>IE</td>
 <td>Trident，俗称为IE内核</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Chrome</td>
 <td>统称为Chromium内核或Chrome内核，以前是Webkit内核，现在是Blink内核</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Firefox</td>
 <td>Gecko内核</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Safari</td>
 <td>Webkit</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Opera</td>
 <td>最初是Presto内核，后来是Webkit，现在是Blink内核</td>
 </tr>
-<tr>
+<tr class="even">
 <td>360、猎豹</td>
 <td>IE+Chrome双内核</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>搜狗、遨游、QQ浏览器</td>
 <td>Trident（兼容模式）+Webkit（高速模式）</td>
 </tr>
-</tbody></table>
-<h4 id="web框架"><a href="#web框架" class="headerlink" title="web框架"></a>web框架</h4><p><img src="/20202020/509/904/django/web%E6%A1%86%E6%9E%B6.jpg" alt></p>
+</tbody>
+</table>
+<h4 id="web框架">web框架</h4>
+<p><img src="/20202020/509/904/django/web框架.jpg"></p>
 <p>框架，即framework，特指为解决一个开放性问题而设计的具有一定约束性的支撑结构，使用框架可以快速帮你开发特定系统。</p>
 <p>框架是利用别人已经设定好的一个网站模板，进行“修改”或者“填空”实现想要的功能。框架的优势：风格统一、内核代码有规律。</p>
-<h4 id="框架架构：MVC-MTV"><a href="#框架架构：MVC-MTV" class="headerlink" title="框架架构：MVC/MTV"></a>框架架构：MVC/MTV</h4><p><img src="/20202020/509/904/django/MVC.png" alt></p>
+<h4 id="框架架构mvcmtv">框架架构：MVC/MTV</h4>
+<p><img src="/20202020/509/904/django/MVC.png"></p>
 <p>MVC全名Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。</p>
 <ul>
 <li>模型（model）：定义数据库相关的内容，一般放在Models.py文件中。</li>
@@ -434,7 +442,7 @@
 <li>模型也可能i调用控制器。</li>
 </ul>
 <p>在Java和.net中将MVC模型改成了多层模型，而Python将MVC摒弃，开发出来了相近的MTV。</p>
-<p><img src="/20202020/509/904/django/MTV.png" alt></p>
+<p><img src="/20202020/509/904/django/MTV.png"></p>
 <p>Django的MTV模式本质上和MVC是一样的，也是为了各组件保持松耦合关系，只是定义上有些许不同，Django的MTV分别是指：</p>
 <ul>
 <li>M代表模型（Model）：负责业务对象和数据库的关系映射（ORM）；</li>
@@ -445,29 +453,29 @@
 <ul>
 <li>WSGI请求处理；</li>
 <li>控制器控制用户输入，通过映射列表将一个请求发送到一个合适的视图；</li>
-<li>程序向模型和模板发送数据—视图；</li>
-<li>数据库存取数据—模型；</li>
-<li>内容与展现分离，描述了数据如何展现—模板；</li>
-<li>将模板和数据整合，形成最终的展示页面—视图；</li>
-<li>控制器返回用户展示—django框架。</li>
+<li>程序向模型和模板发送数据---视图；</li>
+<li>数据库存取数据---模型；</li>
+<li>内容与展现分离，描述了数据如何展现---模板；</li>
+<li>将模板和数据整合，形成最终的展示页面---视图；</li>
+<li>控制器返回用户展示---django框架。</li>
 </ul>
 <p><strong>MTV和MVC的区别：</strong></p>
-<p>​    MVC为那些需要给同样数据提供多个视图的应用程序而设计。它很好地实现了数据层与表示层的分离，特别适用于开发与用户图形界面有关的应用程序。控制器用来处理用户命令以及程序事件；模型维护数据并提供数据访问方法；视图用于数据的显示。</p>
-<p>​    MTV中，视图是描述要展现的数据，而视图一般转交给模板。模板描述了数据如何展现。控制器则是指django框架本身，通过url配置，系统将一个请求发送到一个合适的视图。</p>
+<p>​ MVC为那些需要给同样数据提供多个视图的应用程序而设计。它很好地实现了数据层与表示层的分离，特别适用于开发与用户图形界面有关的应用程序。控制器用来处理用户命令以及程序事件；模型维护数据并提供数据访问方法；视图用于数据的显示。</p>
+<p>​ MTV中，视图是描述要展现的数据，而视图一般转交给模板。模板描述了数据如何展现。控制器则是指django框架本身，通过url配置，系统将一个请求发送到一个合适的视图。</p>
 <p><strong>其中MTV和MVC中的字母排序代表开发顺序，例如MTV即先开发数据库模型、网页模板、将数据库与网页模板关联的视图。</strong></p>
-<h4 id="Django项目"><a href="#Django项目" class="headerlink" title="Django项目"></a>Django项目</h4><img src="/20202020/509/904/django/django框架.jpg" style="zoom: 80%;">
-
+<h4 id="django项目">Django项目</h4>
+<p><img src="/20202020/509/904/django/django框架.jpg" style="zoom: 80%;"></p>
 <p>Django创建项目中各部分的作用;</p>
 <ul>
 <li><strong>djangoWProject</strong>：项目的容器；</li>
 <li><strong>manage.py</strong>：一个实用的命令行工具，可以让你以各种方式与该Django项目进行交互；</li>
-<li><strong>djangoWProject/__ init__.py</strong>：一个空文件，告诉Python该目录是一个Python包；</li>
+<li>**djangoWProject/__ init__.py**：一个空文件，告诉Python该目录是一个Python包；</li>
 <li><strong>djangoWProject/asgi.py</strong>：一个ASGI兼容的Web服务器的入口，便于运行项目。</li>
 <li><strong>djangoWProject/yrls.py</strong>：该Django项目的url声明，一份由Django1驱动的网站目录。</li>
 <li><strong>djangoWProject/wsgi.py</strong>：一个WSGI兼容的Web服务器的入口，便于运行项目。</li>
 </ul>
 <p><strong>问题：WSGI和ASGI的区别</strong></p>
-<p>​    WSGI：Web服务器网关接口(Python Web Server Gateway Interface，WSGI)，是为Python语言定义的Web服务器和Web应用程序或框架之间的一种简单而通用的接口。<br>​    ASGI：异步网关协议接口，一个介于网络协议服务和Python应用之间的标准接口，能够处理多种通用的协议类型，包括HTTP，HTTP2和WebSocket。<br>​    区别：WSGI是基于HTTP协议模式的，不支持WebSocket，而ASGI的诞生则是为了解决Python常用的WSGI不支持当前Web开发中的一些新的协议标准。同时，ASGI对于WSGI原有的模式的支持和WebSocket的扩展，即ASGI是WSGI的扩展。</p>
+<p>​ WSGI：Web服务器网关接口(Python Web Server Gateway Interface，WSGI)，是为Python语言定义的Web服务器和Web应用程序或框架之间的一种简单而通用的接口。 ​ ASGI：异步网关协议接口，一个介于网络协议服务和Python应用之间的标准接口，能够处理多种通用的协议类型，包括HTTP，HTTP2和WebSocket。 ​ 区别：WSGI是基于HTTP协议模式的，不支持WebSocket，而ASGI的诞生则是为了解决Python常用的WSGI不支持当前Web开发中的一些新的协议标准。同时，ASGI对于WSGI原有的模式的支持和WebSocket的扩展，即ASGI是WSGI的扩展。</p>
 
     </div>
 

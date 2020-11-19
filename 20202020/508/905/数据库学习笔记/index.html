@@ -21,21 +21,21 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="数据库学习笔记关系数据库 第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。 第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。 第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。  第三范式实例：将员工表中的部门信息与公司表的信息相">
+  <meta name="description" content="数据库学习笔记 关系数据库  第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。 第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。 第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。  第三范式实例：将员工表中的部门信">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库学习笔记">
 <meta property="og:url" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="数据库学习笔记关系数据库 第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。 第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。 第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。  第三范式实例：将员工表中的部门信息与公司表的信息相">
+<meta property="og:description" content="数据库学习笔记 关系数据库  第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。 第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。 第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。  第三范式实例：将员工表中的部门信">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/F:%5Cblog%5Chexo%5Csource_posts%5C%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C01.png">
+<meta property="og:image" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog/hexo/source_posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01.png">
 <meta property="og:image" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog/hexo/source/_posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/B7AC77F1-0BD4-4a87-96BC-99DE54F5F5FB.png">
 <meta property="article:published_time" content="2020-08-05T03:55:37.000Z">
 <meta property="article:modified_time" content="2020-08-10T05:22:13.530Z">
 <meta property="article:author" content="南歌EuanSu">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/F:%5Cblog%5Chexo%5Csource_posts%5C%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C01.png">
+<meta name="twitter:image" content="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog/hexo/source_posts/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/01.png">
 
 
 <link rel="canonical" href="http://euansu123.github.io/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
@@ -191,14 +191,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">56</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -303,16 +303,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h3 id="数据库学习笔记"><a href="#数据库学习笔记" class="headerlink" title="数据库学习笔记"></a>数据库学习笔记</h3><h4 id="关系数据库"><a href="#关系数据库" class="headerlink" title="关系数据库"></a>关系数据库</h4><ul>
+        <h3 id="数据库学习笔记">数据库学习笔记</h3>
+<h4 id="关系数据库">关系数据库</h4>
+<ul>
 <li>第一范式(1NF):在一个数据表中，如果每个属性值都是不可再分的最小数据单位，则称该表符合第一范式。</li>
 <li>第二范式(2NF):在第一范式的基础上，如果所有的非主属性都完全依赖于任意一个候选关键字，则符合第二范式。</li>
 <li>第三范式(3NF):在第二范式的基础上，数据表中如果不存在非关键字对任意候选关键字段的传递依赖则符合第三范式。</li>
 </ul>
 <p>第三范式实例：将员工表中的部门信息与公司表的信息相互依赖。</p>
 <a id="more"></a>
-
-<p><img src="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/F:%5Cblog%5Chexo%5Csource_posts%5C%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%5C01.png" alt></p>
-<h4 id="数据库的关系"><a href="#数据库的关系" class="headerlink" title="数据库的关系"></a>数据库的关系</h4><p>数据库的关系分为三种不同类型：</p>
+<p><img src="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog\hexo\source_posts\数据库学习笔记\01.png"></p>
+<h4 id="数据库的关系">数据库的关系</h4>
+<p>数据库的关系分为三种不同类型：</p>
 <ul>
 <li>一对一：在这种关系中，每个数据表中的关键字在对应的关系表中只能存在一个记录。</li>
 <li>一对多：主键数据表中只能含有一个记录，而在其关系表中这条记录可以与一个或者多个记录相关。</li>
@@ -323,18 +325,18 @@
 <p>外键必须建在主键上。</p>
 <p>一对一关系实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>一对多关系实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>多对多关系实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">###多对多实现</span><br><span class="line">#商品表</span><br><span class="line">create table product(</span><br><span class="line">	pid int primary key auto_increment,</span><br><span class="line">	pname varchar(20) not null,</span><br><span class="line">	price float,</span><br><span class="line">	num int comment &#39;商品库存&#39;</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">#订单表</span><br><span class="line">create table orders(</span><br><span class="line">	oid int primary key auto_increment,</span><br><span class="line">	dt datetime comment &#39;下单时间&#39;,</span><br><span class="line">	tel varchar(20) not null</span><br><span class="line">)charset&#x3D;utf8;</span><br><span class="line"></span><br><span class="line">#下单关系表</span><br><span class="line">create table orderlist(</span><br><span class="line">	pid int,</span><br><span class="line">	oid int,</span><br><span class="line">	foreign key (pid) references product(pid),</span><br><span class="line">	foreign key (oid) references orders(oid)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#录入测试数据</span><br><span class="line">insert into product (pname,price,num) values (&#39;牛仔裤&#39;,200,100)</span><br><span class="line">insert into product (pname,price,num) values (&#39;裙子&#39;,100,100)</span><br><span class="line">insert into product (pname,price,num) values (&#39;短裤&#39;,300,100)</span><br><span class="line"></span><br><span class="line">insert into orders values (1001,now(),&#39;123456&#39;)</span><br><span class="line">insert into orders values (1002,now(),&#39;123654&#39;)</span><br><span class="line">insert into orders values (1003,now(),&#39;456789&#39;)</span><br><span class="line"></span><br><span class="line">#录入多对多关系</span><br><span class="line"></span><br><span class="line">insert into orderlist values(1,1001);</span><br><span class="line">insert into orderlist values(2,1001);</span><br><span class="line">insert into orderlist values(1,1002);</span><br><span class="line">insert into orderlist values(3,1003);</span><br></pre></td></tr></table></figure>
-
-<h4 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h4><h4 id="预处理语句"><a href="#预处理语句" class="headerlink" title="预处理语句"></a>预处理语句</h4><h4 id="存储过程和函数"><a href="#存储过程和函数" class="headerlink" title="存储过程和函数"></a>存储过程和函数</h4><p>在数据库的执行查询的过程中，可能会遇到复杂的一组工作。因此有了存储过程和函数的应用。SQL语句的特点是一次只能执行一件工作，所以要完成一组工作就必须执行多个SQL语句，如果这样的工作是经常执行的，你就可以考虑将这些要执行的语句建立为Stored procedure元件。<br>将这些过程建立为Stored procedure元件，在之后要执行这些工作时，就可以调用、call这个建立好的Stored procedure元件。</p>
-<h4 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h4><img src="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog\hexo\source\_posts\数据库学习笔记\B7AC77F1-0BD4-4a87-96BC-99DE54F5F5FB.png">
-
-<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sql语言的分类</span><br><span class="line">#DDL（数据定义语言）</span><br><span class="line">create、alter、drop、declare</span><br><span class="line">#DML（数据控制语言）</span><br><span class="line">select、delete、update、insert</span><br><span class="line">#DQL（数据查询语言）</span><br><span class="line">select(where、and、or、in、like、order by、group by、join、...)</span><br><span class="line">#DCL（数据控制语言）</span><br><span class="line">grant、revoke、commit、rollback</span><br><span class="line">#myisam</span><br></pre></td></tr></table></figure>
-
+<h4 id="视图">视图</h4>
+<h4 id="预处理语句">预处理语句</h4>
+<h4 id="存储过程和函数">存储过程和函数</h4>
+<p>在数据库的执行查询的过程中，可能会遇到复杂的一组工作。因此有了存储过程和函数的应用。SQL语句的特点是一次只能执行一件工作，所以要完成一组工作就必须执行多个SQL语句，如果这样的工作是经常执行的，你就可以考虑将这些要执行的语句建立为Stored procedure元件。 将这些过程建立为Stored procedure元件，在之后要执行这些工作时，就可以调用、call这个建立好的Stored procedure元件。</p>
+<h4 id="触发器">触发器</h4>
+<p><img src="/20202020/508/905/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/blog\hexo\source\_posts\数据库学习笔记\B7AC77F1-0BD4-4a87-96BC-99DE54F5F5FB.png"></p>
+<h4 id="知识点">知识点</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sql语言的分类</span><br><span class="line">#DDL（数据定义语言）</span><br><span class="line">create、alter、drop、declare</span><br><span class="line">#DML（数据控制语言）</span><br><span class="line">select、delete、update、insert</span><br><span class="line">#DQL（数据查询语言）</span><br><span class="line">select(where、and、or、in、like、order by、group by、join、...)</span><br><span class="line">#DCL（数据控制语言）</span><br><span class="line">grant、revoke、commit、rollback</span><br><span class="line">#myisam</span><br></pre></td></tr></table></figure>
 
     </div>
 

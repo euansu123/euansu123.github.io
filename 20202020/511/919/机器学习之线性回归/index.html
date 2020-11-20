@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="机器学习之线性回归  线性回归（英语：linear regression）是利用称为线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系进行建模的一种回归分析。这种函数是一个或多个称为回归系数的模型参数的线性组合。只有一个自变量的情况称为简单回归，大于一个自变量情况的叫做多元回归（multivariable linear regression）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习之线性回归">
+<meta property="og:url" content="http://euansu123.github.io/20202020/511/919/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="机器学习之线性回归  线性回归（英语：linear regression）是利用称为线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系进行建模的一种回归分析。这种函数是一个或多个称为回归系数的模型参数的线性组合。只有一个自变量的情况称为简单回归，大于一个自变量情况的叫做多元回归（multivariable linear regression）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B%E5%88%A4%E6%96%AD.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E7%9B%AE%E6%A0%87.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E7%9A%84%E6%8E%A8%E5%AF%BC.jpg">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%A4%BA%E4%BE%8B.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E5%90%91%E9%87%8F%E5%8C%96.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E8%A1%A1%E9%87%8F%E6%A0%87%E5%87%86.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E8%A1%A1%E9%87%8F%E4%B9%8B%E5%9D%87%E6%96%B9%E8%AF%AF%E5%B7%AE.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E8%A1%A1%E9%87%8F%E4%B9%8B%E5%9D%87%E6%96%B9%E6%A0%B9%E8%AF%AF%E5%B7%AE.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E8%A1%A1%E9%87%8F%E4%B9%8B%E5%B9%B3%E5%9D%87%E7%BB%9D%E5%AF%B9%E8%AF%AF%E5%B7%AE.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E8%A1%A1%E9%87%8F%E4%B9%8BR_Squared.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/R2_Squared%E6%8E%A8%E5%AF%BC.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8E%A8%E5%AF%BC.jpg">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E8%AE%A1%E7%AE%97.jpg">
+<meta property="article:published_time" content="2020-11-19T11:20:55.000Z">
+<meta property="article:modified_time" content="2020-11-20T03:20:05.319Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.euansu.cn/static/images/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E9%A2%84%E6%B5%8B%E5%88%A4%E6%96%AD.png">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202020/511/919/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>机器学习之线性回归 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习之线性回归"><span class="nav-number">1.</span> <span class="nav-text">机器学习之线性回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单线性回归"><span class="nav-number">2.</span> <span class="nav-text">简单线性回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#衡量线性回归的指标"><span class="nav-number">3.</span> <span class="nav-text">衡量线性回归的指标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多元线性回归"><span class="nav-number">4.</span> <span class="nav-text">多元线性回归</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">人心有取舍，但求知行合一。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202020/511/919/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          机器学习之线性回归
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-19 19:20:55" itemprop="dateCreated datePublished" datetime="2020-11-19T19:20:55+08:00">2020-11-19</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-20 11:20:05" itemprop="dateModified" datetime="2020-11-20T11:20:05+08:00">2020-11-20</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202020/511/919/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202020/511/919/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="机器学习之线性回归">机器学习之线性回归</h1>
+<blockquote>
+<p><strong>线性回归</strong>（英语：<strong>linear regression</strong>）是利用称为线性回归方程的最小二乘函数对一个或多个自变量和因变量之间关系进行建模的一种回归分析。这种函数是一个或多个称为回归系数的模型参数的线性组合。只有一个自变量的情况称为简单回归，大于一个自变量情况的叫做多元回归（multivariable linear regression）。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="简单线性回归">简单线性回归</h1>
+<p>样本特征只有一个的线性回归问题，为简单线性回归，如房屋价格-房屋面积。</p>
+<p>将横坐标作为x轴，纵坐标作为y轴，每一个点为<code>(X(i),Y(i))</code>，那么我们所期望寻找的直线就是<code>y=ax+b</code>，当给出一个新的点X(j)的时候，我们希望通过<code>y=ax+b</code>预测出y(j)的值。</p>
+<p>既然是预测，就存在误差，我们如何确定自己的预测结果好呢？对于线性问题，最简单的判断就是预测的y与真实的y尽可能小。</p>
+<img src="http://img.euansu.cn/static/images/简单线性回归预测判断.png">
+<ul>
+<li>不使用直接相减的方式，由于差值有正有负，会抵消。</li>
+<li>不适用绝对值的方式，由于绝对值函数存在不可导的点。</li>
+</ul>
+<p>如下，目标也即损失函数。</p>
+<img src="http://img.euansu.cn/static/images/简单线性回归的目标.png">
+<p>通过简单的推导，我们得到了a和b的值：</p>
+<img src="http://img.euansu.cn/static/images/简单线性回归损失函数的推导.jpg">
+<p>如下是简单线性回归的代码实现以及图像展示：</p>
+<img src="http://img.euansu.cn/static/images/简单线性回归示例.png">
+<p>接下来考虑将我们的方法进行向量化，向量化可以去掉循环，使得变成向量的一次点乘。</p>
+<img src="http://img.euansu.cn/static/images/简单线性回归的向量化.png">
+<p>完成上面的步骤后，我们将函数进行封装，以便运行在Pycharm中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 封装成类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleLinearRegression</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a_ = <span class="literal">None</span></span><br><span class="line">        self.b_ = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self,X_train,y_train)</span>:</span></span><br><span class="line">        X_mean = np.mean(X_train)</span><br><span class="line">        y_mean = np.mean(y_train)</span><br><span class="line"></span><br><span class="line">        molecule = <span class="number">0.0</span> <span class="comment"># 分子</span></span><br><span class="line">        denominator = <span class="number">0.0</span> <span class="comment"># 分母</span></span><br><span class="line">        <span class="keyword">for</span> X_i,y_i <span class="keyword">in</span> zip(X_train,y_train):</span><br><span class="line">            molecule += (X_i - X_mean)*(y_i - y_mean)</span><br><span class="line">            denominator += (X_i - X_mean)**<span class="number">2</span></span><br><span class="line">        self.a_ = molecule/denominator</span><br><span class="line">        self.b_ = y_mean - self.a_ * X_mean</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit_vector</span><span class="params">(self,X_train,y_train)</span>:</span></span><br><span class="line">        X_mean = np.mean(X_train)</span><br><span class="line">        y_mean = np.mean(y_train)</span><br><span class="line"></span><br><span class="line">        molecule = <span class="number">0.0</span> <span class="comment"># 分子</span></span><br><span class="line">        denominator = <span class="number">0.0</span> <span class="comment"># 分母</span></span><br><span class="line">        molecule = (X_train - X_mean).dot(y_train - y_mean)</span><br><span class="line">        denominator = (X_train - X_mean).dot(X_train - X_mean)</span><br><span class="line">        self.a_ = molecule/denominator</span><br><span class="line">        self.b_ = y_mean - self.a_ * X_mean</span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self,X_topredict)</span>:</span></span><br><span class="line">        y_predict = []</span><br><span class="line">        <span class="keyword">for</span> x_topredict <span class="keyword">in</span> X_topredict:</span><br><span class="line">            y_temp = self._predict(x_topredict)</span><br><span class="line">            y_predict.append(y_temp)</span><br><span class="line">        <span class="comment"># y_predict = [ self._predict(x_topredict) for x_topredict in X_topredict]</span></span><br><span class="line">        <span class="comment"># 这里是需要返回要预测的结果</span></span><br><span class="line">        <span class="keyword">return</span> np.array(y_predict)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_predict</span><span class="params">(self,x_topredict)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.a_*x_topredict + self.b_</span><br></pre></td></tr></table></figure>
+<h1 id="衡量线性回归的指标">衡量线性回归的指标</h1>
+<img src="http://img.euansu.cn/static/images/线性回归算法的衡量标准.png">
+<p>但如上的衡量标准是和样本数m有关的，因为越多的数据量产生的误差和可能会更大，但是毫无疑问越多的数据量训练出来的模型更好，为此需要一个取消误差的方法，如下三种方法</p>
+<img src="http://img.euansu.cn/static/images/线性回归算法的衡量之均方误差.png">
+<p>MSE的缺点，量纲不准确，如果y的单位是万元，平方后就变成了万元的平方，这可能会给我们的计算带来一些不便。</p>
+<img src="http://img.euansu.cn/static/images/线性回归算法的衡量之均方根误差.png">
+<p>RMSE的缺点：平方累加后再开根号，如果某些预测结果和真实结果相差非常大，那么RMSE的结果会相对变大，所以RMSE有放大误差的趋势。</p>
+<img src="http://img.euansu.cn/static/images/线性回归算法的衡量之平均绝对误差.png">
+<p>MAE直接就反应的是预测结果和真实结果直接的差距。</p>
+<p>虽然计算得到了线性回归算法的均方误差、均方根误差、平均绝对误差，但还是不能直观的反应算法的优劣，算法的误差小，最小能到那里？这是我们所关心的，于是有了R_Squared。</p>
+<img src="http://img.euansu.cn/static/images/线性回归算法的衡量之R_Squared.png">
+<p>r2_squred公式推导：</p>
+<img src="http://img.euansu.cn/static/images/R2_Squared推导.png">
+<p>实例运行在<a href="https://gitee.com/euansu/machine-learning-study/blob/master/%E8%A1%A1%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%AE%97%E6%B3%95%E7%9A%84%E6%8C%87%E6%A0%87.ipynb" target="_blank" rel="noopener">码云仓库</a>。</p>
+<h1 id="多元线性回归">多元线性回归</h1>
+<img src="http://img.euansu.cn/static/images/多元线性回归.png">
+<p>多元线性回归就是将特征值的数量增加到多个，对于多元线性回归的计算有以下推导过程：</p>
+<img src="http://img.euansu.cn/static/images/多元线性回归推导.jpg">
+<p>令求导后的损失函数等于0，可以导出theta为如下：</p>
+<img src="http://img.euansu.cn/static/images/多元线性回归损失计算.jpg">
+<p>根据如上，我们可以用代码实现一个多元线性回归模型。</p>
+<p>多元线性的完整实现在<a href="https://gitee.com/euansu/machine-learning-study/blob/master/%E5%A4%9A%E5%85%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%AE%9E%E7%8E%B0.ipynb" target="_blank" rel="noopener">码云仓库</a>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202020/511/914/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BKNN%E7%AE%97%E6%B3%95/" rel="prev" title="机器学习之KNN算法">
+                  <i class="fa fa-chevron-left"></i> 机器学习之KNN算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202020/511/919/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

@@ -21,19 +21,26 @@
     var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;机器学习之梯度下降法  梯度下降法是一种非常通用的优化算法，能够为大范围的问题找到最优解。梯度下降法的中心思想就是迭代地调整参数从而使成本函数最小化。  梯度下降法的模拟">
+  <meta name="description" content="机器学习之梯度下降法  梯度下降法是一种非常通用的优化算法，能够为大范围的问题找到最优解。梯度下降法的中心思想就是迭代地调整参数从而使成本函数最小化。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习之梯度下降法">
 <meta property="og:url" content="http://euansu123.github.io/20202020/511/920/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/index.html">
 <meta property="og:site_name" content="南歌Euansu的博客">
-<meta property="og:description" content="var meting_api&#x3D;&#39;http:&#x2F;&#x2F;xxx&#x2F;api.php?server&#x3D;:server&amp;type&#x3D;:type&amp;id&#x3D;:id&amp;r&#x3D;:r&#39;机器学习之梯度下降法  梯度下降法是一种非常通用的优化算法，能够为大范围的问题找到最优解。梯度下降法的中心思想就是迭代地调整参数从而使成本函数最小化。  梯度下降法的模拟">
+<meta property="og:description" content="机器学习之梯度下降法  梯度下降法是一种非常通用的优化算法，能够为大范围的问题找到最优解。梯度下降法的中心思想就是迭代地调整参数从而使成本函数最小化。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%8E%87%E5%A4%AA%E5%B0%8Fpng">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%8E%87%E5%A4%AA%E5%A4%A7.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E5%A4%9A%E5%85%83%E6%A2%AF%E5%BA%A6%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC.jpg">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E5%8E%9F%E7%90%86%E7%A4%BA%E6%84%8F.png">
 <meta property="article:published_time" content="2020-11-20T06:57:51.000Z">
-<meta property="article:modified_time" content="2020-11-22T04:00:10.812Z">
+<meta property="article:modified_time" content="2020-12-18T10:45:26.023Z">
 <meta property="article:author" content="南歌EuanSu">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.euansu.cn/static/images/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
 
 
 <link rel="canonical" href="http://euansu123.github.io/20202020/511/920/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/">
@@ -174,7 +181,7 @@
       </ul>
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习之梯度下降法"><span class="nav-number">1.</span> <span class="nav-text">机器学习之梯度下降法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降法的模拟"><span class="nav-number">2.</span> <span class="nav-text">梯度下降法的模拟</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器学习之梯度下降法"><span class="nav-number">1.</span> <span class="nav-text">机器学习之梯度下降法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降法的模拟"><span class="nav-number">2.</span> <span class="nav-text">梯度下降法的模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多元梯度下降法"><span class="nav-number">3.</span> <span class="nav-text">多元梯度下降法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#随机梯度下降法"><span class="nav-number">4.</span> <span class="nav-text">随机梯度下降法</span></a></li></ol></div>
       </section>
       <!--/noindex-->
       <section class="site-overview-wrap sidebar-panel">
@@ -274,7 +281,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-11-22 12:00:10" itemprop="dateModified" datetime="2020-11-22T12:00:10+08:00">2020-11-22</time>
+        <time title="修改时间：2020-12-18 18:45:26" itemprop="dateModified" datetime="2020-12-18T18:45:26+08:00">2020-12-18</time>
       </span>
 
   
@@ -305,7 +312,25 @@
 <blockquote>
 <p>梯度下降法是一种非常通用的优化算法，能够为大范围的问题找到最优解。梯度下降法的中心思想就是迭代地调整参数从而使成本函数最小化。</p>
 </blockquote>
+<a id="more"></a>
+<p>具体来说，首先使用一个随机的theta值（这被称为随机初始化），然后逐步改进，每次踏出一步，每一步都尝试降低一点成本函数（如MSE），直到算法收敛出一个最小值。</p>
+<img src="http://img.euansu.cn/static/images/梯度下降法示意图.png">
+<p>梯度下降法中一个重要参数是每一步的步长，这取决于超参数学习率。如果学习率太低，算法需要经过大量迭代才能够收敛，这将耗费很长时间。</p>
+<img src="http://img.euansu.cn/static/images/梯度下降法学习率太小png">
+<p>反过来说，如果学习率太高，那你可能越过山谷直接到达山的另一边，甚至有可能比之前的七点还要高。这回导致算法发散，值越来越大，最后无法找到好的解决方案。</p>
+<img src="http://img.euansu.cn/static/images/梯度下降法学习率太大.png">
+<p>​</p>
 <h1 id="梯度下降法的模拟">梯度下降法的模拟</h1>
+<p>如下是定义了一个损失函数，损失函数相对于参数theta的变化示意图，我们希望找到使得损失函数取得最小值的theta，这也就是梯度下降法所要做的工作。</p>
+<img src="http://img.euansu.cn/static/images/梯度下降法损失函数.png">
+<p>梯度下降法的模拟在<a href="https://gitee.com/euansu/machine-learning-study/blob/master/Simple_Gradient_descent.ipynb" target="_blank" rel="noopener">码云仓库</a>。</p>
+<h1 id="多元梯度下降法">多元梯度下降法</h1>
+<p>多元梯度下降法即在一元梯度下降法的基础上对多个特征量求导取得损失函数的最小值，推导过程如下图。</p>
+<img src="http://img.euansu.cn/static/images/多元梯度公式推导.jpg">
+<p>根据如上推导，通过代码可以实现多元梯度下降法，多元梯度下降法的实现在<a href="https://gitee.com/euansu/machine-learning-study/blob/master/Multi_Gradient_Descent.ipynb" target="_blank" rel="noopener">码云仓库</a>。</p>
+<h1 id="随机梯度下降法">随机梯度下降法</h1>
+<img src="http://img.euansu.cn/static/images/随机梯度下降法原理示意.png">
+<p>随机梯度下降法原理示意.png</p>
 
     </div>
 
@@ -374,8 +399,8 @@
 
 <div class="copyright">
   
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

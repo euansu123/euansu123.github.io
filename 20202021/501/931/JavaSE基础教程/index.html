@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="JavaSE基础教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE基础教程">
+<meta property="og:url" content="http://euansu123.github.io/20202021/501/931/JavaSE%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="JavaSE基础教程">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%B3%A8%E9%87%8A.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E5%85%B3%E9%94%AE%E5%AD%97.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E6%A0%87%E8%AF%86%E7%AC%A6.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/%E5%BC%B1%E7%B1%BB%E5%9E%8B%E8%AF%AD%E8%A8%80.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.jpg">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E5%8F%98%E9%87%8F%E6%89%A9%E5%B1%95.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7%E5%88%97%E8%A1%A8.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E7%9A%84%E5%8C%85%E6%9C%BA%E5%88%B6.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E5%AF%BC%E5%8C%85.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/JavaDoc%E5%91%BD%E4%BB%A4.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/javadoc%E5%91%BD%E4%BB%A4%E8%A1%8C.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/idea%E7%94%9F%E6%88%90java%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3.png">
+<meta property="article:published_time" content="2021-01-31T14:03:49.000Z">
+<meta property="article:modified_time" content="2021-02-02T02:41:54.210Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.euansu.cn/static/images/java%E6%B3%A8%E9%87%8A.png">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202021/501/931/JavaSE%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JavaSE基础教程 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#javase基础教程"><span class="nav-number">1.</span> <span class="nav-text">JavaSE基础教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">1.1.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标识符"><span class="nav-number">1.2.</span> <span class="nav-text">标识符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">1.3.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强类型语言和弱类型语言"><span class="nav-number">1.3.1.</span> <span class="nav-text">强类型语言和弱类型语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java的数据类型"><span class="nav-number">1.3.2.</span> <span class="nav-text">Java的数据类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java变量"><span class="nav-number">1.4.</span> <span class="nav-text">Java变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java变量类型转换"><span class="nav-number">1.5.</span> <span class="nav-text">Java变量类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java变量作用域"><span class="nav-number">1.6.</span> <span class="nav-text">Java变量作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java常量"><span class="nav-number">1.7.</span> <span class="nav-text">Java常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java运算符"><span class="nav-number">1.8.</span> <span class="nav-text">Java运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二元运算"><span class="nav-number">1.8.1.</span> <span class="nav-text">二元运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同类型的运算"><span class="nav-number">1.8.2.</span> <span class="nav-text">不同类型的运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关系运算"><span class="nav-number">1.8.3.</span> <span class="nav-text">关系运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自增自减运算"><span class="nav-number">1.8.4.</span> <span class="nav-text">自增自减运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑运算"><span class="nav-number">1.8.5.</span> <span class="nav-text">逻辑运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算"><span class="nav-number">1.8.6.</span> <span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串连接"><span class="nav-number">1.8.7.</span> <span class="nav-text">字符串连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三元运算符"><span class="nav-number">1.8.8.</span> <span class="nav-text">三元运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java包机制"><span class="nav-number">1.9.</span> <span class="nav-text">Java包机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javadoc文档"><span class="nav-number">1.10.</span> <span class="nav-text">JavaDoc文档</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">人心有取舍，但求知行合一。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202021/501/931/JavaSE%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaSE基础教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-31 22:03:49" itemprop="dateCreated datePublished" datetime="2021-01-31T22:03:49+08:00">2021-01-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-02 10:41:54" itemprop="dateModified" datetime="2021-02-02T10:41:54+08:00">2021-02-02</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202021/501/931/JavaSE%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202021/501/931/JavaSE%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="javase基础教程">JavaSE基础教程</h1>
+<a id="more"></a>
+<h2 id="注释">注释</h2>
+<p>Java中的注释有三种：单行注释、多行注释、文档注释</p>
+<ul>
+<li>单行注释：//</li>
+<li>多行注释：/**/</li>
+<li>文档注释：/** */</li>
+</ul>
+<img src="http://img.euansu.cn/static/images/java注释.png">
+<h2 id="标识符">标识符</h2>
+<p>在命名标识符的时候，我们要特别注意不能与以下关键字相冲突。</p>
+<img src="http://img.euansu.cn/static/images/Java关键字.png">
+<p>Java标识符命名规则及注意点：</p>
+<ul>
+<li>所有的标识符都应该以字母（A-Z或a-z）、美元符、或者下划线开始。</li>
+<li>首字符之后可以是字母（A-Z或a-z）、美元符、下划线或数字的任何字符组合。</li>
+<li>不能使用关键字作为变量名或方法名。</li>
+<li>标识符是大小写敏感的。</li>
+<li>可以使用中文命名标识符，但不建议。</li>
+</ul>
+<p>合法标识符举例：age、Age、$salary、_value</p>
+<img src="http://img.euansu.cn/static/images/Java标识符.png">
+<h2 id="数据类型">数据类型</h2>
+<h3 id="强类型语言和弱类型语言">强类型语言和弱类型语言</h3>
+<ul>
+<li><p>强类型语言：要求变量的使用严格符合规定，总是强调变量的数据类型，要求变量先定义后使用。如下所示的，num是整型变量，而str是字符型变量，如果没有进行转换就直接进行运算就会出现TypeError的错误。常见的强类型语言有：Java、Python、</p>
+<img src="http://img.euansu.cn/static/images/Java未初始化变量.png"></li>
+<li><p>弱类型语言：与强类型定义相反，弱类型语言的数据类型可以被忽略，一个数据变量可以被赋不同的值。例如如下所示的JS字符型与数字的运算会直接进行转化。</p>
+<img src="http://img.euansu.cn/static/images/弱类型语言.png"></li>
+</ul>
+<h3 id="java的数据类型">Java的数据类型</h3>
+<p>Java的数据类型分为两大类：基本类型、引用类型。</p>
+<img src="http://img.euansu.cn/static/images/Java数据类型.jpg">
+<h2 id="java变量">Java变量</h2>
+<p>变量的定义方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type varName [=value] [&#123;,varName[=value]&#125;];</span><br><span class="line"><span class="comment">//数据类型 变量名 = 值，可以使用逗号来隔开多个同类型变量。</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意事项：</strong></p>
+<ol type="1">
+<li>Java是一种强类型语言，每个变量都必须声明其类型；</li>
+<li>变量名必须是合法的标识符；</li>
+<li>变量声明是一条完整的语句，因此每一个声明都必须以分号结束。</li>
+</ol>
+<p><strong>代码示例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaDataType</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String a = <span class="string">"南歌EuanSu"</span>;</span><br><span class="line">        System.out.println(a);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Java变量</span></span><br><span class="line">        <span class="comment">// 整数类型</span></span><br><span class="line">        <span class="comment">// 1.byte占1个字节范围：-128~127</span></span><br><span class="line">        <span class="keyword">byte</span> b1 = <span class="number">10</span>;</span><br><span class="line">        <span class="comment">// 2.short占2个字节范围：-32768~32767</span></span><br><span class="line">        <span class="keyword">short</span> s1 = <span class="number">1234</span>;</span><br><span class="line">        <span class="comment">// 3.int占4个字节范围：-2147483648~2147483647</span></span><br><span class="line">        <span class="keyword">int</span> i1 = <span class="number">45261</span>;</span><br><span class="line">        <span class="comment">// 4.long占8个字节范围：-9223372036854775808~9223372036854775807</span></span><br><span class="line">        <span class="keyword">long</span> l1 = <span class="number">9223372</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 浮点类型</span></span><br><span class="line">        <span class="comment">// 1.float占4个字节，float定义的时候需要在最后加F。</span></span><br><span class="line">        <span class="keyword">float</span> f1 = <span class="number">50.1F</span>;</span><br><span class="line">        <span class="comment">// 2.double占8个字节</span></span><br><span class="line">        <span class="keyword">double</span> d1 = <span class="number">3.145</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 字符类型</span></span><br><span class="line">        <span class="comment">// char占两个字节，这里特别注意需要用单引号，而不是双引号</span></span><br><span class="line">        <span class="keyword">char</span> c1 = <span class="string">'南'</span>;</span><br><span class="line">        <span class="comment">// 字符串，String不是关键字，而是类</span></span><br><span class="line">        String name = <span class="string">"南歌EuanSu"</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//boolean类型：占1位，其值只有true和false两个</span></span><br><span class="line">        <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Java变量扩展：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaDataTypeExpand</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 整数拓展，进制：二进制0b、十进制、八进制0、十六进制0x</span></span><br><span class="line">        <span class="keyword">int</span> i1 = <span class="number">0b0010</span>;</span><br><span class="line">        <span class="keyword">int</span> i2 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> i3 = <span class="number">0002</span>;</span><br><span class="line">        <span class="keyword">int</span> i4 = <span class="number">0xA</span>; <span class="comment">// 十六进制0x，0~9 A~F</span></span><br><span class="line"></span><br><span class="line">        System.out.println(i1);</span><br><span class="line">        System.out.println(i2);</span><br><span class="line">        System.out.println(i3);</span><br><span class="line">        System.out.println(i4);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"============浮点数拓展==========="</span>);</span><br><span class="line">        <span class="keyword">float</span> f1 = <span class="number">0.1f</span>;</span><br><span class="line">        <span class="keyword">double</span> d1 = <span class="number">1.0</span>/<span class="number">10</span>;</span><br><span class="line">        System.out.println(f1 == d1);</span><br><span class="line">        System.out.println(f1);</span><br><span class="line">        System.out.println(d1);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 最好完全避免使用float进行数据比较，float是对数据的舍入误差，是一个大约的值，接近但并不等于</span></span><br><span class="line">        <span class="keyword">float</span> f2 = <span class="number">12154613156155f</span>;</span><br><span class="line">        <span class="keyword">double</span> d2 = f2+<span class="number">1</span>;</span><br><span class="line">        System.out.println(d2 == f2);</span><br><span class="line">        System.out.println(f2);</span><br><span class="line">        System.out.println(d2);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"============字符拓展==========="</span>);</span><br><span class="line">        <span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">char</span> c2 = <span class="string">'中'</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(c1);</span><br><span class="line">        System.out.println((<span class="keyword">int</span>)c1); <span class="comment">// 强制转换</span></span><br><span class="line"></span><br><span class="line">        System.out.println(c2);</span><br><span class="line">        System.out.println((<span class="keyword">int</span>)c2);</span><br><span class="line">        <span class="comment">// 所有字符的本质还是数字</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"============转义字符==========="</span>);</span><br><span class="line">        <span class="comment">// 转义字符</span></span><br><span class="line">        <span class="comment">// \t 制表符</span></span><br><span class="line">        <span class="comment">// \n 换行符</span></span><br><span class="line">        System.out.println(<span class="string">"Hello\tWorld"</span>);</span><br><span class="line">        System.out.println(<span class="string">"Hello\nWorld"</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/java变量扩展.png">
+<h2 id="java变量类型转换">Java变量类型转换</h2>
+<p>由于Java是强类型语言，所以不同类型的运算，需要用到类型转换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaDataTypeChange</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Java数据类型优先级（由低到高）：byte,short,char—&gt; int —&gt; long—&gt; float —&gt; double。</span></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">128</span>;</span><br><span class="line">        <span class="keyword">byte</span> b = (<span class="keyword">byte</span>) i; <span class="comment">// b = -128,出现了内存溢出，强制转换</span></span><br><span class="line">        <span class="keyword">double</span> c = i; <span class="comment">// c = 128.0 ，由低优先级向高优先级，或者说由表示范围较小向表示范围较大转换，无需进行强制类型转换</span></span><br><span class="line"></span><br><span class="line">        System.out.println(i);</span><br><span class="line">        System.out.println(b);</span><br><span class="line">        System.out.println(c);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 注意点：</span></span><br><span class="line"><span class="comment">            1.不能对布尔值进行转换。</span></span><br><span class="line"><span class="comment">            2.不能把对象类型转换为不相干的类型。</span></span><br><span class="line"><span class="comment">            3.大容量转换到低容量的时候，强制转换，反之则会进行自动转换，</span></span><br><span class="line"><span class="comment">            4.转换的时候可能存在内存溢出或者精度问题。</span></span><br><span class="line"><span class="comment">            5.浮点数到整数的转换是通过舍弃小数得到的，而不是四舍五入。</span></span><br><span class="line"><span class="comment">        * */</span></span><br><span class="line">        System.out.println((<span class="keyword">int</span>)<span class="number">23.7</span>); <span class="comment">// 结果是23</span></span><br><span class="line">        System.out.println((<span class="keyword">int</span>)-<span class="number">23.7f</span>); <span class="comment">// 结果是-23</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">int</span> d = c1 + <span class="number">1</span>;</span><br><span class="line">        System.out.println(d); <span class="comment">// 结果是98</span></span><br><span class="line">        System.out.println((<span class="keyword">char</span>)d); <span class="comment">// 结果是b</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="java变量作用域">Java变量作用域</h2>
+<p>Java变量是程序中最基本的存储单元，其要素包括变量名、变量类型和<font color="red">作用域</font>。</p>
+<p>变量的作用域有三种：类变量、实例变量和局部变量。</p>
+<p><strong>局部变量：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaVariableScope</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// main方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 局部变量：在方法中，使用之前必须声明和初始化值。</span></span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">10</span>;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// System.out.println(i);在main方法中定义的局部变量i不能在其他方法中使用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>实例变量：</strong></p>
+<p>实例变量从属于对象，因此不用特定于哪个方法下使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaVariableScope</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实例变量：从属于对象，如果不进行初始化，会输出这个类型的默认值</span></span><br><span class="line">    <span class="comment">// 布尔值默认为false，除了基本类型其余的默认值都是null</span></span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// main方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 变量类型 变量名 = new JavaVariableScope()</span></span><br><span class="line">        JavaVariableScope javaVariableScope = <span class="keyword">new</span> JavaVariableScope();</span><br><span class="line">        System.out.println(javaVariableScope.name);</span><br><span class="line">        System.out.println(javaVariableScope.age);</span><br><span class="line"></span><br><span class="line">        add();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 其他方法</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span></span>&#123;</span><br><span class="line">        JavaVariableScope javaVariableScope = <span class="keyword">new</span> JavaVariableScope();</span><br><span class="line">        System.out.println(javaVariableScope.name);</span><br><span class="line">        System.out.println(javaVariableScope.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>类变量：</strong></p>
+<p>类变量从属于类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class JavaVariableScope &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 类变量 static，从属于类JavaVariableScope</span><br><span class="line">    static double salary &#x3D; 2500;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; main方法</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 类变量 static</span><br><span class="line">        System.out.println(salary);</span><br><span class="line">        add();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 其他方法</span><br><span class="line">    static public void add()&#123;</span><br><span class="line">        System.out.println(salary);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="java常量">Java常量</h2>
+<p>常量（Constant）：初始化（initialize）后不能再改变值，<font color="red">不会变动的值</font>,常量可以理解为特殊的变量，当常量的值被设定后，在程序运行的过程中不允许被改变。</p>
+<p><strong>Java常量的定义：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> 变量类型 常量名 = 值;</span><br><span class="line"><span class="comment">// 常量名一般使用大写字符。</span></span><br></pre></td></tr></table></figure>
+<p><strong>Java常量示例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaConstant</span> </span>&#123;</span><br><span class="line">    <span class="comment">// final作为修饰符，不用区分先后位置</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> PI = <span class="number">3.14</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(PI);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="java运算符">Java运算符</h2>
+<img src="http://img.euansu.cn/static/images/Java运算符优先级列表.png">
+<h3 id="二元运算">二元运算</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 二元运算符</span></span><br><span class="line">        <span class="comment">// Ctrl + D ： 复制当前行到下一行</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">25</span>;</span><br><span class="line">        <span class="keyword">int</span> d = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(a+b);</span><br><span class="line">        System.out.println(a-b);</span><br><span class="line">        System.out.println(a*b);</span><br><span class="line">        System.out.println(a/(<span class="keyword">double</span>)b); <span class="comment">// 除法时要特别注意小数的问题</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="不同类型的运算">不同类型的运算</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> a = <span class="number">12312345671231124L</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">123</span>;</span><br><span class="line">        <span class="keyword">short</span> c = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">byte</span> d = <span class="number">5</span>;</span><br><span class="line">        System.out.println(a+b+c+d); <span class="comment">// 结果是long类型</span></span><br><span class="line">        System.out.println(b+c+d); <span class="comment">// 结果是int类型</span></span><br><span class="line">        System.out.println(c+d); <span class="comment">// 结果是int类型</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="关系运算">关系运算</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo03</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 关系运算符的返回结果：正确或者错误</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">36</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(a&gt;b); <span class="comment">// false</span></span><br><span class="line">        System.out.println(a&lt;b); <span class="comment">// true</span></span><br><span class="line">        System.out.println(a==b); <span class="comment">// false</span></span><br><span class="line">        System.out.println(a!=b); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        System.out.println(c%a); <span class="comment">//取余（模运算），结果为6</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="自增自减运算">自增自减运算</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo04</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 自增和自减</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> b = a++; <span class="comment">// 执行完这行代码后，先给b赋值，再自增</span></span><br><span class="line">        <span class="comment">// a++ a = a+1;</span></span><br><span class="line">        System.out.println(a); <span class="comment">// a=4</span></span><br><span class="line">        <span class="keyword">int</span> c = ++a; <span class="comment">// 执行完这行代码前，先自增，再给c赋值</span></span><br><span class="line">        <span class="comment">// ++a a = a+1;</span></span><br><span class="line"></span><br><span class="line">        System.out.println(a); <span class="comment">// 5</span></span><br><span class="line">        System.out.println(b); <span class="comment">// 3</span></span><br><span class="line">        System.out.println(c); <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 幂运算 2^3 2*2*2=8</span></span><br><span class="line">        <span class="keyword">double</span> pow = Math.pow(<span class="number">2</span>,<span class="number">3</span>); <span class="comment">// 2的3次方</span></span><br><span class="line">        System.out.println(pow);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="逻辑运算">逻辑运算</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 逻辑运算符</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo05</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 与 (and) 或(or) 非 (not)</span></span><br><span class="line">        <span class="keyword">boolean</span> a = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> b = <span class="keyword">false</span>;</span><br><span class="line">        System.out.println(<span class="string">"a &amp;&amp; b:"</span>+(a&amp;&amp;b)); <span class="comment">// 逻辑与运算：两个变量都为真，结果才为true</span></span><br><span class="line">        System.out.println(<span class="string">"a or b:"</span>+(a||b)); <span class="comment">// 逻辑或运算：两个变量有一个为真，则结果为true</span></span><br><span class="line">        System.out.println(<span class="string">"! (a &amp;&amp; b):"</span>+!(a&amp;&amp;b)); <span class="comment">// 如果是真，则变为假，如果是假则变为真</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 短路运算</span></span><br><span class="line">        <span class="keyword">int</span> c = <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">boolean</span> d = (c&lt;<span class="number">4</span>)&amp;&amp;(c++&lt;<span class="number">4</span>);</span><br><span class="line">        System.out.println(d);</span><br><span class="line">        System.out.println(c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="位运算">位运算</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 位运算</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo06</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="number">2</span>&lt;&lt;<span class="number">3</span>);</span><br><span class="line">        <span class="comment">// 移位运算比直接计算2*8=16更快</span></span><br><span class="line">        <span class="comment">// 2*8=2*2^3</span></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        &lt;&lt; : 左移运算符</span></span><br><span class="line"><span class="comment">        0000 0010 2</span></span><br><span class="line"><span class="comment">        2&lt;&lt;3:</span></span><br><span class="line"><span class="comment">        0000 0100 4</span></span><br><span class="line"><span class="comment">        0000 1000 8</span></span><br><span class="line"><span class="comment">        0001 0000 10</span></span><br><span class="line"><span class="comment">        * */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="字符串连接">字符串连接</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字符串连接符</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo07</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        a+=b; <span class="comment">// a = a + b;</span></span><br><span class="line">        System.out.println(a);</span><br><span class="line">        a-=b; <span class="comment">// a = a - b;</span></span><br><span class="line">        System.out.println(a);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 字符串连接符 + ，如果+号出现String会直接进行拼接，</span></span><br><span class="line">        System.out.println(<span class="string">""</span>+a+b); <span class="comment">// 直接转化为String，1010</span></span><br><span class="line">        System.out.println(a+b+<span class="string">""</span>); <span class="comment">// 先运算结束后，进行拼接，20</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三元运算符">三元运算符</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Operator;</span><br><span class="line"><span class="comment">// 字符串连接符</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo07</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        a+=b; <span class="comment">// a = a + b;</span></span><br><span class="line">        System.out.println(a);</span><br><span class="line">        a-=b; <span class="comment">// a = a - b;</span></span><br><span class="line">        System.out.println(a);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 字符串连接符 + ，如果+号出现String会直接进行拼接，</span></span><br><span class="line">        System.out.println(<span class="string">""</span>+a+b); <span class="comment">// 直接转化为String，1010</span></span><br><span class="line">        System.out.println(a+b+<span class="string">""</span>); <span class="comment">// 先运算结束后，进行拼接，20</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="java包机制">Java包机制</h2>
+<p>为了更好地组织类，Java提供了包机制，用于区别类名的命名空间。</p>
+<p><strong>包机制的语法格式：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> pkg1[.pkg2[.pkg3...]];</span><br></pre></td></tr></table></figure>
+<p><font color="red">一般使用公司域名作为包名</font>，以百度为例，展示Java的包机制。</p>
+<img src="http://img.euansu.cn/static/images/Java的包机制.png">
+<p><strong>Java导包的语法：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">package</span>[.package2...].(classname|*);</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/Java导包.png">
+<h2 id="javadoc文档">JavaDoc文档</h2>
+<p>Javadoc命令是用来生成自己的API文档。</p>
+<p><strong>JavaDoc命令的参数信息：</strong></p>
+<ul>
+<li><span class="citation" data-cites="author">@author</span> 作者名</li>
+<li><span class="citation" data-cites="version">@version</span> 版本号</li>
+<li><span class="citation" data-cites="since">@since</span> 指明需要最早使用的jdk版本</li>
+<li>param 参数名</li>
+<li>return 返回值情况</li>
+<li>throws 异常抛出情况</li>
+</ul>
+<img src="http://img.euansu.cn/static/images/JavaDoc命令.png">
+<p>用cmd命令行生成Java文档。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javadoc -encoding UTF-8 -charset UTF-8 Doc.java</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/javadoc命令行.png">
+<p>也可以使用IDEA生成Java文档。</p>
+<img src="http://img.euansu.cn/static/images/idea生成java帮助文档.png">
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202021/501/922/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8BPCA%E9%99%8D%E7%BB%B4/" rel="prev" title="机器学习之PCA降维">
+                  <i class="fa fa-chevron-left"></i> 机器学习之PCA降维
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202021/501/931/JavaSE%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

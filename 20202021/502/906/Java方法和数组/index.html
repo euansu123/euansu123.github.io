@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"euansu123.github.io","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="Java方法和数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java方法和数组">
+<meta property="og:url" content="http://euansu123.github.io/20202021/502/906/Java%E6%96%B9%E6%B3%95%E5%92%8C%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="南歌Euansu的博客">
+<meta property="og:description" content="Java方法和数组">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89.jpg">
+<meta property="og:image" content="http://img.euansu.cn/static/images/Java%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E8%BD%BDdemo01.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E8%BD%BDdemo02.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E7%9A%84main%E6%96%B9%E6%B3%95demo01.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E7%9A%84main%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9E%E5%8F%82demo.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E7%9A%84%E5%BC%95%E5%85%A5.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8demo01.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8demo02.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8demo03.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E7%9A%84%E9%81%8D%E5%8E%86demo01.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E5%BA%94%E7%94%A8%E9%A2%98demo01.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%9F%A5%E8%AF%A2%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E7%9A%84%E5%85%83%E7%B4%A0.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%9F%A5%E8%AF%A2%E5%85%83%E7%B4%A0%E7%9A%84%E7%B4%A2%E5%BC%95.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0demo.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E5%88%A0%E9%99%A4%E6%95%B0%E7%BB%84%E5%85%83%E7%B4%A0demo.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E7%9A%84Arrays%E5%B7%A5%E5%85%B7%E7%B1%BB.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E6%95%B0%E7%BB%84%E7%9A%84%E5%A4%8D%E5%88%B6.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E9%81%8D%E5%8E%86.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96demo.png">
+<meta property="og:image" content="http://img.euansu.cn/static/images/java%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89demo02.png">
+<meta property="article:published_time" content="2021-02-06T00:23:28.000Z">
+<meta property="article:modified_time" content="2021-02-14T15:43:55.034Z">
+<meta property="article:author" content="南歌EuanSu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.euansu.cn/static/images/Java%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89.jpg">
+
+
+<link rel="canonical" href="http://euansu123.github.io/20202021/502/906/Java%E6%96%B9%E6%B3%95%E5%92%8C%E6%95%B0%E7%BB%84/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java方法和数组 | 南歌Euansu的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">南歌Euansu的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java方法和数组"><span class="nav-number">1.</span> <span class="nav-text">Java方法和数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java方法"><span class="nav-number">1.1.</span> <span class="nav-text">Java方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java方法的定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">Java方法的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java方法的调用"><span class="nav-number">1.1.2.</span> <span class="nav-text">Java方法的调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java方法的重载"><span class="nav-number">1.1.3.</span> <span class="nav-text">Java方法的重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java的main方法"><span class="nav-number">1.1.4.</span> <span class="nav-text">Java的Main方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java方法的可变参数"><span class="nav-number">1.1.5.</span> <span class="nav-text">Java方法的可变参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java数组"><span class="nav-number">1.2.</span> <span class="nav-text">Java数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java数组的引入"><span class="nav-number">1.2.1.</span> <span class="nav-text">Java数组的引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java数组的学习"><span class="nav-number">1.2.2.</span> <span class="nav-text">Java数组的学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的初始化"><span class="nav-number">1.2.3.</span> <span class="nav-text">数组的初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态初始化"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">静态初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态初始化"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">动态初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认初始化"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">默认初始化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java数组的内存分析"><span class="nav-number">1.2.4.</span> <span class="nav-text">Java数组的内存分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java数组的查询"><span class="nav-number">1.2.5.</span> <span class="nav-text">Java数组的查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java数组添加元素"><span class="nav-number">1.2.6.</span> <span class="nav-text">Java数组添加元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java数组删除元素"><span class="nav-number">1.2.7.</span> <span class="nav-text">Java数组删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java数组的arrats工具类"><span class="nav-number">1.2.8.</span> <span class="nav-text">Java数组的Arrats工具类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java数组的复制"><span class="nav-number">1.2.9.</span> <span class="nav-text">Java数组的复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java二维数组的定义和遍历"><span class="nav-number">1.2.10.</span> <span class="nav-text">Java二维数组的定义和遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二维数组的初始化"><span class="nav-number">1.2.11.</span> <span class="nav-text">二维数组的初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#静态初始化-1"><span class="nav-number">1.2.11.1.</span> <span class="nav-text">静态初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态初始化-1"><span class="nav-number">1.2.11.2.</span> <span class="nav-text">动态初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认初始化-1"><span class="nav-number">1.2.11.3.</span> <span class="nav-text">默认初始化</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="南歌EuanSu"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">南歌EuanSu</p>
+  <div class="site-description" itemprop="description">人心有取舍，但求知行合一。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/euansu123" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;euansu123" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:euansuu@gmail.com" title="E-Mail → mailto:euansuu@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://euansu123.github.io/20202021/502/906/Java%E6%96%B9%E6%B3%95%E5%92%8C%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="南歌EuanSu">
+      <meta itemprop="description" content="人心有取舍，但求知行合一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="南歌Euansu的博客">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java方法和数组
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-06 08:23:28" itemprop="dateCreated datePublished" datetime="2021-02-06T08:23:28+08:00">2021-02-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-14 23:43:55" itemprop="dateModified" datetime="2021-02-14T23:43:55+08:00">2021-02-14</time>
+      </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/20202021/502/906/Java%E6%96%B9%E6%B3%95%E5%92%8C%E6%95%B0%E7%BB%84/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/20202021/502/906/Java%E6%96%B9%E6%B3%95%E5%92%8C%E6%95%B0%E7%BB%84/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="java方法和数组">Java方法和数组</h1>
+<blockquote>
+
+</blockquote>
+<a id="more"></a>
+<h2 id="java方法">Java方法</h2>
+<p>Java方法是语句的执行，它们在一起执行一个功能，Java的方法类似于其他语言的函数。</p>
+<ul>
+<li>方法是解决一类问题的步骤的有序组合。</li>
+<li>方法包含于类或对象中。</li>
+<li>方法在程序中被创建，在其他地方被引用。</li>
+</ul>
+<p><font color="red">设计方法的原则：设计方法的时候只完成一个功能，保持方法的原子性，有利于后期拓展。</font></p>
+<h3 id="java方法的定义">Java方法的定义</h3>
+<p>Java方法的定义语法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">修饰符 返回值类型 方法名(参数类型 参数名)&#123;</span><br><span class="line">    ...</span><br><span class="line">    方法体</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> 返回值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/Java方法定义.jpg">
+<p>一般情况下定义一个方法包含以下语法：</p>
+<ul>
+<li>方法包含一个方法头和方法体。下面是一个方法的所有部分：
+<ul>
+<li>修饰符：修饰符，这是可选的，告诉编译器如何调用该方法。定义了该方法的访问类型。</li>
+<li>返回值类型：方法可能会返回值。return ValueType是方法返回值的数据类型。有些方法执行所需的操作，但没有返回值。在这种情况下，returnValueType 是关键字<strong>void</strong>。</li>
+<li><strong>方法名：</strong>是方法的实际名称。方法名和参数表共同构成方法签名。</li>
+<li><strong>参数类型：</strong>参数像是一个占位符。当方法被调用时，传递值给参数。这个值被称为实参或变量。参数列表是指方法的参数类型、顺序和参数的个数。参数是可选的，方法可以不包含任何参数。
+<ul>
+<li>形式参数：在方法调用时用于接收外界输入的数据，定义时的参数。</li>
+<li>实际参数：调用方法时实际传给方法的数据，调用时的参数。</li>
+</ul></li>
+<li><strong>方法体：</strong>方法体包含具体的语句，定义该方法的功能。</li>
+</ul></li>
+</ul>
+<h3 id="java方法的调用">Java方法的调用</h3>
+<p>调用的语法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对象名.方法名(实参列表)</span><br></pre></td></tr></table></figure>
+<p>当方法返回一个值的时候，方法调用通常被当做一个值，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>	larger = max(<span class="number">30</span>,<span class="number">40</span>);</span><br></pre></td></tr></table></figure>
+<p>如果方法的返回值是void，方法调用一定是条语句。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"Hello EuanSu"</span>)</span><br></pre></td></tr></table></figure>
+<p>如下是一个方法的简单定义和使用</p>
+<img src="http://img.euansu.cn/static/images/Java方法定义.png">
+<h3 id="java方法的重载">Java方法的重载</h3>
+<p>Java的方法重载：在同一个类中，方法名相同，形参列表不同的多个方法，构成了方法的重载。</p>
+<p>Java方法的重载只跟：方法名和形参列表有关，与修饰符、返回类型无关。</p>
+<p>形参列表不同指的是：</p>
+<ol type="1">
+<li><p>个数不同：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add()	add(<span class="keyword">int</span> num1)	add(<span class="keyword">int</span> num1,<span class="keyword">int</span> num2)</span><br></pre></td></tr></table></figure></li>
+<li><p>顺序不同：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="keyword">int</span> num1,<span class="keyword">double</span> num2)	add(<span class="keyword">double</span> num1,<span class="keyword">int</span> num2)</span><br></pre></td></tr></table></figure></li>
+<li><p>类型不同：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add(<span class="keyword">int</span> num1)	add(<span class="keyword">double</span> num2)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java方法的重载</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo03</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum1 = add(<span class="number">10</span>,<span class="number">20</span>);</span><br><span class="line">        System.out.println(sum1);</span><br><span class="line">        <span class="keyword">int</span> sum2 = add(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">        System.out.println(sum2);</span><br><span class="line">        <span class="keyword">double</span> sum3 = add(<span class="number">10.5</span>,<span class="number">11.4</span>);</span><br><span class="line">        System.out.println(sum3);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 定义一个方法：两个数相加</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> num1,<span class="keyword">int</span> num2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num1+num2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 定义一个方法：三个数相加</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> num1,<span class="keyword">int</span> num2,<span class="keyword">int</span> num3)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num1+num2+num3;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 定义一个方法：两个double类型的数相加</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span> num1,<span class="keyword">double</span> num2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> num1+num2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java方法的重载demo01.png">
+<p><strong>如下不构成方法的重载：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只是形参不同，相当于方法的重复定义</span></span><br><span class="line">add(<span class="keyword">int</span> numa);	add(<span class="keyword">int</span> numb);</span><br><span class="line"><span class="comment">// 方法的重载与返回值的类型无关</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> num1)</span></span>;	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> num2)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><strong>Java方法重载的扩展：</strong></p>
+<p>不同的参数类型按照：byte,short,char--&gt;int--&gt;long--&gt;float--&gt;double由低到高的顺序执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo04</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        add(<span class="number">5</span>);</span><br><span class="line">        add(<span class="number">5.0</span>);</span><br><span class="line">        <span class="comment">// 级别：byte,short,char--&gt;int--&gt;long--&gt;float--&gt;double</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span> num)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----double"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">float</span> num)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----float"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">long</span> num)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----long"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----int"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java方法的重载demo02.png">
+<h3 id="java的main方法">Java的Main方法</h3>
+<p>main方法：程序的入口，在同一个类中，如果有多个方法，那么虚拟机就会识别main方法，从这个方法作为程序的入口。</p>
+<p>main方法有着严格的格式要求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// public static --&gt; 修饰符</span></span><br><span class="line"><span class="comment">// void --&gt; 代表方法没有返回值</span></span><br><span class="line"><span class="comment">// String[] args --&gt; 形参，不确定因素</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="http://img.euansu.cn/static/images/java的main方法demo01.png">
+<p>允许有多个main方法，但是系统会默认使用第一个，其余的并不会调用。</p>
+<p><strong>形参String[]的实质是new String[]</strong></p>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaMethod01</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 与数组的声明定义相比较</span></span><br><span class="line">        <span class="comment">// int arr1[]; //只对数组进行声明，没有后续操作，相当于白定义了一个数组</span></span><br><span class="line">        <span class="comment">// System.out.println(arr1.length); 输出变量arr1尚未初始化</span></span><br><span class="line">        <span class="comment">// int arr2[] = null;</span></span><br><span class="line">        <span class="comment">// System.out.println(arr2.length); Exception in thread "main" java.lang.NullPointerException</span></span><br><span class="line">        <span class="comment">// int arr3[] = new int[0];</span></span><br><span class="line">        <span class="comment">// System.out.println(arr3.length); 数组长度为0</span></span><br><span class="line">        <span class="comment">// int arr4[] = new int[4];</span></span><br><span class="line">        <span class="comment">// System.out.println(arr4.length); 数组长度为4</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// System.out.println(args.length); 输出args长度为0</span></span><br><span class="line">        <span class="comment">// 从这个结果证明，参数是String[]，实参是 new String[0];</span></span><br><span class="line">        <span class="comment">// 默认情况下，虚拟机在调用main方法的时候就是传入了一个长度为0的数组</span></span><br><span class="line"></span><br><span class="line">        System.out.println(args.length);</span><br><span class="line">        <span class="keyword">for</span>(String str:args)&#123;</span><br><span class="line">            System.out.println(str);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java的main方法的实参demo.png">
+<h3 id="java方法的可变参数">Java方法的可变参数</h3>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaMethod02</span></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    可变参数：提供了一个方法，参数的个数是可变的，解决了部分方法的重载问题</span></span><br><span class="line"><span class="comment">    int...num</span></span><br><span class="line"><span class="comment">    double...num</span></span><br><span class="line"><span class="comment">    boolean...num</span></span><br><span class="line"><span class="comment">    可变参数在JDK1.5之后加入的新特性。</span></span><br><span class="line"><span class="comment">    方法的内部对可变参数的处理和数组是一样的。</span></span><br><span class="line"><span class="comment">    可变参数与其他参数放在一起的时候，必须放在最后。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        method(<span class="number">10</span>);</span><br><span class="line">        method();</span><br><span class="line">        method(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>);</span><br><span class="line">        method(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">44</span>&#125;);</span><br><span class="line">        method2(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(<span class="keyword">int</span>...num)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"------method"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i:num)&#123;</span><br><span class="line">            System.out.print(i+<span class="string">"\t"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">(<span class="keyword">int</span> num1,<span class="keyword">int</span>...num2)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"------method2"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java方法的可变参数.png">
+<h2 id="java数组">Java数组</h2>
+<h3 id="java数组的引入">Java数组的引入</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入扫描器</span></span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo01</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 功能：键盘录入十个学生的成绩：求和、求平均数</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">10</span>;i++)&#123;</span><br><span class="line">            System.out.print(<span class="string">"请输入第"</span>+i+<span class="string">"个学生的成绩："</span>);</span><br><span class="line">            <span class="keyword">int</span> score = scanner.nextInt();</span><br><span class="line">            sum += score;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"十个学生成绩之和为："</span>+sum);</span><br><span class="line">        System.out.println(<span class="string">"十个学生成绩的平均数为："</span>+(sum/<span class="number">10</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java数组的引入.png">
+<p>如上代码的缺点：不能求每个学生的具体成绩是多少，可以通过引入数组来解决这个问题。</p>
+<h3 id="java数组的学习">Java数组的学习</h3>
+<p><strong>数组的定义：</strong>数组是相同数据类型的有序集合，数组描述的是相同类型的若干个数据，按照一定的先后次序排列组合而成。其中，每一个数据称作一个元素，每个元素可以通过一个索引（下标）来访问它们。</p>
+<p>数组有以下五个基本特点：</p>
+<ol type="1">
+<li><p>长度是确定的，数组一旦被创建，他的大小就是不可以改变的。</p></li>
+<li><p>其元素的类型必须是相同类型，不允许出现混合类型。</p></li>
+<li><p>数组类型可以是任何类型，包括基本类型和引用类型。</p></li>
+<li><p>数组是有索引的：从0开始，到数组.length-1结束。</p></li>
+<li><p>数组变量属于引用类型，数组也是对象。</p>
+<p><strong>数组变量属于引用类型，数组也是对象。数组中的每个元素相当于该对象的成员变量。数组本身就是变量，Java中对象是在堆中的，因此数组无论保存原始类型还是其他对象类型，数组对象本身是在堆中存储的。</strong></p></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo02</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 数组的作用：用来存储相同类型的数组</span></span><br><span class="line">        <span class="comment">// 以int类型数组为案例：数组用来存储int类型的数据</span></span><br><span class="line">        <span class="comment">// 1.声明（定义数组）</span></span><br><span class="line">        <span class="comment">// 定义一个int类型的数组，名字叫arr，如下两种方法都可以定义数组</span></span><br><span class="line">        <span class="keyword">int</span>[] arr;</span><br><span class="line">        <span class="keyword">int</span> arr2[];</span><br><span class="line">        <span class="comment">// 如果数组只声明，没有后续操作，那么这个数组相当于没定义</span></span><br><span class="line">        <span class="keyword">int</span> arr3[] = <span class="keyword">null</span>; <span class="comment">// 空 需要注意数组赋值为null和什么都没有赋值是不一样的效果，前者分配了空间，后者则是不存在</span></span><br><span class="line">        <span class="comment">// 2.创建</span></span><br><span class="line">        arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>]; <span class="comment">// 给数组开辟了一个长度为4的空间</span></span><br><span class="line">        <span class="comment">// 声明、创建可以合并为一句话：int arr[] = new int[4];</span></span><br><span class="line">        <span class="comment">// 3.赋值</span></span><br><span class="line">        arr[<span class="number">0</span>] = <span class="number">12</span>;</span><br><span class="line">        arr[<span class="number">1</span>] = <span class="number">56</span>;</span><br><span class="line">        arr[<span class="number">2</span>] = <span class="number">98</span>;</span><br><span class="line">        arr[<span class="number">3</span>] = <span class="number">128</span>;</span><br><span class="line">        <span class="comment">// 4.使用</span></span><br><span class="line">        System.out.println(arr[<span class="number">2</span>]);</span><br><span class="line">        System.out.println(arr[<span class="number">0</span>]+<span class="number">100</span>);</span><br><span class="line">        <span class="comment">// 获取数组长度</span></span><br><span class="line">        System.out.println(<span class="string">"数组的长度是:"</span>+arr.length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java数组的使用demo01.png">
+<p><strong>数组默认的初始值：</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>数组的类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>byte[]</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>short[]</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>int[]</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>long[]</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>float[]</td>
+<td>0.0</td>
+</tr>
+<tr class="even">
+<td>double[]</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">char[] | '<br>
+boolean[] | false |<br>
+引用数据类型 | null |</div>
+<p><strong>代码运行：</strong></p>
+<img src="http://img.euansu.cn/static/images/java数组的使用demo02.png">
+<p><strong>用数组实现成绩的计算以及查询：</strong></p>
+<img src="http://img.euansu.cn/static/images/java数组的使用demo03.png">
+<p><strong>Java数组的遍历：</strong></p>
+<img src="http://img.euansu.cn/static/images/java数组的遍历demo01.png">
+<h3 id="数组的初始化">数组的初始化</h3>
+<p>数组的初始化方式共有三种：静态初始化、动态初始化、默认初始化。</p>
+<h4 id="静态初始化">静态初始化</h4>
+<p>除了用new关键字来产生数组以外，还可以直接在定义数组的同时就为数组元素分配空间并赋值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] = &#123;<span class="number">12</span>,<span class="number">24</span>,<span class="number">36</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> arr = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">12</span>,<span class="number">24</span>,<span class="number">36</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol type="1">
+<li>new int[3]{12,24,36}; --&gt;错误，后面会自动分配，提前标明长度可能会出错。</li>
+<li>int arr[]; arr = {12,24,36};--&gt;错误。</li>
+</ol>
+<h4 id="动态初始化">动态初始化</h4>
+<p>数组定义与为数组分配空间并赋值的操作分开进行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];</span><br><span class="line">arr[<span class="number">0</span>] = <span class="number">12</span>;</span><br><span class="line">arr[<span class="number">1</span>] = <span class="number">24</span>;</span><br><span class="line">arr[<span class="number">2</span>] = <span class="number">36</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="默认初始化">默认初始化</h4>
+<p>数组是引用类型，他的元素相当于类的实例变量，因此数组一经分配空间，其中的每个元素也被按照实例变量同样的方式被隐式初始化。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>];	<span class="comment">// 数组有默认的初始值。</span></span><br></pre></td></tr></table></figure>
+<h3 id="java数组的内存分析">Java数组的内存分析</h3>
+<p>方法的实参传递给形参的时候一定要注意：一切都是值传递。</p>
+<p>如果是基本数据类型，那么传递的就是字面值。</p>
+<p>如果是引用数据类型，那么传递的地址值。</p>
+<img src="http://img.euansu.cn/static/images/java数组应用题demo01.png">
+<img src="http://img.euansu.cn/static/images/java数组内存分析.png">
+<h3 id="java数组的查询">Java数组的查询</h3>
+<ol type="1">
+<li><p>查询指定位置的元素</p>
+<img src="http://img.euansu.cn/static/images/java查询指定位置的元素.png"></li>
+<li><p>查询指定元素的位置--&gt;找出元素的索引</p>
+<img src="http://img.euansu.cn/static/images/java查询元素的索引.png"></li>
+</ol>
+<h3 id="java数组添加元素">Java数组添加元素</h3>
+<p>代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo09</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[] = &#123;<span class="number">12</span>,<span class="number">34</span>,<span class="number">56</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">10</span>&#125;;</span><br><span class="line">        <span class="comment">//           0  1  2  3 4 5</span></span><br><span class="line">        <span class="comment">// 输出增加元素前的数组，：</span></span><br><span class="line">        System.out.println(<span class="string">"增加元素前的数组："</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i!=arr.length-<span class="number">1</span>)&#123;</span><br><span class="line">                System.out.print(arr[i]+<span class="string">","</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.println(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> newarr[] = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length+<span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 从键盘接收数据</span></span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"请输入要添加元素的指定下标："</span>);</span><br><span class="line">        <span class="keyword">int</span> index = scanner.nextInt();</span><br><span class="line">        System.out.println(<span class="string">"请输入要添加的元素值："</span>);</span><br><span class="line">        <span class="keyword">int</span> ele = scanner.nextInt();</span><br><span class="line">        insertEls(arr,newarr,index,ele);</span><br><span class="line">        <span class="comment">// 输出增加元素后的数组，：</span></span><br><span class="line">        System.out.println(<span class="string">"增加元素后的数组："</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;newarr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i!=newarr.length-<span class="number">1</span>)&#123;</span><br><span class="line">                System.out.print(newarr[i]+<span class="string">","</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.println(newarr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将java数组添加元素提取为一个方法</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    在数组的指定位置添加一个元素</span></span><br><span class="line"><span class="comment">    不确定因素：数组、哪个位置、哪个元素</span></span><br><span class="line"><span class="comment">    返回值：无，java都是值传递</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertEls</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> newarr[],<span class="keyword">int</span> index,<span class="keyword">int</span> ele)</span></span>&#123;</span><br><span class="line">         <span class="comment">// 向数组中添加元素</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;newarr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i&lt;index)&#123;</span><br><span class="line">                newarr[i] = arr[i];</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(i==index)&#123;</span><br><span class="line">                newarr[i] = ele;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                newarr[i] = arr[i-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java添加元素demo.png">
+<h3 id="java数组删除元素">Java数组删除元素</h3>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo10</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 功能：删除数组中的指定位置的元素</span></span><br><span class="line">        <span class="comment">// java的数组长度是固定的，不能直接删除实现</span></span><br><span class="line">        <span class="keyword">int</span> arr[] = &#123;<span class="number">12</span>,<span class="number">34</span>,<span class="number">56</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">10</span>&#125;;</span><br><span class="line">        <span class="comment">//           0  1  2  3 4 5</span></span><br><span class="line">        <span class="comment">// 输出增加元素前的数组，：</span></span><br><span class="line">        System.out.println(<span class="string">"删除元素前的数组："</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i!=arr.length-<span class="number">1</span>)&#123;</span><br><span class="line">                System.out.print(arr[i]+<span class="string">","</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.println(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> newarr[] = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length-<span class="number">1</span>];</span><br><span class="line">         <span class="comment">// 从键盘接收数据</span></span><br><span class="line">        Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"请输入要删除元素的下标："</span>);</span><br><span class="line">        <span class="keyword">int</span> index = scanner.nextInt();</span><br><span class="line">        delEle(arr,newarr,index);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 输出删除元素后的数组，：</span></span><br><span class="line">        System.out.println(<span class="string">"删除元素后的数组："</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;newarr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i!=newarr.length-<span class="number">1</span>)&#123;</span><br><span class="line">                System.out.print(newarr[i]+<span class="string">","</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.println(newarr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    删除java数组中的元素</span></span><br><span class="line"><span class="comment">    不确定的量：要删除的数组、新数组、删除的位置</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">delEle</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> newarr[],<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;newarr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(i&lt;index)&#123;</span><br><span class="line">                newarr[i] = arr[i];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                newarr[i] = arr[i+<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java删除数组元素demo.png">
+<h3 id="java数组的arrats工具类">Java数组的Arrats工具类</h3>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导入Arrays工具包</span></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArraysDemo01</span></span>&#123;</span><br><span class="line">    <span class="comment">// Arrays工具类的使用</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 给定一个数组</span></span><br><span class="line">        <span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        <span class="comment">// toString:返回指定数组的内容的字符串表示形式。</span></span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// binarySearch：使用二叉搜索算法搜索指定的int数组的指定值。</span></span><br><span class="line">        <span class="comment">// 在进行此调用之前，必须对数组进行排序（如sort(int[])方法）。 如果没有排序，结果是未定义的。</span></span><br><span class="line">        Arrays.sort(arr);</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line">        System.out.println(Arrays.binarySearch(arr,<span class="number">4</span>));</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// copyOf:复制指定的数组，用零截取或填充（如有必要），以便复制具有指定的长度。</span></span><br><span class="line">        <span class="keyword">int</span> arr2[] = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> newarr[] = Arrays.copyOf(arr2,<span class="number">3</span>);</span><br><span class="line">        System.out.println(Arrays.toString(newarr));</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// copyOfRange:将指定数组的指定范围复制到新数组中。</span></span><br><span class="line">        <span class="keyword">int</span> newarr2[] = Arrays.copyOfRange(arr2,<span class="number">1</span>,<span class="number">3</span>); <span class="comment">//复制的范围：[1,3)</span></span><br><span class="line">        System.out.println(Arrays.toString(newarr2));</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// equals(int[] a, int[] a2)：如果两个指定的int数组彼此相等 ，则返回 true。</span></span><br><span class="line">        <span class="keyword">int</span> arr3[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> arr4[] = &#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> arr5[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        System.out.println(Arrays.equals(arr3,arr4));</span><br><span class="line">        System.out.println(Arrays.equals(arr3,arr5));</span><br><span class="line">        System.out.println(arr3 == arr5); <span class="comment">// false，==比较的是左右两侧的值是否相等，比较的是左右两次的地址值，返回结果一定是false</span></span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// fill(int[] a, int val)：将指定的int值分配给指定的int数组的每个元素。</span></span><br><span class="line">        <span class="keyword">int</span> arr6[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        Arrays.fill(arr6,<span class="number">10</span>);</span><br><span class="line">        System.out.println(Arrays.toString(arr6));</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// fill(int[] a, int fromIndex, int toIndex, int val):将指定的int值分配给指定的int数组的指定范围的每个元素。</span></span><br><span class="line">        <span class="keyword">int</span> arr7[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;;</span><br><span class="line">        Arrays.fill(arr7,<span class="number">1</span>,<span class="number">4</span>,<span class="number">10</span>); <span class="comment">// 填充的范围是[1,4)</span></span><br><span class="line">        System.out.println(Arrays.toString(arr7));</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java数组的Arrays工具类.png">
+<h3 id="java数组的复制">Java数组的复制</h3>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaMethod03</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">/* arraycopy(Object src, int srcPos, Object dest, int destPos, int length):将指定源数组中的数组从指定位置复制到目标数组的指定位置。</span></span><br><span class="line"><span class="comment">            src-源数组、srcPos-源数组的起始位置、dest-目标数组、destPos-目标数组的起始位置、length-要复制的元素长度。</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        <span class="keyword">int</span> srcArr[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> destArr[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">        System.arraycopy(srcArr,<span class="number">1</span>,destArr,<span class="number">4</span>,<span class="number">3</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num:srcArr)&#123;</span><br><span class="line">            System.out.print(num);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">"================"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num:destArr)&#123;</span><br><span class="line">            System.out.print(num);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">"================"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java数组的复制.png">
+<h3 id="java二维数组的定义和遍历">Java二维数组的定义和遍历</h3>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo11</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 定义一个二维数组</span></span><br><span class="line">        <span class="keyword">int</span> arr1[][];</span><br><span class="line">        arr1 = <span class="keyword">new</span> <span class="keyword">int</span>[][]&#123;</span><br><span class="line">            &#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">int</span> arr2[][] = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;,&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;&#125;;</span><br><span class="line">        readArr(arr1);</span><br><span class="line">        readArr(arr2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    不确定的量：数组名</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readArr</span><span class="params">(<span class="keyword">int</span> arr[][])</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">                System.out.print(arr[i][j]+<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java二维数组的定义和遍历.png">
+<h3 id="二维数组的初始化">二维数组的初始化</h3>
+<p>二维数组的初始化方式共有三种：静态初始化、动态初始化、默认初始化。</p>
+<h4 id="静态初始化-1">静态初始化</h4>
+<p>除了用new关键字来产生数组以外，还可以直接在定义数组的同时就为数组元素分配空间并赋值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[][] = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,&#123;<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">int</span> arr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[][]&#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,&#123;<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="动态初始化-1">动态初始化</h4>
+<p>数组定义与为数组元素分配空间并赋值的操作分开进行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][]; <span class="comment">// 本质上定义了一维数组长度为3，这个一维数组的每个元素是一个数组</span></span><br><span class="line">arr[<span class="number">0</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">arr[<span class="number">1</span>] = &#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">arr[<span class="number">2</span>] = &#123;<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> arr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">2</span>]; <span class="comment">//本质上定义了一维数组长度为3，这个一维数组的每个元素有一个默认长度为2的数组</span></span><br></pre></td></tr></table></figure>
+<p>需要注意一下，二维数组给定了长度，可以修改内层的数组。</p>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo12</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">2</span>];</span><br><span class="line">        arr[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        readArr(arr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readArr</span><span class="params">(<span class="keyword">int</span> arr[][])</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">                System.out.print(arr[i][j]+<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java二维数组的初始化demo.png">
+<h4 id="默认初始化-1">默认初始化</h4>
+<p>数组是引用类型，它的元素相当于类的实例变量，因此数组一经分配空间，其中的每个元素也被按照实例变量同样的方式被隐式初始化。</p>
+<p>示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayDemo13</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> arr[][] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">3</span>][<span class="number">2</span>];</span><br><span class="line">        readArr(arr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">readArr</span><span class="params">(<span class="keyword">int</span> arr[][])</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;arr[i].length;j++)&#123;</span><br><span class="line">                System.out.print(arr[i][j]+<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.println(<span class="string">"=================="</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<img src="http://img.euansu.cn/static/images/java二维数组的定义demo02.png">
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20202021/502/902/Java%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" rel="prev" title="Java流程控制">
+                  <i class="fa fa-chevron-left"></i> Java流程控制
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">南歌EuanSu</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script>
+NexT.utils.loadComments('#valine-comments', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', () => {
+    new Valine(Object.assign({
+      el  : '#valine-comments',
+      path: "/20202021/502/906/Java%E6%96%B9%E6%B3%95%E5%92%8C%E6%95%B0%E7%BB%84/",
+    }, {"enable":true,"appId":"lizkAOOMuEVgeWW34gisCClp-gzGzoHsz","appKey":"C6THgn5nTK0XYKemjaoLDUUG","placeholder":"Just go go","avatar":"/img/me.jpg","meta":["nick","mail","link"],"pageSize":10,"lang":null,"visitor":false,"comment_count":true,"recordIP":false,"serverURLs":null,"enableQQ":false,"requiredFields":["nick","mail"]}
+    ));
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true,"scale":0.5},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

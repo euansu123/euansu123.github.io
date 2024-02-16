@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Nginx on EuanSu&#39;s Blog</title>
+        <link>https://euansu123.github.io/tags/nginx/</link>
+        <description>Recent content in Nginx on EuanSu&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Tue, 18 Jul 2023 09:47:00 +0800</lastBuildDate><atom:link href="https://euansu123.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Nginx 基础概念及使用</title>
+        <link>https://euansu123.github.io/post/nginx_base_and_tutorial/</link>
+        <pubDate>Tue, 18 Jul 2023 09:47:00 +0800</pubDate>
+        
+        <guid>https://euansu123.github.io/post/nginx_base_and_tutorial/</guid>
+        <description>&lt;img src="https://euansu123.github.io/img/nginx.png" alt="Featured image of post Nginx 基础概念及使用" /&gt;&lt;p&gt;Nginx是一个高性能的web服务器和反向代理服务器，以其低内存使用率和强大的并发能力而闻名。它最初由Igor Sysoev编写，并以类似BSD的2条款许可证发行。Nginx可以处理各种协议，如HTTP、TCP、UDP、IMAP、POP3和SMTP。它被Yandex、Mail.Ru、VK、Rambler、Dropbox、Netflix、Wordpress.com、FastMail.FM等许多负载沉重的网站广泛使用和信任。&lt;/p&gt;
+&lt;h1 id=&#34;正向代理和反向代理&#34;&gt;正向代理和反向代理&lt;/h1&gt;
+&lt;h2 id=&#34;正向代理&#34;&gt;正向代理&lt;/h2&gt;
+&lt;h3 id=&#34;概念&#34;&gt;概念&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/nginx%E5%9F%BA%E7%A1%80/49d52f5b79a140fd8c131f8fe115bf60tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;特点&#34;&gt;特点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;正向代理需要主动设置代理服务器 ip 或域名进行访问，由设置的ip 或域名去访问内容并返回。&lt;/li&gt;
+&lt;li&gt;正向代理是代理客户端，为客户端收发请求，使得真实的客户端对服务器不可见。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;概念-1&#34;&gt;概念&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/nginx%E5%9F%BA%E7%A1%80/23e94f266d6c44ed95f20053ee973bd4tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;在这里插入图片描述&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;特点-1&#34;&gt;特点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;正向代理需要配置代理服务器，而反向代理不需要做任何设置。&lt;/li&gt;
+&lt;li&gt;反向代理是代理服务器，为服务器收发请求，使得真实服务器对客户端不可见。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;正向代理和反向代理的比较&#34;&gt;正向代理和反向代理的比较&lt;/h2&gt;
+&lt;h3 id=&#34;相同点&#34;&gt;相同点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;正向代理和反向代理所处的位置都是客户端与真实提供服务的服务器之间。&lt;/li&gt;
+&lt;li&gt;正向代理和反向代理都是把客户端的请求转发给服务器，再把服务器的响应转发给客户端。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;不同点&#34;&gt;不同点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;正向代理是客户端的代理，服务器并不知道真正的客户端是谁，反向代理是服务器的代理，客户端并不知道真正的服务器是谁；&lt;/li&gt;
+&lt;li&gt;正向代理一般是客户端架设，反向代理一般是服务器架设；&lt;/li&gt;
+&lt;li&gt;正向代理主要是为了解决访问限制问题，反向代理主要是为了提供负载均衡、安全防护等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;nginx-负载均衡&#34;&gt;Nginx 负载均衡&lt;/h1&gt;
+&lt;h2 id=&#34;概念-2&#34;&gt;概念&lt;/h2&gt;
+&lt;p&gt;负载均衡，英文名称为Load Balance，其含义就是指将负载（工作任务）进行平衡、分摊到多个操作单元上进行运行，例如FTP服务器、Web服务器、企业核心应用服务器和其它主要任务服务器等，从而协同完成工作任务。&lt;/p&gt;
+&lt;p&gt;负载均衡构建在原有网络结构之上，它提供了一种透明且廉价有效的方法扩展服务器和网络设备的带宽、加强网络数据处理能力、增加吞吐量、提高网络的可用性和灵活性。&lt;/p&gt;
+&lt;p&gt;简言之，负载均衡实际上就是将大量请求进行分布式处理的策略。&lt;/p&gt;
+&lt;h2 id=&#34;负载均衡实现&#34;&gt;负载均衡实现&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;upstream&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;testServer&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;server&lt;/span&gt; localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;8081&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;server&lt;/span&gt; localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;8082&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;server&lt;/span&gt; localhost:&lt;span style=&#34;color:#ae81ff&#34;&gt;8083&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;server&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;listen&lt;/span&gt;       &lt;span style=&#34;color:#ae81ff&#34;&gt;8000&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;server_name&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;localhost&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;root&lt;/span&gt;   &lt;span style=&#34;color:#e6db74&#34;&gt;html&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;index&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;index.html&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;index.htm&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#f92672&#34;&gt;proxy_pass&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;http://testServer&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;localhost:8081、localhost:8082、localhost:8083分别为如下页面：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/nginx%E5%9F%BA%E7%A1%80/2022-07-19-20-27-57-image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/nginx%E5%9F%BA%E7%A1%80/2022-07-19-20-28-39-image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/nginx%E5%9F%BA%E7%A1%80/2022-07-19-20-28-50-image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;访问 localhost:8000 会出现如上页面。&lt;/p&gt;
+&lt;h2 id=&#34;负载均衡常用算法&#34;&gt;负载均衡常用算法&lt;/h2&gt;
+&lt;h3 id=&#34;轮询&#34;&gt;轮询&lt;/h3&gt;
+&lt;p&gt;轮询为负载均衡中较为基础也较为简单的算法，它不需要配置额外参数。假设配置文件中共有 &lt;strong&gt;M&lt;/strong&gt; 台服务器，该算法遍历服务器节点列表，并按节点次序每轮选择一台服务器处理请求。当所有节点均被调用过一次后，该算法将从第一个节点开始重新一轮遍历。&lt;/p&gt;
+&lt;h1 id=&#34;nginx-安装&#34;&gt;Nginx 安装&lt;/h1&gt;
+&lt;h2 id=&#34;依赖库安装&#34;&gt;依赖库安装&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# gcc g++&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install build-essential
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install libtool
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# pcre&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install libpcre3 libpcre3-dev
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# zlib&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install zlib1g-dev
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# ssl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install openssl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install libssl-dev
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;nginx-源码编译安装&#34;&gt;Nginx 源码编译安装&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 下载&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ wget https://nginx.org/download/nginx-1.17.8.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 解压&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ tar -zxvf nginx-1.17.8.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 进入目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cd nginx-1.17.8
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 配置，这里可能会报错，缺少啥就去安装啥&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ./configure --prefix&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/usr/local/nginx &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;--with-http_gzip_static_module &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;--with-http_v2_module &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;--with-pcre &lt;span style=&#34;color:#ae81ff&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;&lt;/span&gt;--with-http_ssl_module
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 生成makefile文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;nginx-代理二级域名&#34;&gt;Nginx 代理二级域名&lt;/h1&gt;
+&lt;p&gt;新增一个 &lt;code&gt;server&lt;/code&gt; 块，监听的端口依然是 80 端口，如果配置的端口为非 80 端口，则需要携带端口访问 http 服务。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;server&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;listen&lt;/span&gt;       &lt;span style=&#34;color:#ae81ff&#34;&gt;80&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;server_name&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;cloud.euansu.cn&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;index.php&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;#location / {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;#    proxy_set_header Host $http_host;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;#   proxy_pass http://cloud.euansu.cn:8000;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;       &lt;span style=&#34;color:#75715e&#34;&gt;#}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;root&lt;/span&gt;         &lt;span style=&#34;color:#e6db74&#34;&gt;/kodbox&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;location&lt;/span&gt; ~ &lt;span style=&#34;color:#e6db74&#34;&gt;\.php$&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;root&lt;/span&gt;           &lt;span style=&#34;color:#e6db74&#34;&gt;/kodbox&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;fastcgi_pass&lt;/span&gt;   127.0.0.1:&lt;span style=&#34;color:#ae81ff&#34;&gt;9000&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;fastcgi_index&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;index.php&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;fastcgi_param&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;SCRIPT_FILENAME&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;/kodbox&lt;/span&gt;$fastcgi_script_name;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;include&lt;/span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;fastcgi_params&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;nginx-配置https&#34;&gt;Nginx 配置https&lt;/h1&gt;
+&lt;p&gt;新增一个 &lt;code&gt;server&lt;/code&gt; 块，监听的端口依然是 443 端口，如果配置的端口为非 443 端口，则需要携带端口访问 https 服务。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-nginx&#34; data-lang=&#34;nginx&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;server&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;listen&lt;/span&gt;       &lt;span style=&#34;color:#ae81ff&#34;&gt;443&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;ssl&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;server_name&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;cloud.euansu.cn&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;index.php&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;ssl_certificate&lt;/span&gt;      &lt;span style=&#34;color:#e6db74&#34;&gt;/www/nginx/cert/cloud.euansu.cn.pem&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;ssl_certificate_key&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;/www/nginx/cert/cloud.euansu.cn.key&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;ssl_session_cache&lt;/span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;shared:SSL:1m&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;ssl_session_timeout&lt;/span&gt;  &lt;span style=&#34;color:#ae81ff&#34;&gt;5m&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;ssl_ciphers&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;HIGH:!aNULL:!MD5&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;ssl_prefer_server_ciphers&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;on&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;root&lt;/span&gt;         &lt;span style=&#34;color:#e6db74&#34;&gt;/kodbox&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;location&lt;/span&gt; ~ &lt;span style=&#34;color:#e6db74&#34;&gt;\.php$&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;root&lt;/span&gt;           &lt;span style=&#34;color:#e6db74&#34;&gt;/kodbox&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;fastcgi_pass&lt;/span&gt;   127.0.0.1:&lt;span style=&#34;color:#ae81ff&#34;&gt;9000&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;fastcgi_index&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;index.php&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;fastcgi_param&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;SCRIPT_FILENAME&lt;/span&gt;  &lt;span style=&#34;color:#e6db74&#34;&gt;/kodbox&lt;/span&gt;$fastcgi_script_name;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#f92672&#34;&gt;include&lt;/span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;fastcgi_params&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

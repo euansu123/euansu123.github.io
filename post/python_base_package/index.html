@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='记录了Python的网络请求实现与虚拟环境。
+'>
+<title>Python 基础库</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/python_base_package/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='Python 基础库'>
+<meta property='og:description' content='记录了Python的网络请求实现与虚拟环境。
+'>
+<meta property='og:url' content='https://euansu123.github.io/post/python_base_package/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Python' /><meta property='article:published_time' content='2021-07-25T09:47:00&#43;08:00'/><meta property='article:modified_time' content='2021-07-25T09:47:00&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/python.jpg' />
+<meta name="twitter:title" content="Python 基础库">
+<meta name="twitter:description" content="记录了Python的网络请求实现与虚拟环境。
+"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/python.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/python_base_package/">
+                
+                    <img src="/img/python.jpg" loading="lazy" alt="Featured image of post Python 基础库" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/python_base_package/">Python 基础库</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 25, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>记录了Python的网络请求实现与虚拟环境。</p>
+<h1 id="python-网络请求">Python 网络请求</h1>
+<blockquote>
+<p>这里使用 <code>Python</code> 的第三方库 <code>requests</code> 实现网络请求。</p>
+<p><code>requests</code> 有以下功能特性，几乎涵盖了当今 <code>web</code> 服务的需求，例：</p>
+<ul>
+<li>浏览器式的 <code>SSL</code> 验证；</li>
+<li>身份认证；</li>
+<li>带持久 <code>Cookie</code> 的会话；</li>
+<li>流下载；</li>
+<li>文件分块上传；</li>
+</ul>
+</blockquote>
+<h2 id="http-请求">HTTP 请求</h2>
+<h3 id="http-请求基本概念">HTTP 请求基本概念</h3>
+<blockquote>
+<p>一个HTTP请求由三部分构成：</p>
+<ol>
+<li>请求行</li>
+<li>请求头：</li>
+<li>请求正文</li>
+</ol>
+</blockquote>
+<p><img src="/Python%E5%9F%BA%E7%A1%80/58456e61d5d47.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="requests-方法实践">requests 方法实践</h3>
+<h4 id="get-请求">Get 请求</h4>
+<p>发送 <code>Get</code> 请求的 <code>API</code> 为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>requests<span style="color:#f92672">.</span>get(url, params<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, <span style="color:#f92672">**</span>kwargs)
+</span></span></code></pre></div><p>使用 <code>requests</code> 发送 <code>get</code> 请求：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>get_response1 <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://api.github.com/events&#39;</span>)
+</span></span></code></pre></div><p>部分情况下，<code>URL</code> 会携带参数，例如 <code>https://segmentfault.com/blogs?page=2</code> ，这个 <code>URL</code> 有一个参数 <code>page</code> ，值为 <code>2</code> ，<code>requests</code> 提供了 <code>params</code> 关键字参数，允许我们以字典的形式来提供这些参数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>request_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://segmentfault.com/blogs&#39;</span>,params<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;page&#39;</span>:<span style="color:#ae81ff">2</span>,<span style="color:#e6db74">&#39;age&#39;</span>:<span style="color:#66d9ef">None</span>})
+</span></span><span style="display:flex;"><span>print(request_obj<span style="color:#f92672">.</span>url)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出：https://segmentfault.com/blogs?page=2</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注意：字典中为None的内容不会被添加到url上</span>
+</span></span></code></pre></div><h4 id="post-请求">Post 请求</h4>
+<p>发送 <code>Post</code> 请求的 <code>API</code> 为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>requests<span style="color:#f92672">.</span>post(url, data<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, json<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, <span style="color:#f92672">**</span>kwargs)
+</span></span></code></pre></div><p>使用 <code>requests</code> 发送 <code>post</code> 请求</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>request_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#34;http://httpbin.org/post&#34;</span>)
+</span></span></code></pre></div><p>通常，在发送 POST 请求时还会附上数据，比如发送编码为表单形式的数据或编码为 JSON 形式的数据，这时，我们可以使用 Requests 提供的 <code>data</code> 或 <code>json</code> 参数。</p>
+<ul>
+<li>
+<p>发送编码为表单形式的数据</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;page&#39;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;per_page&#39;</span>: <span style="color:#ae81ff">10</span>}
+</span></span><span style="display:flex;"><span>request_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#34;http://httpbin.org/post&#34;</span>, data<span style="color:#f92672">=</span>payload)
+</span></span></code></pre></div><p>查看输出</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> print(request_obj<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;args&#34;</span>: {}, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;data&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;files&#34;</span>: {}, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;form&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;page&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;per_page&#34;</span>: <span style="color:#e6db74">&#34;10&#34;</span>
+</span></span><span style="display:flex;"><span>  }, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Accept&#34;</span>: <span style="color:#e6db74">&#34;*/*&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Accept-Encoding&#34;</span>: <span style="color:#e6db74">&#34;gzip, deflate&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Content-Length&#34;</span>: <span style="color:#e6db74">&#34;18&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Content-Type&#34;</span>: <span style="color:#e6db74">&#34;application/x-www-form-urlencoded&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Host&#34;</span>: <span style="color:#e6db74">&#34;httpbin.org&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;User-Agent&#34;</span>: <span style="color:#e6db74">&#34;python-requests/2.28.1&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;X-Amzn-Trace-Id&#34;</span>: <span style="color:#e6db74">&#34;Root=1-62bd0db7-2705162709bce09a0ee24c31&#34;</span>
+</span></span><span style="display:flex;"><span>  }, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;json&#34;</span>: null, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;origin&#34;</span>: <span style="color:#e6db74">&#34;222.90.10.252&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;http://httpbin.org/post&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>发送编码为 JSON 格式的数据</p>
+<p>使用 data 参数也可发送 JSON 格式的数据。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;page&#39;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;per_page&#39;</span>: <span style="color:#ae81ff">10</span>}
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#34;http://httpbin.org/post&#34;</span>, data<span style="color:#f92672">=</span>json<span style="color:#f92672">.</span>dumps(payload))
+</span></span></code></pre></div><p>查看输出结果：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> print(requests_obj<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;args&#34;</span>: {}, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;data&#34;</span>: <span style="color:#e6db74">&#34;{</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">page</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">: 1, </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">per_page</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">: 10}&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;files&#34;</span>: {}, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;form&#34;</span>: {}, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Accept&#34;</span>: <span style="color:#e6db74">&#34;*/*&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Accept-Encoding&#34;</span>: <span style="color:#e6db74">&#34;gzip, deflate&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Content-Length&#34;</span>: <span style="color:#e6db74">&#34;27&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Host&#34;</span>: <span style="color:#e6db74">&#34;httpbin.org&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;User-Agent&#34;</span>: <span style="color:#e6db74">&#34;python-requests/2.28.1&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;X-Amzn-Trace-Id&#34;</span>: <span style="color:#e6db74">&#34;Root=1-62bd0e89-0bd2b1a02b9fcf7a40d8f479&#34;</span>
+</span></span><span style="display:flex;"><span>  }, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;json&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;page&#34;</span>: <span style="color:#ae81ff">1</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;per_page&#34;</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>  }, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;origin&#34;</span>: <span style="color:#e6db74">&#34;222.90.10.252&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;http://httpbin.org/post&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>使用 data 参数传递编码为 JSON 格式的数据，需要对dict编码，等价于下面使用 json 参数直接传递 dict 的方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;page&#39;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;per_page&#39;</span>: <span style="color:#ae81ff">10</span>}
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#34;http://httpbin.org/post&#34;</span>, json<span style="color:#f92672">=</span>payload)
+</span></span></code></pre></div><p>查看结果输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> print(requests_obj<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;args&#34;</span>: {}, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;data&#34;</span>: <span style="color:#e6db74">&#34;{</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">page</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">: 1, </span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">per_page</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">: 10}&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;files&#34;</span>: {}, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;form&#34;</span>: {}, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;headers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Accept&#34;</span>: <span style="color:#e6db74">&#34;*/*&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Accept-Encoding&#34;</span>: <span style="color:#e6db74">&#34;gzip, deflate&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Content-Length&#34;</span>: <span style="color:#e6db74">&#34;27&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Content-Type&#34;</span>: <span style="color:#e6db74">&#34;application/json&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Host&#34;</span>: <span style="color:#e6db74">&#34;httpbin.org&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;User-Agent&#34;</span>: <span style="color:#e6db74">&#34;python-requests/2.28.1&#34;</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;X-Amzn-Trace-Id&#34;</span>: <span style="color:#e6db74">&#34;Root=1-62bd0f43-197076e340098e371a43fc3c&#34;</span>
+</span></span><span style="display:flex;"><span>  }, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;json&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;page&#34;</span>: <span style="color:#ae81ff">1</span>, 
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;per_page&#34;</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>  }, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;origin&#34;</span>: <span style="color:#e6db74">&#34;222.90.10.252&#34;</span>, 
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;url&#34;</span>: <span style="color:#e6db74">&#34;http://httpbin.org/post&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="请求头">请求头</h4>
+<p>一些 Http 请求需要构造请求头，可以使用 dict 给 headers 传递参数实现，如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://httpbin.org/post&#39;</span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;page&#39;</span>: <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;per_page&#39;</span>: <span style="color:#ae81ff">10</span>}
+</span></span><span style="display:flex;"><span>headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)&#39;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#34;http://httpbin.org/post&#34;</span>, json<span style="color:#f92672">=</span>payload, headers<span style="color:#f92672">=</span>headers)
+</span></span><span style="display:flex;"><span>print(requests_obj<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>headers)
+</span></span></code></pre></div><p>发送到服务器的请求头可以使用 requests_obj.request.headers 来查看：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&gt;&gt;&gt;</span> <span style="color:#960050;background-color:#1e0010">print(requests_obj.request.headers)</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#960050;background-color:#1e0010">&#39;User-Agent&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;Mozilla/4.0</span> <span style="color:#960050;background-color:#1e0010">(compatible;</span> <span style="color:#960050;background-color:#1e0010">MSIE</span> <span style="color:#960050;background-color:#1e0010">5.5;</span> <span style="color:#960050;background-color:#1e0010">Windows</span> <span style="color:#960050;background-color:#1e0010">NT)&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Accept-Encoding&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;gzip,</span> <span style="color:#960050;background-color:#1e0010">deflate&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Accept&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;*/*&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Connection&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;keep-alive&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Content-Length&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;27&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Content-Type&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;application/json&#39;</span>}
+</span></span></code></pre></div><p>服务器返回的请求头可以使用 requests_obj.headers 来查看：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">&gt;&gt;&gt;</span> <span style="color:#960050;background-color:#1e0010">print(requests_obj.headers)</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#960050;background-color:#1e0010">&#39;Date&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;Thu,</span> <span style="color:#960050;background-color:#1e0010">30</span> <span style="color:#960050;background-color:#1e0010">Jun</span> <span style="color:#960050;background-color:#1e0010">2022</span> <span style="color:#960050;background-color:#1e0010">02:55:34</span> <span style="color:#960050;background-color:#1e0010">GMT&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Content-Type&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;application/json&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Content-Length&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;531&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Connection&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;close&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Server&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;gunicorn/19.9.0&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Access-Control-Allow-Origin&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;*&#39;,</span> <span style="color:#960050;background-color:#1e0010">&#39;Access-Control-Allow-Credentials&#39;:</span> <span style="color:#960050;background-color:#1e0010">&#39;true&#39;</span>}
+</span></span></code></pre></div><h4 id="cookies">Cookies</h4>
+<p>部分 url 需要携带 cookies 请求，可使用 <code>cookies</code> 参数指定要携带的 cookies。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)&#39;</span>}
+</span></span><span style="display:flex;"><span>cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;sessionid&#39;</span>:<span style="color:#e6db74">&#39;tzwwdk68z05vou6g6624g52adavood5a&#39;</span>,<span style="color:#e6db74">&#39;UserName&#39;</span>:<span style="color:#e6db74">&#39;e3base&#39;</span>,<span style="color:#e6db74">&#39;CurrentRole&#39;</span>:<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">7%AE%A1</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">7</span><span style="color:#e6db74">%90%</span><span style="color:#e6db74">86</span><span style="color:#e6db74">%E</span><span style="color:#e6db74">5</span><span style="color:#e6db74">%91%</span><span style="color:#e6db74">98&#39;</span>,<span style="color:#e6db74">&#39;CurrentCluster&#39;</span>:<span style="color:#e6db74">&#39;JF_E3base410&#39;</span>}
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;database&#39;</span>:<span style="color:#e6db74">&#39;&#39;</span>}
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>post(<span style="color:#e6db74">&#39;http://172.18.231.99:28011/JF_E3base560/e3resource/list/databases/&#39;</span>, headers<span style="color:#f92672">=</span>headers, cookies<span style="color:#f92672">=</span>cookies, json<span style="color:#f92672">=</span>data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>status_code)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;success&#34;</span>, <span style="color:#e6db74">&#34;code&#34;</span>: <span style="color:#ae81ff">200</span>, <span style="color:#e6db74">&#34;data&#34;</span>: {<span style="color:#e6db74">&#34;databases&#34;</span>: [<span style="color:#e6db74">&#34;bdess8&#34;</span>, <span style="color:#e6db74">&#34;default&#34;</span>, <span style="color:#e6db74">&#34;doris_test&#34;</span>, <span style="color:#e6db74">&#34;expand&#34;</span>, <span style="color:#e6db74">&#34;fice13&#34;</span>, <span style="color:#e6db74">&#34;hihihi&#34;</span>, <span style="color:#e6db74">&#34;hive001&#34;</span>, <span style="color:#e6db74">&#34;hive_euansu_02&#34;</span>, <span style="color:#e6db74">&#34;hive_hbase_test&#34;</span>, <span style="color:#e6db74">&#34;hive_jiajc&#34;</span>, <span style="color:#e6db74">&#34;hiveeee&#34;</span>, <span style="color:#e6db74">&#34;hivetset&#34;</span>, <span style="color:#e6db74">&#34;huangzx_a&#34;</span>, <span style="color:#e6db74">&#34;hudi&#34;</span>, <span style="color:#e6db74">&#34;ice13&#34;</span>, <span style="color:#e6db74">&#34;iceberg&#34;</span>, <span style="color:#e6db74">&#34;iceberg_impala&#34;</span>, <span style="color:#e6db74">&#34;iceberg_yupb&#34;</span>, <span style="color:#e6db74">&#34;impala_test1&#34;</span>, <span style="color:#e6db74">&#34;jiajc&#34;</span>, <span style="color:#e6db74">&#34;klklklkl&#34;</span>, <span style="color:#e6db74">&#34;niuxl&#34;</span>, <span style="color:#e6db74">&#34;sensitive&#34;</span>, <span style="color:#e6db74">&#34;sice&#34;</span>, <span style="color:#e6db74">&#34;spark_iceberg&#34;</span>, <span style="color:#e6db74">&#34;sql_quality&#34;</span>, <span style="color:#e6db74">&#34;suwh_a&#34;</span>, <span style="color:#e6db74">&#34;suwh_pri&#34;</span>, <span style="color:#e6db74">&#34;test&#34;</span>, <span style="color:#e6db74">&#34;test0220426&#34;</span>, <span style="color:#e6db74">&#34;test20220425&#34;</span>, <span style="color:#e6db74">&#34;test20220426&#34;</span>, <span style="color:#e6db74">&#34;test20220509&#34;</span>, <span style="color:#e6db74">&#34;test20220510&#34;</span>, <span style="color:#e6db74">&#34;test202205102&#34;</span>, <span style="color:#e6db74">&#34;test202205103&#34;</span>, <span style="color:#e6db74">&#34;test2022042505&#34;</span>, <span style="color:#e6db74">&#34;test2022042603&#34;</span>, <span style="color:#e6db74">&#34;test2022042604&#34;</span>, <span style="color:#e6db74">&#34;test2022042607&#34;</span>, <span style="color:#e6db74">&#34;test2022042655&#34;</span>, <span style="color:#e6db74">&#34;test2022042660&#34;</span>, <span style="color:#e6db74">&#34;test2022052303&#34;</span>, <span style="color:#e6db74">&#34;test2022052304&#34;</span>, <span style="color:#e6db74">&#34;test2022052305&#34;</span>, <span style="color:#e6db74">&#34;test_euansu_hive&#34;</span>, <span style="color:#e6db74">&#34;testdb&#34;</span>, <span style="color:#e6db74">&#34;tpcds_bin_partitioned_orc_2&#34;</span>, <span style="color:#e6db74">&#34;tpcds_text_2&#34;</span>, <span style="color:#e6db74">&#34;tt_renjy06_db&#34;</span>, <span style="color:#e6db74">&#34;wanglei_hive&#34;</span>, <span style="color:#e6db74">&#34;weiqm&#34;</span>, <span style="color:#e6db74">&#34;weizy&#34;</span>, <span style="color:#e6db74">&#34;youky_hdfs&#34;</span>, <span style="color:#e6db74">&#34;youky_hive&#34;</span>, <span style="color:#e6db74">&#34;youky_zuhu2&#34;</span>, <span style="color:#e6db74">&#34;youyou&#34;</span>, <span style="color:#e6db74">&#34;yupb&#34;</span>, <span style="color:#e6db74">&#34;yupb002&#34;</span>, <span style="color:#e6db74">&#34;zhangxrtest&#34;</span>]}}
+</span></span></code></pre></div><h4 id="身份认证">身份认证</h4>
+<h4 id="基本身份认证">基本身份认证</h4>
+<p>基本身份认证（HTTP Basic Auth）是使用账号密码进行的简单认证，requests 提供了 HTTPBasicAuth 实现基本身份认证。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> requests.auth <span style="color:#f92672">import</span> HTTPBasicAuth
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;X-Requested-By&#39;</span>: <span style="color:#e6db74">&#39;ambari&#39;</span>}
+</span></span><span style="display:flex;"><span>params <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;fields&#39;</span>:<span style="color:#e6db74">&#39;Clusters/desired_configs&#39;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;http://172.18.231.130:8080/api/v1/clusters/E3baseCluster?fields=Clusters/desired_configs&#39;</span>, headers<span style="color:#f92672">=</span>headers, params<span style="color:#f92672">=</span>params, auth<span style="color:#f92672">=</span>HTTPBasicAuth(<span style="color:#e6db74">&#39;admin&#39;</span>, <span style="color:#e6db74">&#39;admin&#39;</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>status_code)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;href&#34;</span> : <span style="color:#e6db74">&#34;http://172.18.231.130:8080/api/v1/clusters/E3baseCluster?fields=Clusters/desired_configs&amp;fields=Clusters/desired_configs&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Clusters&#34;</span> : {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;cluster_name&#34;</span> : <span style="color:#e6db74">&#34;E3baseCluster&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;desired_configs&#34;</span> : {
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;admin-properties&#34;</span> : {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tag&#34;</span> : <span style="color:#e6db74">&#34;9c2a7808-dce6-477d-8dd8-00c8b1653e12&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;version&#34;</span> : <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#e6db74">&#34;zookeeper-logsearch-conf&#34;</span> : {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;tag&#34;</span> : <span style="color:#e6db74">&#34;67ccad57-abbd-498b-bf4c-b161b098a32f&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;version&#34;</span> : <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="http-响应">HTTP 响应</h2>
+<h3 id="http响应基本概念">HTTP响应基本概念</h3>
+<blockquote>
+<p>HTTP 响应与 HTTP 请求相似，由三部分组成：</p>
+<ul>
+<li>状态行：</li>
+<li>响应头：</li>
+<li>响应正文</li>
+</ul>
+</blockquote>
+<p><img src="/Python%E5%9F%BA%E7%A1%80/58456e62d49d6-16565580577163.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="img"
+	
+	
+></p>
+<h3 id="requests-方法实践-1">requests 方法实践</h3>
+<p>使用 <code>requests.*</code> 发送请求时， requests 做了以下两件事：</p>
+<ol>
+<li>构建一个 requests 对象，该对象会根据请求方法或相关参数发起 HTTP 请求；</li>
+<li>服务器返回响应时，会产生一个 response 对象，该响应对象包含服务器返回的所有信息，也包含原来创建的 requests 对象。</li>
+</ol>
+<p>对于响应状态码，可以访问响应对象的 <code>status_code</code> 属性：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;http://httpbin.org/get&#34;</span>)
+</span></span><span style="display:flex;"><span>print requests_obj<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">200</span>
+</span></span></code></pre></div><p>对于响应正文，可以使用多种方式读取，例：</p>
+<ul>
+<li>普通响应，使用 <code>requests_obj.text</code> 获取；</li>
+<li>JSON响应，使用 <code>requests_obj.json()</code> 获取；</li>
+<li>二进制响应，使用 <code>requests_obj.content</code> 获取；</li>
+<li>原始响应，使用 <code>requests_obj.raw</code> 获取；</li>
+</ul>
+<h4 id="普通响应">普通响应</h4>
+<p>使用 <code>requests_obj.text</code> 来读取 unicode 形式的响应，例：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://github.com/timeline.json&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>encoding)
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#34;message&#34;</span>:<span style="color:#e6db74">&#34;Hello there, wayfaring stranger. If you’re reading this then you probably didn’t see our blog post a couple of years back announcing that this API would go away: http://git.io/17AROg Fear not, you should be able to get what you need from the shiny new Events API instead.&#34;</span>,<span style="color:#e6db74">&#34;documentation_url&#34;</span>:<span style="color:#e6db74">&#34;https://docs.github.com/v3/activity/events/#list-public-events&#34;</span>}
+</span></span><span style="display:flex;"><span>utf<span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>
+</span></span></code></pre></div><h4 id="json-响应">JSON 响应</h4>
+<p>对于 JSON 格式的响应，可以使用 <code>json()</code> 的方法把返回的数据解析成 Python 对象。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;https://github.com/timeline.json&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>json())
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Hello there, wayfaring stranger. If you’re reading this then you probably didn’t see our blog post a couple of years back announcing that this API would go away: http://git.io/17AROg Fear not, you should be able to get what you need from the shiny new Events API instead.&#39;</span>, <span style="color:#e6db74">&#39;documentation_url&#39;</span>: <span style="color:#e6db74">&#39;https://docs.github.com/v3/activity/events/#list-public-events&#39;</span>}
+</span></span></code></pre></div><p>如响应的格式不是 JSON 格式，使用 <code>json()</code> 方法解析，会抛出错误。</p>
+<p><img src="/Python%E5%9F%BA%E7%A1%80/image-20220702133314102.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220702133314102"
+	
+	
+></p>
+<h4 id="二进制响应">二进制响应</h4>
+<p>使用 <code>contenet</code> 属性可以获取二进制数据，例如使用返回的二进制数据进行文件的传输：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url)
+</span></span><span style="display:flex;"><span>image_data <span style="color:#f92672">=</span> requests_obj<span style="color:#f92672">.</span>content
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;D:/study/Python/baidu.png&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> fout:
+</span></span><span style="display:flex;"><span>    fout<span style="color:#f92672">.</span>write(image_data)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>filelist <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>listdir(<span style="color:#e6db74">&#39;D:/study/Python&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(filelist)
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;baidu.png&#39;</span>, <span style="color:#e6db74">&#39;Python基础.assets&#39;</span>, <span style="color:#e6db74">&#39;Python基础.md&#39;</span>, <span style="color:#e6db74">&#39;Python高性能编程学习笔记.md&#39;</span>, <span style="color:#e6db74">&#39;[异步图书].Python高性能编程.pdf&#39;</span>]
+</span></span></code></pre></div><h4 id="原始响应">原始响应</h4>
+<p>获取响应的原始数据，可以通过 <code>raw</code> 属性实现，但在发送请求时需要设置 <code>stream=True</code> ，例如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png&#39;</span>
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url,stream<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># obj.read(size)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># size：要读取的字节数</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>raw)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>raw<span style="color:#f92672">.</span>read(<span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>urllib3<span style="color:#f92672">.</span>response<span style="color:#f92672">.</span>HTTPResponse object at <span style="color:#ae81ff">0x000001DE74E461C8</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x89</span><span style="color:#e6db74">PNG</span><span style="color:#ae81ff">\r\n\x1a\n\x00\x00</span><span style="color:#e6db74">&#39;</span>
+</span></span></code></pre></div><h4 id="重定向">重定向</h4>
+<p>requests 会自动处理重定向的操作，可以使用 <code>history</code> 属性追踪请求 url 的重定向操作，requests_obj.history 是一个 response 对象的列表，这个列表按照从最开始的 url 到重定向的 url 进行排序。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)&#39;</span>}
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://toutiao.io/k/c32y51&#39;</span>,headers<span style="color:#f92672">=</span>headers)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>status_code)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>history)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> response_obj <span style="color:#f92672">in</span> requests_obj<span style="color:#f92672">.</span>history:
+</span></span><span style="display:flex;"><span>    print(response_obj<span style="color:#f92672">.</span>url)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">&lt;</span>Response [<span style="color:#ae81ff">302</span>]<span style="color:#f92672">&gt;</span>, <span style="color:#f92672">&lt;</span>Response [<span style="color:#ae81ff">301</span>]<span style="color:#f92672">&gt;</span>, <span style="color:#f92672">&lt;</span>Response [<span style="color:#ae81ff">302</span>]<span style="color:#f92672">&gt;</span>]
+</span></span><span style="display:flex;"><span>https:<span style="color:#f92672">//</span>toutiao<span style="color:#f92672">.</span>io<span style="color:#f92672">/</span>k<span style="color:#f92672">/</span>c32y51
+</span></span><span style="display:flex;"><span>http:<span style="color:#f92672">//</span>www<span style="color:#f92672">.</span>jianshu<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>p<span style="color:#f92672">/</span><span style="color:#ae81ff">490441391</span>db6<span style="color:#960050;background-color:#1e0010">?</span>hmsr<span style="color:#f92672">=</span>toutiao<span style="color:#f92672">.</span>io<span style="color:#f92672">&amp;</span>utm_campaign<span style="color:#f92672">=</span>toutiao<span style="color:#f92672">.</span>io<span style="color:#f92672">&amp;</span>utm_medium<span style="color:#f92672">=</span>toutiao<span style="color:#f92672">.</span>io<span style="color:#f92672">&amp;</span>utm_source<span style="color:#f92672">=</span>toutiao<span style="color:#f92672">.</span>io
+</span></span><span style="display:flex;"><span>https:<span style="color:#f92672">//</span>www<span style="color:#f92672">.</span>jianshu<span style="color:#f92672">.</span>com<span style="color:#f92672">/</span>p<span style="color:#f92672">/</span><span style="color:#ae81ff">490441391</span>db6<span style="color:#960050;background-color:#1e0010">?</span>hmsr<span style="color:#f92672">=</span>toutiao<span style="color:#f92672">.</span>io<span style="color:#f92672">&amp;</span>utm_campaign<span style="color:#f92672">=</span>toutiao<span style="color:#f92672">.</span>io<span style="color:#f92672">&amp;</span>utm_medium<span style="color:#f92672">=</span>toutiao<span style="color:#f92672">.</span>io<span style="color:#f92672">&amp;</span>utm_source<span style="color:#f92672">=</span>toutiao<span style="color:#f92672">.</span>io
+</span></span></code></pre></div><p>循环处理 requests_obj.history 可以追踪到 url 重定向后的 response 对象，打印 <code>response.url</code> 可以看到重定向的 url 。</p>
+<p>如果请求方法是 GET、POST、PUT、OPTIONS、PATCH 或 DELETE，可以通过 <code>all_redirects</code> 参数禁止重定向：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span>headers <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;User-Agent&#39;</span>: <span style="color:#e6db74">&#39;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)&#39;</span>}
+</span></span><span style="display:flex;"><span>requests_obj <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;https://toutiao.io/k/c32y51&#39;</span>,headers<span style="color:#f92672">=</span>headers,allow_redirects<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>status_code)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span>print(requests_obj<span style="color:#f92672">.</span>history)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">302</span>
+</span></span><span style="display:flex;"><span>[]
+</span></span></code></pre></div><h1 id="virtualenv-虚拟环境">Virtualenv 虚拟环境</h1>
+<p>virtualenv 用来创建对立的 Python环境，可以将项目与实际的环境独立开，在这个环境中安装、卸载软件而不会影响到其他项目，解决了不同项目可能存在的依赖包版本的冲突问题。</p>
+<h2 id="安装-virtualenv">安装 virtualenv</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install -i https://pypi.mirrors.ustc.edu.cn/simple/ virtualenv
+</span></span></code></pre></div><p><img src="/Python%E5%9F%BA%E7%A1%80/image-20220704145909393.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220704145909393"
+	
+	
+></p>
+<h2 id="操作步骤">操作步骤</h2>
+<h3 id="创建目录">创建目录</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 创建目录</span>
+</span></span><span style="display:flex;"><span>mkdir virtualEnv
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 进入创建的目录</span>
+</span></span><span style="display:flex;"><span>cd virtualEnv
+</span></span></code></pre></div><p><img src="/Python%E5%9F%BA%E7%A1%80/image-20220704151932618.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220704151932618"
+	
+	
+></p>
+<h3 id="创建虚拟环境">创建虚拟环境</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>virtualenv venv
+</span></span></code></pre></div><p><img src="/Python%E5%9F%BA%E7%A1%80/image-20220704152033696.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220704152033696"
+	
+	
+></p>
+<h3 id="激活虚拟环境">激活虚拟环境</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>.<span style="color:#ae81ff">\v</span>env<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\a</span>ctivate
+</span></span></code></pre></div><p><img src="/Python%E5%9F%BA%E7%A1%80/image-20220704152124067.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220704152124067"
+	
+	
+></p>
+<p>激活虚拟环境后，会出现一个（venv）前缀，表明这是一个 Python 的 venv 虚拟环境。</p>
+<p>在 <code>venv</code> 环境下，用 <code>pip</code> 安装的包都被安装到 <code>venv</code> 这个环境下，系统Python环境不受任何影响。也就是说，<code>venv</code> 环境是专门针对 <code>virtualEnv</code> 这个应用创建的。</p>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/python/">Python</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

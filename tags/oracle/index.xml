@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Oracle on EuanSu&#39;s Blog</title>
+        <link>https://euansu123.github.io/tags/oracle/</link>
+        <description>Recent content in Oracle on EuanSu&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Fri, 15 Jul 2022 09:47:00 +0800</lastBuildDate><atom:link href="https://euansu123.github.io/tags/oracle/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Oracle 19c 安装使用记录</title>
+        <link>https://euansu123.github.io/post/oracle_19c_operate/</link>
+        <pubDate>Fri, 15 Jul 2022 09:47:00 +0800</pubDate>
+        
+        <guid>https://euansu123.github.io/post/oracle_19c_operate/</guid>
+        <description>&lt;img src="https://euansu123.github.io/img/oracle.jpg" alt="Featured image of post Oracle 19c 安装使用记录" /&gt;&lt;p&gt;Oracle 数据库安装及连接操作。&lt;/p&gt;
+&lt;h1 id=&#34;准备工作&#34;&gt;准备工作&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载 Oracle 19c 安装包，下载地址：https://www.oracle.com/database/technologies/oracle-database-software-downloads.html#19c&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715161021810.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220715161021810&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;下载 Oracle 19c 预安装包，下载地址：http://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-19c-1.0-1.el7.x86_64.rpm&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;安装过程&#34;&gt;安装过程&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;上传 rpm 包到服务器。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715162205506.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220715162205506&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装 Oracle 预安装rpm包。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum -y localinstall oracle-database-preinstall-19c-1.0-1.el7.x86_64.rpm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装 Oracle 安装rpm包。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yum -y localinstall oracle-database-ee-19c-1.0-1.x86_64.rpm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置 Oracle 环境。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/etc/init.d/oracledb_ORCLCDB-19c configure
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;配置环境&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;配置过程执行结束后，查询 Oracle 进程，Oracle 进程存在表示安装完成。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715162846458.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220715162846458&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建 Oracle 用户，并配置 Orace 用户的环境变量。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715163350129.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220715163350129&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;执行 sqlplus / as sysdba 校验 Oracle 数据库是否启动成功。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715163431437.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220715163431437&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用连接工具测试连接是否成功。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/Snipaste_2022-07-15_16-31-58.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Snipaste_2022-07-15_16-31-58&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;oracle-数据库启停操作&#34;&gt;Oracle 数据库启停操作&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/etc/init.d/oracledb_ORCLCDB-19c start|stop|restart|configure|delete
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;oracle-数据库简单操作&#34;&gt;Oracle 数据库简单操作&lt;/h1&gt;
+&lt;p&gt;创建表空间&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; tablespace tab_name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;datafile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;size&lt;/span&gt; n
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[autoextend &lt;span style=&#34;color:#66d9ef&#34;&gt;on&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;next&lt;/span&gt; n1 maxsize m &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;of&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[permanent] 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[extent management &lt;span style=&#34;color:#66d9ef&#34;&gt;local&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;dictionary&lt;/span&gt;];
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; tab_name    &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;表空间的名字&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; path        &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;数据文件路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;size&lt;/span&gt; n    &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;指定数据文件的大小&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; tablespace euansu datafile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/home/oracle/data&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;size&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;M;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714191811220.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220714191811220&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714191826269.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220714191826269&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;创建临时表空间&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;temporary&lt;/span&gt; tablespace temp_name tempfile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;size&lt;/span&gt; n;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; tempname    &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;表空间的名字&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; path        &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;临时表空间数据文件的位置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;size&lt;/span&gt; m    &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;表示临时表空间的大小&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;temporary&lt;/span&gt; tablespace euansu_temp tempfile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/home/oracle/euansu_temp&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;size&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;M;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714192306181.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220714192306181&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714192328271.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220714192328271&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;创建用户&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt; euansu identified &lt;span style=&#34;color:#66d9ef&#34;&gt;by&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;suwenhui123&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt; tablespace euansu &lt;span style=&#34;color:#66d9ef&#34;&gt;temporary&lt;/span&gt; tablespace euansu_temp;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; tablespace            &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;表空间&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;temporary&lt;/span&gt; tablespace    &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;临时表空间&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;创建用户时会报&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;65096&lt;/span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;的错误，执行如下语句即可：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;alter&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;session&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;_ORACLE_SCRIPT&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714192445471.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220714192445471&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;python连接oracle&#34;&gt;Python连接Oracle&lt;/h1&gt;
+&lt;h2 id=&#34;安装-cx_oracle-第三方库&#34;&gt;安装 cx_Oracle 第三方库&lt;/h2&gt;
+&lt;p&gt;最新 cx_Oracle 并不支持 Python2.7，这里下载支持 Python2.7 的7.3.0 版本，下载地址：https://files.pythonhosted.org/packages/5e/e3/cfd4f413f8d47dd2aee09273d9bb3ee6aa7384e0a04e191d703c2199eb93/cx_Oracle-7.3.0.tar.gz&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817174623225.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220817174623225&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 解压 cx_Oracle 源码包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -zxvf cx_Oracle-7.3.0.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 安装 cx_Oracle 第三方库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;python2.7 setup.py install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817175001764.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220817175001764&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安装-oracle-instant-client&#34;&gt;安装 Oracle Instant Client&lt;/h2&gt;
+&lt;p&gt;通过 python 连接 oracle 需要使用 cx_Oracle 第三方库，要求主机提前安装 Oracle Instant Client，否则连接 Oracle 会报如下错误。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817173612608.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220817173612608&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;下载-oracle-instant-client&#34;&gt;下载 Oracle Instant Client&lt;/h3&gt;
+&lt;p&gt;下载地址：https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html，下载对应版本的 Oracle Instant Client包即可。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817173734432.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220817173734432&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;创建-oracle-instant-clinet-所需目录&#34;&gt;创建 Oracle Instant Clinet 所需目录&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo mkdir -p /opt/oracle
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo mv instantclient-basic-linux.x64-21.7.0.0.0dbru.zip /opt/oracle/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd /opt/oracle
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo unzip instantclient-basic-linux.x64-21.7.0.0.0dbru.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;安装系统--libaio-包&#34;&gt;安装系统  libaio 包&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install libaio
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;创建-instant-client-的-so-文件依赖&#34;&gt;创建 Instant Client 的 .so 文件依赖&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo sh -c &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;echo /opt/oracle/instantclient_21_7 &amp;gt; /etc/ld.so.conf.d/oracle-instantclient.conf&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo ldconfig
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;添加-instant-clinet-的环境变量&#34;&gt;添加 Instant Clinet 的环境变量&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;export LD_LIBRARY_PATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/opt/oracle/instantclient_21_7:$LD_LIBRARY_PATH
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;测试连接&#34;&gt;测试连接&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817180349849.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220817180349849&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;python-连接-oracle-封装代码&#34;&gt;Python 连接 Oracle 封装代码&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; cx_Oracle
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OracleApi&lt;/span&gt;(object):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, host, port, user, password, instant):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;host &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; host
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;port &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; port
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;user &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; user
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;password &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; password
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;instant &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; instant
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;connect&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; cx_Oracle&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;user, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;password, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;host, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;port,self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;instant))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cursor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cursor()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;close&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cursor&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;conn&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_one&lt;/span&gt;(self, sql, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;()):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cursor&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;execute(sql, params)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cursor&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fetchone()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Exception&lt;/span&gt;, e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            print e&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;message
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_all&lt;/span&gt;(self, sql):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cursor&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;execute(sql)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;cursor&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fetchall()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;close()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Exception&lt;/span&gt;, e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            print e&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;message
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

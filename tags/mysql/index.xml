@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>mysql on EuanSu&#39;s Blog</title>
+        <link>https://euansu123.github.io/tags/mysql/</link>
+        <description>Recent content in mysql on EuanSu&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sun, 07 Aug 2022 15:07:57 +0800</lastBuildDate><atom:link href="https://euansu123.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mysql源码编译安装</title>
+        <link>https://euansu123.github.io/post/mysql_source_code_compile/</link>
+        <pubDate>Sun, 07 Aug 2022 15:07:57 +0800</pubDate>
+        
+        <guid>https://euansu123.github.io/post/mysql_source_code_compile/</guid>
+        <description>&lt;img src="https://euansu123.github.io/img/mysql.jpg" alt="Featured image of post Mysql源码编译安装" /&gt;&lt;p&gt;Mysql编译安装能够根据需要设定参数，按照需求进行定制安装，并且安装的版本可以根据项目需要灵活选择，整体可配置弹性大。&lt;/p&gt;
+&lt;h1 id=&#34;前提准备&#34;&gt;前提准备&lt;/h1&gt;
+&lt;h2 id=&#34;下载-mysql-源码包&#34;&gt;下载 mysql 源码包&lt;/h2&gt;
+&lt;p&gt;到 &lt;a class=&#34;link&#34; href=&#34;https://downloads.mysql.com/archives/community/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://downloads.mysql.com/archives/community/&lt;/a&gt; 下载对应版本的安装包，需要注意的是 mysql5.7 编译安装需要boost 库，可以在官网下载含 boost 的源码包。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807153737914-16598580753021.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220807153737914&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安装相关依赖包&#34;&gt;安装相关依赖包&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo yum install -y gcc gcc-c++ cmake ncurses ncurses-devel bison wget openssl-devel.x86_64
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807151805742.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220807151805742&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;创建-mysql-所需目录&#34;&gt;创建 mysql 所需目录&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir /iddbs/mysql
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir /iddbdata/3306/data
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir /iddbdata/3306/binlog/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mkdir /iddbdata/3306/logs/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;编译安装&#34;&gt;编译安装&lt;/h1&gt;
+&lt;h2 id=&#34;配置相关参数&#34;&gt;配置相关参数&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cmake -DCMAKE_INSTALL_PREFIX&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbs/mysql  -DMYSQL_DATADIR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/data -DMYSQL_UNIX_ADDR&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/mysql.sock -DDEFAULT_CHARSET&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8 -DDEFAULT_COLLATION&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;utf8_general_ci -DWITH_BOOST&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;boost
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# DCMAKE_INSTALL_PREFIX  指定MySQL程序的安装目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# DMYSQL_DATADIR         数据文件目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# DMYSQL_UNIX_ADDR       socket文件路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# DDEFAULT_CHARSET       指定服务器默认字符集，默认latin1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# DDEFAULT_COLLATION     指定服务器默认的校对规则，默认latin1_general_ci&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807152228029.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220807152228029&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;源码编译安装&#34;&gt;源码编译安装&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;make &amp;amp; make install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807160836849.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220807160836849&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;准备-mysql-配置文件&#34;&gt;准备 mysql 配置文件&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 准备my.cnf文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;client&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3305&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;socket&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/mysql.sock
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;mysqld&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;server-id&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1013306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;basedir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbs/mysql
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;plugin-dir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbs/mysql/lib/plugin
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;datadir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/data
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;log-bin&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/binlog/bin-log
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pid-file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/mysql.pid
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;socket&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/mysql.sock
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;relay-log&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/binlog/relay-log
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;log-error&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/logs/mysql-error.log
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;log_timestamps&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;system
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;初始化-mysql&#34;&gt;初始化 mysql&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 如果不加--initialize-insecure，会直接在前台输出密码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/iddbs/mysql/bin/mysqld --defaults-file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/my.cnf --user&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;euansu --initialize-insecure
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807161436617.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220807161436617&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;启动-mysql&#34;&gt;启动 mysql&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/iddbs/mysql/bin/mysqld_safe --defaults-file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/iddbdata/3306/my.cnf --user&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;euansu &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807161351328.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220807161351328&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;连接-mysql&#34;&gt;连接 mysql&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/iddbs/mysql/bin/mysql -uroot -S /iddbdata/3306/mysql.sock
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;设置 root 账户密码。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set password for root@localhost = password(&amp;#34;mysql&amp;#34;);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807161521346.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220807161521346&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;mysql-相关操作&#34;&gt;mysql 相关操作&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;设置&lt;/span&gt;mysql密码
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; password &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; root&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;localhost &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; password(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;mysql&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;创建数据库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;database&lt;/span&gt; idbcdb;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;创建&lt;/span&gt;mysql用户
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;euansu&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; identified &lt;span style=&#34;color:#66d9ef&#34;&gt;by&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;euansu&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;刷新权限&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;flush &lt;span style=&#34;color:#66d9ef&#34;&gt;privileges&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;用户赋予&lt;/span&gt;mysql远程操作的所有权限
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;grant&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;all&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;privileges&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;on&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;.&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;to&lt;/span&gt; euansu&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;查看用户&lt;/span&gt;euansu的权限域
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;show&lt;/span&gt; grants &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; euansu&lt;span style=&#34;color:#f92672&#34;&gt;@&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807161832090.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220807161832090&#34;
+	
+	
+&gt;&lt;/p&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

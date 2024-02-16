@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='YARN 1.YARN常用命令 1.1 作业 命令 说明 yarn application -list 列出所有的application yarn application -list -appStates [ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED] 根据application状态过滤 yarn application -kill [applicationId] Kill掉application 查看所有任务
+yarn application -list 查看指定任务状态的作业
+# state 可选的有：ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED yarn application -list -appStates &amp;lt;state&amp;gt; # 示例 yarn application -list -appStates RUNNING,ACCEPTED 查看正在运行的任务信息
+yarn applicationattempt -list &amp;lt;application_id&amp;gt; 结束作业
+yarn application -kill &amp;lt;application_id&amp;gt; 1.2 日志 查询指定作业的日志
+# 如果提示内存限制，可以在如下命令后，添加 --size -1 yarn logs -applicationId &amp;lt;application_id&amp;gt; 查询指定 Container 的日志
+yarn logs -applicationId &amp;lt;application_id&amp;gt; -containerId &amp;lt;container_id&amp;gt; 1.'>
+<title>YARN常用命令及Rest API</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/yarn_rest_api/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='YARN常用命令及Rest API'>
+<meta property='og:description' content='YARN 1.YARN常用命令 1.1 作业 命令 说明 yarn application -list 列出所有的application yarn application -list -appStates [ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED] 根据application状态过滤 yarn application -kill [applicationId] Kill掉application 查看所有任务
+yarn application -list 查看指定任务状态的作业
+# state 可选的有：ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED yarn application -list -appStates &amp;lt;state&amp;gt; # 示例 yarn application -list -appStates RUNNING,ACCEPTED 查看正在运行的任务信息
+yarn applicationattempt -list &amp;lt;application_id&amp;gt; 结束作业
+yarn application -kill &amp;lt;application_id&amp;gt; 1.2 日志 查询指定作业的日志
+# 如果提示内存限制，可以在如下命令后，添加 --size -1 yarn logs -applicationId &amp;lt;application_id&amp;gt; 查询指定 Container 的日志
+yarn logs -applicationId &amp;lt;application_id&amp;gt; -containerId &amp;lt;container_id&amp;gt; 1.'>
+<meta property='og:url' content='https://euansu123.github.io/post/yarn_rest_api/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Hadoop' /><meta property='article:tag' content='YARN' /><meta property='article:published_time' content='2024-01-22T11:57:38&#43;08:00'/><meta property='article:modified_time' content='2024-01-22T11:57:38&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/hadoop.png' />
+<meta name="twitter:title" content="YARN常用命令及Rest API">
+<meta name="twitter:description" content="YARN 1.YARN常用命令 1.1 作业 命令 说明 yarn application -list 列出所有的application yarn application -list -appStates [ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED] 根据application状态过滤 yarn application -kill [applicationId] Kill掉application 查看所有任务
+yarn application -list 查看指定任务状态的作业
+# state 可选的有：ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED yarn application -list -appStates &amp;lt;state&amp;gt; # 示例 yarn application -list -appStates RUNNING,ACCEPTED 查看正在运行的任务信息
+yarn applicationattempt -list &amp;lt;application_id&amp;gt; 结束作业
+yarn application -kill &amp;lt;application_id&amp;gt; 1.2 日志 查询指定作业的日志
+# 如果提示内存限制，可以在如下命令后，添加 --size -1 yarn logs -applicationId &amp;lt;application_id&amp;gt; 查询指定 Container 的日志
+yarn logs -applicationId &amp;lt;application_id&amp;gt; -containerId &amp;lt;container_id&amp;gt; 1."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/hadoop.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/yarn_rest_api/">
+                
+                    <img src="/img/hadoop.png" loading="lazy" alt="Featured image of post YARN常用命令及Rest API" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/yarn_rest_api/">YARN常用命令及Rest API</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 22, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="yarn">YARN</h1>
+<h2 id="1yarn常用命令">1.YARN常用命令</h2>
+<h3 id="11-作业">1.1 作业</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yarn application -list</td>
+<td>列出所有的application</td>
+</tr>
+<tr>
+<td>yarn application -list -appStates [ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED]</td>
+<td>根据application状态过滤</td>
+</tr>
+<tr>
+<td>yarn application -kill [applicationId]</td>
+<td>Kill掉application</td>
+</tr>
+</tbody>
+</table></div>
+<p>查看所有任务</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn application -list
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20231030104820397.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20231030104820397"
+	
+	
+></p>
+<p>查看指定任务状态的作业</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># state 可选的有：ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED</span>
+</span></span><span style="display:flex;"><span>yarn application -list -appStates &lt;state&gt;
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 示例</span>
+</span></span><span style="display:flex;"><span>yarn application -list -appStates RUNNING,ACCEPTED
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20230412114200435.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230412114200435"
+	
+	
+></p>
+<p>查看正在运行的任务信息</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn applicationattempt -list &lt;application_id&gt;
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20231030105214173.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20231030105214173"
+	
+	
+></p>
+<p>结束作业</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn application -kill &lt;application_id&gt;
+</span></span></code></pre></div><h3 id="12-日志">1.2 日志</h3>
+<p>查询指定作业的日志</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 如果提示内存限制，可以在如下命令后，添加 --size -1</span>
+</span></span><span style="display:flex;"><span>yarn logs -applicationId &lt;application_id&gt;
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20231030105613765.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20231030105613765"
+	
+	
+></p>
+<p>查询指定 Container 的日志</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn logs -applicationId &lt;application_id&gt; -containerId &lt;container_id&gt;
+</span></span></code></pre></div><h3 id="13-application-attempt">1.3 Application Attempt</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yarn applicationattempt -list [ApplicationId]</td>
+<td>列出所有Application尝试的列表</td>
+</tr>
+<tr>
+<td>yarn applicationattempt -status [ApplicationAttemptId]</td>
+<td>打印Application Attempt的状态</td>
+</tr>
+</tbody>
+</table></div>
+<p>列出Application的所有尝试</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn applicationattempt -list <span style="color:#f92672">[</span>ApplicationId<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20240122102411843.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240122102411843"
+	
+	
+></p>
+<p>打印Application Attempt的状态</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn applicationattempt -status <span style="color:#f92672">[</span>ApplicationAttemptId<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20240122102545463.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240122102545463"
+	
+	
+></p>
+<h3 id="14-容器">1.4 容器</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yarn container -list [ApplicationAttemptId]</td>
+<td>列出所有的Container</td>
+</tr>
+<tr>
+<td>yarn container -status [ContainerId]</td>
+<td>打印Container状态</td>
+</tr>
+</tbody>
+</table></div>
+<p>列出所有的Container</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn container -list <span style="color:#f92672">[</span>ApplicationAttemptId<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20240122103049934.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240122103049934"
+	
+	
+></p>
+<p>打印Container状态</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn container -status <span style="color:#f92672">[</span>ContainerId<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20240122103145929.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240122103145929"
+	
+	
+></p>
+<h3 id="15-其他">1.5 其他</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yarn node -list -all</td>
+<td>查看节点状态</td>
+</tr>
+<tr>
+<td>yarn rmadmin -refreshQueues</td>
+<td>加载队列配置</td>
+</tr>
+<tr>
+<td>yarn queue -status [QueueName]</td>
+<td>打印队列信息</td>
+</tr>
+</tbody>
+</table></div>
+<p>查看节点状态</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn node -list -all
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20240122101045236.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240122101045236"
+	
+	
+></p>
+<p>加载队列配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 需要在RM节点执行</span>
+</span></span><span style="display:flex;"><span>yarn rmadmin -refreshQueues
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20240122101741713.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240122101741713"
+	
+	
+></p>
+<p>查看队列状态</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yarn queue -status <span style="color:#f92672">[</span>QueueName<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20240122101841492.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240122101841492"
+	
+	
+></p>
+<h2 id="2yarn-rest-api">2.YARN Rest Api</h2>
+<p>YARN Rest Api文档地址：https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/ResourceManagerRest.html</p>
+<h3 id="21-集群">2.1 集群</h3>
+<p><strong>获取 RM 节点状态</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># URL</span>
+</span></span><span style="display:flex;"><span>http://rm-http-address:port/ws/v1/cluster/info
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Method</span>
+</span></span><span style="display:flex;"><span>GET
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 示例</span>
+</span></span><span style="display:flex;"><span>curl -X GET -u e3base:<span style="color:#e6db74">&#39;Sit@Paas&amp;123&#39;</span> -i <span style="color:#e6db74">&#34;http://172.21.9.101:13006/ws/v1/cluster/info&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注：如果集群集成了kerbeors，需要增加--negotiate参数</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20230810105526308.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230810105526308"
+	
+	
+></p>
+<p><strong>获取集群Metrics</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># URL</span>
+</span></span><span style="display:flex;"><span>http://rm-http-address:port/ws/v1/cluster/metrics
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Method</span>
+</span></span><span style="display:flex;"><span>GET
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 示例</span>
+</span></span><span style="display:flex;"><span>curl -X GET -u e3base:<span style="color:#e6db74">&#39;Sit@Paas&amp;123&#39;</span> -i <span style="color:#e6db74">&#34;http://172.21.9.101:13006/ws/v1/cluster/metrics&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注：如果集群集成了kerbeors，需要增加--negotiate参数</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20230810110235599.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230810110235599"
+	
+	
+></p>
+<h3 id="22-队列">2.2 队列</h3>
+<p><strong>获取集群队列</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># URL</span>
+</span></span><span style="display:flex;"><span>http://rm-http-address:port/ws/v1/cluster/scheduler
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Method</span>
+</span></span><span style="display:flex;"><span>GET
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 示例</span>
+</span></span><span style="display:flex;"><span>curl -X GET -u e3base:<span style="color:#e6db74">&#39;Sit@Paas&amp;123&#39;</span> -i <span style="color:#e6db74">&#34;http://172.21.9.101:13006/ws/v1/cluster/scheduler&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注：如果集群集成了kerbeors，需要增加--negotiate参数</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20230810110941722.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230810110941722"
+	
+	
+></p>
+<h3 id="23-作业">2.3 作业</h3>
+<p><strong>获取集群作业</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># URL</span>
+</span></span><span style="display:flex;"><span>http://rm-http-address:port/ws/v1/cluster/apps
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Method</span>
+</span></span><span style="display:flex;"><span>GET
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 示例</span>
+</span></span><span style="display:flex;"><span>curl -X GET -u e3base:<span style="color:#e6db74">&#39;Sit@Paas&amp;123&#39;</span> -i <span style="color:#e6db74">&#34;http://172.21.9.101:13006/ws/v1/cluster/apps&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 注：如果集群集成了kerbeors，需要增加--negotiate参数</span>
+</span></span></code></pre></div><p><img src="/yarn_rest_api/image-20230810111144989.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230810111144989"
+	
+	
+></p>
+<h2 id="3其他">3.其他</h2>
+<h3 id="31-相关资源">3.1 相关资源</h3>
+<ol>
+<li>YARN官方文档：https://hadoop.apache.org/docs/stable/</li>
+<li>大数据之Hadoop集群中YARN常用命令：https://www.cnblogs.com/sw-code/p/16387038.html</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/hadoop/">Hadoop</a>
+        
+            <a href="/tags/yarn/">YARN</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

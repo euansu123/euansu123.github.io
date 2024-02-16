@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Prometheus on EuanSu&#39;s Blog</title>
+        <link>https://euansu123.github.io/tags/prometheus/</link>
+        <description>Recent content in Prometheus on EuanSu&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Tue, 11 Jul 2023 19:10:00 +0800</lastBuildDate><atom:link href="https://euansu123.github.io/tags/prometheus/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Prometheus &#43; Grafana指标监控</title>
+        <link>https://euansu123.github.io/post/prometheus_and_grafana/</link>
+        <pubDate>Tue, 11 Jul 2023 19:10:00 +0800</pubDate>
+        
+        <guid>https://euansu123.github.io/post/prometheus_and_grafana/</guid>
+        <description>&lt;img src="https://euansu123.github.io/img/grafana_prometheus.png" alt="Featured image of post Prometheus &#43; Grafana指标监控" /&gt;&lt;p&gt;Prometheus 对大数据组件HDFS的指标进行采集，Grafana进行可视化展示。&lt;/p&gt;
+&lt;h1 id=&#34;1prometheus&#34;&gt;1.Prometheus&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载 &lt;code&gt;Prometheus&lt;/code&gt; 安装包。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 页面下载地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;https://prometheus.io/download/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/Grafana&amp;#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707160343588.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230707160343588&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;上传 &lt;code&gt;Prometheus&lt;/code&gt; 到规划的路径并进行解压。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -zxvf prometheus-2.37.8.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;启动 &lt;code&gt;Prometheus&lt;/code&gt; 服务。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 需要在 Prometheus 目录下执行如下操作&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./prometheus --config.file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;prometheus.yml
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 建议后台启动，命令如下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nohup ./prometheus --config.file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;prometheus.yml &amp;gt;&amp;gt; prometheus.log 2&amp;gt;&amp;amp;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;启动后，即可在页面访问 &lt;code&gt;Prometheus&lt;/code&gt; 服务。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/Grafana&amp;#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707160714058.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230707160714058&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;2grafana&#34;&gt;2.Grafana&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载 &lt;code&gt;Grafana&lt;/code&gt; 安装包。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 这里下载的是安装包，注意不要下载源码包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;wget https://dl.grafana.com/enterprise/release/grafana-enterprise-9.5.2.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 页面下载地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;https://grafana.com/grafana/download/10.0.0?pg&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;oss-graf&amp;amp;plcmt&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;hero-btn-1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/Grafana&amp;#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707160102548.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230707160102548&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;上传到主机规划的目录并进行解压。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tar -zxvf grafana-enterprise-9.5.2.linux-amd64.tar.gz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;启动 &lt;code&gt;Grafana&lt;/code&gt; 服务。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 需要在 Grafana 目录下执行如下操作&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;./bin/grafana-server web
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 建议后台启动，命令如下&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nohup ./grafana-server web 2&amp;gt;&amp;amp;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &amp;gt;&amp;gt; /e3base/apps/grafana/logs/grafana.log &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;启动后，即可在页面访问 &lt;code&gt;Grafana&lt;/code&gt; 服务。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/Grafana&amp;#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707160215621.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230707160215621&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;3指标监控&#34;&gt;3.指标监控&lt;/h1&gt;
+&lt;h2 id=&#34;31-hdfs&#34;&gt;3.1 HDFS&lt;/h2&gt;
+&lt;h3 id=&#34;311-namenode&#34;&gt;3.1.1 NameNode&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;环境信息&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# jmx端口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;12003&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# NameNode节点&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;host-172-18-243-34
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;host-172-18-243-35
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 环境&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Kerberos
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;jmx 接口测试&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X GET --negotiate -u e3base:e3base -i http://host-172-18-243-34:12003/jmx
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X GET --negotiate -u e3base:e3base -i http://host-172-18-243-35:12003/jmx
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/Grafana&amp;#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707161034088.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230707161034088&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Kerberos代理&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Prometheus&lt;/code&gt; 只能够采集非 &lt;code&gt;Kerberos&lt;/code&gt; 环境的信息，&lt;code&gt;Kerberos&lt;/code&gt; 环境下需要使用如下方法，将 &lt;code&gt;Kerbeors&lt;/code&gt; 页面代理成非 &lt;code&gt;Kerberos&lt;/code&gt; 页面供 &lt;code&gt;Prometheus&lt;/code&gt; 进行数据采集。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;解压附件中的 &lt;code&gt;http_exporter.zip&lt;/code&gt; 文件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;unzip http_exporter.zip
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改 &lt;code&gt;httpjmx.yml&lt;/code&gt; 配置文件，设置代理信息。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;httpTimeout&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;httpUrl&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;namenode|http://host-172-18-243-34:12003/jmx&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;blacklistObjectNames&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hadoop:service=NameNode,name=NameNodeInfo|LiveNodes|DeadNodes&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hadoop:service=NameNode,name=FSNamesystemState|TopUserOpCounts&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hadoop:service=DataNode,name=DataNodeInfo|DatanodeNetworkCounts&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;wightlistObjectNames&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;not use now&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;valueReplace&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true:1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;false:0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;active:1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;standby:0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbSwitch&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbPrincipal&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;e3base@SITECH.COM&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbKeyTab&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/etc/security/keytabs/e3base.keytab&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbUseTicketCache&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbRenewTGT&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbRefreshKrb5Config&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbStoreKey&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbIsInitiator&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;krbDebug&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;debug&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;启动 &lt;code&gt;http_exporter&lt;/code&gt; 代理服务。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nohup /e3base/jdk/bin/java -cp collector-0.16.2-SNAPSHOT.jar io.prometheus.jmx.httpjmx.HadoopCollector 172.18.243.36:9102 httpjmx.yml 2&amp;gt;&amp;amp;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &amp;amp;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置 &lt;code&gt;Prometheus&lt;/code&gt; 的配置文件。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;scrape_configs&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# The job name is added as a label `job=&amp;lt;job_name&amp;gt;` to any timeseries scraped from this config.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#f92672&#34;&gt;job_name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;prometheus&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# metrics_path defaults to &amp;#39;/metrics&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# scheme defaults to &amp;#39;http&amp;#39;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;static_configs&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#f92672&#34;&gt;targets&lt;/span&gt;: [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localhost:9090&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  - &lt;span style=&#34;color:#f92672&#34;&gt;job_name&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;namenode&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;static_configs&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#f92672&#34;&gt;targets&lt;/span&gt;: [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;172.18.243.36:9102&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;172.18.243.36:9103&amp;#34;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重启 &lt;code&gt;Prometheus&lt;/code&gt; 服务，页面上出现 &lt;code&gt;namenode&lt;/code&gt; 的相关数据。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/Grafana&amp;#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707161718597.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230707161718597&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;导入附件中的 &lt;code&gt;namenode.json&lt;/code&gt; 到 &lt;code&gt;Grafana&lt;/code&gt;，注意修改文件中的 &lt;code&gt;datasource&lt;/code&gt; 参数，设置成 &lt;code&gt;Promnetheus&lt;/code&gt; 的 &lt;code&gt;target&lt;/code&gt; 名称。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/Grafana&amp;#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707162003538.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230707162003538&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;导入后，页面数据正常展示。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/Grafana&amp;#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707162132401.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230707162132401&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

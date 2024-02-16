@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=' LDAP是一个为查询、浏览和搜索而优化的专业分布式数据库，它成树状结构组织数据，类似于Linux/Unix系统中的文件目录一样。 目录数据库和关系数据库不同，它有优异的读性能，但写性能差，并且没有事务处理、回滚等复杂功能，不适于存储修改频繁的数据。所以目录天生是用来查询的，就好像它的名字一样，目录服务是由目录数据库和一套访问协议组成的系统。
+'>
+<title>LDAP操作记录</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/ldap_tutorial/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='LDAP操作记录'>
+<meta property='og:description' content=' LDAP是一个为查询、浏览和搜索而优化的专业分布式数据库，它成树状结构组织数据，类似于Linux/Unix系统中的文件目录一样。 目录数据库和关系数据库不同，它有优异的读性能，但写性能差，并且没有事务处理、回滚等复杂功能，不适于存储修改频繁的数据。所以目录天生是用来查询的，就好像它的名字一样，目录服务是由目录数据库和一套访问协议组成的系统。
+'>
+<meta property='og:url' content='https://euansu123.github.io/post/ldap_tutorial/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='LDAP' /><meta property='article:published_time' content='2021-12-26T09:47:00&#43;08:00'/><meta property='article:modified_time' content='2021-12-26T09:47:00&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/p2608503691.jpg' />
+<meta name="twitter:title" content="LDAP操作记录">
+<meta name="twitter:description" content=" LDAP是一个为查询、浏览和搜索而优化的专业分布式数据库，它成树状结构组织数据，类似于Linux/Unix系统中的文件目录一样。 目录数据库和关系数据库不同，它有优异的读性能，但写性能差，并且没有事务处理、回滚等复杂功能，不适于存储修改频繁的数据。所以目录天生是用来查询的，就好像它的名字一样，目录服务是由目录数据库和一套访问协议组成的系统。
+"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/p2608503691.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/ldap_tutorial/">
+                
+                    <img src="/img/p2608503691.jpg" loading="lazy" alt="Featured image of post LDAP操作记录" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/ldap_tutorial/">LDAP操作记录</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 26, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <!-- raw HTML omitted -->
+<p>LDAP是一个为查询、浏览和搜索而优化的专业分布式数据库，它成树状结构组织数据，类似于Linux/Unix系统中的文件目录一样。 目录数据库和关系数据库不同，它有优异的读性能，但写性能差，并且没有事务处理、回滚等复杂功能，不适于存储修改频繁的数据。所以目录天生是用来查询的，就好像它的名字一样，目录服务是由目录数据库和一套访问协议组成的系统。</p>
+<h4 id="安装-openldap">安装 openldap</h4>
+<ol>
+<li>
+<p>yum安装相关包</p>
+<pre tabindex="0"><code>sudo yum install -y openldap openldap-clients openldap-servers
+</code></pre></li>
+<li>
+<p>复制默认配置到指定路径下</p>
+<pre tabindex="0"><code>sudo cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+</code></pre></li>
+<li>
+<p>授权给yum安装时创建的ldap用户</p>
+<pre tabindex="0"><code>sudo chown -R ldap /var/lib/ldap/DB_CONFIG
+</code></pre></li>
+<li>
+<p>启动ldap服务</p>
+<pre tabindex="0"><code># 启动服务
+sudo systemctl start slapd
+sudo systemctl enable slapd
+# 查看运行状态
+sudo systemctl status slapd
+</code></pre><p><img src="/LDAP%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/Snipaste_2021-12-24_18-36-44-16404831318111.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Snipaste_2021-12-24_18-36-44-16404831318111"
+	
+	
+></p>
+</li>
+</ol>
+<h4 id="修改-ldap-配置">修改 ldap 配置</h4>
+<ol>
+<li>
+<p>生成管理员密码</p>
+<pre tabindex="0"><code># sudo slappasswd -s 123456
+{SSHA}HHQ/x47AaijvK8wGhmAexBNgrx+ZDbF2
+</code></pre></li>
+<li>
+<p>修改ldap的密码配置</p>
+<pre tabindex="0"><code># 编辑文件如下 vim changepwd.ldif
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}HHQ/x47AaijvK8wGhmAexBNgrx+ZDbF2
+# 执行如下命令，将密码配置应用于ldap
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f changepwd.ldif 
+</code></pre></li>
+<li>
+<p>导入ldap基本的schema文件。</p>
+<pre tabindex="0"><code># 共计12个schema文件需要导入
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/collective.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/corba.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/duaconf.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/dyngroup.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/java.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/misc.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/openldap.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/pmi.ldif
+
+sudo ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/ppolicy.ldif
+</code></pre></li>
+<li>
+<p>修改ldap的域名。</p>
+<pre tabindex="0"><code># 修改域名 vim changedomain.ldif
+dn: olcDatabase={1}monitor,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to * by dn.base=&#34;gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth&#34; read by dn.base=&#34;cn=admin,dc=euansu,dc=cn&#34; read by * none
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcSuffix
+olcSuffix: dc=euansu,dc=cn
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcRootDN
+olcRootDN: cn=admin,dc=euansu,dc=cn
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcRootPW
+olcRootPW: {SSHA}HHQ/x47AaijvK8wGhmAexBNgrx+ZDbF2
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: {0}to attrs=userPassword,shadowLastChange by dn=&#34;cn=admin,dc=euansu,dc=cn&#34; write by anonymous auth by self write by * none
+olcAccess: {1}to dn.base=&#34;&#34; by * read
+olcAccess: {2}to * by dn=&#34;cn=admin,dc=euansu,dc=cn&#34; write by * read
+
+# 执行如下命令将域名应用于ldap
+sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f changedomain.ldif
+</code></pre></li>
+<li>
+<p>启用memberof功能</p>
+<pre tabindex="0"><code># 编写文件 vim add-memberof.ldif
+dn: cn=module{0},cn=config
+cn: modulle{0}
+objectClass: olcModuleList
+objectclass: top
+olcModuleload: memberof.la
+olcModulePath: /usr/lib64/openldap
+
+dn: olcOverlay={0}memberof,olcDatabase={2}hdb,cn=config
+objectClass: olcConfig
+objectClass: olcMemberOf
+objectClass: olcOverlayConfig
+objectClass: top
+olcOverlay: memberof
+olcMemberOfDangling: ignore
+olcMemberOfRefInt: TRUE
+olcMemberOfGroupOC: groupOfUniqueNames
+olcMemberOfMemberAD: uniqueMember
+olcMemberOfMemberOfAD: memberOf
+
+# 编写文件 vim refint1.ldif
+dn: cn=module{0},cn=config
+add: olcmoduleload
+olcmoduleload: refint
+# 编写文件 vim refint2.ldif
+dn: olcOverlay=refint,olcDatabase={2}hdb,cn=config
+objectClass: olcConfig
+objectClass: olcOverlayConfig
+objectClass: olcRefintConfig
+objectClass: top
+olcOverlay: refint
+olcRefintAttribute: memberof uniqueMember manager owner
+# 依次执行如下命令应用配置
+sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f add-memberof.ldif
+sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f refint1.ldif
+sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f refint2.ldif
+</code></pre></li>
+<li>
+<p>新增ldap组织</p>
+<pre tabindex="0"><code>#编写文件 vim base.ldif
+dn: dc=euansu,dc=cn
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: Company
+dc: euansu
+
+dn: cn=admin,dc=euansu,dc=cn
+objectClass: organizationalRole
+cn: admin
+
+dn: ou=People,dc=euansu,dc=cn
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=euansu,dc=cn
+objectClass: organizationalRole
+cn: Group
+# 执行命令，应用配置
+sudo ldapadd -x -D cn=admin,dc=euansu,dc=cn -W -f base.ldif
+</code></pre><p><img src="/LDAP%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/Snipaste_2021-12-24_18-36-44.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Snipaste_2021-12-24_18-36-44"
+	
+	
+></p>
+</li>
+</ol>
+<h4 id="安装-phpldapadmin-ldap网页服务">安装 phpldapadmin LDAP网页服务</h4>
+<ol>
+<li>
+<p>安装phpldapadmin包。</p>
+<pre tabindex="0"><code>sudo yum install -y phpldapadmin
+# 如果没有找到安装包，执行如下操作更新yum源，重新安装
+sudo yum localinstall http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+</code></pre></li>
+<li>
+<p>修改LDAP配置文件。</p>
+<pre tabindex="0"><code># 放开外部ip的访问 sudo vim /etc/httpd/conf.d/phpldapadmin.conf
+# 其中192.168.1.3是物理主机的ip
+Alias /phpldapadmin /usr/share/phpldapadmin/htdocs
+Alias /ldapadmin /usr/share/phpldapadmin/htdocs
+
+&lt;Directory /usr/share/phpldapadmin/htdocs&gt;
+  &lt;IfModule mod_authz_core.c&gt;
+    # Apache 2.4
+    Require all granted
+  &lt;/IfModule&gt;
+  &lt;IfModule !mod_authz_core.c&gt;
+    # Apache 2.4
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+    Allow from ::1
+    Allow from 192.168.1.3
+  &lt;/IfModule&gt;
+&lt;/Directory&gt;
+
+# 修改文件，更改phpldapadmin的登录方式 sudo vim /etc/phpldapadmin/config.php
+
+# 注释398行，放开387行
+$servers-&gt;setValue(&#39;login&#39;,&#39;attr&#39;,&#39;cn&#39;);
+
+# 放开460行的注释，修改为如下
+$servers-&gt;setValue(&#39;login&#39;,&#39;anon_bind&#39;,false);
+
+# 找到519行,设置用户属性的唯一性
+$servers-&gt;setValue(&#39;unique&#39;,&#39;attrs&#39;,array(&#39;mail&#39;,&#39;uid&#39;,&#39;uidNumber&#39;,&#39;cn&#39;,&#39;sn&#39;))
+</code></pre></li>
+<li>
+<p>重启Apache服务。</p>
+<pre tabindex="0"><code># 重启Apache服务
+sudo systemctl start httpd  
+sudo systemctl enable httpd
+</code></pre></li>
+<li>
+<p>访问页面。</p>
+<p><img src="/LDAP%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/image-20211224203702877.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20211224203702877"
+	
+	
+></p>
+<p>输入之前的账号：cn=admin,dc=euansu,dc=cn，进行登录。</p>
+<p><img src="/LDAP%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/image-20211225170118347.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20211225170118347"
+	
+	
+></p>
+</li>
+</ol>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/ldap/">LDAP</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Kerberos Kerberos 是一个用于服务请求时在服务端和客户端进行身份认证的服务，Kerberos支持在所有操作系统上进行构建，包括有 Windows、macOS、FrssBSD 和 Linux。
+官方网址：https://www.kerberos.org/
+1.Kerberos 环境 Kerberos 环境下访问远程主机的服务，需要在主机上先进行认证，然后才可以携带 kerbeors 主机和 keytab 文件访问。
+1.1 Kerbero 主机认证 # keytab_file:keytab文件路径 # kerberos_principal:kerbeors的principal kinit -kt &amp;lt;keytab_file&amp;gt; &amp;lt;kerberos_principal&amp;gt; 1.2 Kerberos环境下的curl # method:请求方法,例如GET、POST、PUT... # negotiate:指定kerberos环境，会携带当前主机认证的kerberos principal进行访问 # username:用户名 # password:密码 # url:要请求的服务地址 curl -X &amp;lt;method&amp;gt; --negotiate -u &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt; -i url 2.Python 2.1 第三方包安装 pip install requests pip install requests_kerberos pip install krbcontext 2.2 工具类 这里以 Python 调用 Hadoop 的 Rest 接口为例，测试 Python 在 Kerberos 环境下的服务调用。'>
+<title>Kerberos环境下Python的接口调用</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/kerberos_python_request/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='Kerberos环境下Python的接口调用'>
+<meta property='og:description' content='Kerberos Kerberos 是一个用于服务请求时在服务端和客户端进行身份认证的服务，Kerberos支持在所有操作系统上进行构建，包括有 Windows、macOS、FrssBSD 和 Linux。
+官方网址：https://www.kerberos.org/
+1.Kerberos 环境 Kerberos 环境下访问远程主机的服务，需要在主机上先进行认证，然后才可以携带 kerbeors 主机和 keytab 文件访问。
+1.1 Kerbero 主机认证 # keytab_file:keytab文件路径 # kerberos_principal:kerbeors的principal kinit -kt &amp;lt;keytab_file&amp;gt; &amp;lt;kerberos_principal&amp;gt; 1.2 Kerberos环境下的curl # method:请求方法,例如GET、POST、PUT... # negotiate:指定kerberos环境，会携带当前主机认证的kerberos principal进行访问 # username:用户名 # password:密码 # url:要请求的服务地址 curl -X &amp;lt;method&amp;gt; --negotiate -u &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt; -i url 2.Python 2.1 第三方包安装 pip install requests pip install requests_kerberos pip install krbcontext 2.2 工具类 这里以 Python 调用 Hadoop 的 Rest 接口为例，测试 Python 在 Kerberos 环境下的服务调用。'>
+<meta property='og:url' content='https://euansu123.github.io/post/kerberos_python_request/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Python' /><meta property='article:tag' content='Hadoop' /><meta property='article:tag' content='Kerberos' /><meta property='article:published_time' content='2023-08-03T11:10:00&#43;08:00'/><meta property='article:modified_time' content='2023-08-03T11:10:00&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/kerberos.png' />
+<meta name="twitter:title" content="Kerberos环境下Python的接口调用">
+<meta name="twitter:description" content="Kerberos Kerberos 是一个用于服务请求时在服务端和客户端进行身份认证的服务，Kerberos支持在所有操作系统上进行构建，包括有 Windows、macOS、FrssBSD 和 Linux。
+官方网址：https://www.kerberos.org/
+1.Kerberos 环境 Kerberos 环境下访问远程主机的服务，需要在主机上先进行认证，然后才可以携带 kerbeors 主机和 keytab 文件访问。
+1.1 Kerbero 主机认证 # keytab_file:keytab文件路径 # kerberos_principal:kerbeors的principal kinit -kt &amp;lt;keytab_file&amp;gt; &amp;lt;kerberos_principal&amp;gt; 1.2 Kerberos环境下的curl # method:请求方法,例如GET、POST、PUT... # negotiate:指定kerberos环境，会携带当前主机认证的kerberos principal进行访问 # username:用户名 # password:密码 # url:要请求的服务地址 curl -X &amp;lt;method&amp;gt; --negotiate -u &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt; -i url 2.Python 2.1 第三方包安装 pip install requests pip install requests_kerberos pip install krbcontext 2.2 工具类 这里以 Python 调用 Hadoop 的 Rest 接口为例，测试 Python 在 Kerberos 环境下的服务调用。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/kerberos.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/kerberos_python_request/">
+                
+                    <img src="/img/kerberos.png" loading="lazy" alt="Featured image of post Kerberos环境下Python的接口调用" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/kerberos_python_request/">Kerberos环境下Python的接口调用</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 03, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="kerberos">Kerberos</h1>
+<p>Kerberos 是一个用于服务请求时在服务端和客户端进行身份认证的服务，Kerberos支持在所有操作系统上进行构建，包括有 Windows、macOS、FrssBSD 和 Linux。</p>
+<p>官方网址：https://www.kerberos.org/</p>
+<h3 id="1kerberos-环境">1.Kerberos 环境</h3>
+<p>Kerberos 环境下访问远程主机的服务，需要在主机上先进行认证，然后才可以携带 kerbeors 主机和 keytab 文件访问。</p>
+<h4 id="11-kerbero-主机认证">1.1 Kerbero 主机认证</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># keytab_file:keytab文件路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># kerberos_principal:kerbeors的principal</span>
+</span></span><span style="display:flex;"><span>kinit -kt &lt;keytab_file&gt; &lt;kerberos_principal&gt;
+</span></span></code></pre></div><p><img src="/kerberos%E7%8E%AF%E5%A2%83Python%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/image-20230802114439433.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230802114439433"
+	
+	
+></p>
+<h4 id="12-kerberos环境下的curl">1.2 Kerberos环境下的curl</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># method:请求方法,例如GET、POST、PUT...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># negotiate:指定kerberos环境，会携带当前主机认证的kerberos principal进行访问</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># username:用户名</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># password:密码</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># url:要请求的服务地址</span>
+</span></span><span style="display:flex;"><span>curl -X &lt;method&gt; --negotiate -u &lt;username&gt;:&lt;password&gt; -i url
+</span></span></code></pre></div><p><img src="/kerberos%E7%8E%AF%E5%A2%83Python%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/image-20230802114552731.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230802114552731"
+	
+	
+></p>
+<h3 id="2python">2.Python</h3>
+<h4 id="21-第三方包安装">2.1 第三方包安装</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>pip install requests
+</span></span><span style="display:flex;"><span>pip install requests_kerberos
+</span></span><span style="display:flex;"><span>pip install krbcontext
+</span></span></code></pre></div><h4 id="22-工具类">2.2 工具类</h4>
+<p>这里以 <code>Python</code> 调用 <code>Hadoop</code> 的 <code>Rest</code> 接口为例，测试 <code>Python</code> 在 <code>Kerberos</code> 环境下的服务调用。</p>
+<p><code>Hadoop Rest</code> 接口文档地址：https://hadoop.apache.org/docs/r1.0.4/webhdfs.html</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># -*- coding=utf-8 -*-</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> logging
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> posixpath
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> requests.auth <span style="color:#f92672">import</span> HTTPBasicAuth
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> requests_kerberos <span style="color:#f92672">import</span> HTTPKerberosAuth
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> krbcontext <span style="color:#f92672">import</span> krbContext
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>_NAMENODE_STATUS_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jmx&#39;</span>
+</span></span><span style="display:flex;"><span>_HDFS_REST_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;webhdfs/v1&#39;</span>
+</span></span><span style="display:flex;"><span>_ACCEPT_CONTENT_TYPE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;application/json&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>LOG <span style="color:#f92672">=</span> logging<span style="color:#f92672">.</span>getLogger(__name__)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HdfsRestApi</span>(object):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    HDFS Rest 接口工具类
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, url, username, password, security_enabled<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, principal<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, keytab_file<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(url)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_username <span style="color:#f92672">=</span> username
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_password <span style="color:#f92672">=</span> password
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_security_enabled <span style="color:#f92672">=</span> security_enabled
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_auth <span style="color:#f92672">=</span> HTTPBasicAuth(self<span style="color:#f92672">.</span>_username, self<span style="color:#f92672">.</span>_password)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>_security_enabled:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">with</span> krbContext(using_keytab<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, principal<span style="color:#f92672">=</span>principal, keytab_file<span style="color:#f92672">=</span>keytab_file):
+</span></span><span style="display:flex;"><span>                self<span style="color:#f92672">.</span>_auth <span style="color:#f92672">=</span> HTTPKerberosAuth()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __str__(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;HDFS Rest Url Address Is </span><span style="color:#e6db74">{HDFS_REST_URL}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(HDFS_REST_URL<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_url)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_get_params</span>(self, params<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>        params <span style="color:#f92672">=</span> params <span style="color:#66d9ef">if</span> params <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span> <span style="color:#66d9ef">else</span> {}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> params
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_namenode_status</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        获取NameNode的状态信息
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>, <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>_url, _NAMENODE_STATUS_URL)
+</span></span><span style="display:flex;"><span>        params <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_params({<span style="color:#e6db74">&#34;qry&#34;</span>: <span style="color:#e6db74">&#34;Hadoop:service=NameNode,name=NameNodeStatus&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, params<span style="color:#f92672">=</span>params, headers<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Accept&#39;</span>: _ACCEPT_CONTENT_TYPE}, auth<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_auth)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;data&#39;</span>] <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>RequestException <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;请求出现异常：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_path_quota</span>(self, path):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        获取路径的配额信息（空间配额）
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        path <span style="color:#f92672">=</span> path[<span style="color:#ae81ff">1</span>:] <span style="color:#66d9ef">if</span> path<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;/&#39;</span>) <span style="color:#66d9ef">else</span> path
+</span></span><span style="display:flex;"><span>        url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>_url, _HDFS_REST_URL, path)
+</span></span><span style="display:flex;"><span>        params <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_params({<span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;GETQUOTAUSAGE&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, params<span style="color:#f92672">=</span>params, headers<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Accept&#39;</span>: _ACCEPT_CONTENT_TYPE}, auth<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_auth)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;data&#39;</span>] <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>RequestException <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;请求出现异常：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_path_quota</span>(self, path, quota):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        设置路径的配额信息（空间配额）
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># curl -i -X PUT &#34;http://&lt;HOST&gt;:&lt;PORT&gt;/webhdfs/v1/&lt;PATH&gt;?op=SETQUOTA</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#                               &amp;namespacequota=&lt;QUOTA&gt;[&amp;storagespacequota=&lt;QUOTA&gt;]&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># namespacequota 指定目录中的最大文件和目录数</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># storagespacequota 目录的最大空间使用量</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        path <span style="color:#f92672">=</span> path[<span style="color:#ae81ff">1</span>:] <span style="color:#66d9ef">if</span> path<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;/&#39;</span>) <span style="color:#66d9ef">else</span> path
+</span></span><span style="display:flex;"><span>        url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>_url, _HDFS_REST_URL, path)
+</span></span><span style="display:flex;"><span>        params <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_params({<span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;SETQUOTA&#34;</span>, <span style="color:#e6db74">&#34;storagespacequota&#34;</span>: quota})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>put(url, params<span style="color:#f92672">=</span>params, headers<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Accept&#39;</span>: _ACCEPT_CONTENT_TYPE}, auth<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_auth)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;设置配额出现异常，请联系管理员处理&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>RequestException <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;请求出现异常：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Directory</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_directory_list</span>(self, path):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        获取路径下的文件及目录列表
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @param path:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            path <span style="color:#f92672">=</span> path[<span style="color:#ae81ff">1</span>:] <span style="color:#66d9ef">if</span> path<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;/&#39;</span>) <span style="color:#66d9ef">else</span> path
+</span></span><span style="display:flex;"><span>            url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>_url, _HDFS_REST_URL, path)
+</span></span><span style="display:flex;"><span>            print url
+</span></span><span style="display:flex;"><span>            params <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_params({<span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;LISTSTATUS&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, params<span style="color:#f92672">=</span>params, headers<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Accept&#39;</span>: _ACCEPT_CONTENT_TYPE}, auth<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_auth)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                    response_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;FileStatuses&#39;</span> <span style="color:#f92672">in</span> response_data <span style="color:#f92672">and</span> <span style="color:#e6db74">&#39;FileStatus&#39;</span> <span style="color:#f92672">in</span> response_data[<span style="color:#e6db74">&#39;FileStatuses&#39;</span>]:
+</span></span><span style="display:flex;"><span>                        result[<span style="color:#e6db74">&#39;data&#39;</span>] <span style="color:#f92672">=</span> response_data[<span style="color:#e6db74">&#39;FileStatuses&#39;</span>][<span style="color:#e6db74">&#39;FileStatus&#39;</span>]
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                        result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>                        result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HDFS Rest 接口数据发生变化，请联系开发人员进行处理&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">elif</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">404</span>:
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">404</span>
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;要查询的路径不存在&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>RequestException <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;请求出现异常：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            LOG<span style="color:#f92672">.</span>exception(e)
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;代码运行时发生错误，错误原因：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_directory</span>(self, path):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        创建HDFS目录并指定用户
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @param path:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># curl -i -X PUT &#34;http://&lt;HOST&gt;:&lt;PORT&gt;/&lt;PATH&gt;?op=MKDIRS[&amp;permission=&lt;OCTAL&gt;]&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            path <span style="color:#f92672">=</span> path[<span style="color:#ae81ff">1</span>:] <span style="color:#66d9ef">if</span> path<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;/&#39;</span>) <span style="color:#66d9ef">else</span> path
+</span></span><span style="display:flex;"><span>            url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>_url, _HDFS_REST_URL, path)
+</span></span><span style="display:flex;"><span>            params <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_params({<span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;MKDIRS&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>put(url, params<span style="color:#f92672">=</span>params, headers<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Accept&#39;</span>: _ACCEPT_CONTENT_TYPE}, auth<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_auth)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>RequestException <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;请求出现异常：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            LOG<span style="color:#f92672">.</span>exception(e)
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;代码运行时发生错误，错误原因：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_path_owner</span>(self, path, user):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        设置HDFS路径的owner
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @param path:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @param user:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># curl -i -X PUT &#34;http://&lt;HOST&gt;:&lt;PORT&gt;/webhdfs/v1/&lt;PATH&gt;?op=SETOWNER</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#                               [&amp;owner=&lt;USER&gt;][&amp;group=&lt;GROUP&gt;]&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            path <span style="color:#f92672">=</span> path[<span style="color:#ae81ff">1</span>:] <span style="color:#66d9ef">if</span> path<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;/&#39;</span>) <span style="color:#66d9ef">else</span> path
+</span></span><span style="display:flex;"><span>            url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>_url, _HDFS_REST_URL, path)
+</span></span><span style="display:flex;"><span>            params <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_params({<span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;SETOWNER&#34;</span>, <span style="color:#e6db74">&#34;owner&#34;</span>: user, <span style="color:#e6db74">&#34;group&#34;</span>: user})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>put(url, params<span style="color:#f92672">=</span>params, headers<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Accept&#39;</span>: _ACCEPT_CONTENT_TYPE}, auth<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_auth)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>RequestException <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;请求出现异常：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            LOG<span style="color:#f92672">.</span>exception(e)
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;代码运行时发生错误，错误原因：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">delete_directory</span>(self, path):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        删除HDFS目录
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @param path:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># curl -i -X DELETE &#34;http://&lt;host&gt;:&lt;port&gt;/webhdfs/v1/&lt;path&gt;?op=DELETE</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#                               [&amp;recursive=&lt;true|false&gt;]&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            path <span style="color:#f92672">=</span> path[<span style="color:#ae81ff">1</span>:] <span style="color:#66d9ef">if</span> path<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;/&#39;</span>) <span style="color:#66d9ef">else</span> path
+</span></span><span style="display:flex;"><span>            url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>_url, _HDFS_REST_URL, path)
+</span></span><span style="display:flex;"><span>            params <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_params({<span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;DELETE&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>delete(url, params<span style="color:#f92672">=</span>params, headers<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Accept&#39;</span>: _ACCEPT_CONTENT_TYPE},
+</span></span><span style="display:flex;"><span>                                           auth<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_auth)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>RequestException <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;请求出现异常：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            LOG<span style="color:#f92672">.</span>exception(e)
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;代码运行时发生错误，错误原因：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_path_status</span>(self, path):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        获取HDFS路径的状态
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @param path:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># curl -i  &#34;http://&lt;HOST&gt;:&lt;PORT&gt;/webhdfs/v1/&lt;PATH&gt;?op=GETFILESTATUS&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            path <span style="color:#f92672">=</span> path[<span style="color:#ae81ff">1</span>:] <span style="color:#66d9ef">if</span> path<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;/&#39;</span>) <span style="color:#66d9ef">else</span> path
+</span></span><span style="display:flex;"><span>            url <span style="color:#f92672">=</span> posixpath<span style="color:#f92672">.</span>join(self<span style="color:#f92672">.</span>_url, _HDFS_REST_URL, path)
+</span></span><span style="display:flex;"><span>            params <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_get_params({<span style="color:#e6db74">&#34;op&#34;</span>: <span style="color:#e6db74">&#34;GETFILESTATUS&#34;</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>get(url, params<span style="color:#f92672">=</span>params, headers<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;Accept&#39;</span>: _ACCEPT_CONTENT_TYPE}, auth<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>_auth)
+</span></span><span style="display:flex;"><span>                print response
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                    response_data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(response<span style="color:#f92672">.</span>text)
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;FileStatus&#39;</span> <span style="color:#f92672">in</span> response_data:
+</span></span><span style="display:flex;"><span>                        result[<span style="color:#e6db74">&#39;data&#39;</span>] <span style="color:#f92672">=</span> response_data[<span style="color:#e6db74">&#39;FileStatus&#39;</span>]
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                        result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>                        result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HDFS Rest 接口数据发生变化，请联系开发人员进行处理&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">elif</span> response<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">404</span>:
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">404</span>
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;要查询的路径不存在&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>status_code
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>text
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">except</span> requests<span style="color:#f92672">.</span>exceptions<span style="color:#f92672">.</span>RequestException <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;请求出现异常：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>            LOG<span style="color:#f92672">.</span>exception(e)
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;代码运行时发生错误，错误原因：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_active_namenode</span>(url_list, username, password, security_enabled<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, principal<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, keytab_file<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    获取active状态的NameNode节点
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param url_list:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param username:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param password:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param security_enabled:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> url_list:
+</span></span><span style="display:flex;"><span>            hdfs_rest_api <span style="color:#f92672">=</span> HdfsRestApi(item, username, password, security_enabled<span style="color:#f92672">=</span>security_enabled,
+</span></span><span style="display:flex;"><span>                                        principal<span style="color:#f92672">=</span>principal, keytab_file<span style="color:#f92672">=</span>keytab_file)
+</span></span><span style="display:flex;"><span>            get_status_result <span style="color:#f92672">=</span> hdfs_rest_api<span style="color:#f92672">.</span>get_namenode_status()
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> get_status_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;beans&#39;</span> <span style="color:#f92672">in</span> get_status_result[<span style="color:#e6db74">&#39;data&#39;</span>] <span style="color:#f92672">and</span> len(get_status_result[<span style="color:#e6db74">&#39;data&#39;</span>][<span style="color:#e6db74">&#39;beans&#39;</span>]) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                    namenode_state <span style="color:#f92672">=</span> get_status_result[<span style="color:#e6db74">&#39;data&#39;</span>][<span style="color:#e6db74">&#39;beans&#39;</span>][<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#39;State&#39;</span>]
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> namenode_state<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;active&#39;</span>:
+</span></span><span style="display:flex;"><span>                        result[<span style="color:#e6db74">&#39;data&#39;</span>] <span style="color:#f92672">=</span> hdfs_rest_api
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HDFS Rest 接口数据发生变化，请联系开发人员进行处理&#39;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_status_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> get_status_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>        result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;代码运行发生了错误：</span><span style="color:#e6db74">{error_message}</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">.</span>format(error_message<span style="color:#f92672">=</span>e)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_hdfs_directory</span>(url_list, username, password, tenant, path, quota, security_enabled<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, principal<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, keytab_file<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    创建HDFS目录
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param url_list:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param username:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param password:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param tenant:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param path:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param quota:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param security_enabled:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param principal:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param keytab_file:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;code&#39;</span>:<span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;message&#39;</span>:<span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    get_active_result <span style="color:#f92672">=</span> get_active_namenode(url_list, username, password, security_enabled<span style="color:#f92672">=</span>security_enabled, principal<span style="color:#f92672">=</span>principal, keytab_file<span style="color:#f92672">=</span>keytab_file)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> get_active_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>        hdfs_rest_api <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;data&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 确定路径是否存在</span>
+</span></span><span style="display:flex;"><span>        get_path_status_result <span style="color:#f92672">=</span> hdfs_rest_api<span style="color:#f92672">.</span>get_path_status(path)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 删除</span>
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;HDFS路径</span><span style="color:#e6db74">{hdfs_path}</span><span style="color:#e6db74">已存在&#39;</span><span style="color:#f92672">.</span>format(hdfs_path<span style="color:#f92672">=</span>path)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">404</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 创建目录</span>
+</span></span><span style="display:flex;"><span>            create_hdfs_directory_result <span style="color:#f92672">=</span> hdfs_rest_api<span style="color:#f92672">.</span>create_directory(path)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> create_hdfs_directory_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                set_path_quota_result <span style="color:#f92672">=</span> hdfs_rest_api<span style="color:#f92672">.</span>set_path_quota(path, quota)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> set_path_quota_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                    hdfs_rest_api<span style="color:#f92672">.</span>set_path_owner(path, tenant)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e"># 删除路径</span>
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">505</span>
+</span></span><span style="display:flex;"><span>                    result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> set_path_quota_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> create_hdfs_directory_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> create_hdfs_directory_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>        result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setting_path_quota</span>(url_list, username, password, path, quota, security_enabled<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, principal<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, keytab_file<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    设置HDFS路径配额
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param url_list:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param username:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param password:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param security_enabled:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param principal:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param keytab_file:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    get_active_result <span style="color:#f92672">=</span> get_active_namenode(url_list, username, password, security_enabled<span style="color:#f92672">=</span>security_enabled, principal<span style="color:#f92672">=</span>principal,keytab_file<span style="color:#f92672">=</span>keytab_file)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> get_active_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>        hdfs_rest_api <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;data&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 确定路径是否存在</span>
+</span></span><span style="display:flex;"><span>        get_path_status_result <span style="color:#f92672">=</span> hdfs_rest_api<span style="color:#f92672">.</span>get_path_status(path)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 设置配额</span>
+</span></span><span style="display:flex;"><span>            set_path_quota_result <span style="color:#f92672">=</span> hdfs_rest_api<span style="color:#f92672">.</span>set_path_quota(path, quota)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> set_path_quota_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> set_path_quota_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> set_path_quota_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">404</span>:
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;修改配额操作失败：HDFS路径</span><span style="color:#e6db74">{hdfs_path}</span><span style="color:#e6db74">不存在&#39;</span><span style="color:#f92672">.</span>format(hdfs_path<span style="color:#f92672">=</span>path)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>        result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">delete_hdfs_path</span>(url_list, username, password, path, security_enabled<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, principal<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, keytab_file<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    删除HDFS的目录或文件
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param url_list:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param username:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param password:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param path:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param security_enabled:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param principal:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @param keytab_file:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    @return:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;code&#39;</span>: <span style="color:#ae81ff">200</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;success&#39;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    get_active_result <span style="color:#f92672">=</span> get_active_namenode(url_list, username, password, security_enabled<span style="color:#f92672">=</span>security_enabled, principal<span style="color:#f92672">=</span>principal, keytab_file<span style="color:#f92672">=</span>keytab_file)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> get_active_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>        hdfs_rest_api <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;data&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 确定路径是否存在</span>
+</span></span><span style="display:flex;"><span>        get_path_status_result <span style="color:#f92672">=</span> hdfs_rest_api<span style="color:#f92672">.</span>get_path_status(path)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 删除</span>
+</span></span><span style="display:flex;"><span>            delete_directory_reuslt <span style="color:#f92672">=</span> hdfs_rest_api<span style="color:#f92672">.</span>delete_directory(path)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> delete_directory_reuslt[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">200</span>:
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> delete_directory_reuslt[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>                result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> delete_directory_reuslt[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">404</span>:
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;删除操作失败：HDFS路径</span><span style="color:#e6db74">{hdfs_path}</span><span style="color:#e6db74">不存在&#39;</span><span style="color:#f92672">.</span>format(hdfs_path<span style="color:#f92672">=</span>path)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_path_status_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>            result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        result[<span style="color:#e6db74">&#39;code&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;code&#39;</span>]
+</span></span><span style="display:flex;"><span>        result[<span style="color:#e6db74">&#39;message&#39;</span>] <span style="color:#f92672">=</span> get_active_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span></code></pre></div><h4 id="23-代码测试">2.3 代码测试</h4>
+<p><code>main</code> 方法中调用工具类，获取目录文件以及目录的状态。</p>
+<p><img src="/kerberos%E7%8E%AF%E5%A2%83Python%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/image-20230802114016428.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230802114016428"
+	
+	
+></p>
+<p>返回内容如下，<code>Kerberos</code> 环境下 <code>Python</code> 的接口调用操作成功。</p>
+<p><img src="/kerberos%E7%8E%AF%E5%A2%83Python%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/image-20230802113924801.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230802113924801"
+	
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/python/">Python</a>
+        
+            <a href="/tags/hadoop/">Hadoop</a>
+        
+            <a href="/tags/kerberos/">Kerberos</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

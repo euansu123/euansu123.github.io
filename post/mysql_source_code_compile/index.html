@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Mysql编译安装能够根据需要设定参数，按照需求进行定制安装，并且安装的版本可以根据项目需要灵活选择，整体可配置弹性大。
+'>
+<title>Mysql源码编译安装</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/mysql_source_code_compile/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='Mysql源码编译安装'>
+<meta property='og:description' content='Mysql编译安装能够根据需要设定参数，按照需求进行定制安装，并且安装的版本可以根据项目需要灵活选择，整体可配置弹性大。
+'>
+<meta property='og:url' content='https://euansu123.github.io/post/mysql_source_code_compile/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='mysql' /><meta property='article:published_time' content='2022-08-07T15:07:57&#43;08:00'/><meta property='article:modified_time' content='2022-08-07T15:07:57&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/mysql.jpg' />
+<meta name="twitter:title" content="Mysql源码编译安装">
+<meta name="twitter:description" content="Mysql编译安装能够根据需要设定参数，按照需求进行定制安装，并且安装的版本可以根据项目需要灵活选择，整体可配置弹性大。
+"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/mysql.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/mysql_source_code_compile/">
+                
+                    <img src="/img/mysql.jpg" loading="lazy" alt="Featured image of post Mysql源码编译安装" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/mysql_source_code_compile/">Mysql源码编译安装</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 07, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Mysql编译安装能够根据需要设定参数，按照需求进行定制安装，并且安装的版本可以根据项目需要灵活选择，整体可配置弹性大。</p>
+<h1 id="前提准备">前提准备</h1>
+<h2 id="下载-mysql-源码包">下载 mysql 源码包</h2>
+<p>到 <a class="link" href="https://downloads.mysql.com/archives/community/"  target="_blank" rel="noopener"
+    >https://downloads.mysql.com/archives/community/</a> 下载对应版本的安装包，需要注意的是 mysql5.7 编译安装需要boost 库，可以在官网下载含 boost 的源码包。</p>
+<p><img src="/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807153737914-16598580753021.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220807153737914"
+	
+	
+></p>
+<h2 id="安装相关依赖包">安装相关依赖包</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo yum install -y gcc gcc-c++ cmake ncurses ncurses-devel bison wget openssl-devel.x86_64
+</span></span></code></pre></div><p><img src="/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807151805742.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220807151805742"
+	
+	
+></p>
+<h2 id="创建-mysql-所需目录">创建 mysql 所需目录</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>mkdir /iddbs/mysql
+</span></span><span style="display:flex;"><span>mkdir /iddbdata/3306/data
+</span></span><span style="display:flex;"><span>mkdir /iddbdata/3306/binlog/
+</span></span><span style="display:flex;"><span>mkdir /iddbdata/3306/logs/
+</span></span></code></pre></div><h1 id="编译安装">编译安装</h1>
+<h2 id="配置相关参数">配置相关参数</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cmake -DCMAKE_INSTALL_PREFIX<span style="color:#f92672">=</span>/iddbs/mysql  -DMYSQL_DATADIR<span style="color:#f92672">=</span>/iddbdata/3306/data -DMYSQL_UNIX_ADDR<span style="color:#f92672">=</span>/iddbdata/3306/mysql.sock -DDEFAULT_CHARSET<span style="color:#f92672">=</span>utf8 -DDEFAULT_COLLATION<span style="color:#f92672">=</span>utf8_general_ci -DWITH_BOOST<span style="color:#f92672">=</span>boost
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DCMAKE_INSTALL_PREFIX  指定MySQL程序的安装目录</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DMYSQL_DATADIR         数据文件目录</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DMYSQL_UNIX_ADDR       socket文件路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DDEFAULT_CHARSET       指定服务器默认字符集，默认latin1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># DDEFAULT_COLLATION     指定服务器默认的校对规则，默认latin1_general_ci</span>
+</span></span></code></pre></div><p><img src="/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807152228029.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220807152228029"
+	
+	
+></p>
+<h2 id="源码编译安装">源码编译安装</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>make &amp; make install
+</span></span></code></pre></div><p><img src="/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807160836849.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220807160836849"
+	
+	
+></p>
+<h2 id="准备-mysql-配置文件">准备 mysql 配置文件</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 准备my.cnf文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>client<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>port<span style="color:#f92672">=</span><span style="color:#ae81ff">3305</span>
+</span></span><span style="display:flex;"><span>socket<span style="color:#f92672">=</span>/iddbdata/3306/mysql.sock
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>mysqld<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>port<span style="color:#f92672">=</span><span style="color:#ae81ff">3306</span>
+</span></span><span style="display:flex;"><span>server-id<span style="color:#f92672">=</span><span style="color:#ae81ff">1013306</span>
+</span></span><span style="display:flex;"><span>basedir<span style="color:#f92672">=</span>/iddbs/mysql
+</span></span><span style="display:flex;"><span>plugin-dir<span style="color:#f92672">=</span>/iddbs/mysql/lib/plugin
+</span></span><span style="display:flex;"><span>datadir<span style="color:#f92672">=</span>/iddbdata/3306/data
+</span></span><span style="display:flex;"><span>log-bin<span style="color:#f92672">=</span>/iddbdata/3306/binlog/bin-log
+</span></span><span style="display:flex;"><span>pid-file<span style="color:#f92672">=</span>/iddbdata/3306/mysql.pid
+</span></span><span style="display:flex;"><span>socket<span style="color:#f92672">=</span>/iddbdata/3306/mysql.sock
+</span></span><span style="display:flex;"><span>relay-log<span style="color:#f92672">=</span>/iddbdata/3306/binlog/relay-log
+</span></span><span style="display:flex;"><span>log-error<span style="color:#f92672">=</span>/iddbdata/3306/logs/mysql-error.log
+</span></span><span style="display:flex;"><span>log_timestamps<span style="color:#f92672">=</span>system
+</span></span></code></pre></div><h2 id="初始化-mysql">初始化 mysql</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 如果不加--initialize-insecure，会直接在前台输出密码</span>
+</span></span><span style="display:flex;"><span>/iddbs/mysql/bin/mysqld --defaults-file<span style="color:#f92672">=</span>/iddbdata/3306/my.cnf --user<span style="color:#f92672">=</span>euansu --initialize-insecure
+</span></span></code></pre></div><p><img src="/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807161436617.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220807161436617"
+	
+	
+></p>
+<h2 id="启动-mysql">启动 mysql</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/iddbs/mysql/bin/mysqld_safe --defaults-file<span style="color:#f92672">=</span>/iddbdata/3306/my.cnf --user<span style="color:#f92672">=</span>euansu &amp;
+</span></span></code></pre></div><p><img src="/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807161351328.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220807161351328"
+	
+	
+></p>
+<h2 id="连接-mysql">连接 mysql</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/iddbs/mysql/bin/mysql -uroot -S /iddbdata/3306/mysql.sock
+</span></span></code></pre></div><p>设置 root 账户密码。</p>
+<pre tabindex="0"><code>set password for root@localhost = password(&#34;mysql&#34;);
+</code></pre><p><img src="/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807161521346.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220807161521346"
+	
+	
+></p>
+<h1 id="mysql-相关操作">mysql 相关操作</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">设置</span>mysql密码
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">set</span> password <span style="color:#66d9ef">for</span> root<span style="color:#f92672">@</span>localhost <span style="color:#f92672">=</span> password(<span style="color:#e6db74">&#34;mysql&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建数据库</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">database</span> idbcdb;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建</span>mysql用户
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">user</span> <span style="color:#e6db74">&#39;euansu&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span> identified <span style="color:#66d9ef">by</span> <span style="color:#e6db74">&#39;euansu&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">刷新权限</span>
+</span></span><span style="display:flex;"><span>flush <span style="color:#66d9ef">privileges</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">用户赋予</span>mysql远程操作的所有权限
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">grant</span> <span style="color:#66d9ef">all</span> <span style="color:#66d9ef">privileges</span> <span style="color:#66d9ef">on</span> <span style="color:#f92672">*</span>.<span style="color:#f92672">*</span> <span style="color:#66d9ef">to</span> euansu<span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">查看用户</span>euansu的权限域
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">show</span> grants <span style="color:#66d9ef">for</span> euansu<span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span>;
+</span></span></code></pre></div><p><img src="/mysql%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/image-20220807161832090.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220807161832090"
+	
+	
+></p>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/mysql/">mysql</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

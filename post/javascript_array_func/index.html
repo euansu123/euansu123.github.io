@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='文章整理了JavaScript常用函数。
+'>
+<title>JavaScript列表常用函数</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/javascript_array_func/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='JavaScript列表常用函数'>
+<meta property='og:description' content='文章整理了JavaScript常用函数。
+'>
+<meta property='og:url' content='https://euansu123.github.io/post/javascript_array_func/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JavaScript' /><meta property='article:published_time' content='2023-06-09T10:16:48&#43;08:00'/><meta property='article:modified_time' content='2023-06-09T10:16:48&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/javascript.jpg' />
+<meta name="twitter:title" content="JavaScript列表常用函数">
+<meta name="twitter:description" content="文章整理了JavaScript常用函数。
+"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/javascript.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/javascript_array_func/">
+                
+                    <img src="/img/javascript.jpg" loading="lazy" alt="Featured image of post JavaScript列表常用函数" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/javascript_array_func/">JavaScript列表常用函数</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 09, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>文章整理了JavaScript常用函数。</p>
+<h3 id="过滤列表元素--filter">过滤列表元素&ndash;filter</h3>
+<p><code>filter()</code>方法创建一个通过条件的新数组。</p>
+<h4 id="filter-语法">filter 语法</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">newArray</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">callbackFn</span>(<span style="color:#a6e22e">element</span>, [<span style="color:#a6e22e">index</span>], [<span style="color:#a6e22e">array</span>]), <span style="color:#a6e22e">context</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// element 数组中当前正在处理的元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// index【可选】 正在处理的元素在数组中的索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// arrray【可选】 filter处理的数组
+</span></span></span></code></pre></div><h4 id="函数使用">函数使用</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">words</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;spray&#39;</span>, <span style="color:#e6db74">&#39;limit&#39;</span>, <span style="color:#e6db74">&#39;elite&#39;</span>, <span style="color:#e6db74">&#39;exuberant&#39;</span>, <span style="color:#e6db74">&#39;destruction&#39;</span>, <span style="color:#e6db74">&#39;present&#39;</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">words</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">word</span> =&gt; <span style="color:#a6e22e">word</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">6</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">words</span>.<span style="color:#a6e22e">filter</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">element</span>,<span style="color:#a6e22e">index</span>,<span style="color:#a6e22e">arr</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arr</span>[<span style="color:#a6e22e">index</span>])
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">element</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">element</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>}, <span style="color:#a6e22e">words</span>);
+</span></span></code></pre></div><p>函数输出</p>
+<pre tabindex="0"><code>Array [&#34;exuberant&#34;, &#34;destruction&#34;, &#34;present&#34;]
+Array [&#34;exuberant&#34;, &#34;destruction&#34;, &#34;present&#34;]
+&#34;spray&#34;
+&#34;spray&#34;
+&#34;limit&#34;
+&#34;limit&#34;
+&#34;elite&#34;
+&#34;elite&#34;
+&#34;exuberant&#34;
+&#34;exuberant&#34;
+&#34;destruction&#34;
+&#34;destruction&#34;
+&#34;present&#34;
+&#34;present&#34;
+</code></pre><h3 id="修改列表元素--map">修改列表元素&ndash;map</h3>
+<h4 id="map-语法">map 语法</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">newArray</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">callbackFn</span>(<span style="color:#a6e22e">element</span>, [<span style="color:#a6e22e">index</span>], [<span style="color:#a6e22e">array</span>]), <span style="color:#a6e22e">context</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// element 数组中当前正在处理的元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// index【可选】 正在处理的元素在数组中的索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// arrray【可选】 filter处理的数组
+</span></span></span></code></pre></div><h4 id="函数使用-1">函数使用</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">array1</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">16</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// pass a function to map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map1</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">array1</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">x</span> =&gt; <span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">map1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// expected output: Array [2, 8, 18, 32]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">map2</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">array1</span>.<span style="color:#a6e22e">map</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">element</span>,<span style="color:#a6e22e">index</span>,<span style="color:#a6e22e">arr</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">arr</span>[<span style="color:#a6e22e">index</span>])
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">element</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">element</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>}, <span style="color:#a6e22e">array1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">map2</span>)
+</span></span></code></pre></div><p>函数输出</p>
+<pre tabindex="0"><code>Array [2, 8, 18, 32]
+1
+1
+4
+4
+9
+9
+16
+16
+Array [1, 4, 9, 16]
+</code></pre><h3 id="更新列表元素--foreach">更新列表元素&ndash;forEach</h3>
+<h4 id="foreach-语法">forEach 语法</h4>
+<pre tabindex="0"><code>array.forEach(function(currentValue, index, arr))
+# currentValue：函数当前处理的值
+# index：当前值在列表中索引
+# arr：被处理的列表
+</code></pre><h4 id="函数使用-2">函数使用</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">students</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;John&#39;</span>, <span style="color:#e6db74">&#39;Sara&#39;</span>, <span style="color:#e6db74">&#39;Jack&#39;</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">students</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">myFunction</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">myFunction</span>(<span style="color:#a6e22e">item</span>, <span style="color:#a6e22e">index</span>, <span style="color:#a6e22e">arr</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">arr</span>[<span style="color:#a6e22e">index</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Hello &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">item</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">students</span>);
+</span></span></code></pre></div><p>函数输出</p>
+<pre tabindex="0"><code>[&#34;Hello John&#34;, &#34;Hello Sara&#34;, &#34;Hello Jack&#34;]
+</code></pre><h3 id="查找列表符合条件的第一个元素--find">查找列表符合条件的第一个元素&ndash;find</h3>
+<h4 id="find-语法">find 语法</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">find</span>(<span style="color:#a6e22e">callback</span>(<span style="color:#a6e22e">element</span>, <span style="color:#a6e22e">index</span>, <span style="color:#a6e22e">arr</span>),<span style="color:#a6e22e">thisArg</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// element 数组中当前正在处理的元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// index【可选】 正在处理的元素在数组中的索引
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// arrray【可选】 filter处理的数组
+</span></span></span></code></pre></div><h4 id="函数使用-3">函数使用</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">numbers</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isEven</span>(<span style="color:#a6e22e">element</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">evenNumber</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">numbers</span>.<span style="color:#a6e22e">find</span>(<span style="color:#a6e22e">isEven</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">evenNumber</span>);
+</span></span></code></pre></div><p>函数输出</p>
+<pre tabindex="0"><code>4
+</code></pre><h3 id="查找列表符合条件的第一个元素的位置--findindex">查找列表符合条件的第一个元素的位置&ndash;findIndex</h3>
+<h4 id="findindex-语法">findIndex 语法</h4>
+<pre tabindex="0"><code>const index = arr.findIndex(callback(element, index, arr),thisArg)
+// element 数组中当前正在处理的元素
+// index【可选】 正在处理的元素在数组中的索引
+// arrray【可选】 filter处理的数组
+</code></pre><h4 id="函数使用-4">函数使用</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isOdd</span>(<span style="color:#a6e22e">element</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">element</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">!==</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">numbers</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">firstOdd</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">numbers</span>.<span style="color:#a6e22e">findIndex</span>(<span style="color:#a6e22e">isOdd</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">firstOdd</span>);
+</span></span></code></pre></div><p>函数输出</p>
+<pre tabindex="0"><code>2
+</code></pre>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/javascript/">JavaScript</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

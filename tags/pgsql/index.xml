@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>PGSQL on EuanSu&#39;s Blog</title>
+        <link>https://euansu123.github.io/tags/pgsql/</link>
+        <description>Recent content in PGSQL on EuanSu&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Wed, 13 Jul 2022 09:47:00 +0800</lastBuildDate><atom:link href="https://euansu123.github.io/tags/pgsql/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PGSQL 使用记录</title>
+        <link>https://euansu123.github.io/post/python_connect_pgsql/</link>
+        <pubDate>Wed, 13 Jul 2022 09:47:00 +0800</pubDate>
+        
+        <guid>https://euansu123.github.io/post/python_connect_pgsql/</guid>
+        <description>&lt;img src="https://euansu123.github.io/img/postgres-logo.png" alt="Featured image of post PGSQL 使用记录" /&gt;&lt;p&gt;PostgreSQL 被业界誉为“世界上最先进的开源关系型数据库”，虽然 PostgreSQL 是关系型数据库，但其也支持 NoSQL 数据类型（JSON/XML/hstore），并且性能甚至超过了 MongoDB。&lt;/p&gt;
+&lt;h1 id=&#34;pgsql-操作&#34;&gt;PGSQL 操作&lt;/h1&gt;
+&lt;h2 id=&#34;pgsql-cli&#34;&gt;PGSQL CLI&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# pgsql部署执行执行如下操作&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo su - postgres
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;psql
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220708171039813.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220708171039813&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pgsql-客户端连接&#34;&gt;PGSQL 客户端连接&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 使用客户端连接使用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;psql -h 133.0.120.49 -p &lt;span style=&#34;color:#ae81ff&#34;&gt;18921&lt;/span&gt; --username&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;flink_cdc --password
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714101916339.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220714101916339&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pgsql-语句操作&#34;&gt;PGSQL 语句操作&lt;/h2&gt;
+&lt;p&gt;创建用户&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;user&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;suwh&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; password &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suwenhui@2022&amp;#39;&lt;/span&gt;; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220708201523982.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220708201523982&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;创建库&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;database&lt;/span&gt; suwh &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;owner&lt;/span&gt; suwh;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;获取pgsql所有的库&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; pg_database;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220708153713056.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220708153713056&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;获取pgsql所有的表&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt;  tablename  &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt;  pg_tables  &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt;  tablename &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;pg%&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;AND&lt;/span&gt; tablename &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sql_%&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;ORDER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;BY&lt;/span&gt;  tablename;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220709113315958.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220709113315958&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;创建pgsql表&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;创建表&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; COMPANY(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ID INT &lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;KEY&lt;/span&gt;     &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   NAME           TEXT    &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   AGE            INT     &lt;span style=&#34;color:#66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ADDRESS        CHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   SALARY         REAL
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;#&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;插入数据&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; COMPANY (ID,NAME,AGE,ADDRESS,SALARY) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Allen&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Texas&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; COMPANY (ID,NAME,AGE,ADDRESS,SALARY) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;euansu&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;25&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Texas&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;.&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;查询pgsql表结构&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt;   A.ordinal_position,   A.&lt;span style=&#34;color:#66d9ef&#34;&gt;column_name&lt;/span&gt;,   &lt;span style=&#34;color:#66d9ef&#34;&gt;CASE&lt;/span&gt; A.is_nullable &lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;NO&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ELSE&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; is_nullable,   A.data_type,   coalesce(A.character_maximum_length, A.numeric_precision, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;length&lt;/span&gt;,   B.&lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt;,   &lt;span style=&#34;color:#66d9ef&#34;&gt;CASE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;WHEN&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;length&lt;/span&gt;(B.attname) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;THEN&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ELSE&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;END&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; is_pk  &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt;   information_schema.columns A  &lt;span style=&#34;color:#66d9ef&#34;&gt;LEFT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;JOIN&lt;/span&gt; (   &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt;     pg_attribute.attname,     col_description ( pg_attribute.attrelid, pg_attribute.attnum ) &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;COMMENT&lt;/span&gt;   &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt;     pg_index,     pg_class,     pg_attribute   &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt;     pg_class.oid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;company&amp;#39;&lt;/span&gt;::regclass   &lt;span style=&#34;color:#66d9ef&#34;&gt;AND&lt;/span&gt; pg_index.indrelid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pg_class.oid   &lt;span style=&#34;color:#66d9ef&#34;&gt;AND&lt;/span&gt; pg_attribute.attrelid &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; pg_class.oid   &lt;span style=&#34;color:#66d9ef&#34;&gt;AND&lt;/span&gt; pg_attribute.attnum &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;ANY&lt;/span&gt;(pg_index.indkey)  ) B &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt; A.&lt;span style=&#34;color:#66d9ef&#34;&gt;column_name&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; b.attname  &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt;   A.table_schema &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;public&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;AND&lt;/span&gt; A.&lt;span style=&#34;color:#66d9ef&#34;&gt;table_name&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;company&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;ORDER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;BY&lt;/span&gt;   ordinal_position &lt;span style=&#34;color:#66d9ef&#34;&gt;ASC&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220708171255127.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220708171255127&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;pgsql-数据类型&#34;&gt;PGSQL 数据类型&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名字&lt;/th&gt;
+&lt;th&gt;别名&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;bigint&lt;/td&gt;
+&lt;td&gt;int8&lt;/td&gt;
+&lt;td&gt;有符号8字节整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bigserial&lt;/td&gt;
+&lt;td&gt;serial8&lt;/td&gt;
+&lt;td&gt;自增8字节整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bit [ (n) ]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;定长位串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bit varying [ (n) ]&lt;/td&gt;
+&lt;td&gt;varbit&lt;/td&gt;
+&lt;td&gt;可变长位串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;逻辑布尔值(真/假)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;box&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;平面上的矩形&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;bytea&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;二进制数据(&amp;ldquo;字节数组&amp;rdquo;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;character varying [(n)]&lt;/td&gt;
+&lt;td&gt;varchar [(n)]&lt;/td&gt;
+&lt;td&gt;可变长字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;cidr&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;IPv4 或 IPv6 网络地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;circle&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;平面上的圆&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;date&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;日历日期(年, 月, 日)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;double precision&lt;/td&gt;
+&lt;td&gt;float8&lt;/td&gt;
+&lt;td&gt;双精度浮点数(8字节)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;inet&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;IPv4 或 IPv6 主机地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;integer&lt;/td&gt;
+&lt;td&gt;int, int4&lt;/td&gt;
+&lt;td&gt;有符号 4 字节整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;interval [ fields ] [ (p) ]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;时间间隔&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;line&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;平面上的无限长直线&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;lseg&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;平面上的线段&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;macaddr&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;MAC (Media Access Control)地址&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;money&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;货币金额&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;numeric [ (p, s) ]&lt;/td&gt;
+&lt;td&gt;decimal [ (p, s) ]&lt;/td&gt;
+&lt;td&gt;可选精度的准确数值数据类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;path&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;平面上的几何路径&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;point&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;平面上的点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;polygon&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;平面上的封闭几何路径&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;real&lt;/td&gt;
+&lt;td&gt;float4&lt;/td&gt;
+&lt;td&gt;单精度浮点数(4 字节)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;smallint&lt;/td&gt;
+&lt;td&gt;int2&lt;/td&gt;
+&lt;td&gt;有符号 2 字节整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;smallserial&lt;/td&gt;
+&lt;td&gt;serial2&lt;/td&gt;
+&lt;td&gt;自增 2 字节整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;serial&lt;/td&gt;
+&lt;td&gt;serial4&lt;/td&gt;
+&lt;td&gt;自增 4 字节整数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;text&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;可变长字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;time [ (p) ] [ without time zone ]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;一天中的时刻(无时区)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;time [ (p) ] with time zone    timetz&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;一天中的时刻，含时区&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;timestamp [ (p) ] [ without time zone ]&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;日期与时刻(无时区)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;timestamp [ (p) ] with time zone&lt;/td&gt;
+&lt;td&gt;timestamptz&lt;/td&gt;
+&lt;td&gt;日期与时刻，含时区&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tsquery&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;文本检索查询&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;tsvector&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;文本检索文档&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;txid_snapshot&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;用户级别的事务ID快照&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;uuid&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;通用唯一标识符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;xml&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;XML 数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;json&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;JSON 数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;python-连接-pgsql&#34;&gt;Python 连接 PGSQL&lt;/h1&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 配置的用户 suwh 无数据库。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;conn &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; psycopg2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;connect(host&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;172.21.3.82&amp;#39;&lt;/span&gt;, port&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;5432&amp;#39;&lt;/span&gt;, user&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suwh&amp;#39;&lt;/span&gt;, password&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;suwenhui@2022&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220708202731870.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220708202731870&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;给用户 &lt;code&gt;suwh&lt;/code&gt; 创建库后，正常连接。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220708202958091.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220708202958091&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h1 id=&#34;python-连接-pgsql-报错&#34;&gt;Python 连接 PGSQL 报错&lt;/h1&gt;
+&lt;p&gt;（1）问题现象&lt;/p&gt;
+&lt;p&gt;SCRAM authentication requires libpq version 10 or above。&lt;/p&gt;
+&lt;p&gt;（2）问题结论&lt;/p&gt;
+&lt;p&gt;libpq 包版本低于10版本，升级 libpq 包版本，使用最新的 libpq.so 包替换原有的 libpq.so 包。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/pgsql%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714101702399.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20220714101702399&#34;
+	
+	
+&gt;&lt;/p&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Prometheus 对大数据组件HDFS的指标进行采集，Grafana进行可视化展示。
+'>
+<title>Prometheus &#43; Grafana指标监控</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/prometheus_and_grafana/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='Prometheus &#43; Grafana指标监控'>
+<meta property='og:description' content='Prometheus 对大数据组件HDFS的指标进行采集，Grafana进行可视化展示。
+'>
+<meta property='og:url' content='https://euansu123.github.io/post/prometheus_and_grafana/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Prometheus' /><meta property='article:tag' content='Grafana' /><meta property='article:published_time' content='2023-07-11T19:10:00&#43;08:00'/><meta property='article:modified_time' content='2023-07-11T19:10:00&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/grafana_prometheus.png' />
+<meta name="twitter:title" content="Prometheus &#43; Grafana指标监控">
+<meta name="twitter:description" content="Prometheus 对大数据组件HDFS的指标进行采集，Grafana进行可视化展示。
+"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/grafana_prometheus.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/prometheus_and_grafana/">
+                
+                    <img src="/img/grafana_prometheus.png" loading="lazy" alt="Featured image of post Prometheus &#43; Grafana指标监控" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/prometheus_and_grafana/">Prometheus &#43; Grafana指标监控</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 11, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Prometheus 对大数据组件HDFS的指标进行采集，Grafana进行可视化展示。</p>
+<h1 id="1prometheus">1.Prometheus</h1>
+<ol>
+<li>
+<p>下载 <code>Prometheus</code> 安装包。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 页面下载地址</span>
+</span></span><span style="display:flex;"><span>https://prometheus.io/download/
+</span></span></code></pre></div><p><img src="/Grafana&#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707160343588.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230707160343588"
+	
+	
+></p>
+</li>
+<li>
+<p>上传 <code>Prometheus</code> 到规划的路径并进行解压。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tar -zxvf prometheus-2.37.8.linux-amd64.tar.gz
+</span></span></code></pre></div></li>
+<li>
+<p>启动 <code>Prometheus</code> 服务。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 需要在 Prometheus 目录下执行如下操作</span>
+</span></span><span style="display:flex;"><span>./prometheus --config.file<span style="color:#f92672">=</span>prometheus.yml
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 建议后台启动，命令如下</span>
+</span></span><span style="display:flex;"><span>nohup ./prometheus --config.file<span style="color:#f92672">=</span>prometheus.yml &gt;&gt; prometheus.log 2&gt;&amp;<span style="color:#ae81ff">1</span> &amp;
+</span></span></code></pre></div><p>启动后，即可在页面访问 <code>Prometheus</code> 服务。</p>
+<p><img src="/Grafana&#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707160714058.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230707160714058"
+	
+	
+></p>
+</li>
+</ol>
+<h1 id="2grafana">2.Grafana</h1>
+<ol>
+<li>
+<p>下载 <code>Grafana</code> 安装包。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># 这里下载的是安装包，注意不要下载源码包</span>
+</span></span><span style="display:flex;"><span>wget https://dl.grafana.com/enterprise/release/grafana-enterprise-9.5.2.linux-amd64.tar.gz
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 页面下载地址</span>
+</span></span><span style="display:flex;"><span>https://grafana.com/grafana/download/10.0.0?pg<span style="color:#f92672">=</span>oss-graf&amp;plcmt<span style="color:#f92672">=</span>hero-btn-1
+</span></span></code></pre></div><p><img src="/Grafana&#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707160102548.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230707160102548"
+	
+	
+></p>
+</li>
+<li>
+<p>上传到主机规划的目录并进行解压。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tar -zxvf grafana-enterprise-9.5.2.linux-amd64.tar.gz
+</span></span></code></pre></div></li>
+<li>
+<p>启动 <code>Grafana</code> 服务。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 需要在 Grafana 目录下执行如下操作</span>
+</span></span><span style="display:flex;"><span>./bin/grafana-server web
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 建议后台启动，命令如下</span>
+</span></span><span style="display:flex;"><span>nohup ./grafana-server web 2&gt;&amp;<span style="color:#ae81ff">1</span> &gt;&gt; /e3base/apps/grafana/logs/grafana.log &amp;
+</span></span></code></pre></div><p>启动后，即可在页面访问 <code>Grafana</code> 服务。</p>
+<p><img src="/Grafana&#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707160215621.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230707160215621"
+	
+	
+></p>
+</li>
+</ol>
+<h1 id="3指标监控">3.指标监控</h1>
+<h2 id="31-hdfs">3.1 HDFS</h2>
+<h3 id="311-namenode">3.1.1 NameNode</h3>
+<p><strong>环境信息</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># jmx端口</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">12003</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># NameNode节点</span>
+</span></span><span style="display:flex;"><span>host-172-18-243-34
+</span></span><span style="display:flex;"><span>host-172-18-243-35
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 环境</span>
+</span></span><span style="display:flex;"><span>Kerberos
+</span></span></code></pre></div><p><strong>jmx 接口测试</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>curl -X GET --negotiate -u e3base:e3base -i http://host-172-18-243-34:12003/jmx
+</span></span><span style="display:flex;"><span>curl -X GET --negotiate -u e3base:e3base -i http://host-172-18-243-35:12003/jmx
+</span></span></code></pre></div><p><img src="/Grafana&#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707161034088.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230707161034088"
+	
+	
+></p>
+<p><strong>Kerberos代理</strong></p>
+<p><code>Prometheus</code> 只能够采集非 <code>Kerberos</code> 环境的信息，<code>Kerberos</code> 环境下需要使用如下方法，将 <code>Kerbeors</code> 页面代理成非 <code>Kerberos</code> 页面供 <code>Prometheus</code> 进行数据采集。</p>
+<ol>
+<li>
+<p>解压附件中的 <code>http_exporter.zip</code> 文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>unzip http_exporter.zip
+</span></span></code></pre></div></li>
+<li>
+<p>修改 <code>httpjmx.yml</code> 配置文件，设置代理信息。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">httpTimeout</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">httpUrl</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;namenode|http://host-172-18-243-34:12003/jmx&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">blacklistObjectNames</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;Hadoop:service=NameNode,name=NameNodeInfo|LiveNodes|DeadNodes&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;Hadoop:service=NameNode,name=FSNamesystemState|TopUserOpCounts&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;Hadoop:service=DataNode,name=DataNodeInfo|DatanodeNetworkCounts&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">wightlistObjectNames</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;not use now&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">valueReplace</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;true:1&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;false:0&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;active:1&#34;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#e6db74">&#34;standby:0&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbSwitch</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbPrincipal</span>: <span style="color:#e6db74">&#34;e3base@SITECH.COM&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbKeyTab</span>: <span style="color:#e6db74">&#34;/etc/security/keytabs/e3base.keytab&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbUseTicketCache</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbRenewTGT</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbRefreshKrb5Config</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbStoreKey</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbIsInitiator</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">krbDebug</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">debug</span>: <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div></li>
+<li>
+<p>启动 <code>http_exporter</code> 代理服务。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nohup /e3base/jdk/bin/java -cp collector-0.16.2-SNAPSHOT.jar io.prometheus.jmx.httpjmx.HadoopCollector 172.18.243.36:9102 httpjmx.yml 2&gt;&amp;<span style="color:#ae81ff">1</span> &amp;
+</span></span></code></pre></div></li>
+<li>
+<p>配置 <code>Prometheus</code> 的配置文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">scrape_configs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#e6db74">&#34;prometheus&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># metrics_path defaults to &#39;/metrics&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># scheme defaults to &#39;http&#39;.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">targets</span>: [<span style="color:#e6db74">&#34;localhost:9090&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">job_name</span>: <span style="color:#e6db74">&#34;namenode&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">static_configs</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">targets</span>: [<span style="color:#e6db74">&#34;172.18.243.36:9102&#34;</span>,<span style="color:#e6db74">&#34;172.18.243.36:9103&#34;</span>]
+</span></span></code></pre></div></li>
+<li>
+<p>重启 <code>Prometheus</code> 服务，页面上出现 <code>namenode</code> 的相关数据。</p>
+<p><img src="/Grafana&#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707161718597.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230707161718597"
+	
+	
+></p>
+</li>
+<li>
+<p>导入附件中的 <code>namenode.json</code> 到 <code>Grafana</code>，注意修改文件中的 <code>datasource</code> 参数，设置成 <code>Promnetheus</code> 的 <code>target</code> 名称。</p>
+<p><img src="/Grafana&#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707162003538.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230707162003538"
+	
+	
+></p>
+</li>
+<li>
+<p>导入后，页面数据正常展示。</p>
+<p><img src="/Grafana&#43;prometheus%E6%8C%87%E6%A0%87%E7%9B%91%E6%8E%A7/image-20230707162132401.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20230707162132401"
+	
+	
+></p>
+</li>
+</ol>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/prometheus/">Prometheus</a>
+        
+            <a href="/tags/grafana/">Grafana</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

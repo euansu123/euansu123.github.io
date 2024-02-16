@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Oracle 数据库安装及连接操作。
+'>
+<title>Oracle 19c 安装使用记录</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/oracle_19c_operate/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='Oracle 19c 安装使用记录'>
+<meta property='og:description' content='Oracle 数据库安装及连接操作。
+'>
+<meta property='og:url' content='https://euansu123.github.io/post/oracle_19c_operate/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Oracle' /><meta property='article:published_time' content='2022-07-15T09:47:00&#43;08:00'/><meta property='article:modified_time' content='2022-07-15T09:47:00&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/oracle.jpg' />
+<meta name="twitter:title" content="Oracle 19c 安装使用记录">
+<meta name="twitter:description" content="Oracle 数据库安装及连接操作。
+"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/oracle.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/oracle_19c_operate/">
+                
+                    <img src="/img/oracle.jpg" loading="lazy" alt="Featured image of post Oracle 19c 安装使用记录" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/oracle_19c_operate/">Oracle 19c 安装使用记录</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 15, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Oracle 数据库安装及连接操作。</p>
+<h1 id="准备工作">准备工作</h1>
+<ol>
+<li>
+<p>下载 Oracle 19c 安装包，下载地址：https://www.oracle.com/database/technologies/oracle-database-software-downloads.html#19c</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715161021810.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220715161021810"
+	
+	
+></p>
+</li>
+<li>
+<p>下载 Oracle 19c 预安装包，下载地址：http://yum.oracle.com/repo/OracleLinux/OL7/latest/x86_64/getPackage/oracle-database-preinstall-19c-1.0-1.el7.x86_64.rpm</p>
+</li>
+</ol>
+<h1 id="安装过程">安装过程</h1>
+<ol>
+<li>
+<p>上传 rpm 包到服务器。</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715162205506.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220715162205506"
+	
+	
+></p>
+</li>
+<li>
+<p>安装 Oracle 预安装rpm包。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yum -y localinstall oracle-database-preinstall-19c-1.0-1.el7.x86_64.rpm
+</span></span></code></pre></div></li>
+<li>
+<p>安装 Oracle 安装rpm包。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>yum -y localinstall oracle-database-ee-19c-1.0-1.x86_64.rpm
+</span></span></code></pre></div></li>
+<li>
+<p>配置 Oracle 环境。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/etc/init.d/oracledb_ORCLCDB-19c configure
+</span></span></code></pre></div><p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="配置环境"
+	
+	
+></p>
+<p>配置过程执行结束后，查询 Oracle 进程，Oracle 进程存在表示安装完成。</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715162846458.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220715162846458"
+	
+	
+></p>
+</li>
+<li>
+<p>创建 Oracle 用户，并配置 Orace 用户的环境变量。</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715163350129.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220715163350129"
+	
+	
+></p>
+</li>
+<li>
+<p>执行 sqlplus / as sysdba 校验 Oracle 数据库是否启动成功。</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220715163431437.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220715163431437"
+	
+	
+></p>
+</li>
+<li>
+<p>使用连接工具测试连接是否成功。</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/Snipaste_2022-07-15_16-31-58.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="Snipaste_2022-07-15_16-31-58"
+	
+	
+></p>
+</li>
+</ol>
+<h1 id="oracle-数据库启停操作">Oracle 数据库启停操作</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>/etc/init.d/oracledb_ORCLCDB-19c start|stop|restart|configure|delete
+</span></span></code></pre></div><h1 id="oracle-数据库简单操作">Oracle 数据库简单操作</h1>
+<p>创建表空间</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> tablespace tab_name
+</span></span><span style="display:flex;"><span>datafile <span style="color:#e6db74">&#39;path&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">size</span> n
+</span></span><span style="display:flex;"><span>[autoextend <span style="color:#66d9ef">on</span> <span style="color:#66d9ef">next</span> n1 maxsize m <span style="color:#f92672">/</span><span style="color:#66d9ef">of</span>]
+</span></span><span style="display:flex;"><span>[permanent] 
+</span></span><span style="display:flex;"><span>[extent management <span style="color:#66d9ef">local</span><span style="color:#f92672">/</span><span style="color:#66d9ef">dictionary</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> tab_name    <span style="color:#960050;background-color:#1e0010">表空间的名字</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> path        <span style="color:#960050;background-color:#1e0010">数据文件路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#66d9ef">size</span> n    <span style="color:#960050;background-color:#1e0010">指定数据文件的大小</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> tablespace euansu datafile <span style="color:#e6db74">&#39;/home/oracle/data&#39;</span> <span style="color:#66d9ef">size</span> <span style="color:#ae81ff">100</span>M;
+</span></span></code></pre></div><p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714191811220.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220714191811220"
+	
+	
+></p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714191826269.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220714191826269"
+	
+	
+></p>
+<p>创建临时表空间</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">temporary</span> tablespace temp_name tempfile <span style="color:#e6db74">&#39;path&#39;</span> <span style="color:#66d9ef">size</span> n;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> tempname    <span style="color:#960050;background-color:#1e0010">表空间的名字</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> path        <span style="color:#960050;background-color:#1e0010">临时表空间数据文件的位置</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#66d9ef">size</span> m    <span style="color:#960050;background-color:#1e0010">表示临时表空间的大小</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">temporary</span> tablespace euansu_temp tempfile <span style="color:#e6db74">&#39;/home/oracle/euansu_temp&#39;</span> <span style="color:#66d9ef">size</span> <span style="color:#ae81ff">10</span>M;
+</span></span></code></pre></div><p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714192306181.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220714192306181"
+	
+	
+></p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714192328271.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220714192328271"
+	
+	
+></p>
+<p>创建用户</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">user</span> euansu identified <span style="color:#66d9ef">by</span> <span style="color:#e6db74">&#34;suwenhui123&#34;</span> <span style="color:#66d9ef">default</span> tablespace euansu <span style="color:#66d9ef">temporary</span> tablespace euansu_temp;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> tablespace            <span style="color:#960050;background-color:#1e0010">表空间</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#66d9ef">temporary</span> tablespace    <span style="color:#960050;background-color:#1e0010">临时表空间</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#</span> <span style="color:#960050;background-color:#1e0010">创建用户时会报</span><span style="color:#ae81ff">65096</span><span style="color:#960050;background-color:#1e0010">的错误，执行如下语句即可：</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">alter</span> <span style="color:#66d9ef">session</span> <span style="color:#66d9ef">set</span> <span style="color:#e6db74">&#34;_ORACLE_SCRIPT&#34;</span><span style="color:#f92672">=</span><span style="color:#66d9ef">true</span>;
+</span></span></code></pre></div><p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220714192445471.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220714192445471"
+	
+	
+></p>
+<h1 id="python连接oracle">Python连接Oracle</h1>
+<h2 id="安装-cx_oracle-第三方库">安装 cx_Oracle 第三方库</h2>
+<p>最新 cx_Oracle 并不支持 Python2.7，这里下载支持 Python2.7 的7.3.0 版本，下载地址：https://files.pythonhosted.org/packages/5e/e3/cfd4f413f8d47dd2aee09273d9bb3ee6aa7384e0a04e191d703c2199eb93/cx_Oracle-7.3.0.tar.gz</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817174623225.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220817174623225"
+	
+	
+></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 解压 cx_Oracle 源码包</span>
+</span></span><span style="display:flex;"><span>tar -zxvf cx_Oracle-7.3.0.tar.gz
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装 cx_Oracle 第三方库</span>
+</span></span><span style="display:flex;"><span>python2.7 setup.py install
+</span></span></code></pre></div><p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817175001764.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220817175001764"
+	
+	
+></p>
+<h2 id="安装-oracle-instant-client">安装 Oracle Instant Client</h2>
+<p>通过 python 连接 oracle 需要使用 cx_Oracle 第三方库，要求主机提前安装 Oracle Instant Client，否则连接 Oracle 会报如下错误。</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817173612608.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220817173612608"
+	
+	
+></p>
+<h3 id="下载-oracle-instant-client">下载 Oracle Instant Client</h3>
+<p>下载地址：https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html，下载对应版本的 Oracle Instant Client包即可。</p>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817173734432.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220817173734432"
+	
+	
+></p>
+<h3 id="创建-oracle-instant-clinet-所需目录">创建 Oracle Instant Clinet 所需目录</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo mkdir -p /opt/oracle
+</span></span><span style="display:flex;"><span>sudo mv instantclient-basic-linux.x64-21.7.0.0.0dbru.zip /opt/oracle/
+</span></span><span style="display:flex;"><span>cd /opt/oracle
+</span></span><span style="display:flex;"><span>sudo unzip instantclient-basic-linux.x64-21.7.0.0.0dbru.zip
+</span></span></code></pre></div><h3 id="安装系统--libaio-包">安装系统  libaio 包</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo yum install libaio
+</span></span></code></pre></div><h3 id="创建-instant-client-的-so-文件依赖">创建 Instant Client 的 .so 文件依赖</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo sh -c <span style="color:#e6db74">&#34;echo /opt/oracle/instantclient_21_7 &gt; /etc/ld.so.conf.d/oracle-instantclient.conf&#34;</span>
+</span></span><span style="display:flex;"><span>sudo ldconfig
+</span></span></code></pre></div><h3 id="添加-instant-clinet-的环境变量">添加 Instant Clinet 的环境变量</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>export LD_LIBRARY_PATH<span style="color:#f92672">=</span>/opt/oracle/instantclient_21_7:$LD_LIBRARY_PATH
+</span></span></code></pre></div><h3 id="测试连接">测试连接</h3>
+<p><img src="/oracle%E8%BF%9E%E6%8E%A5%E4%BD%BF%E7%94%A8/image-20220817180349849.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20220817180349849"
+	
+	
+></p>
+<h2 id="python-连接-oracle-封装代码">Python 连接 Oracle 封装代码</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> cx_Oracle
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OracleApi</span>(object):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, host, port, user, password, instant):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>host <span style="color:#f92672">=</span> host
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>port <span style="color:#f92672">=</span> port
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>user <span style="color:#f92672">=</span> user
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>password <span style="color:#f92672">=</span> password
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>instant <span style="color:#f92672">=</span> instant
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">connect</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>conn <span style="color:#f92672">=</span> cx_Oracle<span style="color:#f92672">.</span>connect(self<span style="color:#f92672">.</span>user, self<span style="color:#f92672">.</span>password, <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">/</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (self<span style="color:#f92672">.</span>host, self<span style="color:#f92672">.</span>port,self<span style="color:#f92672">.</span>instant))
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>cursor <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>conn<span style="color:#f92672">.</span>cursor()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">close</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>cursor<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>conn<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_one</span>(self, sql, params<span style="color:#f92672">=</span>()):
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>connect()
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>cursor<span style="color:#f92672">.</span>execute(sql, params)
+</span></span><span style="display:flex;"><span>            result <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cursor<span style="color:#f92672">.</span>fetchone()
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>, e:
+</span></span><span style="display:flex;"><span>            print e<span style="color:#f92672">.</span>message
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_all</span>(self, sql):
+</span></span><span style="display:flex;"><span>        list <span style="color:#f92672">=</span> ()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>connect()
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>cursor<span style="color:#f92672">.</span>execute(sql)
+</span></span><span style="display:flex;"><span>            list <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>cursor<span style="color:#f92672">.</span>fetchall()
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>, e:
+</span></span><span style="display:flex;"><span>            print e<span style="color:#f92672">.</span>message
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> list
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/oracle/">Oracle</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

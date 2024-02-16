@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Hadoop on EuanSu&#39;s Blog</title>
+        <link>https://euansu123.github.io/tags/hadoop/</link>
+        <description>Recent content in Hadoop on EuanSu&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Mon, 22 Jan 2024 11:57:38 +0800</lastBuildDate><atom:link href="https://euansu123.github.io/tags/hadoop/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>YARN常用命令及Rest API</title>
+        <link>https://euansu123.github.io/post/yarn_rest_api/</link>
+        <pubDate>Mon, 22 Jan 2024 11:57:38 +0800</pubDate>
+        
+        <guid>https://euansu123.github.io/post/yarn_rest_api/</guid>
+        <description>&lt;img src="https://euansu123.github.io/img/hadoop.png" alt="Featured image of post YARN常用命令及Rest API" /&gt;&lt;h1 id=&#34;yarn&#34;&gt;YARN&lt;/h1&gt;
+&lt;h2 id=&#34;1yarn常用命令&#34;&gt;1.YARN常用命令&lt;/h2&gt;
+&lt;h3 id=&#34;11-作业&#34;&gt;1.1 作业&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn application -list&lt;/td&gt;
+&lt;td&gt;列出所有的application&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn application -list -appStates [ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED]&lt;/td&gt;
+&lt;td&gt;根据application状态过滤&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn application -kill [applicationId]&lt;/td&gt;
+&lt;td&gt;Kill掉application&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;查看所有任务&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn application -list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20231030104820397.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20231030104820397&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看指定任务状态的作业&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# state 可选的有：ALL、NEW、NEW_SAVING、SUBMITTED、ACCEPTED、RUNNING、FINISHED、FAILED、KILLED&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn application -list -appStates &amp;lt;state&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 示例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn application -list -appStates RUNNING,ACCEPTED
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20230412114200435.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230412114200435&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看正在运行的任务信息&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn applicationattempt -list &amp;lt;application_id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20231030105214173.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20231030105214173&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;结束作业&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn application -kill &amp;lt;application_id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;12-日志&#34;&gt;1.2 日志&lt;/h3&gt;
+&lt;p&gt;查询指定作业的日志&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 如果提示内存限制，可以在如下命令后，添加 --size -1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn logs -applicationId &amp;lt;application_id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20231030105613765.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20231030105613765&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查询指定 Container 的日志&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn logs -applicationId &amp;lt;application_id&amp;gt; -containerId &amp;lt;container_id&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;13-application-attempt&#34;&gt;1.3 Application Attempt&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn applicationattempt -list [ApplicationId]&lt;/td&gt;
+&lt;td&gt;列出所有Application尝试的列表&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn applicationattempt -status [ApplicationAttemptId]&lt;/td&gt;
+&lt;td&gt;打印Application Attempt的状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;列出Application的所有尝试&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn applicationattempt -list &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ApplicationId&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20240122102411843.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240122102411843&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;打印Application Attempt的状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn applicationattempt -status &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ApplicationAttemptId&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20240122102545463.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240122102545463&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;14-容器&#34;&gt;1.4 容器&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn container -list [ApplicationAttemptId]&lt;/td&gt;
+&lt;td&gt;列出所有的Container&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn container -status [ContainerId]&lt;/td&gt;
+&lt;td&gt;打印Container状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;列出所有的Container&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn container -list &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ApplicationAttemptId&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20240122103049934.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240122103049934&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;打印Container状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn container -status &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ContainerId&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20240122103145929.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240122103145929&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;15-其他&#34;&gt;1.5 其他&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn node -list -all&lt;/td&gt;
+&lt;td&gt;查看节点状态&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn rmadmin -refreshQueues&lt;/td&gt;
+&lt;td&gt;加载队列配置&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yarn queue -status [QueueName]&lt;/td&gt;
+&lt;td&gt;打印队列信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;查看节点状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn node -list -all
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20240122101045236.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240122101045236&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;加载队列配置&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 需要在RM节点执行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn rmadmin -refreshQueues
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20240122101741713.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240122101741713&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看队列状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yarn queue -status &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;QueueName&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20240122101841492.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20240122101841492&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2yarn-rest-api&#34;&gt;2.YARN Rest Api&lt;/h2&gt;
+&lt;p&gt;YARN Rest Api文档地址：https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/ResourceManagerRest.html&lt;/p&gt;
+&lt;h3 id=&#34;21-集群&#34;&gt;2.1 集群&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;获取 RM 节点状态&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://rm-http-address:port/ws/v1/cluster/info
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Method&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GET
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 示例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X GET -u e3base:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Sit@Paas&amp;amp;123&amp;#39;&lt;/span&gt; -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://172.21.9.101:13006/ws/v1/cluster/info&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 注：如果集群集成了kerbeors，需要增加--negotiate参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20230810105526308.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230810105526308&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;获取集群Metrics&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://rm-http-address:port/ws/v1/cluster/metrics
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Method&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GET
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 示例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X GET -u e3base:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Sit@Paas&amp;amp;123&amp;#39;&lt;/span&gt; -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://172.21.9.101:13006/ws/v1/cluster/metrics&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 注：如果集群集成了kerbeors，需要增加--negotiate参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20230810110235599.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230810110235599&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;22-队列&#34;&gt;2.2 队列&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;获取集群队列&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://rm-http-address:port/ws/v1/cluster/scheduler
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Method&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GET
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 示例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X GET -u e3base:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Sit@Paas&amp;amp;123&amp;#39;&lt;/span&gt; -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://172.21.9.101:13006/ws/v1/cluster/scheduler&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 注：如果集群集成了kerbeors，需要增加--negotiate参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20230810110941722.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230810110941722&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;23-作业&#34;&gt;2.3 作业&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;获取集群作业&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# URL&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;http://rm-http-address:port/ws/v1/cluster/apps
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Method&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GET
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 示例&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X GET -u e3base:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Sit@Paas&amp;amp;123&amp;#39;&lt;/span&gt; -i &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;http://172.21.9.101:13006/ws/v1/cluster/apps&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 注：如果集群集成了kerbeors，需要增加--negotiate参数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/yarn_rest_api/image-20230810111144989.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230810111144989&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3其他&#34;&gt;3.其他&lt;/h2&gt;
+&lt;h3 id=&#34;31-相关资源&#34;&gt;3.1 相关资源&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;YARN官方文档：https://hadoop.apache.org/docs/stable/&lt;/li&gt;
+&lt;li&gt;大数据之Hadoop集群中YARN常用命令：https://www.cnblogs.com/sw-code/p/16387038.html&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Kerberos环境下Python的接口调用</title>
+        <link>https://euansu123.github.io/post/kerberos_python_request/</link>
+        <pubDate>Thu, 03 Aug 2023 11:10:00 +0800</pubDate>
+        
+        <guid>https://euansu123.github.io/post/kerberos_python_request/</guid>
+        <description>&lt;img src="https://euansu123.github.io/img/kerberos.png" alt="Featured image of post Kerberos环境下Python的接口调用" /&gt;&lt;h1 id=&#34;kerberos&#34;&gt;Kerberos&lt;/h1&gt;
+&lt;p&gt;Kerberos 是一个用于服务请求时在服务端和客户端进行身份认证的服务，Kerberos支持在所有操作系统上进行构建，包括有 Windows、macOS、FrssBSD 和 Linux。&lt;/p&gt;
+&lt;p&gt;官方网址：https://www.kerberos.org/&lt;/p&gt;
+&lt;h3 id=&#34;1kerberos-环境&#34;&gt;1.Kerberos 环境&lt;/h3&gt;
+&lt;p&gt;Kerberos 环境下访问远程主机的服务，需要在主机上先进行认证，然后才可以携带 kerbeors 主机和 keytab 文件访问。&lt;/p&gt;
+&lt;h4 id=&#34;11-kerbero-主机认证&#34;&gt;1.1 Kerbero 主机认证&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# keytab_file:keytab文件路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# kerberos_principal:kerbeors的principal&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kinit -kt &amp;lt;keytab_file&amp;gt; &amp;lt;kerberos_principal&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/kerberos%E7%8E%AF%E5%A2%83Python%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/image-20230802114439433.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230802114439433&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;12-kerberos环境下的curl&#34;&gt;1.2 Kerberos环境下的curl&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# method:请求方法,例如GET、POST、PUT...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# negotiate:指定kerberos环境，会携带当前主机认证的kerberos principal进行访问&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# username:用户名&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# password:密码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# url:要请求的服务地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;curl -X &amp;lt;method&amp;gt; --negotiate -u &amp;lt;username&amp;gt;:&amp;lt;password&amp;gt; -i url
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/kerberos%E7%8E%AF%E5%A2%83Python%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/image-20230802114552731.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230802114552731&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2python&#34;&gt;2.Python&lt;/h3&gt;
+&lt;h4 id=&#34;21-第三方包安装&#34;&gt;2.1 第三方包安装&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install requests
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install requests_kerberos
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;pip install krbcontext
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;22-工具类&#34;&gt;2.2 工具类&lt;/h4&gt;
+&lt;p&gt;这里以 &lt;code&gt;Python&lt;/code&gt; 调用 &lt;code&gt;Hadoop&lt;/code&gt; 的 &lt;code&gt;Rest&lt;/code&gt; 接口为例，测试 &lt;code&gt;Python&lt;/code&gt; 在 &lt;code&gt;Kerberos&lt;/code&gt; 环境下的服务调用。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Hadoop Rest&lt;/code&gt; 接口文档地址：https://hadoop.apache.org/docs/r1.0.4/webhdfs.html&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# -*- coding=utf-8 -*-&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; json
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; logging
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; requests
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; posixpath
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; requests.auth &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; HTTPBasicAuth
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; requests_kerberos &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; HTTPKerberosAuth
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; krbcontext &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; krbContext
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_NAMENODE_STATUS_URL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;jmx&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_HDFS_REST_URL &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;webhdfs/v1&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;_ACCEPT_CONTENT_TYPE &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;application/json&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LOG &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; logging&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;getLogger(__name__)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;HdfsRestApi&lt;/span&gt;(object):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    HDFS Rest 接口工具类
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, url, username, password, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(url)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_username &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; username
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_password &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; password
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_security_enabled &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; security_enabled
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; HTTPBasicAuth(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_username, self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_password)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_security_enabled:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;with&lt;/span&gt; krbContext(using_keytab&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;principal, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;keytab_file):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; HTTPKerberosAuth()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __str__(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;HDFS Rest Url Address Is &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{HDFS_REST_URL}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(HDFS_REST_URL&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_get_params&lt;/span&gt;(self, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; params &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; params &lt;span style=&#34;color:#f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; params
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_namenode_status&lt;/span&gt;(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        获取NameNode的状态信息
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url, _NAMENODE_STATUS_URL)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_get_params({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;qry&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hadoop:service=NameNode,name=NameNodeStatus&amp;#34;&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(url, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;params, headers&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Accept&amp;#39;&lt;/span&gt;: _ACCEPT_CONTENT_TYPE}, auth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; json&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loads(response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exceptions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RequestException &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请求出现异常：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_path_quota&lt;/span&gt;(self, path):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        获取路径的配额信息（空间配额）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url, _HDFS_REST_URL, path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_get_params({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;op&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GETQUOTAUSAGE&amp;#34;&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(url, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;params, headers&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Accept&amp;#39;&lt;/span&gt;: _ACCEPT_CONTENT_TYPE}, auth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; json&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loads(response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exceptions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RequestException &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请求出现异常：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;set_path_quota&lt;/span&gt;(self, path, quota):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        设置路径的配额信息（空间配额）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# curl -i -X PUT &amp;#34;http://&amp;lt;HOST&amp;gt;:&amp;lt;PORT&amp;gt;/webhdfs/v1/&amp;lt;PATH&amp;gt;?op=SETQUOTA&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;#                               &amp;amp;namespacequota=&amp;lt;QUOTA&amp;gt;[&amp;amp;storagespacequota=&amp;lt;QUOTA&amp;gt;]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# namespacequota 指定目录中的最大文件和目录数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# storagespacequota 目录的最大空间使用量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url, _HDFS_REST_URL, path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_get_params({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;op&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SETQUOTA&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;storagespacequota&amp;#34;&lt;/span&gt;: quota})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;put(url, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;params, headers&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Accept&amp;#39;&lt;/span&gt;: _ACCEPT_CONTENT_TYPE}, auth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;设置配额出现异常，请联系管理员处理&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exceptions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RequestException &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请求出现异常：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# Directory&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_directory_list&lt;/span&gt;(self, path):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        获取路径下的文件及目录列表
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @param path:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url, _HDFS_REST_URL, path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            print url
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_get_params({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;op&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;LISTSTATUS&amp;#34;&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(url, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;params, headers&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Accept&amp;#39;&lt;/span&gt;: _ACCEPT_CONTENT_TYPE}, auth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    response_data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; json&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loads(response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FileStatuses&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; response_data &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FileStatus&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; response_data[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FileStatuses&amp;#39;&lt;/span&gt;]:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response_data[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FileStatuses&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FileStatus&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HDFS Rest 接口数据发生变化，请联系开发人员进行处理&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;要查询的路径不存在&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exceptions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RequestException &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请求出现异常：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Exception&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            LOG&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exception(e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;代码运行时发生错误，错误原因：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;create_directory&lt;/span&gt;(self, path):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        创建HDFS目录并指定用户
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @param path:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# curl -i -X PUT &amp;#34;http://&amp;lt;HOST&amp;gt;:&amp;lt;PORT&amp;gt;/&amp;lt;PATH&amp;gt;?op=MKDIRS[&amp;amp;permission=&amp;lt;OCTAL&amp;gt;]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url, _HDFS_REST_URL, path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_get_params({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;op&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MKDIRS&amp;#34;&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;put(url, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;params, headers&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Accept&amp;#39;&lt;/span&gt;: _ACCEPT_CONTENT_TYPE}, auth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exceptions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RequestException &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请求出现异常：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Exception&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            LOG&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exception(e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;代码运行时发生错误，错误原因：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;set_path_owner&lt;/span&gt;(self, path, user):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        设置HDFS路径的owner
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @param path:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @param user:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# curl -i -X PUT &amp;#34;http://&amp;lt;HOST&amp;gt;:&amp;lt;PORT&amp;gt;/webhdfs/v1/&amp;lt;PATH&amp;gt;?op=SETOWNER&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;#                               [&amp;amp;owner=&amp;lt;USER&amp;gt;][&amp;amp;group=&amp;lt;GROUP&amp;gt;]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url, _HDFS_REST_URL, path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_get_params({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;op&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SETOWNER&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;owner&amp;#34;&lt;/span&gt;: user, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;group&amp;#34;&lt;/span&gt;: user})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;put(url, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;params, headers&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Accept&amp;#39;&lt;/span&gt;: _ACCEPT_CONTENT_TYPE}, auth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exceptions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RequestException &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请求出现异常：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Exception&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            LOG&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exception(e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;代码运行时发生错误，错误原因：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;delete_directory&lt;/span&gt;(self, path):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        删除HDFS目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @param path:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# curl -i -X DELETE &amp;#34;http://&amp;lt;host&amp;gt;:&amp;lt;port&amp;gt;/webhdfs/v1/&amp;lt;path&amp;gt;?op=DELETE&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;#                               [&amp;amp;recursive=&amp;lt;true|false&amp;gt;]&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url, _HDFS_REST_URL, path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_get_params({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;op&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;DELETE&amp;#34;&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;delete(url, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;params, headers&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Accept&amp;#39;&lt;/span&gt;: _ACCEPT_CONTENT_TYPE},
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           auth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exceptions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RequestException &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请求出现异常：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Exception&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            LOG&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exception(e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;代码运行时发生错误，错误原因：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_path_status&lt;/span&gt;(self, path):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        获取HDFS路径的状态
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @param path:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;        &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# curl -i  &amp;#34;http://&amp;lt;HOST&amp;gt;:&amp;lt;PORT&amp;gt;/webhdfs/v1/&amp;lt;PATH&amp;gt;?op=GETFILESTATUS&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            path &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; path[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:] &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; path&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;startswith(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; path
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            url &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; posixpath&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_url, _HDFS_REST_URL, path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            params &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_get_params({&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;op&amp;#34;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;GETFILESTATUS&amp;#34;&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                response &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get(url, params&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;params, headers&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;{&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Accept&amp;#39;&lt;/span&gt;: _ACCEPT_CONTENT_TYPE}, auth&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_auth)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                print response
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    response_data &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; json&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;loads(response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FileStatus&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; response_data:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response_data[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;FileStatus&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HDFS Rest 接口数据发生变化，请联系开发人员进行处理&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;要查询的路径不存在&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;status_code
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; response&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;text
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; requests&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exceptions&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;RequestException &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;请求出现异常：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Exception&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            LOG&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;exception(e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;代码运行时发生错误，错误原因：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_active_namenode&lt;/span&gt;(url_list, username, password, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    获取active状态的NameNode节点
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param url_list:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param username:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param password:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param security_enabled:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; item &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; url_list:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            hdfs_rest_api &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; HdfsRestApi(item, username, password, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;security_enabled,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                        principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;principal, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;keytab_file)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            get_status_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_namenode_status()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; get_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;beans&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; get_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;and&lt;/span&gt; len(get_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;beans&amp;#39;&lt;/span&gt;]) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    namenode_state &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;beans&amp;#39;&lt;/span&gt;][&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;][&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;State&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; namenode_state&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;lower() &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;active&amp;#39;&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HDFS Rest 接口数据发生变化，请联系开发人员进行处理&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Exception&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; e:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;代码运行发生了错误：&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{error_message}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(error_message&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;e)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;create_hdfs_directory&lt;/span&gt;(url_list, username, password, tenant, path, quota, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    创建HDFS目录
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param url_list:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param username:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param password:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param tenant:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param path:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param quota:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param security_enabled:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param principal:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param keytab_file:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    get_active_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_namenode(url_list, username, password, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;security_enabled, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;principal, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;keytab_file)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        hdfs_rest_api &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# 确定路径是否存在&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        get_path_status_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_path_status(path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;# 删除&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HDFS路径&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{hdfs_path}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;已存在&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(hdfs_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;# 创建目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            create_hdfs_directory_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;create_directory(path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; create_hdfs_directory_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                set_path_quota_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_path_quota(path, quota)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; set_path_quota_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_path_owner(path, tenant)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#75715e&#34;&gt;# 删除路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;505&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set_path_quota_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; create_hdfs_directory_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; create_hdfs_directory_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;setting_path_quota&lt;/span&gt;(url_list, username, password, path, quota, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    设置HDFS路径配额
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param url_list:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param username:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param password:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param security_enabled:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param principal:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param keytab_file:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    get_active_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_namenode(url_list, username, password, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;security_enabled, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;principal,keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;keytab_file)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        hdfs_rest_api &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# 确定路径是否存在&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        get_path_status_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_path_status(path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;# 设置配额&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            set_path_quota_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_path_quota(path, quota)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; set_path_quota_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set_path_quota_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set_path_quota_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;修改配额操作失败：HDFS路径&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{hdfs_path}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;不存在&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(hdfs_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;delete_hdfs_path&lt;/span&gt;(url_list, username, password, path, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    删除HDFS的目录或文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param url_list:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param username:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param password:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param path:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param security_enabled:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param principal:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @param keytab_file:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    @return:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;success&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    get_active_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_namenode(url_list, username, password, security_enabled&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;security_enabled, principal&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;principal, keytab_file&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;keytab_file)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        hdfs_rest_api &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;# 确定路径是否存在&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        get_path_status_result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_path_status(path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#75715e&#34;&gt;# 删除&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            delete_directory_reuslt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; hdfs_rest_api&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;delete_directory(path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; delete_directory_reuslt[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;200&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; delete_directory_reuslt[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; delete_directory_reuslt[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;elif&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;404&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;删除操作失败：HDFS路径&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{hdfs_path}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;不存在&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;format(hdfs_path&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;path)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_path_status_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;code&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; get_active_result[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;message&amp;#39;&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;23-代码测试&#34;&gt;2.3 代码测试&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;main&lt;/code&gt; 方法中调用工具类，获取目录文件以及目录的状态。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/kerberos%E7%8E%AF%E5%A2%83Python%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/image-20230802114016428.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230802114016428&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;返回内容如下，&lt;code&gt;Kerberos&lt;/code&gt; 环境下 &lt;code&gt;Python&lt;/code&gt; 的接口调用操作成功。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://euansu123.github.io/kerberos%E7%8E%AF%E5%A2%83Python%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8/image-20230802113924801.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image-20230802113924801&#34;
+	
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

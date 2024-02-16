@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Python代码的单元测试 单元测试的概念 定义：是指对软件中的最小可测试单元进行检查和验证。 作用：可以确保程序模块是否否和我们规范的输出，保证该模块经过修改后仍然是满足我们的需求。 单元测试的策略 如果要创建单元测试，可以遵循如下基本技巧来确保涵盖所有的测试用例。
+逻辑检查：给定正确的、符合预期的输入，系统是否能够执行正确的计算并遵循通过代码正确的路径？给定的输入是否涵盖通过代码的所有路径？ 边界检查：对于给定的输入，系统如何响应？ 系统如何响应典型输入、边缘用例或无效输入？假设您期望输入的整数介于 3 和 7 之间。当您使用 5（典型输入）、3（边缘用例）或 9（无效输入）时，系统会如何响应？ 错误处理：当输入中出现错误时，系统会如何响应？ 是否提示用户输入其他内容？ 软件是否会崩溃？ 面向对象的检查：如果通过运行代码更改任何持久对象的状态，则该对象是否正确更新？ 单元测试类的编写 首先编写要进行单元测试的代码。
+def add(x, y): &amp;#34;&amp;#34;&amp;#34;加法函数&amp;#34;&amp;#34;&amp;#34; return x &#43; y def subtract(x, y): &amp;#34;&amp;#34;&amp;#34;减法函数&amp;#34;&amp;#34;&amp;#34; return x - y def multiply(x, y): &amp;#34;&amp;#34;&amp;#34;乘法函数&amp;#34;&amp;#34;&amp;#34; return x * y def divide(x, y): &amp;#34;&amp;#34;&amp;#34;除法函数&amp;#34;&amp;#34;&amp;#34; if y != 0: return x / y else: return ValueError(&amp;#34;除数不能为0&amp;#34;) 编写测试工具代码。
+# 测试代码应使用test_xxx的名称进行规范 # 这里使用断言assert进行模拟 # assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常 # 如下代码执行正常不报错，则说明函数执行符合预期 from myfunctions import divide # 一个简单的单元测试示例 def test_divide(x, y, result): r = divide(x, y) assert result == r def test_divide_error(x, y): try: divide(x, y) except ValueError: assert False 执行单元测试的工具代码。'>
+<title>Python代码的单元测试</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/python_unittest/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='Python代码的单元测试'>
+<meta property='og:description' content='Python代码的单元测试 单元测试的概念 定义：是指对软件中的最小可测试单元进行检查和验证。 作用：可以确保程序模块是否否和我们规范的输出，保证该模块经过修改后仍然是满足我们的需求。 单元测试的策略 如果要创建单元测试，可以遵循如下基本技巧来确保涵盖所有的测试用例。
+逻辑检查：给定正确的、符合预期的输入，系统是否能够执行正确的计算并遵循通过代码正确的路径？给定的输入是否涵盖通过代码的所有路径？ 边界检查：对于给定的输入，系统如何响应？ 系统如何响应典型输入、边缘用例或无效输入？假设您期望输入的整数介于 3 和 7 之间。当您使用 5（典型输入）、3（边缘用例）或 9（无效输入）时，系统会如何响应？ 错误处理：当输入中出现错误时，系统会如何响应？ 是否提示用户输入其他内容？ 软件是否会崩溃？ 面向对象的检查：如果通过运行代码更改任何持久对象的状态，则该对象是否正确更新？ 单元测试类的编写 首先编写要进行单元测试的代码。
+def add(x, y): &amp;#34;&amp;#34;&amp;#34;加法函数&amp;#34;&amp;#34;&amp;#34; return x &#43; y def subtract(x, y): &amp;#34;&amp;#34;&amp;#34;减法函数&amp;#34;&amp;#34;&amp;#34; return x - y def multiply(x, y): &amp;#34;&amp;#34;&amp;#34;乘法函数&amp;#34;&amp;#34;&amp;#34; return x * y def divide(x, y): &amp;#34;&amp;#34;&amp;#34;除法函数&amp;#34;&amp;#34;&amp;#34; if y != 0: return x / y else: return ValueError(&amp;#34;除数不能为0&amp;#34;) 编写测试工具代码。
+# 测试代码应使用test_xxx的名称进行规范 # 这里使用断言assert进行模拟 # assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常 # 如下代码执行正常不报错，则说明函数执行符合预期 from myfunctions import divide # 一个简单的单元测试示例 def test_divide(x, y, result): r = divide(x, y) assert result == r def test_divide_error(x, y): try: divide(x, y) except ValueError: assert False 执行单元测试的工具代码。'>
+<meta property='og:url' content='https://euansu123.github.io/post/python_unittest/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Python' /><meta property='article:published_time' content='2024-02-14T01:00:00&#43;08:00'/><meta property='article:modified_time' content='2024-02-14T01:00:00&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/Python%E4%B8%AD%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.jpg' />
+<meta name="twitter:title" content="Python代码的单元测试">
+<meta name="twitter:description" content="Python代码的单元测试 单元测试的概念 定义：是指对软件中的最小可测试单元进行检查和验证。 作用：可以确保程序模块是否否和我们规范的输出，保证该模块经过修改后仍然是满足我们的需求。 单元测试的策略 如果要创建单元测试，可以遵循如下基本技巧来确保涵盖所有的测试用例。
+逻辑检查：给定正确的、符合预期的输入，系统是否能够执行正确的计算并遵循通过代码正确的路径？给定的输入是否涵盖通过代码的所有路径？ 边界检查：对于给定的输入，系统如何响应？ 系统如何响应典型输入、边缘用例或无效输入？假设您期望输入的整数介于 3 和 7 之间。当您使用 5（典型输入）、3（边缘用例）或 9（无效输入）时，系统会如何响应？ 错误处理：当输入中出现错误时，系统会如何响应？ 是否提示用户输入其他内容？ 软件是否会崩溃？ 面向对象的检查：如果通过运行代码更改任何持久对象的状态，则该对象是否正确更新？ 单元测试类的编写 首先编写要进行单元测试的代码。
+def add(x, y): &amp;#34;&amp;#34;&amp;#34;加法函数&amp;#34;&amp;#34;&amp;#34; return x &#43; y def subtract(x, y): &amp;#34;&amp;#34;&amp;#34;减法函数&amp;#34;&amp;#34;&amp;#34; return x - y def multiply(x, y): &amp;#34;&amp;#34;&amp;#34;乘法函数&amp;#34;&amp;#34;&amp;#34; return x * y def divide(x, y): &amp;#34;&amp;#34;&amp;#34;除法函数&amp;#34;&amp;#34;&amp;#34; if y != 0: return x / y else: return ValueError(&amp;#34;除数不能为0&amp;#34;) 编写测试工具代码。
+# 测试代码应使用test_xxx的名称进行规范 # 这里使用断言assert进行模拟 # assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常 # 如下代码执行正常不报错，则说明函数执行符合预期 from myfunctions import divide # 一个简单的单元测试示例 def test_divide(x, y, result): r = divide(x, y) assert result == r def test_divide_error(x, y): try: divide(x, y) except ValueError: assert False 执行单元测试的工具代码。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/Python%E4%B8%AD%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/python_unittest/">
+                
+                    <img src="/img/Python%e4%b8%ad%e7%9a%84%e5%8d%95%e5%85%83%e6%b5%8b%e8%af%95.jpg" loading="lazy" alt="Featured image of post Python代码的单元测试" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/python_unittest/">Python代码的单元测试</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 14, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="python代码的单元测试">Python代码的单元测试</h1>
+<h2 id="单元测试的概念">单元测试的概念</h2>
+<ul>
+<li>定义：是指对软件中的最小可测试单元进行检查和验证。</li>
+<li>作用：可以确保程序模块是否否和我们规范的输出，保证该模块经过修改后仍然是满足我们的需求。</li>
+</ul>
+<h2 id="单元测试的策略">单元测试的策略</h2>
+<p>如果要创建单元测试，可以遵循如下基本技巧来确保涵盖所有的测试用例。</p>
+<ul>
+<li>逻辑检查：给定正确的、符合预期的输入，系统是否能够执行正确的计算并遵循通过代码正确的路径？给定的输入是否涵盖通过代码的所有路径？</li>
+<li>边界检查：对于给定的输入，系统如何响应？ 系统如何响应典型输入、边缘用例或无效输入？假设您期望输入的整数介于 3 和 7 之间。当您使用 5（典型输入）、3（边缘用例）或 9（无效输入）时，系统会如何响应？</li>
+<li>错误处理：当输入中出现错误时，系统会如何响应？ 是否提示用户输入其他内容？ 软件是否会崩溃？</li>
+<li>面向对象的检查：如果通过运行代码更改任何持久对象的状态，则该对象是否正确更新？</li>
+</ul>
+<h2 id="单元测试类的编写">单元测试类的编写</h2>
+<ol>
+<li>
+<p>首先编写要进行单元测试的代码。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;加法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subtract</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;减法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">-</span> y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">multiply</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;乘法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">divide</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;除法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> y <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x <span style="color:#f92672">/</span> y
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;除数不能为0&#34;</span>)
+</span></span></code></pre></div></li>
+<li>
+<p>编写测试工具代码。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 测试代码应使用test_xxx的名称进行规范</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这里使用断言assert进行模拟</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 如下代码执行正常不报错，则说明函数执行符合预期</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> myfunctions <span style="color:#f92672">import</span> divide
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一个简单的单元测试示例</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_divide</span>(x, y, result):
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> divide(x, y)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> result <span style="color:#f92672">==</span> r
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_divide_error</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        divide(x, y)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">assert</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div></li>
+<li>
+<p>执行单元测试的工具代码。</p>
+<p>单元测试执行完成，无错误输出代码执行符合预期。</p>
+<p><img src="/Python%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/image-20240213234844432.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240213234844432"
+	
+	
+></p>
+</li>
+</ol>
+<h2 id="python中的单元测试类">Python中的单元测试类</h2>
+<p>如上的代码能够满足Python中进行单元测试的需求，但如果换一套方法，我们的单元测试又需要手动编码，Python中提供了专业的单元测试工具类：<code>unittest</code>，以下是该单元测试类的使用方法介绍。</p>
+<p><code>unittest</code> 将我们常规用到的测试场景封装了以下断言方法，根据测试所需要的场景进行引用。</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>断言方法</th>
+<th>方法解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>assertEqual(a, b)</code></td>
+<td>检查a 和b 是否相等。</td>
+</tr>
+<tr>
+<td><code>assertNotEqual(a, b)</code></td>
+<td>检查a 和b 是否不相等。</td>
+</tr>
+<tr>
+<td><code>assertTrue(x)</code></td>
+<td>检查x 是否为True。</td>
+</tr>
+<tr>
+<td><code>assertFalse(x)</code></td>
+<td>检查x 是否为False。</td>
+</tr>
+<tr>
+<td><code>assertIs(a, b)</code></td>
+<td>检查a 和b 是否为同一对象（is）。</td>
+</tr>
+<tr>
+<td><code>assertIsNot(a, b)</code></td>
+<td>检查a 和b 是否不是同一对象。</td>
+</tr>
+<tr>
+<td><code>assertIsNone(x)</code></td>
+<td>检查x 是否为None。</td>
+</tr>
+<tr>
+<td><code>assertIsNotNone(x)</code></td>
+<td>检查x 是否不是None。</td>
+</tr>
+<tr>
+<td><code>assertIn(a, b)</code></td>
+<td>检查a 是否在b 中。</td>
+</tr>
+<tr>
+<td><code>assertNotIn(a, b)</code></td>
+<td>检查a 是否不在b 中。</td>
+</tr>
+<tr>
+<td><code>assertIsInstance(a, b)</code></td>
+<td>检查a 是否为b 类型的实例。</td>
+</tr>
+<tr>
+<td><code>assertNotIsInstance(a, b)</code></td>
+<td>检查a 是否不是b 类型的实例。</td>
+</tr>
+<tr>
+<td><code>assertAlmostEqual(a, b)</code></td>
+<td>检查a 和b 是否近似相等（适用于浮点数比较）。</td>
+</tr>
+<tr>
+<td><code>assertNotAlmostEqual(a, b)</code></td>
+<td>检查a 和b 是否不近似相等（适用于浮点数比较）。</td>
+</tr>
+<tr>
+<td><code>assertRaises(Error, func, *args, **kwargs)</code></td>
+<td>检查当调用function 时是否抛出了Error 异常。</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="unittest模块的基础使用">unittest模块的基础使用</h3>
+<p>单元测试代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># unittest 是python自带的工具包，无需单独下载</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> unittest
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> myfunctions <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMyFunctions</span>(unittest<span style="color:#f92672">.</span>TestCase):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_add</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># assertEqual，断言测试方法，`unittest` 将我们常规用到的测试场景封装成断言方法，根据测试所需要的场景进行引用。</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(add(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(add(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_subtract</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(subtract(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(subtract(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(subtract(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_multiply</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(multiply(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(multiply(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(multiply(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_divide</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(divide(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(divide(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), <span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(divide(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>), <span style="color:#ae81ff">0.5</span>)
+</span></span></code></pre></div><p><code>unittest</code> 代码并不能够直接运行，有以下执行方法：</p>
+<ul>
+<li>
+<p>命令行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python -m unittest test_myfunctions.py
+</span></span></code></pre></div><p><img src="/Python%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/image-20240214000503690.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240214000503690"
+	
+	
+></p>
+<p>注意：这里的启动如果写成 <code>python.exe -m unittest .\test_myfunctions.py</code> 会报如下错误。</p>
+<p><img src="/Python%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/image-20240214000542161.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240214000542161"
+	
+	
+></p>
+</li>
+<li>
+<p><code>main</code> 函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    unittest<span style="color:#f92672">.</span>main()
+</span></span></code></pre></div><p><img src="/Python%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/image-20240214000729728.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240214000729728"
+	
+	
+></p>
+</li>
+</ul>
+<h3 id="unittest模块的前置方法">unittest模块的前置方法</h3>
+<p>在实际的测试中可能同时存在多个前置相同的测试，<code>unittest</code>模块提供了<code>setUp()</code>用于在测试开始前执行相关环境的设置，<code>tearDown()</code> 在 <code>setUp()</code> 方法之后进行执行。</p>
+<p><!-- raw HTML omitted -->注：这里的 <code>setUp</code> 和 <code>tearDown</code> 是固定的函数名，不允许更改。<!-- raw HTML omitted --></p>
+<p>要测试的代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">divide</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;除法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;divide called&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> y <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x <span style="color:#f92672">/</span> y
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;除数不能为0&#34;</span>)
+</span></span></code></pre></div><p>测试工具类：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> unittest
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> myfunctions <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMyFunctions</span>(unittest<span style="color:#f92672">.</span>TestCase):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>test_value_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>test_value_b <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>test_value_c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;setUp called&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">del</span> self<span style="color:#f92672">.</span>test_value_a
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">del</span> self<span style="color:#f92672">.</span>test_value_b
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">del</span> self<span style="color:#f92672">.</span>test_value_c
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;tearDown called&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_divide</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(divide(self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_b), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertRaises(<span style="color:#a6e22e">ValueError</span>, divide, self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_c)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    unittest<span style="color:#f92672">.</span>main()
+</span></span></code></pre></div><p>代码执行测试：</p>
+<p>可以看到，在执行函数测试之前，首先调用了 <code>setUp()</code> 前置方法，然后执行测试，测试结束后，调用 <code>tearDown()</code> 清理单元测试。</p>
+<p><img src="/Python%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/image-20240214001944498.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240214001944498"
+	
+	
+></p>
+<h3 id="测试覆盖率">测试覆盖率</h3>
+<p>覆盖率是用来度量<em>测试</em>完整性的手段,是测试效果衡量的标准,是测试技术有效性的度量: 覆盖率 = (至少被执行一次的项目(item)数) / (项目的总数)</p>
+<p>Python中提供了测试覆盖率的模块类：coverage，该第三方包需要手动安装。</p>
+<p><img src="/Python%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/image-20240214002749901.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240214002749901"
+	
+	
+></p>
+<p>这里使用如下方法直接进行代码的测试覆盖率分析</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 调用单元测试工具类</span>
+</span></span><span style="display:flex;"><span>coverage run -m unittest discover
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 输出测试报告</span>
+</span></span><span style="display:flex;"><span>coverage report
+</span></span></code></pre></div><p><img src="/Python%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/image-20240214003203531.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240214003203531"
+	
+	
+></p>
+<p>这里的代码测试覆盖率较低，对单元测试工具类进行优化，要测试的代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;加法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">+</span> y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">subtract</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;减法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">-</span> y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">multiply</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;乘法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">divide</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;除法函数&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;divide called&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> y <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x <span style="color:#f92672">/</span> y
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;除数不能为0&#34;</span>)
+</span></span></code></pre></div><p>优化后的单元测试方法为：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> unittest
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> myfunctions <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMyFunctions</span>(unittest<span style="color:#f92672">.</span>TestCase):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>test_value_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>test_value_b <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>test_value_c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;setUp called&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">del</span> self<span style="color:#f92672">.</span>test_value_a
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">del</span> self<span style="color:#f92672">.</span>test_value_b
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">del</span> self<span style="color:#f92672">.</span>test_value_c
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;tearDown called&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_add</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(add(self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_b), <span style="color:#ae81ff">15</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(add(self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_c), <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_subtract</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(subtract(self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_b), <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(subtract(self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_c), <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_multiply</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(multiply(self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_b), <span style="color:#ae81ff">50</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(multiply(self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_c), <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_divide</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(divide(self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_b), <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertRaises(<span style="color:#a6e22e">ValueError</span>, divide, self<span style="color:#f92672">.</span>test_value_a, self<span style="color:#f92672">.</span>test_value_c)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    unittest<span style="color:#f92672">.</span>main()
+</span></span></code></pre></div><p>结果测试</p>
+<p><img src="/Python%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/image-20240214003718187.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="image-20240214003718187"
+	
+	
+></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/python/">Python</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

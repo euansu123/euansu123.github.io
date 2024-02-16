@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Nginx是一个高性能的web服务器和反向代理服务器，以其低内存使用率和强大的并发能力而闻名。它最初由Igor Sysoev编写，并以类似BSD的2条款许可证发行。Nginx可以处理各种协议，如HTTP、TCP、UDP、IMAP、POP3和SMTP。它被Yandex、Mail.Ru、VK、Rambler、Dropbox、Netflix、Wordpress.com、FastMail.FM等许多负载沉重的网站广泛使用和信任。
+'>
+<title>Nginx 基础概念及使用</title>
+
+<link rel='canonical' href='https://euansu123.github.io/post/nginx_base_and_tutorial/'>
+
+<link rel="stylesheet" href="/scss/style.min.83fdf04f357d6c514ee15e600463b045549e8b40c428f14454adecaa742b352f.css"><meta property='og:title' content='Nginx 基础概念及使用'>
+<meta property='og:description' content='Nginx是一个高性能的web服务器和反向代理服务器，以其低内存使用率和强大的并发能力而闻名。它最初由Igor Sysoev编写，并以类似BSD的2条款许可证发行。Nginx可以处理各种协议，如HTTP、TCP、UDP、IMAP、POP3和SMTP。它被Yandex、Mail.Ru、VK、Rambler、Dropbox、Netflix、Wordpress.com、FastMail.FM等许多负载沉重的网站广泛使用和信任。
+'>
+<meta property='og:url' content='https://euansu123.github.io/post/nginx_base_and_tutorial/'>
+<meta property='og:site_name' content='EuanSu&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Nginx' /><meta property='article:published_time' content='2023-07-18T09:47:00&#43;08:00'/><meta property='article:modified_time' content='2023-07-18T09:47:00&#43;08:00'/><meta property='og:image' content='https://euansu123.github.io/img/nginx.png' />
+<meta name="twitter:title" content="Nginx 基础概念及使用">
+<meta name="twitter:description" content="Nginx是一个高性能的web服务器和反向代理服务器，以其低内存使用率和强大的并发能力而闻名。它最初由Igor Sysoev编写，并以类似BSD的2条款许可证发行。Nginx可以处理各种协议，如HTTP、TCP、UDP、IMAP、POP3和SMTP。它被Yandex、Mail.Ru、VK、Rambler、Dropbox、Netflix、Wordpress.com、FastMail.FM等许多负载沉重的网站广泛使用和信任。
+"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://euansu123.github.io/img/nginx.png' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "light");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huf4e58488b142d2a3fc54de6d76489e59_104192_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">EuanSu&#39;s Blog</a></h1>
+            <h2 class="site-description"></h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/nginx_base_and_tutorial/">
+                
+                    <img src="/img/nginx.png" loading="lazy" alt="Featured image of post Nginx 基础概念及使用" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/nginx_base_and_tutorial/">Nginx 基础概念及使用</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 18, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Nginx是一个高性能的web服务器和反向代理服务器，以其低内存使用率和强大的并发能力而闻名。它最初由Igor Sysoev编写，并以类似BSD的2条款许可证发行。Nginx可以处理各种协议，如HTTP、TCP、UDP、IMAP、POP3和SMTP。它被Yandex、Mail.Ru、VK、Rambler、Dropbox、Netflix、Wordpress.com、FastMail.FM等许多负载沉重的网站广泛使用和信任。</p>
+<h1 id="正向代理和反向代理">正向代理和反向代理</h1>
+<h2 id="正向代理">正向代理</h2>
+<h3 id="概念">概念</h3>
+<p><img src="/nginx%E5%9F%BA%E7%A1%80/49d52f5b79a140fd8c131f8fe115bf60tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+></p>
+<h3 id="特点">特点</h3>
+<ul>
+<li>正向代理需要主动设置代理服务器 ip 或域名进行访问，由设置的ip 或域名去访问内容并返回。</li>
+<li>正向代理是代理客户端，为客户端收发请求，使得真实的客户端对服务器不可见。</li>
+</ul>
+<h3 id="概念-1">概念</h3>
+<p><img src="/nginx%E5%9F%BA%E7%A1%80/23e94f266d6c44ed95f20053ee973bd4tplv-k3u1fbpfcp-zoom-in-crop-mark3024000.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="在这里插入图片描述"
+	
+	
+></p>
+<h3 id="特点-1">特点</h3>
+<ul>
+<li>正向代理需要配置代理服务器，而反向代理不需要做任何设置。</li>
+<li>反向代理是代理服务器，为服务器收发请求，使得真实服务器对客户端不可见。</li>
+</ul>
+<h2 id="正向代理和反向代理的比较">正向代理和反向代理的比较</h2>
+<h3 id="相同点">相同点</h3>
+<ul>
+<li>正向代理和反向代理所处的位置都是客户端与真实提供服务的服务器之间。</li>
+<li>正向代理和反向代理都是把客户端的请求转发给服务器，再把服务器的响应转发给客户端。</li>
+</ul>
+<h3 id="不同点">不同点</h3>
+<ul>
+<li>正向代理是客户端的代理，服务器并不知道真正的客户端是谁，反向代理是服务器的代理，客户端并不知道真正的服务器是谁；</li>
+<li>正向代理一般是客户端架设，反向代理一般是服务器架设；</li>
+<li>正向代理主要是为了解决访问限制问题，反向代理主要是为了提供负载均衡、安全防护等。</li>
+</ul>
+<h1 id="nginx-负载均衡">Nginx 负载均衡</h1>
+<h2 id="概念-2">概念</h2>
+<p>负载均衡，英文名称为Load Balance，其含义就是指将负载（工作任务）进行平衡、分摊到多个操作单元上进行运行，例如FTP服务器、Web服务器、企业核心应用服务器和其它主要任务服务器等，从而协同完成工作任务。</p>
+<p>负载均衡构建在原有网络结构之上，它提供了一种透明且廉价有效的方法扩展服务器和网络设备的带宽、加强网络数据处理能力、增加吞吐量、提高网络的可用性和灵活性。</p>
+<p>简言之，负载均衡实际上就是将大量请求进行分布式处理的策略。</p>
+<h2 id="负载均衡实现">负载均衡实现</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">upstream</span> <span style="color:#e6db74">testServer</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server</span> localhost:<span style="color:#ae81ff">8081</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server</span> localhost:<span style="color:#ae81ff">8082</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server</span> localhost:<span style="color:#ae81ff">8083</span>;
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">server</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">listen</span>       <span style="color:#ae81ff">8000</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server_name</span>  <span style="color:#e6db74">localhost</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">root</span>   <span style="color:#e6db74">html</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">index</span>  <span style="color:#e6db74">index.html</span> <span style="color:#e6db74">index.htm</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">proxy_pass</span> <span style="color:#e6db74">http://testServer</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>localhost:8081、localhost:8082、localhost:8083分别为如下页面：</p>
+<p><img src="/nginx%E5%9F%BA%E7%A1%80/2022-07-19-20-27-57-image.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><img src="/nginx%E5%9F%BA%E7%A1%80/2022-07-19-20-28-39-image.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p><img src="/nginx%E5%9F%BA%E7%A1%80/2022-07-19-20-28-50-image.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>访问 localhost:8000 会出现如上页面。</p>
+<h2 id="负载均衡常用算法">负载均衡常用算法</h2>
+<h3 id="轮询">轮询</h3>
+<p>轮询为负载均衡中较为基础也较为简单的算法，它不需要配置额外参数。假设配置文件中共有 <strong>M</strong> 台服务器，该算法遍历服务器节点列表，并按节点次序每轮选择一台服务器处理请求。当所有节点均被调用过一次后，该算法将从第一个节点开始重新一轮遍历。</p>
+<h1 id="nginx-安装">Nginx 安装</h1>
+<h2 id="依赖库安装">依赖库安装</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># gcc g++</span>
+</span></span><span style="display:flex;"><span>sudo yum install build-essential
+</span></span><span style="display:flex;"><span>sudo yum install libtool
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pcre</span>
+</span></span><span style="display:flex;"><span>sudo yum install libpcre3 libpcre3-dev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># zlib</span>
+</span></span><span style="display:flex;"><span>sudo yum install zlib1g-dev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ssl</span>
+</span></span><span style="display:flex;"><span>sudo yum install openssl
+</span></span><span style="display:flex;"><span>sudo yum install libssl-dev
+</span></span></code></pre></div><h2 id="nginx-源码编译安装">Nginx 源码编译安装</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 下载</span>
+</span></span><span style="display:flex;"><span>$ wget https://nginx.org/download/nginx-1.17.8.tar.gz
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 解压</span>
+</span></span><span style="display:flex;"><span>$ tar -zxvf nginx-1.17.8.tar.gz
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 进入目录</span>
+</span></span><span style="display:flex;"><span>$ cd nginx-1.17.8
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 配置，这里可能会报错，缺少啥就去安装啥</span>
+</span></span><span style="display:flex;"><span>$ ./configure --prefix<span style="color:#f92672">=</span>/usr/local/nginx <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_gzip_static_module <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_v2_module <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-pcre <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_ssl_module
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成makefile文件</span>
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装</span>
+</span></span><span style="display:flex;"><span>make install
+</span></span></code></pre></div><h1 id="nginx-代理二级域名">Nginx 代理二级域名</h1>
+<p>新增一个 <code>server</code> 块，监听的端口依然是 80 端口，如果配置的端口为非 80 端口，则需要携带端口访问 http 服务。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">server</span> {
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">listen</span>       <span style="color:#ae81ff">80</span>;
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">server_name</span>  <span style="color:#e6db74">cloud.euansu.cn</span>;
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">index</span> <span style="color:#e6db74">index.php</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">#location / {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#75715e">#    proxy_set_header Host $http_host;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">#   proxy_pass http://cloud.euansu.cn:8000;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#75715e">#}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>       <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">root</span>         <span style="color:#e6db74">/kodbox</span>;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">location</span> ~ <span style="color:#e6db74">\.php$</span> {
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">root</span>           <span style="color:#e6db74">/kodbox</span>;
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">fastcgi_pass</span>   127.0.0.1:<span style="color:#ae81ff">9000</span>;
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">fastcgi_index</span>  <span style="color:#e6db74">index.php</span>;
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">fastcgi_param</span>  <span style="color:#e6db74">SCRIPT_FILENAME</span>  <span style="color:#e6db74">/kodbox</span>$fastcgi_script_name;
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">include</span>        <span style="color:#e6db74">fastcgi_params</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><h1 id="nginx-配置https">Nginx 配置https</h1>
+<p>新增一个 <code>server</code> 块，监听的端口依然是 443 端口，如果配置的端口为非 443 端口，则需要携带端口访问 https 服务。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nginx" data-lang="nginx"><span style="display:flex;"><span><span style="color:#66d9ef">server</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">listen</span>       <span style="color:#ae81ff">443</span> <span style="color:#e6db74">ssl</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">server_name</span>  <span style="color:#e6db74">cloud.euansu.cn</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">index</span> <span style="color:#e6db74">index.php</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ssl_certificate</span>      <span style="color:#e6db74">/www/nginx/cert/cloud.euansu.cn.pem</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ssl_certificate_key</span>  <span style="color:#e6db74">/www/nginx/cert/cloud.euansu.cn.key</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ssl_session_cache</span>    <span style="color:#e6db74">shared:SSL:1m</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ssl_session_timeout</span>  <span style="color:#ae81ff">5m</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ssl_ciphers</span>  <span style="color:#e6db74">HIGH:!aNULL:!MD5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ssl_prefer_server_ciphers</span>  <span style="color:#66d9ef">on</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">location</span> <span style="color:#e6db74">/</span> {
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">root</span>         <span style="color:#e6db74">/kodbox</span>;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>       <span style="color:#f92672">location</span> ~ <span style="color:#e6db74">\.php$</span> {
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">root</span>           <span style="color:#e6db74">/kodbox</span>;
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">fastcgi_pass</span>   127.0.0.1:<span style="color:#ae81ff">9000</span>;
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">fastcgi_index</span>  <span style="color:#e6db74">index.php</span>;
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">fastcgi_param</span>  <span style="color:#e6db74">SCRIPT_FILENAME</span>  <span style="color:#e6db74">/kodbox</span>$fastcgi_script_name;
+</span></span><span style="display:flex;"><span>           <span style="color:#f92672">include</span>        <span style="color:#e6db74">fastcgi_params</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/nginx/">Nginx</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2024 EuanSu&#39;s Blog
+    </section>
+    <span class="icp">
+        <a class="icp" target="_blank" href="https://beian.miit.gov.cn/">冀ICP备20005107号-2</a>
+      </span>
+    
+    <section class="powerby">
+        
+
+        
+
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.17.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
